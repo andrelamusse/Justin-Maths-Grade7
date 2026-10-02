@@ -87,3 +87,42 @@ test('Subtraction breakdown logic: no negative jump steps produced for 2-digit n
   assert.ok(onesDiff >= 0, `Ones difference must be non-negative, got ${onesDiff}`);
   assert.equal(tensDiff + onesDiff, 4, '47 - 43 must equal 4');
 });
+
+test('Exhaustive stress test: All 7 categories across all 4 sub-categories produce mathematically exact problems and verbal scripts', () => {
+  const app = new MathGrinderApp();
+  const categoryIds = ['add', 'sub', 'mul', 'div', 'mixed_add_sub', 'mixed_mul_div', 'all_mixed'];
+  const subCategoryIds = ['easy', 'medium', 'hard', 'all'];
+
+  for (const cat of categoryIds) {
+    for (const sub of subCategoryIds) {
+      for (let trial = 0; trial < 40; trial++) {
+        // Vary streak for 'all' mode
+        app.streak = trial % 12;
+        const q = app.generateQuestion(cat, sub);
+
+        assert.ok(!isNaN(q.a) && typeof q.a === 'number', `Operand a is invalid in ${cat}/${sub}`);
+        assert.ok(!isNaN(q.b) && typeof q.b === 'number', `Operand b is invalid in ${cat}/${sub}`);
+        assert.ok(!isNaN(q.result) && typeof q.result === 'number', `Result is invalid in ${cat}/${sub}`);
+        assert.ok(q.b !== 0, `Divisor or operand b cannot be 0 in ${cat}/${sub}`);
+
+        if (q.op === '+') {
+          assert.equal(q.a + q.b, q.result, `Addition math failed: ${q.a} + ${q.b} != ${q.result}`);
+        } else if (q.op === '-') {
+          assert.ok(q.a >= q.b, `Subtraction cannot be negative: ${q.a} - ${q.b}`);
+          assert.equal(q.a - q.b, q.result, `Subtraction math failed: ${q.a} - ${q.b} != ${q.result}`);
+        } else if (q.op === '×') {
+          assert.equal(q.a * q.b, q.result, `Multiplication math failed: ${q.a} × ${q.b} != ${q.result}`);
+        } else if (q.op === '÷') {
+          assert.equal(q.a % q.b, 0, `Division remainder must be 0: ${q.a} ÷ ${q.b}`);
+          assert.equal(q.a / q.b, q.result, `Division math failed: ${q.a} ÷ ${q.b} != ${q.result}`);
+        } else {
+          assert.fail(`Unknown operation ${q.op}`);
+        }
+
+        // Test verbal script generation for this question
+        const explanation = generateVerbalExplanation(q.op, q.a, q.b, q.result);
+        assert.ok(typeof explanation === 'string' && explanation.length > 5, `Explanation too short for ${q.a} ${q.op} ${q.b}`);
+      }
+    }
+  }
+});

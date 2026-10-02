@@ -42,26 +42,61 @@
 
     <!-- Main Container -->
     <main class="grinder-container">
-      <!-- Operation Selection Tabs -->
-      <nav class="operation-tabs" aria-label="Operations">
-        <button class="op-tab active" data-op="+">
-          <span class="op-icon">➕</span> Addition
-        </button>
-        <button class="op-tab" data-op="-">
-          <span class="op-icon">➖</span> Subtraction
-        </button>
-        <button class="op-tab" data-op="×">
-          <span class="op-icon">✖️</span> Multiplication
-        </button>
-        <button class="op-tab" data-op="÷">
-          <span class="op-icon">➗</span> Division
-        </button>
-      </nav>
-
-      <!-- Level Pills -->
-      <section class="level-selector-row" id="level-selector" aria-label="Difficulty levels">
-        <!-- Rendered by JS -->
+      <!-- 7 Category Options -->
+      <section class="category-selection-container" aria-label="Math Operation Categories">
+        <div class="selector-heading">Choose Practice Mode (7 Options):</div>
+        <nav class="category-grid" id="category-tabs" aria-label="Math Categories">
+          <button class="category-btn active" data-cat="add" title="Practice addition problems">
+            <span class="cat-icon">➕</span> Addition (+)
+          </button>
+          <button class="category-btn" data-cat="sub" title="Practice subtraction problems">
+            <span class="cat-icon">➖</span> Subtraction (-)
+          </button>
+          <button class="category-btn" data-cat="mul" title="Practice multiplication tables">
+            <span class="cat-icon">✖️</span> Multiplication (×)
+          </button>
+          <button class="category-btn" data-cat="div" title="Practice division problems">
+            <span class="cat-icon">➗</span> Division (÷)
+          </button>
+          <button class="category-btn" data-cat="mixed_add_sub" title="Mixed addition and subtraction (+ & -)">
+            <span class="cat-icon">➕➖</span> Mixed (+ &amp; -)
+          </button>
+          <button class="category-btn" data-cat="mixed_mul_div" title="Mixed multiplication and division (× & ÷)">
+            <span class="cat-icon">✖️➗</span> Mixed (&times; &amp; &divide;)
+          </button>
+          <button class="category-btn" data-cat="all_mixed" title="All 4 operations mixed (+, -, ×, ÷)">
+            <span class="cat-icon">🎲</span> All 4 Mixed (+, -, &times;, &divide;)
+          </button>
+        </nav>
       </section>
+
+      <!-- 4 Sub-Category Difficulty Options -->
+      <section class="sub-category-selection-container" aria-label="Difficulty Sub-Categories">
+        <div class="selector-heading">Difficulty Level:</div>
+        <nav class="sub-category-row" id="sub-category-selector" aria-label="Difficulty Sub-Categories">
+          <button class="sub-cat-pill active" data-sub="easy" title="Core fundamentals & small numbers">
+            <span class="sub-icon">🌱</span> Easy
+          </button>
+          <button class="sub-cat-pill" data-sub="medium" title="Bridges to 10 & 2-digit basics">
+            <span class="sub-icon">⚡</span> Medium
+          </button>
+          <button class="sub-cat-pill" data-sub="hard" title="Regrouping, borrowing & upper tables">
+            <span class="sub-icon">🔥</span> Hard
+          </button>
+          <button class="sub-cat-pill" data-sub="all" title="Gradual progressive mode: starts easy and dynamically ramps up difficulty as questions are solved">
+            <span class="sub-icon">🚀</span> All (Gradual)
+          </button>
+        </nav>
+        <!-- Gradual Mode Status Banner (Shows when 'All' is active) -->
+        <div id="gradual-tier-indicator" class="gradual-tier-indicator hidden" aria-live="polite">
+          <span class="indicator-title">📈 Ramp-Up Grinder:</span>
+          <span id="tier-badge" class="gradual-tier-badge tier-easy">Easy 🌱</span>
+          <span id="tier-details" class="tier-details-text">(Streak: 0 &bull; ramps up as streak builds)</span>
+        </div>
+      </section>
+
+      <!-- Hidden container for legacy selector lookup safety -->
+      <div id="level-selector" class="hidden" aria-hidden="true"></div>
 
       <!-- Main Question Card -->
       <article class="question-card" aria-live="polite">

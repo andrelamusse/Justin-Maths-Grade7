@@ -3,7 +3,7 @@ import { MathVisualizer } from './visualizers.js';
 import { sound } from './audio.js';
 import { generateVerbalExplanation } from './speech-scripts.js';
 
-// Level definitions
+// Level definitions (Preserved for full backwards compatibility)
 export const LEVEL_DEFINITIONS = {
   '+': [
     { id: 1, name: 'Micro Basics (1 - 5)', desc: '1+4, 2+3, 1+1...' },
@@ -34,8 +34,102 @@ export const LEVEL_DEFINITIONS = {
   ]
 };
 
+// Streamlined 7 Category Definitions
+export const CATEGORIES = [
+  {
+    id: 'add',
+    name: 'Addition (+)',
+    symbol: '+',
+    icon: '➕',
+    ops: ['+'],
+    desc: 'Practice addition facts'
+  },
+  {
+    id: 'sub',
+    name: 'Subtraction (-)',
+    symbol: '-',
+    icon: '➖',
+    ops: ['-'],
+    desc: 'Practice subtraction facts'
+  },
+  {
+    id: 'mul',
+    name: 'Multiplication (×)',
+    symbol: '×',
+    icon: '✖️',
+    ops: ['×'],
+    desc: 'Practice multiplication tables'
+  },
+  {
+    id: 'div',
+    name: 'Division (÷)',
+    symbol: '÷',
+    icon: '➗',
+    ops: ['÷'],
+    desc: 'Practice division facts'
+  },
+  {
+    id: 'mixed_add_sub',
+    name: 'Mixed Addition & Subtraction (+ & -)',
+    shortName: 'Mixed (+ & -)',
+    symbol: '+ & -',
+    icon: '➕➖',
+    ops: ['+', '-'],
+    desc: 'Mixed addition and subtraction problems'
+  },
+  {
+    id: 'mixed_mul_div',
+    name: 'Mixed Multiplication & Division (× & ÷)',
+    shortName: 'Mixed (× & ÷)',
+    symbol: '× & ÷',
+    icon: '✖️➗',
+    ops: ['×', '÷'],
+    desc: 'Mixed multiplication and division problems'
+  },
+  {
+    id: 'all_mixed',
+    name: 'All 4 Operations Mixed (+, -, ×, ÷)',
+    shortName: 'All 4 Mixed (+, -, ×, ÷)',
+    symbol: '+, -, ×, ÷',
+    icon: '🎲',
+    ops: ['+', '-', '×', '÷'],
+    desc: 'All 4 operations combined'
+  }
+];
+
+// 4 Sub-Category Difficulty Options
+export const SUB_CATEGORIES = [
+  {
+    id: 'easy',
+    name: 'Easy',
+    icon: '🌱',
+    desc: 'Core fundamentals & small numbers'
+  },
+  {
+    id: 'medium',
+    name: 'Medium',
+    icon: '⚡',
+    desc: 'Bridges to 10 & 2-digit basics'
+  },
+  {
+    id: 'hard',
+    name: 'Hard',
+    icon: '🔥',
+    desc: 'Regrouping, borrowing & upper tables'
+  },
+  {
+    id: 'all',
+    name: 'All (Gradual)',
+    icon: '🚀',
+    desc: 'Progressive mode: dynamically ramps up difficulty as questions are solved'
+  }
+];
+
 export class MathGrinderApp {
   constructor() {
+    this.currentCategory = 'add';
+    this.currentSubCategory = 'easy';
+    this.progressiveTier = 'easy';
     this.currentOp = '+';
     this.currentLevel = 1;
     this.currentQuestion = null;
@@ -67,6 +161,12 @@ export class MathGrinderApp {
         this.bestStreak = parsed.bestStreak || 0;
         this.totalSolved = parsed.totalSolved || 0;
         this.xp = parsed.xp || 0;
+        if (parsed.currentCategory && CATEGORIES.some(c => c.id === parsed.currentCategory)) {
+          this.currentCategory = parsed.currentCategory;
+        }
+        if (parsed.currentSubCategory && SUB_CATEGORIES.some(s => s.id === parsed.currentSubCategory)) {
+          this.currentSubCategory = parsed.currentSubCategory;
+        }
         if (parsed.settings) this.settings = { ...this.settings, ...parsed.settings };
       }
     } catch (e) {
@@ -82,6 +182,8 @@ export class MathGrinderApp {
         bestStreak: this.bestStreak,
         totalSolved: this.totalSolved,
         xp: this.xp,
+        currentCategory: this.currentCategory,
+        currentSubCategory: this.currentSubCategory,
         settings: this.settings
       };
       localStorage.setItem('justin_math_grinder_v1', JSON.stringify(data));
@@ -95,7 +197,8 @@ export class MathGrinderApp {
     this.bindEvents();
     this.applySettings();
     this.visualizer = new MathVisualizer(this.dom.visContainer);
-    this.renderLevelSelector();
+    this.updateCategoryUI();
+    this.updateSubCategoryUI();
     this.updateStatsUI();
     this.nextQuestion();
   }
@@ -103,6 +206,13 @@ export class MathGrinderApp {
   cacheDom() {
     this.dom = {
       appContainer: document.getElementById('grinder-app'),
+      categoryGrid: document.getElementById('category-tabs'),
+      categoryBtns: document.querySelectorAll('.category-btn'),
+      subCategoryRow: document.getElementById('sub-category-selector'),
+      subCatBtns: document.querySelectorAll('.sub-cat-pill'),
+      tierIndicator: document.getElementById('gradual-tier-indicator'),
+      tierBadge: document.getElementById('tier-badge'),
+      tierDetails: document.getElementById('tier-details'),
       opTabs: document.querySelectorAll('.op-tab'),
       levelSelector: document.getElementById('level-selector'),
       numA: document.getElementById('num-a'),
@@ -131,13 +241,35 @@ export class MathGrinderApp {
   }
 
   bindEvents() {
-    // Operation selection
-    this.dom.opTabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        const op = e.currentTarget.dataset.op;
-        this.setOperation(op);
+    // 7 Category selection buttons
+    if (this.dom.categoryBtns) {
+      this.dom.categoryBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const cat = e.currentTarget.dataset.cat;
+          this.setCategory(cat);
+        });
       });
-    });
+    }
+
+    // 4 Sub-Category difficulty pills
+    if (this.dom.subCatBtns) {
+      this.dom.subCatBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const sub = e.currentTarget.dataset.sub;
+          this.setSubCategory(sub);
+        });
+      });
+    }
+
+    // Legacy operation tabs support (if rendered)
+    if (this.dom.opTabs) {
+      this.dom.opTabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          const op = e.currentTarget.dataset.op;
+          this.setOperation(op);
+        });
+      });
+    }
 
     // Keypad clicks
     this.dom.keypadBtns.forEach(btn => {
@@ -234,38 +366,87 @@ export class MathGrinderApp {
     this.initScratchpad();
   }
 
-  setOperation(op) {
-    this.currentOp = op;
-    this.currentLevel = 1;
-    this.dom.opTabs.forEach(t => t.classList.toggle('active', t.dataset.op === op));
-    this.renderLevelSelector();
+  setCategory(catId) {
+    const found = CATEGORIES.find(c => c.id === catId || c.symbol === catId);
+    if (!found) return;
+    this.currentCategory = found.id;
+    this.streak = 0; // Fresh streak so gradual mode starts at Easy for newly selected skill
+    this.updateCategoryUI();
+    this.updateStatsUI();
     this.nextQuestion();
+    this.saveState();
+  }
+
+  setSubCategory(subId) {
+    const found = SUB_CATEGORIES.find(s => s.id === subId);
+    if (!found) return;
+    this.currentSubCategory = found.id;
+    this.updateSubCategoryUI();
+    this.nextQuestion();
+    this.saveState();
+  }
+
+  setOperation(op) {
+    const map = { '+': 'add', '-': 'sub', '×': 'mul', '÷': 'div', '*': 'mul', '/': 'div' };
+    const catId = map[op] || 'add';
+    this.setCategory(catId);
+  }
+
+  updateCategoryUI() {
+    if (this.dom && this.dom.categoryBtns) {
+      this.dom.categoryBtns.forEach(b => {
+        b.classList.toggle('active', b.dataset.cat === this.currentCategory);
+      });
+    }
+  }
+
+  updateSubCategoryUI() {
+    if (this.dom && this.dom.subCatBtns) {
+      this.dom.subCatBtns.forEach(b => {
+        b.classList.toggle('active', b.dataset.sub === this.currentSubCategory);
+      });
+    }
+    this.updateGradualIndicator();
+  }
+
+  renderCategorySelector() {
+    this.updateCategoryUI();
+  }
+
+  renderSubCategorySelector() {
+    this.updateSubCategoryUI();
   }
 
   renderLevelSelector() {
-    if (!this.dom.levelSelector) return;
-    this.dom.levelSelector.innerHTML = '';
-    const levels = LEVEL_DEFINITIONS[this.currentOp] || LEVEL_DEFINITIONS['+'];
-
-    levels.forEach(lvl => {
-      const btn = document.createElement('button');
-      btn.className = `level-pill ${lvl.id === this.currentLevel ? 'active' : ''}`;
-      btn.dataset.level = lvl.id;
-      btn.innerHTML = `<span class="lvl-num">L${lvl.id}</span> <span class="lvl-title">${lvl.name}</span>`;
-      btn.title = lvl.desc;
-
-      btn.addEventListener('click', () => {
-        this.currentLevel = lvl.id;
-        document.querySelectorAll('.level-pill').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        this.nextQuestion();
-      });
-
-      this.dom.levelSelector.appendChild(btn);
-    });
+    this.updateSubCategoryUI();
   }
 
-  generateQuestion(op, level) {
+  getProgressiveTier(streak = this.streak) {
+    if (streak >= 7) return 'hard';
+    if (streak >= 3) return 'medium';
+    return 'easy';
+  }
+
+  updateGradualIndicator() {
+    if (!this.dom || !this.dom.tierIndicator) return;
+    if (this.currentSubCategory === 'all') {
+      this.dom.tierIndicator.classList.remove('hidden');
+      const tier = this.getProgressiveTier(this.streak);
+      this.progressiveTier = tier;
+      if (this.dom.tierBadge) {
+        this.dom.tierBadge.className = `gradual-tier-badge tier-${tier}`;
+        const titles = { easy: 'Easy 🌱', medium: 'Medium ⚡', hard: 'Hard 🔥' };
+        this.dom.tierBadge.textContent = titles[tier] || tier;
+      }
+      if (this.dom.tierDetails) {
+        this.dom.tierDetails.textContent = `(Streak: ${this.streak} 🔥 • Difficulty ramps up as streak builds)`;
+      }
+    } else {
+      this.dom.tierIndicator.classList.add('hidden');
+    }
+  }
+
+  generateByLevel(op, level) {
     let a = 1;
     let b = 1;
     let result = 2;
@@ -387,48 +568,139 @@ export class MathGrinderApp {
     return { op, a, b, result };
   }
 
+  generateByDifficulty(op, difficulty = 'easy') {
+    if (op === '+') {
+      if (difficulty === 'easy') {
+        const lvl = Math.random() < 0.5 ? 1 : 2;
+        return this.generateByLevel('+', lvl);
+      } else if (difficulty === 'medium') {
+        const lvl = Math.random() < 0.5 ? 3 : 4;
+        return this.generateByLevel('+', lvl);
+      } else {
+        // hard: 85% level 5 (regrouping), 15% level 4
+        const lvl = Math.random() < 0.85 ? 5 : 4;
+        return this.generateByLevel('+', lvl);
+      }
+    } else if (op === '-') {
+      if (difficulty === 'easy') {
+        const lvl = Math.random() < 0.5 ? 1 : 2;
+        return this.generateByLevel('-', lvl);
+      } else if (difficulty === 'medium') {
+        const lvl = Math.random() < 0.5 ? 3 : 4;
+        return this.generateByLevel('-', lvl);
+      } else {
+        // hard: level 5 (borrowing)
+        return this.generateByLevel('-', 5);
+      }
+    } else if (op === '×' || op === '*') {
+      if (difficulty === 'easy') {
+        return this.generateByLevel('×', 1); // 2x, 5x, 10x
+      } else if (difficulty === 'medium') {
+        const lvl = Math.random() < 0.5 ? 2 : 3; // 3x, 4x, or 6x-9x
+        return this.generateByLevel('×', lvl);
+      } else {
+        // hard: level 3 (20%), level 4 (40%), level 5 (40%)
+        const r = Math.random();
+        const lvl = r < 0.2 ? 3 : (r < 0.6 ? 4 : 5);
+        return this.generateByLevel('×', lvl);
+      }
+    } else if (op === '÷' || op === '/') {
+      if (difficulty === 'easy') {
+        const lvl = Math.random() < 0.5 ? 1 : 2; // ÷2, ÷5, ÷10
+        return this.generateByLevel('÷', lvl);
+      } else if (difficulty === 'medium') {
+        const lvl = Math.random() < 0.7 ? 3 : 2; // ÷3, ÷4, ÷5
+        return this.generateByLevel('÷', lvl);
+      } else {
+        // hard: level 4 (mastery up to 144)
+        return this.generateByLevel('÷', 4);
+      }
+    }
+
+    return this.generateByLevel('+', 1);
+  }
+
+  generateQuestion(catOrOp = this.currentCategory, levelOrSubCat = this.currentSubCategory) {
+    // 1. Legacy support: if levelOrSubCat is numeric (e.g. 1..5), run generateByLevel directly
+    if (typeof levelOrSubCat === 'number') {
+      const opMap = { add: '+', sub: '-', mul: '×', div: '÷', '+': '+', '-': '-', '×': '×', '÷': '÷', '*': '×', '/': '÷' };
+      const op = opMap[catOrOp] || '+';
+      return this.generateByLevel(op, levelOrSubCat);
+    }
+
+    // 2. Determine progressive difficulty tier
+    let subCategory = levelOrSubCat || this.currentSubCategory || 'easy';
+    let tier = subCategory;
+    if (subCategory === 'all') {
+      tier = this.getProgressiveTier(this.streak);
+    }
+    if (!['easy', 'medium', 'hard'].includes(tier)) {
+      tier = 'easy';
+    }
+
+    // 3. Determine operation from category
+    const cat = CATEGORIES.find(c => c.id === catOrOp || c.symbol === catOrOp);
+    let chosenOp = '+';
+    if (cat && cat.ops && cat.ops.length > 0) {
+      chosenOp = cat.ops[Math.floor(Math.random() * cat.ops.length)];
+    } else if (['+', '-', '×', '÷'].includes(catOrOp)) {
+      chosenOp = catOrOp;
+    }
+
+    const question = this.generateByDifficulty(chosenOp, tier);
+    question.category = cat ? cat.id : catOrOp;
+    question.subCategory = subCategory;
+    question.tier = tier;
+    return question;
+  }
+
   nextQuestion() {
     clearTimeout(this.autoAdvanceTimer);
     if (this.isSpeaking) {
       sound.stopSpeech();
       this.isSpeaking = false;
-      if (this.dom.speakBtn) {
+      if (this.dom && this.dom.speakBtn) {
         this.dom.speakBtn.textContent = '📢 Explain';
         this.dom.speakBtn.classList.remove('speaking');
       }
     }
 
     this.userAnswer = '';
-    this.currentQuestion = this.generateQuestion(this.currentOp, this.currentLevel);
+    this.currentQuestion = this.generateQuestion(this.currentCategory, this.currentSubCategory);
+    this.currentOp = this.currentQuestion.op;
 
-    if (this.dom.numA) this.dom.numA.textContent = this.currentQuestion.a;
-    if (this.dom.opSymbol) this.dom.opSymbol.textContent = this.currentQuestion.op;
-    if (this.dom.numB) this.dom.numB.textContent = this.currentQuestion.b;
-    if (this.dom.answerDisplay) {
-      this.dom.answerDisplay.textContent = '?';
-      this.dom.answerDisplay.classList.remove('correct', 'incorrect');
+    if (this.dom) {
+      if (this.dom.numA) this.dom.numA.textContent = this.currentQuestion.a;
+      if (this.dom.opSymbol) this.dom.opSymbol.textContent = this.currentQuestion.op;
+      if (this.dom.numB) this.dom.numB.textContent = this.currentQuestion.b;
+      if (this.dom.answerDisplay) {
+        this.dom.answerDisplay.textContent = '?';
+        this.dom.answerDisplay.classList.remove('correct', 'incorrect');
+      }
+
+      if (this.dom.feedbackMsg) {
+        this.dom.feedbackMsg.textContent = '';
+        this.dom.feedbackMsg.className = 'feedback-msg';
+      }
+
+      if (this.dom.captionBar) {
+        this.dom.captionBar.textContent = 'Tap 📢 Explain to hear step-by-step guidance.';
+      }
+
+      // Reset breakdown area
+      if (this.dom.breakdownContainer) {
+        this.dom.breakdownContainer.classList.add('hidden');
+        this.dom.breakdownContainer.innerHTML = '';
+        if (this.dom.breakdownBtn) this.dom.breakdownBtn.textContent = 'Break it Down 🧩';
+      }
+
+      // Auto-update visualizer if open
+      if (this.dom.visContainer && !this.dom.visContainer.classList.contains('hidden')) {
+        this.renderVisualizer();
+      }
     }
 
-    if (this.dom.feedbackMsg) {
-      this.dom.feedbackMsg.textContent = '';
-      this.dom.feedbackMsg.className = 'feedback-msg';
-    }
-
-    if (this.dom.captionBar) {
-      this.dom.captionBar.textContent = 'Tap 📢 Explain to hear step-by-step guidance.';
-    }
-
-    // Reset breakdown area
-    if (this.dom.breakdownContainer) {
-      this.dom.breakdownContainer.classList.add('hidden');
-      this.dom.breakdownContainer.innerHTML = '';
-      if (this.dom.breakdownBtn) this.dom.breakdownBtn.textContent = 'Break it Down 🧩';
-    }
-
-    // Auto-update visualizer if open
-    if (this.dom.visContainer && !this.dom.visContainer.classList.contains('hidden')) {
-      this.renderVisualizer();
-    }
+    this.updateGradualIndicator();
 
     if (this.settings.autoSpeak) {
       this.speakCurrentQuestion();
@@ -504,6 +776,7 @@ export class MathGrinderApp {
     }
 
     this.updateStatsUI();
+    this.updateGradualIndicator();
     this.saveState();
 
     // Auto advance after 1.2 seconds
@@ -541,6 +814,7 @@ export class MathGrinderApp {
     this.toggleBreakdown(true);
 
     this.updateStatsUI();
+    this.updateGradualIndicator();
   }
 
   renderVisualizer() {
@@ -589,6 +863,16 @@ export class MathGrinderApp {
           <div class="bd-step"><strong>Add Leftover:</strong> You have <span class="highlight-ones">${rest}</span> left from ${b}.</div>
           <div class="bd-step"><strong>Total:</strong> 10 + ${rest} = <span class="highlight-total">${result}</span></div>
         `;
+      } else if ((a >= 10 && b < 10) || (b >= 10 && a < 10)) {
+        const twoD = a >= 10 ? a : b;
+        const oneD = a >= 10 ? b : a;
+        const tens = Math.floor(twoD / 10) * 10;
+        const ones = twoD % 10;
+        html += `
+          <div class="bd-step"><strong>Step 1 (Tens):</strong> Keep <span class="highlight-tens">${tens}</span> in mind.</div>
+          <div class="bd-step"><strong>Step 2 (Ones):</strong> ${ones} + ${oneD} = <span class="highlight-ones">${ones + oneD}</span></div>
+          <div class="bd-step"><strong>Step 3 (Combine):</strong> ${tens} + ${ones + oneD} = <span class="highlight-total">${result}</span></div>
+        `;
       } else {
         html += `<div class="bd-step">Start at <strong>${Math.max(a, b)}</strong> and count on <strong>${Math.min(a, b)}</strong> more to reach <span class="highlight-total">${result}</span>.</div>`;
       }
@@ -619,6 +903,21 @@ export class MathGrinderApp {
             <div class="bd-step"><strong>Total Difference:</strong> ${jump1} + ${jump2} = <span class="highlight-total">${result}</span></div>
           `;
         }
+      } else if (a >= 20 && b < 10) {
+        const aT = Math.floor(a / 10) * 10;
+        const aO = a % 10;
+        if (aO >= b) {
+          html += `
+            <div class="bd-step"><strong>Step 1 (Tens):</strong> Keep <span class="highlight-tens">${aT}</span></div>
+            <div class="bd-step"><strong>Step 2 (Ones):</strong> ${aO} - ${b} = <span class="highlight-ones">${aO - b}</span></div>
+            <div class="bd-step"><strong>Step 3 (Combine):</strong> ${aT} + ${aO - b} = <span class="highlight-total">${result}</span></div>
+          `;
+        } else {
+          html += `
+            <div class="bd-step"><strong>Jump 1:</strong> Count back ${aO} steps to reach <strong>${aT}</strong></div>
+            <div class="bd-step"><strong>Jump 2:</strong> Count back ${b - aO} more from ${aT} &rarr; lands on <span class="highlight-total">${result}</span></div>
+          `;
+        }
       } else {
         html += `<div class="bd-step">Start at <strong>${a}</strong>, count back <strong>${b}</strong> steps &rarr; lands on <span class="highlight-total">${result}</span>.</div>`;
       }
@@ -631,6 +930,7 @@ export class MathGrinderApp {
       html += `
         <div class="bd-step">Share ${a} cookies equally with ${b} friends.</div>
         <div class="bd-step">Everyone gets <span class="highlight-total">${result}</span> cookies each!</div>
+        <div class="bd-step">Check with multiplication: ${b} &times; ${result} = <span class="highlight-total">${a}</span></div>
       `;
     }
 
@@ -680,6 +980,7 @@ export class MathGrinderApp {
   }
 
   updateStatsUI() {
+    if (!this.dom) return;
     if (this.dom.streakVal) this.dom.streakVal.textContent = this.streak;
     if (this.dom.solvedVal) this.dom.solvedVal.textContent = this.totalSolved;
     if (this.dom.xpVal) this.dom.xpVal.textContent = this.xp;

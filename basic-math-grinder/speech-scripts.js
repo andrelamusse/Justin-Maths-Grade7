@@ -77,6 +77,20 @@ function generateAdditionExplanation(a, b, result) {
     return `Let's solve this step by step. First add the tens: ${aTens} plus ${bTens} is ${tensSum}. Next add the ones: ${aOnes} plus ${bOnes} is ${onesSum}. Finally, add ${tensSum} plus ${onesSum} to get ${result}!`;
   }
 
+  // Two digit plus one digit (e.g. 24 + 5 or 38 + 7)
+  if ((a >= 10 && b < 10) || (b >= 10 && a < 10)) {
+    const twoD = a >= 10 ? a : b;
+    const oneD = a >= 10 ? b : a;
+    const tens = Math.floor(twoD / 10) * 10;
+    const ones = twoD % 10;
+    const newOnes = ones + oneD;
+    if (newOnes < 10) {
+      return `Start at ${twoD}. Keep the ${tens} in mind, and add the ones: ${ones} plus ${oneD} is ${newOnes}. So the answer is ${result}!`;
+    } else {
+      return `Start at ${twoD}. Add ${10 - ones} to reach the next ten (${tens + 10}), then add the rest to reach ${result}!`;
+    }
+  }
+
   // Fallback
   return `${a} plus ${b} equals ${result}. Count the blocks to see the total!`;
 }
@@ -117,6 +131,17 @@ function generateSubtractionExplanation(a, b, result) {
       return `Think of jumping up like a frog! From ${b}, jump ${jumpToTen} steps directly up to ${a}! The difference is ${result}!`;
     }
     return `Think of jumping up like a frog! From ${b}, jump ${jumpToTen} steps to reach ${nextTen}. Then jump ${jumpToTarget} more steps to reach ${a}. Add those jumps: ${jumpToTen} plus ${jumpToTarget} is ${result}!`;
+  }
+
+  // 2-digit minus 1-digit (e.g. 35 - 3 or 42 - 5)
+  if (a >= 20 && b < 10) {
+    const ones = a % 10;
+    const tens = Math.floor(a / 10) * 10;
+    if (ones >= b) {
+      return `Keep the tens (${tens}). Subtract the ones: ${ones} minus ${b} is ${ones - b}. Put them together: ${result}!`;
+    } else {
+      return `From ${a}, count back ${ones} steps to reach ${tens}. Then count back ${b - ones} more steps to land on ${result}!`;
+    }
   }
 
   return `Start at ${a}, subtract ${b}, and you arrive at ${result}.`;

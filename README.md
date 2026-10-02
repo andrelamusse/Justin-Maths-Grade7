@@ -21,6 +21,19 @@ Both applications are 100% self-contained, high-performance static web apps host
 > **The Priority Application** — Master the foundational core operations ($1+4$, $7+3$, $34+23$, $2 \times 4$, $12 \div 3$).
 
 - **The Problem It Solves:** When a learner cannot picture quantities in their mind, traditional mental drills fail and cause cognitive shutdown.
+- **7 Streamlined Practice Categories:**
+  1. ➕ **Addition (+)** — Facts up to 10, teen bridges, and 2-digit sums with regrouping.
+  2. ➖ **Subtraction (-)** — Facts within 5/10, teen bridges, and 2-digit differences with borrowing.
+  3. ✖️ **Multiplication (×)** — 2x/5x/10x doubles, core tables, and mastery mix up to 12x12.
+  4. ➗ **Division (÷)** — Halves (÷2), ÷5, ÷10, and mastery division up to 144.
+  5. ➕➖ **Mixed Addition & Subtraction (+ & -)** — Blended practice switching between adding and taking away.
+  6. ✖️➗ **Mixed Multiplication & Division (× & ÷)** — Blended practice linking tables to equal sharing.
+  7. 🎲 **All 4 Operations Mixed (+, -, ×, ÷)** — Comprehensive challenge across all basic math operations.
+- **4 Sub-Category Difficulty Levels:**
+  - 🌱 **Easy** — Foundational micro-basics, small numbers, and facts within 10.
+  - ⚡ **Medium** — Bridges to 10, 2-digit operations without regrouping, and intermediate tables.
+  - 🔥 **Hard** — 2-digit regrouping/carrying, borrowing, and upper times tables up to 144.
+  - 🚀 **All (Gradual)** — Dynamic ramp-up grinding mode: starts easy and gets progressively harder as Justin builds streaks.
 - **Multisensory CPA Visualizations (Concrete $\to$ Pictorial $\to$ Abstract):**
   - **Ten-Frames & Double Ten-Frames:** Red and blue physical counters filling 10-grids, making "bridging to 10" visible and tangible.
   - **Base-Ten (Dienes) Blocks:** 3D-styled Ten Rods and Unit Cubes for 2-digit numbers ($34 + 23$), showing place-value grouping and regrouping/carrying.
