@@ -2,7 +2,16 @@
 
 A specialized dual-application mathematics learning suite engineered for **Justin**, a Grade 7 learner who experiences difficulties visualizing arithmetic in his head (ADHD, dyscalculia, dyslexia, or working memory challenges).
 
-Both applications are 100% self-contained, high-performance static web apps ready to host directly on **GitHub Pages** with **zero build steps** and **zero external dependencies**.
+Both applications are 100% self-contained, high-performance static web apps hosted directly on **GitHub Pages** with **zero build steps** and **zero external dependencies**.
+
+---
+
+## 🌐 Official Live Deployment & Repository Endpoints
+
+- 🌐 **Live Suite Master Hub:** [https://andrelamusse.github.io/Justin-Maths-Grade7/](https://andrelamusse.github.io/Justin-Maths-Grade7/)
+- 🧠 **Live Neuro-Visual Basic Math Grinder:** [https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/](https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/)
+- 📐 **Live Grade 7 English Maths Academy:** [https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/](https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/)
+- 📁 **Official GitHub Repository:** [https://github.com/andrelamusse/Justin-Maths-Grade7](https://github.com/andrelamusse/Justin-Maths-Grade7)
 
 ---
 
@@ -73,35 +82,22 @@ The repository root includes a launchpad connecting both applications:
 
 ---
 
-## 🌐 How to Host on GitHub & GitHub Pages
+## 🌐 How Hosted on GitHub & GitHub Pages
 
-Since all code is written in vanilla HTML5, CSS3, and ES6+ modules without any build tools or external servers, hosting is 100% free on GitHub Pages:
+Since all code is written in vanilla HTML5, CSS3, and ES6+ modules without any build tools or external servers, hosting is 100% free and automated on GitHub Pages:
 
-### Step 1: Initialize Git and Push to GitHub
-Open a terminal in this folder (`Justin Maths Grade 7`):
+### Live Application URLs
+- 🚀 **Master Hub:** [https://andrelamusse.github.io/Justin-Maths-Grade7/](https://andrelamusse.github.io/Justin-Maths-Grade7/)
+- 🧠 **Basic Math Grinder:** [https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/](https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/)
+- 📐 **Grade 7 Academy:** [https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/](https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/)
 
-```bash
-git init
-git add .
-git commit -m "feat: complete Justin Maths Grade 7 suite and neuro-visual grinder"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git push -u origin main
-```
+### Repository & Deployment Setup
+- **GitHub Repository:** [https://github.com/andrelamusse/Justin-Maths-Grade7](https://github.com/andrelamusse/Justin-Maths-Grade7)
+- **Deployment Branch:** `main`
+- **Root Directory:** `/` (Root directory containing `index.html`)
+- **HTTPS Enforcement:** Enabled
 
-### Step 2: Turn on GitHub Pages
-1. Go to your repository on GitHub.
-2. Click **Settings** (top navigation bar).
-3. In the left sidebar, click **Pages** (under "Code and automation").
-4. Under **Build and deployment**:
-   - **Source:** *Deploy from a branch*
-   - **Branch:** `main`
-   - **Folder:** `/ (root)`
-5. Click **Save**.
-6. Wait 60–90 seconds. GitHub will display your live website URL:
-   `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
-
-Both apps are immediately usable on desktops, laptops, Chromebooks, iPads, tablets, and phones!
+Both apps are immediately usable on desktops, laptops, Chromebooks, iPads, tablets, and mobile phones!
 
 ---
 
