@@ -44,9 +44,11 @@ function generateAdditionExplanation(a, b, result) {
 
   // Making 10 bridge
   if (a < 10 && b < 10 && a + b > 10) {
-    const needFor10 = 10 - a;
-    const remaining = b - needFor10;
-    return `Let's make a 10 first! ${a} needs ${needFor10} more to fill up a 10. Split ${b} into ${needFor10} and ${remaining}. ${a} plus ${needFor10} is 10, plus ${remaining} more makes ${result}!`;
+    const bigger = Math.max(a, b);
+    const smaller = Math.min(a, b);
+    const needFor10 = 10 - bigger;
+    const remaining = smaller - needFor10;
+    return `Let's make a 10 first! ${bigger} needs ${needFor10} more to fill up a 10. Split ${smaller} into ${needFor10} and ${remaining}. ${bigger} plus ${needFor10} is 10, plus ${remaining} more makes ${result}!`;
   }
 
   // Near doubles (e.g. 6 + 7)
@@ -106,14 +108,30 @@ function generateSubtractionExplanation(a, b, result) {
     return `Imagine you have ${a} dots. Cross out ${b} of them. You have ${result} left!`;
   }
 
-  // Teen subtraction bridging 10 (e.g. 14 - 6)
-  if (a > 10 && a < 20 && b < 10) {
-    const stepTo10 = a - 10;
-    const stepAfter10 = b - stepTo10;
-    return `Let's jump back to 10 first! From ${a}, jump back ${stepTo10} steps to reach 10. You still need to take away ${stepAfter10} more. 10 minus ${stepAfter10} leaves ${result}!`;
+  // Subtracting single digit from teen or 2-digit number (e.g. 15-3, 14-6, 42-5)
+  if (a >= 10 && b < 10) {
+    const ones = a % 10;
+    const tens = Math.floor(a / 10) * 10;
+
+    if (b === ones) {
+      return `Take away the ${b} ones to land directly on ${result}!`;
+    }
+
+    if (ones > b) {
+      return `Keep the tens (${tens}). Subtract the ones: ${ones} minus ${b} is ${ones - b}. Put them together: ${result}!`;
+    }
+
+    // ones < b: Bridge across 10
+    const stepToTen = ones;
+    const stepPastTen = b - stepToTen;
+    if (a < 20) {
+      return `Let's jump back to 10 first! From ${a}, jump back ${stepToTen} steps to reach 10. You still need to take away ${stepPastTen} more. 10 minus ${stepPastTen} leaves ${result}!`;
+    } else {
+      return `From ${a}, count back ${stepToTen} steps to reach ${tens}. Then count back ${stepPastTen} more steps to land on ${result}!`;
+    }
   }
 
-  // 2-digit without borrow (e.g. 47 - 23 or 15 - 12)
+  // 2-digit without borrow (e.g. 47 - 23 or 55 - 21)
   if (a >= 10 && b >= 10 && (a % 10) >= (b % 10)) {
     const aTens = Math.floor(a / 10) * 10;
     const bTens = Math.floor(b / 10) * 10;
@@ -131,17 +149,6 @@ function generateSubtractionExplanation(a, b, result) {
       return `Think of jumping up like a frog! From ${b}, jump ${jumpToTen} steps directly up to ${a}! The difference is ${result}!`;
     }
     return `Think of jumping up like a frog! From ${b}, jump ${jumpToTen} steps to reach ${nextTen}. Then jump ${jumpToTarget} more steps to reach ${a}. Add those jumps: ${jumpToTen} plus ${jumpToTarget} is ${result}!`;
-  }
-
-  // 2-digit minus 1-digit (e.g. 35 - 3 or 42 - 5)
-  if (a >= 20 && b < 10) {
-    const ones = a % 10;
-    const tens = Math.floor(a / 10) * 10;
-    if (ones >= b) {
-      return `Keep the tens (${tens}). Subtract the ones: ${ones} minus ${b} is ${ones - b}. Put them together: ${result}!`;
-    } else {
-      return `From ${a}, count back ${ones} steps to reach ${tens}. Then count back ${b - ones} more steps to land on ${result}!`;
-    }
   }
 
   return `Start at ${a}, subtract ${b}, and you arrive at ${result}.`;

@@ -163,6 +163,9 @@ export class MathGrinderApp {
         this.xp = parsed.xp || 0;
         if (parsed.currentCategory && CATEGORIES.some(c => c.id === parsed.currentCategory)) {
           this.currentCategory = parsed.currentCategory;
+        } else if (parsed.currentOp) {
+          const map = { '+': 'add', '-': 'sub', '×': 'mul', '÷': 'div', '*': 'mul', '/': 'div' };
+          this.currentCategory = map[parsed.currentOp] || 'add';
         }
         if (parsed.currentSubCategory && SUB_CATEGORIES.some(s => s.id === parsed.currentSubCategory)) {
           this.currentSubCategory = parsed.currentSubCategory;
@@ -381,7 +384,11 @@ export class MathGrinderApp {
     const found = SUB_CATEGORIES.find(s => s.id === subId);
     if (!found) return;
     this.currentSubCategory = found.id;
+    if (found.id === 'all') {
+      this.streak = 0; // Fresh progressive ramp-up starting from Easy
+    }
     this.updateSubCategoryUI();
+    this.updateStatsUI();
     this.nextQuestion();
     this.saveState();
   }
@@ -439,7 +446,8 @@ export class MathGrinderApp {
         this.dom.tierBadge.textContent = titles[tier] || tier;
       }
       if (this.dom.tierDetails) {
-        this.dom.tierDetails.textContent = `(Streak: ${this.streak} 🔥 • Difficulty ramps up as streak builds)`;
+        const nextTarget = tier === 'easy' ? '3 for Medium ⚡' : (tier === 'medium' ? '7 for Hard 🔥' : 'Max Level 🔥');
+        this.dom.tierDetails.textContent = `(Streak: ${this.streak} 🔥 • Next: ${nextTarget})`;
       }
     } else {
       this.dom.tierIndicator.classList.add('hidden');
@@ -473,7 +481,7 @@ export class MathGrinderApp {
         const aTens = Math.floor(Math.random() * 5) + 1; // 1 to 5
         const bTens = Math.floor(Math.random() * (9 - aTens)) + 1; // sum <= 9
         const aOnes = Math.floor(Math.random() * 9) + 1; // 1 to 9
-        const bOnes = Math.floor(Math.random() * (9 - aOnes)); // sum <= 9
+        const bOnes = Math.floor(Math.random() * (10 - aOnes)); // 0 to 9 - aOnes inclusive, sum <= 9
         a = aTens * 10 + aOnes;
         b = bTens * 10 + bOnes;
       } else if (level === 5) {
@@ -498,10 +506,12 @@ export class MathGrinderApp {
         a = Math.floor(Math.random() * 5) + 6; // 6 to 10
         b = Math.floor(Math.random() * (a - 1)) + 1;
       } else if (level === 3) {
-        // Teen bridges (11 to 18 minus single digit resulting in single digit)
-        b = Math.floor(Math.random() * 6) + 4; // 4 to 9
-        result = Math.floor(Math.random() * 6) + 4;
-        a = b + result;
+        // Teen bridges (11 to 18 minus single digit crossing 10)
+        a = Math.floor(Math.random() * 8) + 11; // 11 to 18
+        const aOnes = a - 10; // 1 to 8
+        const minB = aOnes + 1; // must bridge across 10
+        const maxB = 9; // single digit subtrahend
+        b = Math.floor(Math.random() * (maxB - minB + 1)) + minB;
       } else if (level === 4) {
         // 2-digit no borrow (e.g. 47 - 23, 68 - 35)
         const aTens = Math.floor(Math.random() * 6) + 3; // 3 to 8
@@ -856,11 +866,13 @@ export class MathGrinderApp {
           <div class="bd-step"><strong>Step 3 (Combine):</strong> ${aT + bT} + ${aO + bO} = <span class="highlight-total">${result}</span></div>
         `;
       } else if (a < 10 && b < 10 && a + b > 10) {
-        const need = 10 - a;
-        const rest = b - need;
+        const bigger = Math.max(a, b);
+        const smaller = Math.min(a, b);
+        const need = 10 - bigger;
+        const rest = smaller - need;
         html += `
-          <div class="bd-step"><strong>Make 10:</strong> Start with ${a}. Add <span class="highlight-ones">${need}</span> from ${b} to make <strong>10</strong>.</div>
-          <div class="bd-step"><strong>Add Leftover:</strong> You have <span class="highlight-ones">${rest}</span> left from ${b}.</div>
+          <div class="bd-step"><strong>Make 10:</strong> Start with ${bigger}. Add <span class="highlight-ones">${need}</span> from ${smaller} to make <strong>10</strong>.</div>
+          <div class="bd-step"><strong>Add Leftover:</strong> You have <span class="highlight-ones">${rest}</span> left from ${smaller}.</div>
           <div class="bd-step"><strong>Total:</strong> 10 + ${rest} = <span class="highlight-total">${result}</span></div>
         `;
       } else if ((a >= 10 && b < 10) || (b >= 10 && a < 10)) {
@@ -903,7 +915,7 @@ export class MathGrinderApp {
             <div class="bd-step"><strong>Total Difference:</strong> ${jump1} + ${jump2} = <span class="highlight-total">${result}</span></div>
           `;
         }
-      } else if (a >= 20 && b < 10) {
+      } else if (a >= 10 && b < 10) {
         const aT = Math.floor(a / 10) * 10;
         const aO = a % 10;
         if (aO >= b) {

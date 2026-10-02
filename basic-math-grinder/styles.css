@@ -906,6 +906,8 @@ body.theme-dark .tier-hard {
   background: var(--bg-color);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .array-dot {
@@ -930,6 +932,8 @@ body.theme-dark .tier-hard {
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .sharing-group-card {

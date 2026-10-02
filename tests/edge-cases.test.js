@@ -122,6 +122,9 @@ test('Exhaustive stress test: All 7 categories across all 4 sub-categories produ
         // Test verbal script generation for this question
         const explanation = generateVerbalExplanation(q.op, q.a, q.b, q.result);
         assert.ok(typeof explanation === 'string' && explanation.length > 5, `Explanation too short for ${q.a} ${q.op} ${q.b}`);
+        assert.ok(!/-\d/.test(explanation), `Explanation contains negative number for ${q.a} ${q.op} ${q.b}: "${explanation}"`);
+        assert.ok(!explanation.includes('NaN'), `Explanation contains NaN for ${q.a} ${q.op} ${q.b}`);
+        assert.ok(!explanation.includes('undefined'), `Explanation contains undefined for ${q.a} ${q.op} ${q.b}`);
       }
     }
   }

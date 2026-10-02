@@ -176,6 +176,14 @@ test('Changing category resets streak to 0 for fresh gradual ramp-up', () => {
   assert.equal(app.streak, 0, 'Switching category must reset streak to 0');
 });
 
+test('Switching sub-category to "all" resets streak to 0 for fresh gradual ramp-up', () => {
+  const app = new MathGrinderApp();
+  app.streak = 10;
+  app.setSubCategory('all');
+  assert.equal(app.currentSubCategory, 'all');
+  assert.equal(app.streak, 0, 'Switching sub-category to all must reset streak to 0');
+});
+
 test('MathGrinderApp generates valid addition questions for all levels', () => {
   const app = new MathGrinderApp();
   for (let lvl = 1; lvl <= 5; lvl++) {
@@ -210,6 +218,11 @@ test('MathGrinderApp generates valid subtraction questions for all levels', () =
 
       if (lvl === 1) {
         assert.ok(q.a <= 5, `Level 1 subtraction must be within 5`);
+      } else if (lvl === 3) {
+        assert.ok(q.a >= 11 && q.a <= 18, `Level 3 must be a teen number: ${q.a}`);
+        assert.ok(q.b <= 9, `Level 3 subtrahend must be single digit: ${q.b}`);
+        assert.ok((q.a % 10) < q.b, `Level 3 must bridge across 10: ${q.a} - ${q.b}`);
+        assert.ok(q.result >= 1 && q.result <= 9, `Level 3 result must be single digit: ${q.result}`);
       } else if (lvl === 4) {
         assert.ok(q.a >= 20 && q.b >= 10, `Level 4 subtraction should be 2-digit`);
         assert.ok((q.a % 10) >= (q.b % 10), `Level 4 subtraction must not require borrowing`);
@@ -291,4 +304,41 @@ test('Division Level 4 can generate tables up to 12 and dividends up to 144', ()
 
   assert.ok(sawAbove100, 'Should generate dividends above 100 in mastery division');
   assert.ok(sawDivisor11Or12, 'Should generate divisors 11 or 12 in mastery division');
+});
+
+test('Verbal speech explanations never contain negative numbers for subtraction', () => {
+  for (let a = 1; a <= 100; a++) {
+    for (let b = 1; b <= a; b++) {
+      const res = a - b;
+      const speech = generateVerbalExplanation('-', a, b, res);
+      assert.ok(!/-\d/.test(speech), `Explanation for ${a} - ${b} must not have negative number: "${speech}"`);
+      assert.ok(!speech.includes('NaN'), `Explanation for ${a} - ${b} contains NaN`);
+      assert.ok(!speech.includes('undefined'), `Explanation for ${a} - ${b} contains undefined`);
+    }
+  }
+});
+
+test('Step-by-step breakdown handles teen subtractions with jumping or place-value steps', () => {
+  const app = new MathGrinderApp();
+  // Mock breakdown container DOM
+  const container = { innerHTML: '', classList: { contains: () => false, remove: () => {}, add: () => {} } };
+  const btn = { textContent: '' };
+  app.dom = { breakdownContainer: container, breakdownBtn: btn };
+
+  // 1. Teen subtraction bridging 10 (14 - 6)
+  app.currentQuestion = { op: '-', a: 14, b: 6, result: 8 };
+  app.toggleBreakdown(true);
+  assert.ok(container.innerHTML.includes('Jump 1:'), 'Teen subtraction 14 - 6 should have Jump 1');
+  assert.ok(container.innerHTML.includes('10'), 'Teen subtraction 14 - 6 should bridge to 10');
+
+  // 2. Teen subtraction without bridging (15 - 3)
+  app.currentQuestion = { op: '-', a: 15, b: 3, result: 12 };
+  app.toggleBreakdown(true);
+  assert.ok(container.innerHTML.includes('Step 1 (Tens):') && container.innerHTML.includes('Step 2 (Ones):'), 'Teen subtraction 15 - 3 should have place value steps');
+
+  // 3. Make 10 addition (4 + 8)
+  app.currentQuestion = { op: '+', a: 4, b: 8, result: 12 };
+  app.toggleBreakdown(true);
+  assert.ok(container.innerHTML.includes('Make 10:'), 'Addition 4 + 8 should have Make 10 step');
+  assert.ok(container.innerHTML.includes('Start with 8'), 'Addition 4 + 8 should start with larger addend 8');
 });
