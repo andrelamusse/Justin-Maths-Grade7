@@ -145,6 +145,12 @@ body {
   border-color: #FECACA;
 }
 
+.solved-counter {
+  color: #0284C7;
+  background: #E0F2FE;
+  border-color: #BAE6FD;
+}
+
 .xp-counter {
   color: #7C3AED;
   background: #EDE9FE;
@@ -161,6 +167,12 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.nav-link-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .control-btn {
@@ -821,6 +833,20 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scratchpad-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scratchpad-tools .control-btn.active {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
 }
 
 .scratchpad-canvas {

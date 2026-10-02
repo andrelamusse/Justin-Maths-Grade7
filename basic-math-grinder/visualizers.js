@@ -21,7 +21,8 @@ export class MathVisualizer {
 
     // Choose the best visual model for the problem
     if (operation === '+' || operation === '-') {
-      if (a <= 20 && b <= 20 && (a + b) <= 20) {
+      const useTenFrame = (operation === '+' && (a + b) <= 20) || (operation === '-' && a <= 20);
+      if (useTenFrame) {
         wrapper.appendChild(this.createTenFrameElement(operation, a, b, result));
         wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
       } else {
@@ -190,13 +191,29 @@ export class MathVisualizer {
       `;
     } else {
       // Subtraction
-      summary.innerHTML = `
-        <div class="summary-steps">
-          <div class="step-chip tens-chip">Tens: ${aTens * 10} - ${bTens * 10} = ${(aTens - bTens) * 10}</div>
-          <div class="step-chip ones-chip">Ones: ${aOnes} - ${bOnes} = ${aOnes - bOnes}</div>
-          <div class="step-chip result-chip">Total Remaining: <strong>${result}</strong></div>
-        </div>
-      `;
+      if (aOnes >= bOnes) {
+        summary.innerHTML = `
+          <div class="summary-steps">
+            <div class="step-chip tens-chip">Tens: ${aTens * 10} - ${bTens * 10} = ${(aTens - bTens) * 10}</div>
+            <div class="step-chip ones-chip">Ones: ${aOnes} - ${bOnes} = ${aOnes - bOnes}</div>
+            <div class="step-chip result-chip">Total Remaining: <strong>${result}</strong></div>
+          </div>
+        `;
+      } else {
+        // Regrouping / Borrowing
+        const regroupedTens = (aTens - 1) * 10;
+        const regroupedOnes = aOnes + 10;
+        const finalTens = (aTens - 1 - bTens) * 10;
+        const finalOnes = regroupedOnes - bOnes;
+        summary.innerHTML = `
+          <div class="summary-steps">
+            <div class="step-chip tens-chip">Tens (Regrouped): ${regroupedTens} - ${bTens * 10} = ${finalTens}</div>
+            <div class="step-chip ones-chip">Ones (Unbundled): ${regroupedOnes} - ${bOnes} = ${finalOnes}</div>
+            <div class="step-chip result-chip">Total Remaining: <strong>${result}</strong></div>
+          </div>
+          <div class="carry-alert">💡 <strong>Regrouping:</strong> ${aOnes} is smaller than ${bOnes}. We trade 1 Ten rod into 10 Ones cubes! That gives ${regroupedOnes} ones.</div>
+        `;
+      }
     }
 
     section.appendChild(summary);
@@ -290,13 +307,25 @@ export class MathVisualizer {
 
     // Ticks
     const tickStep = totalSpan > 30 ? 5 : 1;
+    const tickSet = new Set();
     for (let v = minVal; v <= maxVal; v += tickStep) {
+      tickSet.add(v);
+    }
+    tickSet.add(a);
+    tickSet.add(result);
+    const sortedTicks = Array.from(tickSet).filter(v => v >= minVal && v <= maxVal).sort((x, y) => x - y);
+
+    for (const v of sortedTicks) {
       const x = valToX(v);
+      const isKey = v === a || v === result;
       const isMajor = v % 5 === 0;
-      const tickH = isMajor ? 14 : 8;
-      svgHtml += `<line x1="${x}" y1="${lineY - tickH}" x2="${x}" y2="${lineY + tickH}" stroke="#94a3b8" stroke-width="${isMajor ? 2 : 1.5}"/>`;
-      if (isMajor || v === a || v === result) {
-        svgHtml += `<text x="${x}" y="${lineY + 26}" font-size="12" font-weight="${v === result || v === a ? 'bold' : 'normal'}" fill="${v === result ? '#0284c7' : '#475569'}" text-anchor="middle">${v}</text>`;
+      const tickH = isKey ? 15 : (isMajor ? 14 : 8);
+      const strokeW = isKey ? 2.5 : (isMajor ? 2 : 1.5);
+      const strokeCol = isKey ? (v === result ? (op === '+' ? '#10b981' : '#f59e0b') : '#3b82f6') : (isMajor ? '#64748b' : '#94a3b8');
+      svgHtml += `<line x1="${x}" y1="${lineY - tickH}" x2="${x}" y2="${lineY + tickH}" stroke="${strokeCol}" stroke-width="${strokeW}"/>`;
+      if (isMajor || isKey) {
+        const textCol = isKey ? (v === result ? (op === '+' ? '#10b981' : '#f59e0b') : '#2563eb') : '#475569';
+        svgHtml += `<text x="${x}" y="${lineY + 26}" font-size="12" font-weight="${isKey ? 'bold' : 'normal'}" fill="${textCol}" text-anchor="middle">${v}</text>`;
       }
     }
 

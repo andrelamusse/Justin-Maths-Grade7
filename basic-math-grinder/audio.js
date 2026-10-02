@@ -176,7 +176,16 @@ class SoundSystem {
       return;
     }
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    if (!this.selectedVoice) {
+      this.loadVoice();
+    }
+
+    const cleanText = text
+      .replace(/×/g, ' times ')
+      .replace(/÷/g, ' divided by ')
+      .replace(/−/g, ' minus ');
+
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     if (this.selectedVoice) {
       utterance.voice = this.selectedVoice;
     }

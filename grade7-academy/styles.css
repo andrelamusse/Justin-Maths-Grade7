@@ -132,6 +132,18 @@ body {
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.grinder-bridge-btn {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+  color: #1D4ED8;
+}
+.grinder-bridge-btn:hover {
+  background: #DBEAFE;
 }
 
 /* Layout */

@@ -46,6 +46,7 @@ export class MathGrinderApp {
     this.xp = 0;
     this.history = [];
     this.autoAdvanceTimer = null;
+    this.isSpeaking = false;
     this.settings = {
       font: 'lexend',
       theme: 'cream',
@@ -288,18 +289,19 @@ export class MathGrinderApp {
         b = Math.floor(Math.random() * 5) + 5; // 5,6,7,8,9
       } else if (level === 4) {
         // 2-digit without carry (e.g. 34 + 23)
-        const aTens = Math.floor(Math.random() * 4) + 1; // 1 to 4
-        const bTens = Math.floor(Math.random() * 4) + 1;
-        const aOnes = Math.floor(Math.random() * 5); // 0 to 4
+        const aTens = Math.floor(Math.random() * 5) + 1; // 1 to 5
+        const bTens = Math.floor(Math.random() * (9 - aTens)) + 1; // sum <= 9
+        const aOnes = Math.floor(Math.random() * 9) + 1; // 1 to 9
         const bOnes = Math.floor(Math.random() * (9 - aOnes)); // sum <= 9
         a = aTens * 10 + aOnes;
         b = bTens * 10 + bOnes;
       } else if (level === 5) {
         // 2-digit with carry (e.g. 48 + 27)
-        const aTens = Math.floor(Math.random() * 4) + 1;
-        const bTens = Math.floor(Math.random() * 4) + 1;
-        const aOnes = Math.floor(Math.random() * 5) + 5; // 5 to 9
-        const bOnes = Math.floor(Math.random() * 5) + (10 - aOnes); // sum >= 10
+        const aTens = Math.floor(Math.random() * 4) + 1; // 1 to 4
+        const bTens = Math.floor(Math.random() * (8 - aTens)) + 1; // sum <= 8
+        const aOnes = Math.floor(Math.random() * 9) + 1; // 1 to 9
+        const minB = 10 - aOnes;
+        const bOnes = Math.floor(Math.random() * (10 - minB)) + minB; // minB to 9, sum >= 10
         a = aTens * 10 + aOnes;
         b = bTens * 10 + bOnes;
       }
@@ -320,19 +322,19 @@ export class MathGrinderApp {
         result = Math.floor(Math.random() * 6) + 4;
         a = b + result;
       } else if (level === 4) {
-        // 2-digit no borrow
-        const aTens = Math.floor(Math.random() * 4) + 4; // 4 to 7
-        const bTens = Math.floor(Math.random() * (aTens - 1)) + 1;
-        const aOnes = Math.floor(Math.random() * 5) + 4; // 4 to 8
-        const bOnes = Math.floor(Math.random() * aOnes);
+        // 2-digit no borrow (e.g. 47 - 23, 68 - 35)
+        const aTens = Math.floor(Math.random() * 6) + 3; // 3 to 8
+        const bTens = Math.floor(Math.random() * (aTens - 1)) + 1; // 1 to aTens - 1
+        const aOnes = Math.floor(Math.random() * 10); // 0 to 9
+        const bOnes = Math.floor(Math.random() * (aOnes + 1)); // 0 to aOnes
         a = aTens * 10 + aOnes;
         b = bTens * 10 + bOnes;
       } else if (level === 5) {
         // 2-digit with borrow (e.g. 52 - 28)
-        const aTens = Math.floor(Math.random() * 4) + 4;
-        const bTens = Math.floor(Math.random() * (aTens - 2)) + 1;
-        const aOnes = Math.floor(Math.random() * 4) + 1; // 1 to 4
-        const bOnes = Math.floor(Math.random() * 4) + 5; // 5 to 8
+        const aTens = Math.floor(Math.random() * 6) + 3; // 3 to 8
+        const bTens = Math.floor(Math.random() * (aTens - 1)) + 1; // 1 to aTens - 1
+        const bOnes = Math.floor(Math.random() * 8) + 2; // 2 to 9
+        const aOnes = Math.floor(Math.random() * bOnes); // 0 to bOnes - 1 (guaranteed aOnes < bOnes)
         a = aTens * 10 + aOnes;
         b = bTens * 10 + bOnes;
       }
@@ -367,12 +369,16 @@ export class MathGrinderApp {
 
     } else if (op === '÷') {
       let divisor = 2;
+      let maxQuotient = 10;
       if (level === 1) divisor = 2;
       else if (level === 2) divisor = [5, 10][Math.floor(Math.random() * 2)];
       else if (level === 3) divisor = [3, 4][Math.floor(Math.random() * 2)];
-      else divisor = Math.floor(Math.random() * 10) + 2;
+      else {
+        divisor = Math.floor(Math.random() * 11) + 2; // 2 to 12
+        maxQuotient = 12; // up to 144
+      }
 
-      const quotient = Math.floor(Math.random() * 10) + 1;
+      const quotient = Math.floor(Math.random() * maxQuotient) + 1;
       b = divisor;
       result = quotient;
       a = b * result;
@@ -383,6 +389,15 @@ export class MathGrinderApp {
 
   nextQuestion() {
     clearTimeout(this.autoAdvanceTimer);
+    if (this.isSpeaking) {
+      sound.stopSpeech();
+      this.isSpeaking = false;
+      if (this.dom.speakBtn) {
+        this.dom.speakBtn.textContent = '📢 Explain';
+        this.dom.speakBtn.classList.remove('speaking');
+      }
+    }
+
     this.userAnswer = '';
     this.currentQuestion = this.generateQuestion(this.currentOp, this.currentLevel);
 
@@ -407,6 +422,7 @@ export class MathGrinderApp {
     if (this.dom.breakdownContainer) {
       this.dom.breakdownContainer.classList.add('hidden');
       this.dom.breakdownContainer.innerHTML = '';
+      if (this.dom.breakdownBtn) this.dom.breakdownBtn.textContent = 'Break it Down 🧩';
     }
 
     // Auto-update visualizer if open
@@ -544,10 +560,12 @@ export class MathGrinderApp {
     if (!isHidden && !forceShow) {
       this.dom.breakdownContainer.classList.add('hidden');
       this.dom.breakdownContainer.innerHTML = '';
+      if (this.dom.breakdownBtn) this.dom.breakdownBtn.textContent = 'Break it Down 🧩';
       return;
     }
 
     this.dom.breakdownContainer.classList.remove('hidden');
+    if (this.dom.breakdownBtn) this.dom.breakdownBtn.textContent = 'Hide Breakdown 🧩';
     const { op, a, b, result } = this.currentQuestion;
 
     let html = '<div class="breakdown-card"><h4>🧩 Step-by-Step Breakdown</h4>';
@@ -575,13 +593,32 @@ export class MathGrinderApp {
         html += `<div class="bd-step">Start at <strong>${Math.max(a, b)}</strong> and count on <strong>${Math.min(a, b)}</strong> more to reach <span class="highlight-total">${result}</span>.</div>`;
       }
     } else if (op === '-') {
-      if (a >= 10 && b >= 10) {
-        const nextTen = Math.ceil(b / 10) * 10;
+      if (a >= 10 && b >= 10 && (a % 10) >= (b % 10)) {
+        const aT = Math.floor(a / 10) * 10;
+        const aO = a % 10;
+        const bT = Math.floor(b / 10) * 10;
+        const bO = b % 10;
         html += `
-          <div class="bd-step"><strong>Jump 1:</strong> From ${b} up to ${nextTen} is <span class="highlight-ones">+${nextTen - b}</span></div>
-          <div class="bd-step"><strong>Jump 2:</strong> From ${nextTen} up to ${a} is <span class="highlight-tens">+${a - nextTen}</span></div>
-          <div class="bd-step"><strong>Total Difference:</strong> ${nextTen - b} + ${a - nextTen} = <span class="highlight-total">${result}</span></div>
+          <div class="bd-step"><strong>Step 1 (Tens):</strong> ${aT} - ${bT} = <span class="highlight-tens">${aT - bT}</span></div>
+          <div class="bd-step"><strong>Step 2 (Ones):</strong> ${aO} - ${bO} = <span class="highlight-ones">${aO - bO}</span></div>
+          <div class="bd-step"><strong>Step 3 (Combine):</strong> ${aT - bT} + ${aO - bO} = <span class="highlight-total">${result}</span></div>
         `;
+      } else if (a >= 10 && b >= 10) {
+        const nextTen = Math.ceil(b / 10) * 10;
+        const jump1 = nextTen - b;
+        const jump2 = a - nextTen;
+        if (jump2 === 0) {
+          html += `
+            <div class="bd-step"><strong>Jump 1:</strong> From ${b} up to ${a} is <span class="highlight-total">+${jump1}</span></div>
+            <div class="bd-step"><strong>Total Difference:</strong> <span class="highlight-total">${result}</span></div>
+          `;
+        } else {
+          html += `
+            <div class="bd-step"><strong>Jump 1:</strong> From ${b} up to ${nextTen} is <span class="highlight-ones">+${jump1}</span></div>
+            <div class="bd-step"><strong>Jump 2:</strong> From ${nextTen} up to ${a} is <span class="highlight-tens">+${jump2}</span></div>
+            <div class="bd-step"><strong>Total Difference:</strong> ${jump1} + ${jump2} = <span class="highlight-total">${result}</span></div>
+          `;
+        }
       } else {
         html += `<div class="bd-step">Start at <strong>${a}</strong>, count back <strong>${b}</strong> steps &rarr; lands on <span class="highlight-total">${result}</span>.</div>`;
       }
@@ -603,6 +640,17 @@ export class MathGrinderApp {
 
   speakCurrentQuestion() {
     if (!this.currentQuestion) return;
+
+    if (this.isSpeaking) {
+      sound.stopSpeech();
+      this.isSpeaking = false;
+      if (this.dom.speakBtn) {
+        this.dom.speakBtn.textContent = '📢 Explain';
+        this.dom.speakBtn.classList.remove('speaking');
+      }
+      return;
+    }
+
     const { op, a, b, result } = this.currentQuestion;
     const text = generateVerbalExplanation(op, a, b, result);
 
@@ -610,10 +658,24 @@ export class MathGrinderApp {
       this.dom.captionBar.innerHTML = `🗣️ <em>"${text}"</em>`;
     }
 
+    this.isSpeaking = true;
+    if (this.dom.speakBtn) {
+      this.dom.speakBtn.textContent = '⏹️ Stop';
+      this.dom.speakBtn.classList.add('speaking');
+    }
+
     sound.speak(text, () => {
-      if (this.dom.speakBtn) this.dom.speakBtn.classList.add('speaking');
+      this.isSpeaking = true;
+      if (this.dom.speakBtn) {
+        this.dom.speakBtn.textContent = '⏹️ Stop';
+        this.dom.speakBtn.classList.add('speaking');
+      }
     }, () => {
-      if (this.dom.speakBtn) this.dom.speakBtn.classList.remove('speaking');
+      this.isSpeaking = false;
+      if (this.dom.speakBtn) {
+        this.dom.speakBtn.textContent = '📢 Explain';
+        this.dom.speakBtn.classList.remove('speaking');
+      }
     });
   }
 
@@ -650,26 +712,55 @@ export class MathGrinderApp {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let drawing = false;
+    let mode = 'pen'; // 'pen' | 'eraser'
+
+    const applyBrush = () => {
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      if (mode === 'eraser') {
+        ctx.lineWidth = 18;
+        ctx.strokeStyle = '#FFFFFF';
+      } else {
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#0284c7';
+      }
+    };
 
     const resize = () => {
-      canvas.width = canvas.parentElement.clientWidth;
+      const wrap = document.getElementById('scratchpad-wrapper');
+      if (!wrap || wrap.classList.contains('hidden')) return;
+      const targetWidth = canvas.parentElement.clientWidth || 700;
+      if (canvas.width === targetWidth && canvas.height === 140) return;
+
+      // Save existing strokes before resizing
+      let prevData = null;
+      if (canvas.width > 0 && canvas.height > 0) {
+        try { prevData = ctx.getImageData(0, 0, canvas.width, canvas.height); } catch (e) {}
+      }
+
+      canvas.width = targetWidth;
       canvas.height = 140;
-      ctx.lineWidth = 3;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = '#0284c7';
+
+      if (prevData) {
+        try { ctx.putImageData(prevData, 0, 0); } catch (e) {}
+      }
+      applyBrush();
     };
-    resize();
+
     window.addEventListener('resize', resize);
 
     const getPos = (e) => {
       const rect = canvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return { x: clientX - rect.left, y: clientY - rect.top };
+      const scaleX = canvas.width / (rect.width || 1);
+      const scaleY = canvas.height / (rect.height || 1);
+      return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
     };
 
     const startDraw = (e) => {
       drawing = true;
+      applyBrush();
       const pos = getPos(e);
       ctx.beginPath();
       ctx.moveTo(pos.x, pos.y);
@@ -694,6 +785,23 @@ export class MathGrinderApp {
     canvas.addEventListener('touchmove', (e) => { e.preventDefault(); moveDraw(e); }, { passive: false });
     canvas.addEventListener('touchend', endDraw);
 
+    const penBtn = document.getElementById('scratchpad-pen-btn');
+    const eraserBtn = document.getElementById('scratchpad-eraser-btn');
+    if (penBtn && eraserBtn) {
+      penBtn.addEventListener('click', () => {
+        mode = 'pen';
+        penBtn.classList.add('active');
+        eraserBtn.classList.remove('active');
+        applyBrush();
+      });
+      eraserBtn.addEventListener('click', () => {
+        mode = 'eraser';
+        eraserBtn.classList.add('active');
+        penBtn.classList.remove('active');
+        applyBrush();
+      });
+    }
+
     const clearBtn = document.getElementById('clear-scratchpad-btn');
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
@@ -705,8 +813,14 @@ export class MathGrinderApp {
       this.dom.scratchpadToggle.addEventListener('click', () => {
         const wrap = document.getElementById('scratchpad-wrapper');
         if (wrap) {
+          const willShow = wrap.classList.contains('hidden');
           wrap.classList.toggle('hidden');
-          resize();
+          if (willShow) {
+            this.dom.scratchpadToggle.textContent = 'Hide Scratchpad ✏️';
+            resize();
+          } else {
+            this.dom.scratchpadToggle.textContent = 'Scratchpad ✏️';
+          }
         }
       });
     }

@@ -160,6 +160,7 @@ export class Grade7AcademyApp {
   }
 
   switchView(viewName) {
+    speechReader.stop();
     this.activeTab = viewName;
     this.dom.viewTabs.forEach(t => t.classList.toggle('active', t.dataset.view === viewName));
 
@@ -251,9 +252,22 @@ export class Grade7AcademyApp {
   }
 
   readCurrentLessonAloud() {
+    const btn = document.getElementById('speak-this-lesson-btn');
+    if (speechReader.currentlySpeaking) {
+      speechReader.stop();
+      if (btn) btn.textContent = '📢 Read Aloud';
+      return;
+    }
+
     const { topic } = this.getCurrentTopic();
     const text = `${topic.title}. ${topic.lesson.keyIdea}. Here are the rules: ${topic.lesson.rules.join('. ')}.`;
-    speechReader.speak(text);
+    if (btn) btn.textContent = '⏹️ Stop';
+
+    speechReader.speak(text, () => {
+      if (btn) btn.textContent = '⏹️ Stop';
+    }, () => {
+      if (btn) btn.textContent = '📢 Read Aloud';
+    });
   }
 
   // --- PRACTICE QUIZ VIEW ---

@@ -109,13 +109,19 @@ export class Grade7Tools {
         <div class="pan-controls right-pan-ctrl">
           <h4>Right Side (<span id="right-expr-text">10</span>)</h4>
           <div class="btn-group">
+            <button class="pill-btn add-btn" id="right-add-x">+ 1x Block</button>
+            <button class="pill-btn sub-btn" id="right-sub-x">- 1x Block</button>
+          </div>
+          <div class="btn-group">
             <button class="pill-btn add-btn" id="right-add-unit">+ 1 Unit</button>
             <button class="pill-btn sub-btn" id="right-sub-unit">- 1 Unit</button>
           </div>
-          <div class="btn-group">
-            <button class="pill-btn reset-btn" id="reset-balance-btn">↺ Reset Equation</button>
-          </div>
         </div>
+      </div>
+
+      <div class="balance-actions-bar" style="display:flex; justify-content:center; gap:12px; margin-top:12px;">
+        <button class="pill-btn add-btn" id="halve-both-btn" title="Divide both sides by 2">➗ Halve Both Sides (÷ 2)</button>
+        <button class="pill-btn reset-btn" id="reset-balance-btn">↺ Reset to 2x + 4 = 10</button>
       </div>
     `;
 
@@ -127,8 +133,16 @@ export class Grade7Tools {
       const leftExpr = card.querySelector('#left-expr-text');
       const rightExpr = card.querySelector('#right-expr-text');
 
-      leftExpr.textContent = `${leftX > 0 ? (leftX === 1 ? 'x' : `${leftX}x`) : ''} ${leftUnits > 0 ? (leftX > 0 ? `+ ${leftUnits}` : `${leftUnits}`) : (leftX === 0 ? '0' : '')}`;
-      rightExpr.textContent = `${rightX > 0 ? (rightX === 1 ? 'x' : `${rightX}x`) : ''} ${rightUnits > 0 ? (rightX > 0 ? `+ ${rightUnits}` : `${rightUnits}`) : (rightX === 0 ? '0' : '')}`;
+      const formatExpr = (xCount, units) => {
+        const parts = [];
+        if (xCount > 0) parts.push(xCount === 1 ? 'x' : `${xCount}x`);
+        if (units > 0) parts.push(`${units}`);
+        if (parts.length === 0) return '0';
+        return parts.join(' + ');
+      };
+
+      leftExpr.textContent = formatExpr(leftX, leftUnits);
+      rightExpr.textContent = formatExpr(rightX, rightUnits);
 
       const leftW = getLeftTotal();
       const rightW = getRightTotal();
@@ -146,6 +160,8 @@ export class Grade7Tools {
         badge.className = 'balance-badge balanced';
         if (leftX === 1 && leftUnits === 0 && rightX === 0) {
           badge.textContent = `🎉 Solved! 1x = ${rightUnits}! (x = ${rightUnits})`;
+        } else if (rightX === 1 && rightUnits === 0 && leftX === 0) {
+          badge.textContent = `🎉 Solved! x = ${leftUnits}!`;
         } else {
           badge.textContent = `⚖️ Balanced! Both sides are equal.`;
         }
@@ -164,8 +180,19 @@ export class Grade7Tools {
     card.querySelector('#left-add-unit').onclick = () => { leftUnits++; updateScaleVisual(); };
     card.querySelector('#left-sub-unit').onclick = () => { if (leftUnits > 0) leftUnits--; updateScaleVisual(); };
 
+    card.querySelector('#right-add-x').onclick = () => { rightX++; updateScaleVisual(); };
+    card.querySelector('#right-sub-x').onclick = () => { if (rightX > 0) rightX--; updateScaleVisual(); };
     card.querySelector('#right-add-unit').onclick = () => { rightUnits++; updateScaleVisual(); };
     card.querySelector('#right-sub-unit').onclick = () => { if (rightUnits > 0) rightUnits--; updateScaleVisual(); };
+
+    card.querySelector('#halve-both-btn').onclick = () => {
+      if (leftX % 2 === 0 && leftUnits % 2 === 0 && rightX % 2 === 0 && rightUnits % 2 === 0) {
+        leftX /= 2; leftUnits /= 2; rightX /= 2; rightUnits /= 2;
+        updateScaleVisual();
+      } else {
+        alert('Both sides must have even numbers of blocks and units to divide by 2 cleanly!');
+      }
+    };
 
     card.querySelector('#reset-balance-btn').onclick = () => {
       leftX = 2; leftUnits = 4; rightX = 0; rightUnits = 10;
@@ -218,19 +245,42 @@ export class Grade7Tools {
       for (let i = 0; i < row.count; i++) {
         const block = document.createElement('div');
         block.className = 'fraction-block';
+        block.dataset.num = i + 1;
+        block.dataset.denom = row.count;
         block.style.backgroundColor = row.color;
         block.textContent = row.count === 1 ? '1' : `1/${row.count}`;
 
         block.onclick = () => {
-          document.querySelectorAll('.fraction-block').forEach(b => b.classList.remove('selected-block'));
-          block.classList.add('selected-block');
+          const selectedNumerator = i + 1;
+          const selectedDenominator = row.count;
+          const targetVal = selectedNumerator / selectedDenominator;
 
-          const dec = (1 / row.count).toFixed(3);
-          const pct = ((1 / row.count) * 100).toFixed(1);
+          // Find and highlight all blocks that align to this cumulative value
+          const equivalents = [];
+          document.querySelectorAll('.fraction-block').forEach(b => {
+            const bNum = parseInt(b.dataset.num, 10);
+            const bDenom = parseInt(b.dataset.denom, 10);
+            const val = bNum / bDenom;
+            if (Math.abs(val - targetVal) < 0.0001) {
+              b.classList.add('selected-block');
+              equivalents.push(bNum === bDenom ? '1' : `${bNum}/${bDenom}`);
+            } else {
+              b.classList.remove('selected-block');
+            }
+          });
+
+          const dec = targetVal.toFixed(3);
+          const pct = (targetVal * 100).toFixed(1);
+          const eqText = equivalents.length > 1 ? equivalents.join(' = ') : `${selectedNumerator}/${selectedDenominator}`;
+
           infoBox.innerHTML = `
-            <strong>Selected: 1/${row.count}</strong> = 
-            <span class="hl-badge">Decimal: ${dec}</span> 
-            <span class="hl-badge">Percentage: ${pct}%</span>
+            <div style="font-size: 1.05rem; margin-bottom: 6px;">
+              <strong>Equivalents Aligning:</strong> <span class="highlight-total" style="color:#059669; font-weight:800; font-size:1.15rem;">${eqText}</span>
+            </div>
+            <div>
+              <span class="hl-badge">Decimal: ${dec}</span> 
+              <span class="hl-badge">Percentage: ${pct}%</span>
+            </div>
           `;
         };
 
@@ -380,8 +430,10 @@ export class Grade7Tools {
         <div class="thermo-interactive-col">
           <div class="current-temp-badge" id="temp-badge">Current: <strong>+5°C</strong></div>
           <div class="temp-control-buttons">
-            <button class="pill-btn add-btn" id="warm-up-btn">🔥 Warm Up (+5°)</button>
-            <button class="pill-btn sub-btn" id="cool-down-btn">❄️ Cool Down (-5°)</button>
+            <button class="pill-btn add-btn" id="warm-up-5-btn">🔥 +5°</button>
+            <button class="pill-btn add-btn" id="warm-up-1-btn">🔺 +1°</button>
+            <button class="pill-btn sub-btn" id="cool-down-1-btn">🔻 -1°</button>
+            <button class="pill-btn sub-btn" id="cool-down-5-btn">❄️ -5°</button>
             <button class="pill-btn reset-btn" id="zero-temp-btn">0° Freeze</button>
           </div>
           <div class="temp-math-explanation" id="temp-math-box">
@@ -414,8 +466,10 @@ export class Grade7Tools {
       }
     };
 
-    card.querySelector('#warm-up-btn').onclick = () => { if (temp <= 15) temp += 5; updateThermo(); };
-    card.querySelector('#cool-down-btn').onclick = () => { if (temp >= -15) temp -= 5; updateThermo(); };
+    card.querySelector('#warm-up-5-btn').onclick = () => { if (temp <= 15) temp += 5; updateThermo(); };
+    card.querySelector('#warm-up-1-btn').onclick = () => { if (temp < 20) temp += 1; updateThermo(); };
+    card.querySelector('#cool-down-1-btn').onclick = () => { if (temp > -20) temp -= 1; updateThermo(); };
+    card.querySelector('#cool-down-5-btn').onclick = () => { if (temp >= -15) temp -= 5; updateThermo(); };
     card.querySelector('#zero-temp-btn').onclick = () => { temp = 0; updateThermo(); };
 
     updateThermo();

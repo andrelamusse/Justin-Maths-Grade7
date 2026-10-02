@@ -99,6 +99,10 @@ test('generateVerbalExplanation produces cognitive explanations for all operatio
   const textSubBorrow = generateVerbalExplanation('-', 52, 28, 24);
   assert.ok(textSubBorrow.includes('jumping up') || textSubBorrow.includes('jump'), 'Should mention jump strategy');
 
+  // Test 9+1 number bonds to 10
+  const text9Plus1 = generateVerbalExplanation('+', 9, 1, 10);
+  assert.ok(text9Plus1.includes('best friends of 10') || text9Plus1.includes('count up just one more'), '9+1 should use making 10 or count up 1 rather than 9s trick');
+
   // Test multiplication
   const textMult = generateVerbalExplanation('×', 2, 4, 8);
   assert.ok(textMult.includes('doubling') || textMult.includes('groups'), 'Should mention doubling or groups');
@@ -106,4 +110,21 @@ test('generateVerbalExplanation produces cognitive explanations for all operatio
   // Test division
   const textDiv = generateVerbalExplanation('÷', 12, 3, 4);
   assert.ok(textDiv.includes('groups') || textDiv.includes('shared'), 'Should mention groups or sharing');
+});
+
+test('Division Level 4 can generate tables up to 12 and dividends up to 144', () => {
+  const app = new MathGrinderApp();
+  let sawAbove100 = false;
+  let sawDivisor11Or12 = false;
+
+  for (let i = 0; i < 300; i++) {
+    const q = app.generateQuestion('÷', 4);
+    if (q.a > 100) sawAbove100 = true;
+    if (q.b >= 11) sawDivisor11Or12 = true;
+    assert.ok(q.a <= 144, `Dividend should not exceed 144, got ${q.a}`);
+    assert.equal(q.a % q.b, 0, `Must divide evenly: ${q.a} / ${q.b}`);
+  }
+
+  assert.ok(sawAbove100, 'Should generate dividends above 100 in mastery division');
+  assert.ok(sawDivisor11Or12, 'Should generate divisors 11 or 12 in mastery division');
 });

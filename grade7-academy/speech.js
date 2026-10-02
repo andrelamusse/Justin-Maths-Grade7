@@ -6,6 +6,7 @@ class Grade7Speech {
     this.speechEnabled = true;
     this.speechRate = 0.92;
     this.selectedVoice = null;
+    this.currentlySpeaking = false;
     this.init();
   }
 
@@ -29,36 +30,55 @@ class Grade7Speech {
       if (onEnd) onEnd();
       return;
     }
-    window.speechSynthesis.cancel();
+    this.stop();
     if (!this.speechEnabled || !text) {
       if (onEnd) onEnd();
       return;
     }
 
+    if (!this.selectedVoice) {
+      this.loadVoice();
+    }
+
     const cleanText = text
+      .replace(/\$([0-9.]+)/g, '$1 dollars')
+      .replace(/cm²/g, ' square centimetres ')
+      .replace(/m²/g, ' square metres ')
+      .replace(/cm³/g, ' cubic centimetres ')
+      .replace(/m³/g, ' cubic metres ')
       .replace(/[²]/g, ' squared ')
       .replace(/[³]/g, ' cubed ')
       .replace(/[√]/g, ' square root of ')
       .replace(/[∛]/g, ' cube root of ')
       .replace(/[°]/g, ' degrees ')
+      .replace(/÷/g, ' divided by ')
+      .replace(/×/g, ' times ')
       .replace(/[\/]/g, ' over ');
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     if (this.selectedVoice) utterance.voice = this.selectedVoice;
     utterance.rate = this.speechRate;
 
-    if (onStart) utterance.onstart = onStart;
-    if (onEnd) {
-      utterance.onend = onEnd;
-      utterance.onerror = onEnd;
-    }
+    utterance.onstart = () => {
+      this.currentlySpeaking = true;
+      if (onStart) onStart();
+    };
+
+    const handleFinish = () => {
+      this.currentlySpeaking = false;
+      if (onEnd) onEnd();
+    };
+
+    utterance.onend = handleFinish;
+    utterance.onerror = handleFinish;
 
     window.speechSynthesis.speak(utterance);
   }
 
   stop() {
-    if ('speechSynthesis' in window) {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+      this.currentlySpeaking = false;
     }
   }
 }

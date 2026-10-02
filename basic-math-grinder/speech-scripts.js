@@ -19,16 +19,25 @@ export function generateVerbalExplanation(operation, a, b, result) {
 }
 
 function generateAdditionExplanation(a, b, result) {
-  // Single digit basics
+  // Adding 1
+  if (a === 1) return `Start at ${b}, and count up just one more: that gives ${result}!`;
+  if (b === 1) return `Start at ${a}, and count up just one more: that gives ${result}!`;
+
+  // Doubles
+  if (a === b && a <= 12) return `A double! Double ${a} is ${result}.`;
+
+  // Facts making 10 (Number bonds to 10)
+  if (a + b === 10) {
+    return `${a} and ${b} are best friends of 10! Together they make a full ten-frame of 10.`;
+  }
+
+  // Single digit basics within 5
   if (a <= 5 && b <= 5) {
-    if (a === 1) return `Start at ${b}, and count up just one more: that gives ${result}!`;
-    if (b === 1) return `Start at ${a}, and count up just one more: that gives ${result}!`;
-    if (a === b) return `A double! Double ${a} is ${result}.`;
     return `Imagine ${a} counters, then add ${b} more. Count them together: ${result}!`;
   }
 
-  // Adding 9 trick
-  if (a === 9 || b === 9) {
+  // Adding 9 trick (for sums greater than 10)
+  if ((a === 9 || b === 9) && a + b > 10) {
     const other = a === 9 ? b : a;
     return `Here is a secret trick for adding 9! Nine is almost 10. First add 10 to ${other} to get ${other + 10}. Then step back by 1. That leaves ${result}!`;
   }
@@ -44,11 +53,6 @@ function generateAdditionExplanation(a, b, result) {
   if (Math.abs(a - b) === 1 && a < 10 && b < 10) {
     const smaller = Math.min(a, b);
     return `This is a near-double! Double ${smaller} is ${smaller * 2}, plus 1 more makes ${result}!`;
-  }
-
-  // Facts making 10
-  if (a + b === 10) {
-    return `${a} and ${b} are best friends of 10! Together they make a full ten-frame of 10.`;
   }
 
   // Two digit numbers without carry (e.g. 34 + 23)
@@ -95,8 +99,8 @@ function generateSubtractionExplanation(a, b, result) {
     return `Let's jump back to 10 first! From ${a}, jump back ${stepTo10} steps to reach 10. You still need to take away ${stepAfter10} more. 10 minus ${stepAfter10} leaves ${result}!`;
   }
 
-  // 2-digit without borrow (e.g. 47 - 23)
-  if (a >= 20 && b >= 10 && (a % 10) >= (b % 10)) {
+  // 2-digit without borrow (e.g. 47 - 23 or 15 - 12)
+  if (a >= 10 && b >= 10 && (a % 10) >= (b % 10)) {
     const aTens = Math.floor(a / 10) * 10;
     const bTens = Math.floor(b / 10) * 10;
     const tensDiff = aTens - bTens;
@@ -109,6 +113,9 @@ function generateSubtractionExplanation(a, b, result) {
     const nextTen = Math.ceil(b / 10) * 10;
     const jumpToTen = nextTen - b;
     const jumpToTarget = a - nextTen;
+    if (jumpToTarget === 0) {
+      return `Think of jumping up like a frog! From ${b}, jump ${jumpToTen} steps directly up to ${a}! The difference is ${result}!`;
+    }
     return `Think of jumping up like a frog! From ${b}, jump ${jumpToTen} steps to reach ${nextTen}. Then jump ${jumpToTarget} more steps to reach ${a}. Add those jumps: ${jumpToTen} plus ${jumpToTarget} is ${result}!`;
   }
 
