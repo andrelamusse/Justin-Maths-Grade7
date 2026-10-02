@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neuro-Visual Basic Math Grinder | Justin's Foundation Builder</title>
+  <meta name="description" content="Visual and verbal math grinding tool specifically designed for learners with ADHD, dyscalculia, or dyslexia to build intuitive number sense.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body class="font-lexend theme-cream">
+  <div id="grinder-app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <a href="../index.html" class="back-link" title="Return to Portal Hub">&larr; Back to Hub</a>
+        <h1 class="brand-title">🧠 MathFoundations</h1>
+      </div>
+
+      <div class="header-stats">
+        <div class="stat-item streak-counter" title="Current streak without mistakes">
+          🔥 Streak: <span id="streak-val">0</span>
+        </div>
+        <div class="stat-item xp-counter" title="Total XP points earned">
+          ⚡ XP: <span id="xp-val">0</span>
+        </div>
+        <div class="stat-item badge-item" title="Current mastery badge">
+          <span id="level-badge">🌱 Math Rookie</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <button id="theme-toggle" class="control-btn" title="Toggle visual theme">🎨 Theme</button>
+        <button id="font-toggle" class="control-btn" title="Switch between Lexend and Dyslexic font">🔤 Font</button>
+        <button id="soundToggle" class="control-btn" id="sound-toggle" title="Toggle sound effects">🔊 Sound: ON</button>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="grinder-container">
+      <!-- Operation Selection Tabs -->
+      <nav class="operation-tabs" aria-label="Operations">
+        <button class="op-tab active" data-op="+">
+          <span class="op-icon">➕</span> Addition
+        </button>
+        <button class="op-tab" data-op="-">
+          <span class="op-icon">➖</span> Subtraction
+        </button>
+        <button class="op-tab" data-op="×">
+          <span class="op-icon">✖️</span> Multiplication
+        </button>
+        <button class="op-tab" data-op="÷">
+          <span class="op-icon">➗</span> Division
+        </button>
+      </nav>
+
+      <!-- Level Pills -->
+      <section class="level-selector-row" id="level-selector" aria-label="Difficulty levels">
+        <!-- Rendered by JS -->
+      </section>
+
+      <!-- Main Question Card -->
+      <article class="question-card" aria-live="polite">
+        <div class="math-equation-row">
+          <span class="num-chunk num-a" id="num-a">1</span>
+          <span class="op-chunk" id="op-symbol">+</span>
+          <span class="num-chunk num-b" id="num-b">4</span>
+          <span class="equals-chunk">=</span>
+          <span class="answer-box" id="answer-display" aria-label="Your Answer">?</span>
+        </div>
+
+        <!-- Feedback message area -->
+        <div class="feedback-msg" id="feedback-message"></div>
+
+        <!-- Speech / Audio Explanation Bar -->
+        <div class="speech-bar-row">
+          <button id="speak-btn" class="speak-action-btn" title="Read and explain this problem aloud">
+            📢 Explain
+          </button>
+          <div class="speech-caption-text" id="speech-caption-bar">
+            Tap <strong>📢 Explain</strong> to hear step-by-step verbal guidance.
+          </div>
+        </div>
+
+        <!-- Assistant Tools Buttons -->
+        <div class="tools-bar">
+          <button id="vis-toggle-btn" class="tool-action-btn" title="Show visual representation">
+            Show Visualizer 👁️
+          </button>
+          <button id="breakdown-btn" class="tool-action-btn" title="Break into smaller sub-steps">
+            Break it Down 🧩
+          </button>
+          <button id="scratchpad-toggle" class="tool-action-btn" title="Open doodle scratchpad">
+            Scratchpad ✏️
+          </button>
+        </div>
+
+        <!-- Breakdown Container (Initially Hidden) -->
+        <div id="breakdown-container" class="hidden"></div>
+      </article>
+
+      <!-- Visualizer Container (Initially Hidden) -->
+      <section id="visualizer-container" class="visualizer-card hidden" aria-label="Visual representation of the problem">
+        <!-- Ten-frame, Base-10 blocks, number line, or array rendered here -->
+      </section>
+
+      <!-- Scratchpad Drawing Canvas (Initially Hidden) -->
+      <section id="scratchpad-wrapper" class="scratchpad-wrapper hidden">
+        <div class="scratchpad-header">
+          <strong>✏️ Justin's Math Scratchpad (Draw or write working)</strong>
+          <button id="clear-scratchpad-btn" class="control-btn">Clear Canvas 🗑️</button>
+        </div>
+        <canvas id="scratchpad-canvas" class="scratchpad-canvas"></canvas>
+      </section>
+
+      <!-- On-Screen Keypad -->
+      <section class="keypad-container" aria-label="Number keypad">
+        <button class="key-btn" data-val="1">1</button>
+        <button class="key-btn" data-val="2">2</button>
+        <button class="key-btn" data-val="3">3</button>
+        <button class="key-btn" data-val="4">4</button>
+        <button class="key-btn" data-val="5">5</button>
+        <button class="key-btn" data-val="6">6</button>
+        <button class="key-btn" data-val="7">7</button>
+        <button class="key-btn" data-val="8">8</button>
+        <button class="key-btn" data-val="9">9</button>
+        <button class="key-btn key-clear" data-val="clear" title="Clear input">C</button>
+        <button class="key-btn" data-val="0">0</button>
+        <button class="key-btn key-back" data-val="backspace" title="Delete last digit">⌫</button>
+        <button class="key-btn key-submit" id="submit-btn" title="Check answer">Check Answer ↵</button>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justin's Grade 7 English Maths Academy</title>
+  <meta name="description" content="Comprehensive Grade 7 English Mathematics curriculum covering numbers, algebra, geometry, measurement, and data handling with interactive tools and verbal explanations.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+</head>
+<body class="font-lexend theme-light">
+  <div id="grade7-app">
+    <!-- Header -->
+    <header class="academy-header">
+      <div class="brand-wrap">
+        <a href="../index.html" class="back-hub-link" title="Return to Portal">&larr; Back to Hub</a>
+        <h1 class="academy-title">📐 Justin's Grade 7 Maths Academy</h1>
+      </div>
+
+      <div class="header-meta">
+        <span class="mastery-stars-badge" id="total-mastery-stars">⭐ 0 Topics Mastered</span>
+        <button id="theme-toggle-btn" class="control-btn" title="Toggle Theme">🎨 Theme: LIGHT</button>
+        <button id="font-toggle-btn" class="control-btn" title="Toggle Dyslexic Font">🔤 Font: Lexend</button>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="academy-layout">
+      <!-- Sidebar: 5 Strands -->
+      <aside class="strands-sidebar">
+        <h3 class="sidebar-heading">Grade 7 Strands</h3>
+        <nav class="strands-nav-list" id="strand-nav-list" aria-label="Curriculum Strands">
+          <!-- Rendered by JS -->
+        </nav>
+      </aside>
+
+      <!-- Main Stage -->
+      <main class="main-stage">
+        <!-- Top Sub-Bar: Topics & Learning Modes -->
+        <section class="stage-top-bar">
+          <div class="topic-nav-pills" id="topic-nav-list" aria-label="Strand Topics">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="modes-tabs-row" role="tablist">
+            <button class="nav-view-tab active" data-view="lesson" role="tab">📖 Lessons & Strategy</button>
+            <button class="nav-view-tab" data-view="practice" role="tab">✍️ Practice Quiz</button>
+            <button class="nav-view-tab" data-view="tools" role="tab">🛠️ Interactive Tools Lab</button>
+            <button class="nav-view-tab" data-view="exam" role="tab">🏆 Challenge Exam</button>
+          </div>
+        </section>
+
+        <!-- Dynamic Workspaces -->
+        <section class="workspace-wrapper">
+          <!-- 1. Lesson Workspace -->
+          <div id="lesson-workspace">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- 2. Practice Quiz Workspace -->
+          <div id="practice-workspace" class="hidden">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- 3. Interactive Tools Lab Workspace -->
+          <div id="tools-workspace" class="hidden">
+            <div class="tools-tab-bar">
+              <button class="tool-tab-btn active" data-tool="balance">⚖️ Equation Balance</button>
+              <button class="tool-tab-btn" data-tool="fractions">🧱 Fraction Wall</button>
+              <button class="tool-tab-btn" data-tool="angles">📐 Angle Visualizer</button>
+              <button class="tool-tab-btn" data-tool="integers">🌡️ Integer Thermometer</button>
+            </div>
+            <!-- Tool container rendered by JS -->
+          </div>
+
+          <!-- 4. Challenge Exam Workspace -->
+          <div id="exam-workspace" class="hidden">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
