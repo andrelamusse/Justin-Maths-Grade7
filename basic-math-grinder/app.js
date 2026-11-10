@@ -125,8 +125,165 @@ export const SUB_CATEGORIES = [
   }
 ];
 
+// 6 Official Past Exam Papers for Basic Maths Practice (15 Questions each)
+export const PAST_EXAM_PAPERS = [
+  {
+    id: 'paper_1',
+    title: 'Paper 1: Term 1 Past Paper — Addition & Subtraction Basics',
+    term: 'Term 1 Past Paper',
+    ops: ['+', '-'],
+    totalMarks: 22,
+    desc: 'Number bonds to 10 & 20, teen bridges (8+5, 15-7), 2-digit no-carry/no-borrow, and pocket money word problems.',
+    questions: [
+      { section: 'Section A: Mental Warm-Up', op: '+', a: 4, b: 5, result: 9, marks: 1, level: 1 },
+      { section: 'Section A: Mental Warm-Up', op: '+', a: 7, b: 3, result: 10, marks: 1, level: 2 },
+      { section: 'Section A: Mental Warm-Up', op: '-', a: 9, b: 4, result: 5, marks: 1, level: 2 },
+      { section: 'Section A: Mental Warm-Up', op: '-', a: 10, b: 6, result: 4, marks: 1, level: 2 },
+      { section: 'Section A: Mental Warm-Up', op: '+', a: 8, b: 5, result: 13, marks: 1, level: 3 },
+      { section: 'Section B: Core Calculations', op: '+', a: 9, b: 7, result: 16, marks: 1, level: 3 },
+      { section: 'Section B: Core Calculations', op: '-', a: 14, b: 6, result: 8, marks: 1, level: 3 },
+      { section: 'Section B: Core Calculations', op: '-', a: 16, b: 9, result: 7, marks: 1, level: 3 },
+      { section: 'Section B: Core Calculations', op: '+', a: 34, b: 23, result: 57, marks: 2, level: 4 },
+      { section: 'Section B: Core Calculations', op: '-', a: 68, b: 35, result: 33, marks: 2, level: 4 },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 25, b: 14, result: 39, marks: 2, level: 4, wordPrompt: 'Justin has 25 marbles and wins 14 more in a game. How many marbles does he have altogether?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 49, b: 24, result: 25, marks: 2, level: 4, wordPrompt: 'A bus has 49 passengers. At the first stop, 24 passengers get off. How many passengers are left on the bus?' },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 32, b: 46, result: 78, marks: 2, level: 4, wordPrompt: 'A tuckshop sells 32 pies on Monday and 46 pies on Tuesday. How many pies were sold in total?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 76, b: 42, result: 34, marks: 2, level: 4, wordPrompt: 'Liam saved R76 and spent R42 on a book. How many Rand does he have left?' },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 41, b: 37, result: 78, marks: 2, level: 4, wordPrompt: 'In a cricket match, Justin scores 41 runs in the first innings and 37 runs in the second innings. What is his total score?' }
+    ]
+  },
+  {
+    id: 'paper_2',
+    title: 'Paper 2: Term 1 Past Paper — Regrouping & Borrowing Mastery',
+    term: 'Term 1 Advanced Paper',
+    ops: ['+', '-'],
+    totalMarks: 25,
+    desc: 'Teen bridges, 2-digit addition with carrying (48+27), 2-digit subtraction with borrowing (52-28), and word problems.',
+    questions: [
+      { section: 'Section A: Mental Warm-Up', op: '+', a: 8, b: 7, result: 15, marks: 1, level: 3 },
+      { section: 'Section A: Mental Warm-Up', op: '+', a: 9, b: 8, result: 17, marks: 1, level: 3 },
+      { section: 'Section A: Mental Warm-Up', op: '-', a: 15, b: 8, result: 7, marks: 1, level: 3 },
+      { section: 'Section A: Mental Warm-Up', op: '-', a: 17, b: 9, result: 8, marks: 1, level: 3 },
+      { section: 'Section A: Mental Warm-Up', op: '+', a: 26, b: 13, result: 39, marks: 1, level: 4 },
+      { section: 'Section B: Column Regrouping & Borrowing', op: '+', a: 38, b: 25, result: 63, marks: 2, level: 5 },
+      { section: 'Section B: Column Regrouping & Borrowing', op: '+', a: 47, b: 36, result: 83, marks: 2, level: 5 },
+      { section: 'Section B: Column Regrouping & Borrowing', op: '-', a: 52, b: 28, result: 24, marks: 2, level: 5 },
+      { section: 'Section B: Column Regrouping & Borrowing', op: '-', a: 63, b: 37, result: 26, marks: 2, level: 5 },
+      { section: 'Section B: Column Regrouping & Borrowing', op: '+', a: 49, b: 28, result: 77, marks: 2, level: 5 },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 36, b: 27, result: 63, marks: 2, level: 5, wordPrompt: 'There are 36 learners in Grade 7A and 27 learners in Grade 7B. How many learners are there altogether?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 61, b: 25, result: 36, marks: 2, level: 5, wordPrompt: 'A rope is 61 metres long. A builder cuts off 25 metres. How many metres of rope remain?' },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 45, b: 38, result: 83, marks: 2, level: 5, wordPrompt: 'Sam collects 45 bottle tops in week 1 and 38 bottle tops in week 2. What is his total collection?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 74, b: 39, result: 35, marks: 2, level: 5, wordPrompt: 'A baker bakes 74 cupcakes and sells 39 of them before lunch. How many cupcakes are left?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 82, b: 46, result: 36, marks: 2, level: 5, wordPrompt: 'A book has 82 pages. Justin has already read 46 pages. How many pages does he still need to read?' }
+    ]
+  },
+  {
+    id: 'paper_3',
+    title: 'Paper 3: Term 2 Past Paper — Multiplication & Division Core',
+    term: 'Term 2 Past Paper',
+    ops: ['×', '÷'],
+    totalMarks: 22,
+    desc: 'Core times tables (2x, 3x, 4x, 5x, 10x), halving, equal sharing division, and array/grouping word problems.',
+    questions: [
+      { section: 'Section A: Mental Tables', op: '×', a: 2, b: 6, result: 12, marks: 1, level: 1 },
+      { section: 'Section A: Mental Tables', op: '×', a: 5, b: 7, result: 35, marks: 1, level: 1 },
+      { section: 'Section A: Mental Tables', op: '×', a: 10, b: 8, result: 80, marks: 1, level: 1 },
+      { section: 'Section A: Mental Tables', op: '÷', a: 16, b: 2, result: 8, marks: 1, level: 1 },
+      { section: 'Section A: Mental Tables', op: '÷', a: 45, b: 5, result: 9, marks: 1, level: 2 },
+      { section: 'Section B: 3x and 4x Tables & Division', op: '×', a: 3, b: 8, result: 24, marks: 1, level: 2 },
+      { section: 'Section B: 3x and 4x Tables & Division', op: '×', a: 4, b: 7, result: 28, marks: 1, level: 2 },
+      { section: 'Section B: 3x and 4x Tables & Division', op: '÷', a: 27, b: 3, result: 9, marks: 1, level: 3 },
+      { section: 'Section B: 3x and 4x Tables & Division', op: '÷', a: 36, b: 4, result: 9, marks: 2, level: 3 },
+      { section: 'Section B: 3x and 4x Tables & Division', op: '×', a: 4, b: 9, result: 36, marks: 2, level: 2 },
+      { section: 'Section C: Exam Word Problems', op: '×', a: 5, b: 8, result: 40, marks: 2, level: 1, wordPrompt: 'There are 5 boxes of crayons with 8 crayons in each box. How many crayons are there altogether?' },
+      { section: 'Section C: Exam Word Problems', op: '÷', a: 30, b: 5, result: 6, marks: 2, level: 2, wordPrompt: 'Share 30 sweets equally among 5 friends. How many sweets does each friend get?' },
+      { section: 'Section C: Exam Word Problems', op: '×', a: 3, b: 9, result: 27, marks: 2, level: 2, wordPrompt: 'A triangle has 3 sides. How many sides do 9 separate triangles have altogether?' },
+      { section: 'Section C: Exam Word Problems', op: '÷', a: 32, b: 4, result: 8, marks: 2, level: 3, wordPrompt: 'A classroom has 32 desks arranged in 4 equal rows. How many desks are in each row?' },
+      { section: 'Section C: Exam Word Problems', op: '×', a: 10, b: 9, result: 90, marks: 2, level: 1, wordPrompt: 'One cinema ticket costs R10. How much will 9 cinema tickets cost in Rand?' }
+    ]
+  },
+  {
+    id: 'paper_4',
+    title: 'Paper 4: Term 2 Past Paper — Upper Tables & Division Mastery',
+    term: 'Term 2 Advanced Paper',
+    ops: ['×', '÷'],
+    totalMarks: 25,
+    desc: 'Upper times tables (6x, 7x, 8x, 9x, 11x, 12x), division facts up to 144 ÷ 12, and multi-pack word problems.',
+    questions: [
+      { section: 'Section A: Speed Tables', op: '×', a: 6, b: 6, result: 36, marks: 1, level: 3 },
+      { section: 'Section A: Speed Tables', op: '×', a: 7, b: 8, result: 56, marks: 1, level: 3 },
+      { section: 'Section A: Speed Tables', op: '×', a: 9, b: 6, result: 54, marks: 1, level: 3 },
+      { section: 'Section A: Speed Tables', op: '÷', a: 42, b: 6, result: 7, marks: 1, level: 4 },
+      { section: 'Section A: Speed Tables', op: '÷', a: 63, b: 9, result: 7, marks: 1, level: 4 },
+      { section: 'Section B: Upper Tables up to 12x12', op: '×', a: 8, b: 9, result: 72, marks: 2, level: 3 },
+      { section: 'Section B: Upper Tables up to 12x12', op: '×', a: 11, b: 8, result: 88, marks: 2, level: 4 },
+      { section: 'Section B: Upper Tables up to 12x12', op: '×', a: 12, b: 7, result: 84, marks: 2, level: 4 },
+      { section: 'Section B: Upper Tables up to 12x12', op: '÷', a: 96, b: 8, result: 12, marks: 2, level: 4 },
+      { section: 'Section B: Upper Tables up to 12x12', op: '÷', a: 108, b: 9, result: 12, marks: 2, level: 4 },
+      { section: 'Section C: Exam Word Problems', op: '×', a: 7, b: 7, result: 49, marks: 2, level: 3, wordPrompt: 'There are 7 days in 1 week. How many days are there in 7 weeks?' },
+      { section: 'Section C: Exam Word Problems', op: '÷', a: 72, b: 8, result: 9, marks: 2, level: 4, wordPrompt: '72 apples are packed equally into 8 crates. How many apples are in each crate?' },
+      { section: 'Section C: Exam Word Problems', op: '×', a: 12, b: 6, result: 72, marks: 2, level: 4, wordPrompt: 'Eggs are sold in cartons of 12. How many eggs are there in 6 full cartons?' },
+      { section: 'Section C: Exam Word Problems', op: '÷', a: 132, b: 11, result: 12, marks: 2, level: 4, wordPrompt: 'A rugby club spends R132 on 11 identical water bottles. How much does 1 bottle cost in Rand?' },
+      { section: 'Section C: Exam Word Problems', op: '×', a: 12, b: 12, result: 144, marks: 2, level: 5, wordPrompt: 'A square patio has 12 rows of tiles with 12 tiles in each row. How many tiles are used altogether?' }
+    ]
+  },
+  {
+    id: 'paper_5',
+    title: 'Paper 5: Mid-Year Past Exam — All 4 Operations (Paper A)',
+    term: 'Mid-Year Exam Paper',
+    ops: ['+', '-', '×', '÷'],
+    totalMarks: 26,
+    desc: 'Full mid-year exam combining addition, subtraction, multiplication, and division across mental and word problems.',
+    questions: [
+      { section: 'Section A: Mental Operations', op: '+', a: 9, b: 6, result: 15, marks: 1, level: 3 },
+      { section: 'Section A: Mental Operations', op: '-', a: 14, b: 8, result: 6, marks: 1, level: 3 },
+      { section: 'Section A: Mental Operations', op: '×', a: 4, b: 8, result: 32, marks: 1, level: 2 },
+      { section: 'Section A: Mental Operations', op: '÷', a: 40, b: 5, result: 8, marks: 1, level: 2 },
+      { section: 'Section A: Mental Operations', op: '+', a: 35, b: 24, result: 59, marks: 1, level: 4 },
+      { section: 'Section B: Mixed Written Calculations', op: '-', a: 78, b: 43, result: 35, marks: 2, level: 4 },
+      { section: 'Section B: Mixed Written Calculations', op: '+', a: 46, b: 28, result: 74, marks: 2, level: 5 },
+      { section: 'Section B: Mixed Written Calculations', op: '-', a: 62, b: 27, result: 35, marks: 2, level: 5 },
+      { section: 'Section B: Mixed Written Calculations', op: '×', a: 6, b: 8, result: 48, marks: 2, level: 3 },
+      { section: 'Section B: Mixed Written Calculations', op: '÷', a: 54, b: 6, result: 9, marks: 2, level: 4 },
+      { section: 'Section C: Mixed Exam Word Problems', op: '+', a: 48, b: 35, result: 83, marks: 2, level: 5, wordPrompt: 'A farmer has 48 sheep in the top field and 35 sheep in the bottom field. How many sheep does he have in total?' },
+      { section: 'Section C: Mixed Exam Word Problems', op: '-', a: 70, b: 26, result: 44, marks: 2, level: 5, wordPrompt: 'Justin has R70. He buys a cap for R26. How much change should he receive in Rand?' },
+      { section: 'Section C: Mixed Exam Word Problems', op: '×', a: 8, b: 7, result: 56, marks: 2, level: 3, wordPrompt: 'A spider has 8 legs. How many legs do 7 spiders have altogether?' },
+      { section: 'Section C: Mixed Exam Word Problems', op: '÷', a: 64, b: 8, result: 8, marks: 2, level: 4, wordPrompt: '64 learners are put into 8 equal relay teams. How many learners are in each team?' },
+      { section: 'Section C: Mixed Exam Word Problems', op: '×', a: 9, b: 9, result: 81, marks: 3, level: 3, wordPrompt: 'A chessboard-style grid has 9 rows with 9 squares in each row. How many squares are on the board?' }
+    ]
+  },
+  {
+    id: 'paper_6',
+    title: 'Paper 6: Year-End Final Past Exam — All 4 Operations Mastery',
+    term: 'Final Year-End Exam',
+    ops: ['+', '-', '×', '÷'],
+    totalMarks: 30,
+    desc: 'Comprehensive final exam testing carrying, borrowing, upper tables up to 12x12, division up to 144, and word problems.',
+    questions: [
+      { section: 'Section A: Rapid Recall', op: '+', a: 8, b: 9, result: 17, marks: 1, level: 3 },
+      { section: 'Section A: Rapid Recall', op: '-', a: 17, b: 8, result: 9, marks: 1, level: 3 },
+      { section: 'Section A: Rapid Recall', op: '×', a: 7, b: 9, result: 63, marks: 1, level: 3 },
+      { section: 'Section A: Rapid Recall', op: '÷', a: 56, b: 7, result: 8, marks: 1, level: 4 },
+      { section: 'Section A: Rapid Recall', op: '×', a: 11, b: 9, result: 99, marks: 2, level: 4 },
+      { section: 'Section B: Advanced Operations', op: '+', a: 49, b: 38, result: 87, marks: 2, level: 5 },
+      { section: 'Section B: Advanced Operations', op: '-', a: 81, b: 46, result: 35, marks: 2, level: 5 },
+      { section: 'Section B: Advanced Operations', op: '+', a: 57, b: 26, result: 83, marks: 2, level: 5 },
+      { section: 'Section B: Advanced Operations', op: '-', a: 73, b: 38, result: 35, marks: 2, level: 5 },
+      { section: 'Section B: Advanced Operations', op: '÷', a: 120, b: 10, result: 12, marks: 2, level: 4 },
+      { section: 'Section C: Final Exam Word Problems', op: '+', a: 47, b: 39, result: 86, marks: 2, level: 5, wordPrompt: 'In a basketball game, Team Blue scores 47 points in the first half and 39 points in the second half. What is their final score?' },
+      { section: 'Section C: Final Exam Word Problems', op: '-', a: 84, b: 47, result: 37, marks: 3, level: 5, wordPrompt: 'A shop has 84 loaves of bread in the morning and sells 47 loaves during the day. How many loaves are left?' },
+      { section: 'Section C: Final Exam Word Problems', op: '×', a: 12, b: 8, result: 96, marks: 3, level: 4, wordPrompt: 'There are 12 pencils in a pack. How many pencils are there in 8 packs?' },
+      { section: 'Section C: Final Exam Word Problems', op: '÷', a: 108, b: 12, result: 9, marks: 3, level: 4, wordPrompt: 'A 108 cm piece of ribbon is cut into 12 equal pieces. How many cm long is each piece?' },
+      { section: 'Section C: Final Exam Word Problems', op: '÷', a: 144, b: 12, result: 12, marks: 3, level: 4, wordPrompt: '144 chairs are arranged in 12 equal rows in the school hall. How many chairs are in each row?' }
+    ]
+  }
+];
+
 export class MathGrinderApp {
   constructor() {
+    this.currentMode = 'grinder'; // 'grinder' | 'papers'
+    this.activeExam = null;
+    this.paperBestScores = {};
     this.currentCategory = 'add';
     this.currentSubCategory = 'easy';
     this.progressiveTier = 'easy';
@@ -161,6 +318,9 @@ export class MathGrinderApp {
         this.bestStreak = parsed.bestStreak || 0;
         this.totalSolved = parsed.totalSolved || 0;
         this.xp = parsed.xp || 0;
+        if (parsed.paperBestScores && typeof parsed.paperBestScores === 'object') {
+          this.paperBestScores = parsed.paperBestScores;
+        }
         if (parsed.currentCategory && CATEGORIES.some(c => c.id === parsed.currentCategory)) {
           this.currentCategory = parsed.currentCategory;
         } else if (parsed.currentOp) {
@@ -185,6 +345,7 @@ export class MathGrinderApp {
         bestStreak: this.bestStreak,
         totalSolved: this.totalSolved,
         xp: this.xp,
+        paperBestScores: this.paperBestScores,
         currentCategory: this.currentCategory,
         currentSubCategory: this.currentSubCategory,
         settings: this.settings
@@ -200,6 +361,7 @@ export class MathGrinderApp {
     this.bindEvents();
     this.applySettings();
     this.visualizer = new MathVisualizer(this.dom.visContainer);
+    this.renderPastPapersGrid();
     this.updateCategoryUI();
     this.updateSubCategoryUI();
     this.updateStatsUI();
@@ -209,6 +371,18 @@ export class MathGrinderApp {
   cacheDom() {
     this.dom = {
       appContainer: document.getElementById('grinder-app'),
+      modeGrinderBtn: document.getElementById('mode-grinder-btn'),
+      modePapersBtn: document.getElementById('mode-papers-btn'),
+      pastPapersView: document.getElementById('past-papers-view'),
+      pastPapersGrid: document.getElementById('past-papers-grid'),
+      examReportContainer: document.getElementById('exam-report-container'),
+      examActiveBanner: document.getElementById('exam-active-banner'),
+      examActiveTitle: document.getElementById('exam-active-title'),
+      examQuestionMarks: document.getElementById('exam-question-marks'),
+      exitExamBtn: document.getElementById('exit-exam-btn'),
+      grinderSelectorsWrap: document.getElementById('grinder-selectors-wrap'),
+      questionWorkspaceWrap: document.getElementById('question-workspace-wrap'),
+      examWordContext: document.getElementById('exam-word-context'),
       categoryGrid: document.getElementById('category-tabs'),
       categoryBtns: document.querySelectorAll('.category-btn'),
       subCategoryRow: document.getElementById('sub-category-selector'),
@@ -244,6 +418,19 @@ export class MathGrinderApp {
   }
 
   bindEvents() {
+    // Top-level mode switcher (Daily Grinder vs Past Exam Papers)
+    if (this.dom.modeGrinderBtn && this.dom.modePapersBtn) {
+      this.dom.modeGrinderBtn.addEventListener('click', () => this.switchMode('grinder'));
+      this.dom.modePapersBtn.addEventListener('click', () => this.switchMode('papers'));
+    }
+
+    if (this.dom.exitExamBtn) {
+      this.dom.exitExamBtn.addEventListener('click', () => {
+        this.activeExam = null;
+        this.switchMode('papers');
+      });
+    }
+
     // 7 Category selection buttons
     if (this.dom.categoryBtns) {
       this.dom.categoryBtns.forEach(btn => {
@@ -676,10 +863,37 @@ export class MathGrinderApp {
     }
 
     this.userAnswer = '';
-    this.currentQuestion = this.generateQuestion(this.currentCategory, this.currentSubCategory);
+    if (this.activeExam && !this.activeExam.completed) {
+      this.currentQuestion = this.activeExam.questions[this.activeExam.index];
+    } else {
+      this.currentQuestion = this.generateQuestion(this.currentCategory, this.currentSubCategory);
+    }
     this.currentOp = this.currentQuestion.op;
 
     if (this.dom) {
+      if (this.activeExam && !this.activeExam.completed) {
+        if (this.dom.examActiveBanner) this.dom.examActiveBanner.classList.remove('hidden');
+        if (this.dom.examActiveTitle) {
+          this.dom.examActiveTitle.textContent = `📄 ${this.activeExam.title} • Q${this.activeExam.index + 1} of ${this.activeExam.questions.length} (${this.currentQuestion.section || 'Exam'})`;
+        }
+        if (this.dom.examQuestionMarks) {
+          const m = this.currentQuestion.marks || 1;
+          this.dom.examQuestionMarks.textContent = `[${m} ${m === 1 ? 'Mark' : 'Marks'}]`;
+        }
+      } else if (this.dom.examActiveBanner) {
+        this.dom.examActiveBanner.classList.add('hidden');
+      }
+
+      if (this.dom.examWordContext) {
+        if (this.currentQuestion.wordPrompt) {
+          this.dom.examWordContext.classList.remove('hidden');
+          this.dom.examWordContext.innerHTML = `📝 <strong>Word Problem:</strong> ${this.currentQuestion.wordPrompt}`;
+        } else {
+          this.dom.examWordContext.classList.add('hidden');
+          this.dom.examWordContext.textContent = '';
+        }
+      }
+
       if (this.dom.numA) this.dom.numA.textContent = this.currentQuestion.a;
       if (this.dom.opSymbol) this.dom.opSymbol.textContent = this.currentQuestion.op;
       if (this.dom.numB) this.dom.numB.textContent = this.currentQuestion.b;
@@ -740,6 +954,40 @@ export class MathGrinderApp {
     if (this.userAnswer === '' || this.userAnswer === '?') return;
 
     const entered = parseInt(this.userAnswer, 10);
+
+    // If inside an active Past Exam Paper
+    if (this.activeExam && !this.activeExam.completed) {
+      const res = this.submitExamAnswer(entered);
+      if (res && res.isCorrect) {
+        sound.playSuccess();
+        this.totalSolved++;
+        this.xp += res.earnedMarks * 10;
+        if (this.dom && this.dom.answerDisplay) this.dom.answerDisplay.classList.add('correct');
+        if (this.dom && this.dom.feedbackMsg) {
+          this.dom.feedbackMsg.textContent = `✅ Correct! +${res.earnedMarks} ${res.earnedMarks === 1 ? 'Mark' : 'Marks'}`;
+          this.dom.feedbackMsg.className = 'feedback-msg success-burst';
+        }
+      } else {
+        sound.playGentleTryAgain();
+        if (this.dom && this.dom.answerDisplay) this.dom.answerDisplay.classList.add('incorrect');
+        if (this.dom && this.dom.feedbackMsg) {
+          this.dom.feedbackMsg.textContent = `📝 Recorded (${entered}). Moving to next exam question...`;
+          this.dom.feedbackMsg.className = 'feedback-msg try-again';
+        }
+      }
+      this.updateStatsUI();
+      this.saveState();
+
+      this.autoAdvanceTimer = setTimeout(() => {
+        if (this.activeExam && this.activeExam.completed) {
+          this.showExamReportCard();
+        } else {
+          this.nextQuestion();
+        }
+      }, 650);
+      return;
+    }
+
     const correct = this.currentQuestion.result;
 
     if (entered === correct) {
@@ -963,8 +1211,9 @@ export class MathGrinderApp {
       return;
     }
 
-    const { op, a, b, result } = this.currentQuestion;
-    const text = generateVerbalExplanation(op, a, b, result);
+    const { op, a, b, result, wordPrompt } = this.currentQuestion;
+    const baseExplanation = generateVerbalExplanation(op, a, b, result);
+    const text = wordPrompt ? `${wordPrompt} ${baseExplanation}` : baseExplanation;
 
     if (this.dom.captionBar) {
       this.dom.captionBar.innerHTML = `🗣️ <em>"${text}"</em>`;
@@ -1006,6 +1255,317 @@ export class MathGrinderApp {
 
     if (this.dom.levelBadge) {
       this.dom.levelBadge.textContent = badge;
+    }
+  }
+
+  // =========================================================================
+  // PAST EXAM PAPERS ENGINE
+  // =========================================================================
+
+  switchMode(mode) {
+    clearTimeout(this.autoAdvanceTimer);
+    sound.stopSpeech();
+    this.isSpeaking = false;
+    this.currentMode = mode === 'papers' ? 'papers' : 'grinder';
+
+    if (!this.dom) return;
+    if (this.dom.modeGrinderBtn) this.dom.modeGrinderBtn.classList.toggle('active', this.currentMode === 'grinder');
+    if (this.dom.modePapersBtn) this.dom.modePapersBtn.classList.toggle('active', this.currentMode === 'papers');
+
+    if (this.currentMode === 'papers') {
+      this.activeExam = null;
+      if (this.dom.examActiveBanner) this.dom.examActiveBanner.classList.add('hidden');
+      if (this.dom.grinderSelectorsWrap) this.dom.grinderSelectorsWrap.classList.add('hidden');
+      if (this.dom.questionWorkspaceWrap) this.dom.questionWorkspaceWrap.classList.add('hidden');
+      if (this.dom.pastPapersView) this.dom.pastPapersView.classList.remove('hidden');
+      this.renderPastPapersGrid();
+    } else {
+      this.activeExam = null;
+      if (this.dom.examActiveBanner) this.dom.examActiveBanner.classList.add('hidden');
+      if (this.dom.pastPapersView) this.dom.pastPapersView.classList.add('hidden');
+      if (this.dom.grinderSelectorsWrap) this.dom.grinderSelectorsWrap.classList.remove('hidden');
+      if (this.dom.questionWorkspaceWrap) this.dom.questionWorkspaceWrap.classList.remove('hidden');
+      this.nextQuestion();
+    }
+  }
+
+  renderPastPapersGrid() {
+    if (!this.dom || !this.dom.pastPapersGrid) return;
+    this.dom.pastPapersGrid.innerHTML = PAST_EXAM_PAPERS.map(paper => {
+      const best = this.paperBestScores[paper.id];
+      const bestHtml = best !== undefined
+        ? `<div class="paper-best-score">🏆 Best Score: ${best}%</div>`
+        : `<div class="paper-best-score" style="color:var(--text-muted);">📝 Not attempted yet</div>`;
+
+      return `
+        <article class="paper-card">
+          <div class="paper-card-top">
+            <span class="paper-term-badge">${paper.term}</span>
+            <span class="paper-marks-badge">${paper.questions.length} Qs &bull; ${paper.totalMarks} Marks</span>
+          </div>
+          <h3>${paper.title}</h3>
+          <p>${paper.desc}</p>
+          ${bestHtml}
+          <div class="paper-actions-row">
+            <button class="paper-start-btn" data-paper="${paper.id}" data-variant="false">✍️ Start Past Paper</button>
+            <button class="paper-variant-btn" data-paper="${paper.id}" data-variant="true" title="Practise same paper structure with fresh numbers">🎲 Fresh Variant</button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    this.dom.pastPapersGrid.querySelectorAll('button[data-paper]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const paperId = btn.dataset.paper;
+        const asVariant = btn.dataset.variant === 'true';
+        this.startExamPaper(paperId, asVariant);
+      });
+    });
+  }
+
+  buildDynamicWordPrompt(op, a, b) {
+    if (op === '+') {
+      const templates = [
+        `Justin has ${a} marbles and wins ${b} more in a game. How many marbles does he have altogether?`,
+        `A tuckshop sells ${a} pies on Monday and ${b} pies on Tuesday. How many pies were sold in total?`,
+        `In a cricket match, a batsman scores ${a} runs in the first innings and ${b} runs in the second innings. What is his total score?`
+      ];
+      return templates[(a + b) % templates.length];
+    } else if (op === '-') {
+      const templates = [
+        `A bus has ${a} passengers. At the first stop, ${b} passengers get off. How many passengers are left on the bus?`,
+        `Liam saved R${a} and spent R${b} on a book. How many Rand does he have left?`,
+        `A book has ${a} pages. Justin has already read ${b} pages. How many pages does he still need to read?`
+      ];
+      return templates[(a + b) % templates.length];
+    } else if (op === '×') {
+      const templates = [
+        `There are ${a} boxes with ${b} crayons in each box. How many crayons are there altogether?`,
+        `A pack costs R${b}. How much will ${a} packs cost in Rand?`,
+        `A hall has ${a} rows of chairs with ${b} chairs in each row. How many chairs are there altogether?`
+      ];
+      return templates[(a + b) % templates.length];
+    } else {
+      const templates = [
+        `Share ${a} sweets equally among ${b} friends. How many sweets does each friend get?`,
+        `${a} apples are packed equally into ${b} crates. How many apples are in each crate?`,
+        `A ${a} cm ribbon is cut into ${b} equal pieces. How many cm long is each piece?`
+      ];
+      return templates[(a + b) % templates.length];
+    }
+  }
+
+  startExamPaper(paperId, asFreshVariant = false) {
+    const found = PAST_EXAM_PAPERS.find(p => p.id === paperId) || PAST_EXAM_PAPERS[0];
+    const questions = found.questions.map((q, idx) => {
+      if (!asFreshVariant) {
+        return { ...q, questionNumber: idx + 1 };
+      }
+      const generated = this.generateByLevel(q.op, q.level || 2);
+      return {
+        section: q.section,
+        op: generated.op,
+        a: generated.a,
+        b: generated.b,
+        result: generated.result,
+        marks: q.marks || 1,
+        level: q.level || 2,
+        questionNumber: idx + 1,
+        wordPrompt: q.wordPrompt ? this.buildDynamicWordPrompt(generated.op, generated.a, generated.b) : undefined
+      };
+    });
+
+    const totalMarks = questions.reduce((sum, q) => sum + (q.marks || 1), 0);
+
+    this.activeExam = {
+      paperId: found.id,
+      title: asFreshVariant ? `${found.title} (Fresh Variant)` : found.title,
+      term: found.term,
+      questions,
+      totalMarks,
+      index: 0,
+      answers: [],
+      completed: false,
+      isVariant: asFreshVariant
+    };
+
+    if (this.dom) {
+      if (this.dom.pastPapersView) this.dom.pastPapersView.classList.add('hidden');
+      if (this.dom.grinderSelectorsWrap) this.dom.grinderSelectorsWrap.classList.add('hidden');
+      if (this.dom.questionWorkspaceWrap) this.dom.questionWorkspaceWrap.classList.remove('hidden');
+    }
+
+    this.nextQuestion();
+    return this.activeExam;
+  }
+
+  submitExamAnswer(enteredNum) {
+    if (!this.activeExam || this.activeExam.completed) return null;
+    const q = this.activeExam.questions[this.activeExam.index];
+    const isCorrect = Number(enteredNum) === q.result;
+    const earnedMarks = isCorrect ? (q.marks || 1) : 0;
+
+    this.activeExam.answers.push({
+      question: q,
+      userAnswer: enteredNum,
+      isCorrect,
+      earnedMarks,
+      maxMarks: q.marks || 1
+    });
+
+    if (this.activeExam.index + 1 < this.activeExam.questions.length) {
+      this.activeExam.index += 1;
+    } else {
+      this.activeExam.completed = true;
+    }
+
+    return { isCorrect, earnedMarks };
+  }
+
+  gradeExamPaper(exam = this.activeExam) {
+    if (!exam) return null;
+    const earnedMarks = exam.answers.reduce((acc, a) => acc + a.earnedMarks, 0);
+    const totalMarks = exam.totalMarks || 1;
+    const percentage = Math.round((earnedMarks / totalMarks) * 100);
+
+    if (
+      this.paperBestScores[exam.paperId] === undefined ||
+      percentage > this.paperBestScores[exam.paperId]
+    ) {
+      this.paperBestScores[exam.paperId] = percentage;
+      this.saveState();
+    }
+
+    const opStats = {
+      '+': { op: '+', name: 'Addition (+)', catId: 'add', correct: 0, total: 0 },
+      '-': { op: '-', name: 'Subtraction (-)', catId: 'sub', correct: 0, total: 0 },
+      '×': { op: '×', name: 'Multiplication (×)', catId: 'mul', correct: 0, total: 0 },
+      '÷': { op: '÷', name: 'Division (÷)', catId: 'div', correct: 0, total: 0 }
+    };
+
+    exam.answers.forEach(a => {
+      const st = opStats[a.question.op];
+      if (st) {
+        st.total += 1;
+        if (a.isCorrect) st.correct += 1;
+      }
+    });
+
+    const activeOps = Object.values(opStats).filter(s => s.total > 0);
+    const missedOps = activeOps.filter(s => s.correct < s.total);
+
+    let recommendedCategory = 'all_mixed';
+    if (missedOps.length === 1) {
+      recommendedCategory = missedOps[0].catId;
+    } else if (missedOps.length === 2) {
+      const symbols = missedOps.map(m => m.op);
+      if (symbols.includes('+') && symbols.includes('-')) recommendedCategory = 'mixed_add_sub';
+      else if (symbols.includes('×') && symbols.includes('÷')) recommendedCategory = 'mixed_mul_div';
+    }
+
+    return {
+      paperId: exam.paperId,
+      title: exam.title,
+      earnedMarks,
+      totalMarks,
+      percentage,
+      correctCount: exam.answers.filter(a => a.isCorrect).length,
+      totalQuestions: exam.questions.length,
+      operationBreakdown: activeOps,
+      missedOps,
+      recommendedCategory,
+      answers: exam.answers
+    };
+  }
+
+  showExamReportCard() {
+    const report = this.gradeExamPaper(this.activeExam);
+    if (!report || !this.dom) return;
+
+    sound.playStreakBonus();
+    this.launchConfetti();
+
+    if (this.dom.examActiveBanner) this.dom.examActiveBanner.classList.add('hidden');
+    if (this.dom.questionWorkspaceWrap) this.dom.questionWorkspaceWrap.classList.add('hidden');
+    if (this.dom.pastPapersView) this.dom.pastPapersView.classList.remove('hidden');
+    this.renderPastPapersGrid();
+
+    if (!this.dom.examReportContainer) return;
+    this.dom.examReportContainer.classList.remove('hidden');
+
+    const gradeLabel = report.percentage >= 80
+      ? '🏆 Distinction! Exam Master!'
+      : (report.percentage >= 60 ? '⭐ Good Pass! Keep Polishing!' : '💪 Great Effort! Practise Your Weak Spots Below!');
+
+    const opsHtml = report.operationBreakdown.map(o => {
+      const full = o.correct === o.total;
+      return `
+        <div class="exam-op-pill ${full ? 'exam-op-pass' : 'exam-op-miss'}">
+          ${full ? '✅' : '🎯'} ${o.name}: ${o.correct} / ${o.total}
+        </div>
+      `;
+    }).join('');
+
+    const memoHtml = report.answers.map((a, idx) => {
+      const q = a.question;
+      return `
+        <div class="memo-item ${a.isCorrect ? 'memo-correct' : 'memo-wrong'}">
+          <div>
+            <strong>Q${idx + 1} (${q.marks} ${q.marks === 1 ? 'Mark' : 'Marks'}):</strong>
+            ${q.wordPrompt ? `${q.wordPrompt} <em>(${q.a} ${q.op} ${q.b})</em>` : `<strong>${q.a} ${q.op} ${q.b} = ?</strong>`}
+          </div>
+          <div style="margin-top:4px;">
+            Your Answer: <strong style="color:${a.isCorrect ? '#059669' : '#DC2626'};">${a.userAnswer}</strong>
+            &bull; Official Answer: <strong style="color:#059669;">${q.result}</strong>
+            ${a.isCorrect ? '✅' : '❌'}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    this.dom.examReportContainer.innerHTML = `
+      <div class="exam-report-card">
+        <h3>📋 ${report.title} — Official Report Card &amp; Memorandum</h3>
+        <div class="exam-score-giant">${report.earnedMarks} / ${report.totalMarks} Marks (${report.percentage}%)</div>
+        <div style="font-weight:700;font-size:1.05rem;">${gradeLabel} &bull; ${report.correctCount} of ${report.totalQuestions} Correct</div>
+
+        <div class="exam-ops-summary">${opsHtml}</div>
+
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          ${report.missedOps.length > 0 ? `
+            <button id="exam-practise-weak-btn" class="paper-start-btn" style="max-width:300px;background:#DC2626;">
+              🎯 Practise My Weak Operations
+            </button>
+          ` : ''}
+          <button id="exam-retry-variant-btn" class="paper-start-btn" style="max-width:280px;">
+            🎲 Retry Paper with Fresh Numbers
+          </button>
+        </div>
+
+        <div style="text-align:left;margin-top:6px;">
+          <h4 style="color:var(--primary);margin-bottom:8px;">📖 Complete Past Paper Memorandum (Question by Question):</h4>
+          <div class="memo-list">${memoHtml}</div>
+        </div>
+      </div>
+    `;
+
+    const weakBtn = document.getElementById('exam-practise-weak-btn');
+    if (weakBtn) {
+      weakBtn.addEventListener('click', () => {
+        this.currentCategory = report.recommendedCategory;
+        this.currentSubCategory = 'all';
+        this.streak = 0;
+        this.switchMode('grinder');
+        this.updateCategoryUI();
+        this.updateSubCategoryUI();
+      });
+    }
+
+    const retryBtn = document.getElementById('exam-retry-variant-btn');
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => {
+        this.startExamPaper(report.paperId, true);
+      });
     }
   }
 

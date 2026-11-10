@@ -1,7 +1,7 @@
 // basic-math.test.js - Automated tests for Basic Math Grinder logic
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MathGrinderApp, LEVEL_DEFINITIONS, CATEGORIES, SUB_CATEGORIES } from '../basic-math-grinder/app.js';
+import { MathGrinderApp, LEVEL_DEFINITIONS, CATEGORIES, SUB_CATEGORIES, PAST_EXAM_PAPERS } from '../basic-math-grinder/app.js';
 import { generateVerbalExplanation } from '../basic-math-grinder/speech-scripts.js';
 
 test('Level definitions are configured for all 4 operations', () => {
@@ -341,4 +341,54 @@ test('Step-by-step breakdown handles teen subtractions with jumping or place-val
   app.toggleBreakdown(true);
   assert.ok(container.innerHTML.includes('Make 10:'), 'Addition 4 + 8 should have Make 10 step');
   assert.ok(container.innerHTML.includes('Start with 8'), 'Addition 4 + 8 should start with larger addend 8');
+});
+
+test('Past Exam Papers suite has 6 complete papers with 15 mathematically verified questions each and supports fresh variants & grading', () => {
+  assert.equal(PAST_EXAM_PAPERS.length, 6, 'Expected 6 Past Exam Papers');
+  const app = new MathGrinderApp();
+
+  for (const paper of PAST_EXAM_PAPERS) {
+    assert.equal(paper.questions.length, 15, `Paper ${paper.id} must have 15 questions`);
+    const sumMarks = paper.questions.reduce((s, q) => s + q.marks, 0);
+    assert.equal(paper.totalMarks, sumMarks, `Paper ${paper.id} totalMarks must equal sum of question marks`);
+
+    // Verify every static question is mathematically exact
+    for (const q of paper.questions) {
+      if (q.op === '+') assert.equal(q.result, q.a + q.b);
+      if (q.op === '-') assert.equal(q.result, q.a - q.b);
+      if (q.op === '×') assert.equal(q.result, q.a * q.b);
+      if (q.op === '÷') {
+        assert.equal(q.a % q.b, 0);
+        assert.equal(q.result, q.a / q.b);
+      }
+    }
+
+    // Test standard paper execution and grading
+    const exam = app.startExamPaper(paper.id, false);
+    assert.equal(exam.questions.length, 15);
+
+    for (let i = 0; i < 15; i++) {
+      const q = exam.questions[i];
+      const entered = i < 13 ? q.result : 9999; // 13 right, 2 wrong
+      app.submitExamAnswer(entered);
+    }
+
+    assert.equal(exam.completed, true);
+    const report = app.gradeExamPaper(exam);
+    assert.equal(report.correctCount, 13);
+    assert.equal(report.totalQuestions, 15);
+    assert.ok(report.percentage > 0 && report.percentage <= 100);
+    assert.ok(report.missedOps.length >= 1);
+
+    // Test fresh variant generation
+    const variantExam = app.startExamPaper(paper.id, true);
+    assert.equal(variantExam.questions.length, 15);
+    assert.equal(variantExam.isVariant, true);
+    for (const vq of variantExam.questions) {
+      if (vq.op === '+') assert.equal(vq.result, vq.a + vq.b);
+      if (vq.op === '-') assert.equal(vq.result, vq.a - vq.b);
+      if (vq.op === '×') assert.equal(vq.result, vq.a * vq.b);
+      if (vq.op === '÷') assert.equal(vq.result, vq.a / vq.b);
+    }
+  }
 });

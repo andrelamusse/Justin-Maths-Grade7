@@ -43,6 +43,34 @@
 
     <!-- Main Container -->
     <main class="grinder-container">
+      <!-- Top-Level Mode Switcher: Daily Grinder vs Past Exam Papers -->
+      <nav class="grinder-mode-tabs" aria-label="Practice Modes">
+        <button class="mode-tab-btn active" id="mode-grinder-btn" data-mode="grinder">
+          🎯 Daily Grinder (7 Categories)
+        </button>
+        <button class="mode-tab-btn" id="mode-papers-btn" data-mode="papers">
+          📄 Past Exam Papers (6 Full Papers)
+        </button>
+      </nav>
+
+      <!-- Past Exam Papers Selection & Report Card View (Initially Hidden) -->
+      <section id="past-papers-view" class="hidden" aria-label="Past Exam Papers">
+        <div class="selector-heading" style="margin-bottom: 8px;">Select a Past Exam Paper to Practise (Includes Visualizers, Voice Coaching &amp; Memorandum):</div>
+        <div id="past-papers-grid" class="past-papers-grid"></div>
+        <div id="exam-report-container" class="hidden" style="margin-top: 16px;"></div>
+      </section>
+
+      <!-- Active Past Paper Progress Banner (Shown while writing a paper) -->
+      <div id="exam-active-banner" class="exam-active-bar hidden" aria-live="polite">
+        <span id="exam-active-title">📄 Paper 1 &bull; Question 1 of 15</span>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="exam-question-marks" class="paper-marks-badge">[2 Marks]</span>
+          <button id="exit-exam-btn" class="control-btn">Exit Paper &times;</button>
+        </div>
+      </div>
+
+      <!-- 7 Category & 4 Sub-Category Selectors Wrapper -->
+      <div id="grinder-selectors-wrap">
       <!-- 7 Category Options -->
       <section class="category-selection-container" aria-label="Math Operation Categories">
         <div class="selector-heading">Choose Practice Mode (7 Options):</div>
@@ -98,9 +126,15 @@
 
       <!-- Hidden container for legacy selector lookup safety -->
       <div id="level-selector" class="hidden" aria-hidden="true"></div>
+      </div>
 
+      <!-- Main Question Workspace -->
+      <div id="question-workspace-wrap">
       <!-- Main Question Card -->
       <article class="question-card" aria-live="polite">
+        <!-- Optional Past Paper Word Problem Context Box -->
+        <div id="exam-word-context" class="exam-word-context hidden"></div>
+
         <div class="math-equation-row">
           <span class="num-chunk num-a" id="num-a">1</span>
           <span class="op-chunk" id="op-symbol">+</span>
@@ -173,6 +207,7 @@
         <button class="key-btn key-back" data-val="backspace" title="Delete last digit">⌫</button>
         <button class="key-btn key-submit" id="submit-btn" title="Check answer">Check Answer ↵</button>
       </section>
+      </div>
     </main>
   </div>
 

@@ -1054,6 +1054,248 @@ body.theme-dark .tier-hard {
   100% { transform: translateY(85vh) rotate(720deg); opacity: 0; }
 }
 
+/* Mode Switcher Tabs (Daily Grinder vs Past Exam Papers) */
+.grinder-mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.mode-tab-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-tab-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.mode-tab-btn.active {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+/* Past Exam Papers Grid */
+.past-papers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.paper-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.paper-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.paper-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.paper-term-badge {
+  background: #DBEAFE;
+  color: #1E40AF;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.paper-marks-badge {
+  background: #FEF3C7;
+  color: #92400E;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.paper-card h3 {
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.paper-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.paper-best-score {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.paper-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.paper-start-btn {
+  flex: 1;
+  background: var(--primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.paper-start-btn:hover {
+  background: var(--primary-hover);
+}
+
+.paper-variant-btn {
+  background: var(--bg-color);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.paper-variant-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Active Exam Banner & Word Context Box */
+.exam-active-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: #FEF3C7;
+  border: 2px solid #F59E0B;
+  color: #92400E;
+  font-weight: 700;
+}
+
+.exam-word-context {
+  width: 100%;
+  background: var(--bg-color);
+  border-left: 4px solid var(--primary);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: left;
+  line-height: 1.45;
+}
+
+/* Past Paper Report Card & Memorandum */
+.exam-report-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.exam-score-giant {
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.exam-ops-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  text-align: left;
+}
+
+.exam-op-pill {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.exam-op-pass {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.exam-op-miss {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.memo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.memo-item {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.memo-item.memo-correct {
+  border-left: 4px solid #10B981;
+}
+
+.memo-item.memo-wrong {
+  border-left: 4px solid #EF4444;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .category-grid {
@@ -1072,6 +1314,11 @@ body.theme-dark .tier-hard {
   }
   .sub-category-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .past-papers-grid,
+  .exam-ops-summary,
+  .grinder-mode-tabs {
+    grid-template-columns: 1fr;
   }
 }
 
