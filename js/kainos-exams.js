@@ -41,6 +41,17 @@ export const KAINOS_PAPERS_CATALOG = [
       },
       {
         id: 's7p1-q3',
+        num: 1,
+        part: '(c)',
+        q: 'Calculate: \\((-24) \\div (-4)\\)',
+        marks: 1,
+        options: ['6', '-6', '8', '-8'],
+        answer: '6',
+        memo: 'Award 1 mark for +6. Two negatives divided make a positive.',
+        tutorTip: 'Same signs divided always give a positive result.'
+      },
+      {
+        id: 's7p1-q4',
         num: 2,
         part: '',
         q: 'Evaluate using BIDMAS: \\(18 - 3 \\times (4 + 2)\\)',
@@ -51,9 +62,20 @@ export const KAINOS_PAPERS_CATALOG = [
         tutorTip: 'Justin, do NOT subtract 18 - 3 first! Brackets and multiplication always come before subtraction!'
       },
       {
-        id: 's7p1-q4',
+        id: 's7p1-q5',
         num: 3,
-        part: '',
+        part: '(a)',
+        q: 'Write \\(72\\) as a product of its prime factors in index form.',
+        marks: 2,
+        options: ['2³ × 3²', '2² × 3³', '2⁴ × 3', '8 × 9'],
+        answer: '2³ × 3²',
+        memo: '72 = 8 × 9 = 2 × 2 × 2 × 3 × 3 = 2³ × 3².',
+        tutorTip: 'Index form means using exponents (powers). 8 is 2 cubed and 9 is 3 squared.'
+      },
+      {
+        id: 's7p1-q6',
+        num: 3,
+        part: '(b)',
         q: 'Find the Highest Common Factor (HCF) of 24 and 36.',
         marks: 2,
         options: ['12', '6', '72', '4'],
@@ -62,7 +84,7 @@ export const KAINOS_PAPERS_CATALOG = [
         tutorTip: 'List factors or use prime factor ladders to find the greatest shared factor.'
       },
       {
-        id: 's7p1-q5',
+        id: 's7p1-q7',
         num: 4,
         part: '',
         q: 'Solve the equation: \\(4x - 7 = 25\\)',
@@ -73,7 +95,7 @@ export const KAINOS_PAPERS_CATALOG = [
         tutorTip: 'Balance model: Add 7 to both sides first, then divide by 4.'
       },
       {
-        id: 's7p1-q6',
+        id: 's7p1-q8',
         num: 5,
         part: '',
         q: 'Calculate: \\(\\frac{3}{5} \\div \\frac{9}{10}\\)',
@@ -131,6 +153,39 @@ export const KAINOS_PAPERS_CATALOG = [
         answer: '18',
         memo: 'Total sum required = 4 × 18 = 72. Sum of known 3 = 14 + 21 + 19 = 54. Fourth number = 72 - 54 = 18.',
         tutorTip: 'Mean times count equals total sum. Find total sum first!'
+      },
+      {
+        id: 's7p2-q4',
+        num: 4,
+        part: '',
+        q: 'Share \\(\\text{R } 350\\) in the ratio \\(3 : 4\\). How much is the larger share?',
+        marks: 2,
+        options: ['R 200', 'R 150', 'R 175', 'R 225'],
+        answer: 'R 200',
+        memo: 'Total parts = 3 + 4 = 7. 1 part = 350 ÷ 7 = R 50. Larger share = 4 × 50 = R 200.',
+        tutorTip: 'Divide total amount by total parts to get 1 part, then multiply by 4.'
+      },
+      {
+        id: 's7p2-q5',
+        num: 5,
+        part: '',
+        q: 'A taxi in Vanderbijlpark uses formula \\(C = 8d + 15\\). Calculate the cost \\(C\\) for a trip of \\(12\\text{ km}\\).',
+        marks: 2,
+        options: ['R 111', 'R 96', 'R 105', 'R 120'],
+        answer: 'R 111',
+        memo: 'Substitute d = 12: C = 8(12) + 15 = 96 + 15 = R 111.',
+        tutorTip: 'Multiply 8 by 12 first, then add the R 15 callout fee.'
+      },
+      {
+        id: 's7p2-q6',
+        num: 6,
+        part: '',
+        q: 'On a pie chart of 60 learners, rugby occupies an angle of \\(120^\\circ\\). How many learners play rugby?',
+        marks: 2,
+        options: ['20 learners', '15 learners', '25 learners', '30 learners'],
+        answer: '20 learners',
+        memo: 'Fraction = 120 / 360 = 1/3. 1/3 of 60 learners = 20 learners.',
+        tutorTip: '120 degrees out of 360 is exactly one third of the full circle.'
       }
     ]
   },
@@ -169,6 +224,50 @@ export const KAINOS_PAPERS_CATALOG = [
         answer: '56',
         memo: '7 × 8 = 56.',
         tutorTip: 'Rhyme: 5, 6, 7, 8 -> 56 is 7 times 8!'
+      },
+      {
+        id: 's6p1-q3',
+        num: 3,
+        part: '',
+        q: 'Calculate: \\(45 \\times 100\\)',
+        marks: 1,
+        options: ['4 500', '450', '45 000', '4.5'],
+        answer: '4 500',
+        memo: 'Multiplying by 100 shifts digits two places left: 4 500.',
+        tutorTip: 'Move the digits two places to the left and add two zeros.'
+      },
+      {
+        id: 's6p1-q4',
+        num: 4,
+        part: '',
+        q: 'Complete the equivalent fraction: \\(\\frac{3}{5} = \\frac{?}{20}\\)',
+        marks: 1,
+        options: ['12', '15', '9', '16'],
+        answer: '12',
+        memo: 'Denominator multiplied by 4 (5 × 4 = 20), so numerator: 3 × 4 = 12.',
+        tutorTip: 'Whatever you multiply the bottom by, multiply the top by the same.'
+      },
+      {
+        id: 's6p1-q5',
+        num: 5,
+        part: '',
+        q: 'Two angles on a straight line are \\(118^\\circ\\) and \\(x^\\circ\\). Find \\(x\\).',
+        marks: 1,
+        options: ['62°', '72°', '52°', '82°'],
+        answer: '62°',
+        memo: 'Angles on a straight line add to 180°: 180 - 118 = 62°.',
+        tutorTip: 'Straight line sum is always 180 degrees.'
+      },
+      {
+        id: 's6p1-q6',
+        num: 6,
+        part: '',
+        q: 'Calculate the area of a rectangle with length \\(8\\text{ cm}\\) and width \\(6\\text{ cm}\\).',
+        marks: 1,
+        options: ['48 cm²', '28 cm²', '14 cm²', '24 cm²'],
+        answer: '48 cm²',
+        memo: 'Area = length × width = 8 × 6 = 48 cm².',
+        tutorTip: 'Area of rectangle = length times width.'
       }
     ]
   },
@@ -196,6 +295,61 @@ export const KAINOS_PAPERS_CATALOG = [
         answer: '16:00',
         memo: '14:15 + 1h = 15:15. 15:15 + 45 min = 16:00.',
         tutorTip: 'Add the whole hour first, then add the remaining 45 minutes to reach the top of the next hour.'
+      },
+      {
+        id: 's6p2-q2',
+        num: 2,
+        part: '',
+        q: 'Calculate: \\(24.60 + 8.75\\)',
+        marks: 1,
+        options: ['33.35', '32.35', '33.45', '32.45'],
+        answer: '33.35',
+        memo: 'Line up decimal points: 24.60 + 8.75 = 33.35.',
+        tutorTip: 'Keep decimal points strictly lined up in vertical columns.'
+      },
+      {
+        id: 's6p2-q3',
+        num: 3,
+        part: '',
+        q: 'Work out: \\(15.30 - 6.84\\)',
+        marks: 1,
+        options: ['8.46', '9.46', '8.56', '9.56'],
+        answer: '8.46',
+        memo: 'Regroup across decimals: 15.30 - 6.84 = 8.46.',
+        tutorTip: 'Pad trailing zeros and borrow across place-value columns.'
+      },
+      {
+        id: 's6p2-q4',
+        num: 4,
+        part: '',
+        q: 'Calculate: \\(72 \\div 1000\\)',
+        marks: 1,
+        options: ['0.072', '0.72', '0.0072', '7.2'],
+        answer: '0.072',
+        memo: 'Dividing by 1 000 shifts the decimal point 3 places to the left: 0.072.',
+        tutorTip: 'Count the 3 zeros in 1000: jump decimal point 3 places left.'
+      },
+      {
+        id: 's6p2-q5',
+        num: 5,
+        part: '',
+        q: 'Calculate \\(15\\%\\) of \\(\\text{R } 240\\).',
+        marks: 2,
+        options: ['R 36', 'R 24', 'R 48', 'R 30'],
+        answer: 'R 36',
+        memo: '10% of 240 = R 24. 5% of 240 = R 12. 15% = 24 + 12 = R 36.',
+        tutorTip: 'Break 15% down into 10% plus 5%.'
+      },
+      {
+        id: 's6p2-q6',
+        num: 6,
+        part: '',
+        q: 'Calculate the volume of a cuboid with length \\(5\\text{ cm}\\), width \\(3\\text{ cm}\\), and height \\(4\\text{ cm}\\).',
+        marks: 2,
+        options: ['60 cm³', '12 cm³', '48 cm³', '24 cm³'],
+        answer: '60 cm³',
+        memo: 'V = l × w × h = 5 × 3 × 4 = 60 cm³.',
+        tutorTip: 'Multiply length by width by height.'
       }
     ]
   }
@@ -203,21 +357,51 @@ export const KAINOS_PAPERS_CATALOG = [
 
 export class KainosExamSimulator {
   constructor(paperId = 'stage7-p1') {
-    this.setPaper(paperId);
-    this.currentIndex = 0;
-    this.userAnswers = [];
-    this.timerSeconds = 0;
     this.timerInterval = null;
-    this.isFinished = false;
+    this.onTick = null;
+    this.onTimeUp = null;
+    this.setPaper(paperId);
   }
 
   setPaper(paperId) {
+    this.stopTimer();
     this.paper = KAINOS_PAPERS_CATALOG.find(p => p.id === paperId) || KAINOS_PAPERS_CATALOG[0];
     this.questions = this.paper.sampleQuestions || [];
     this.currentIndex = 0;
     this.userAnswers = [];
     this.timerSeconds = this.paper.durationMinutes * 60;
     this.isFinished = false;
+  }
+
+  startTimer(onTick = null, onTimeUp = null) {
+    this.stopTimer();
+    this.onTick = onTick;
+    this.onTimeUp = onTimeUp;
+    this.timerInterval = setInterval(() => {
+      this.timerSeconds--;
+      if (this.onTick) {
+        this.onTick(this.getFormattedTime(), this.timerSeconds);
+      }
+      if (this.timerSeconds <= 0) {
+        this.stopTimer();
+        this.isFinished = true;
+        if (this.onTimeUp) this.onTimeUp();
+      }
+    }, 1000);
+  }
+
+  stopTimer() {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
+  }
+
+  getFormattedTime() {
+    const totalSecs = Math.max(0, this.timerSeconds);
+    const m = Math.floor(totalSecs / 60);
+    const s = totalSecs % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   }
 
   getCurrentQuestion() {
@@ -245,7 +429,7 @@ export class KainosExamSimulator {
     this.currentIndex++;
     if (this.currentIndex >= this.questions.length) {
       this.isFinished = true;
-      if (this.timerInterval) clearInterval(this.timerInterval);
+      this.stopTimer();
     }
   }
 

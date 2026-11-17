@@ -1230,11 +1230,16 @@ body {
   flex: 1;
   color: #fff;
   font-weight: 800;
-  font-size: 0.85rem;
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 2px;
 }
 
 .ratio-block.part-a { background: var(--color-blue); }
@@ -1529,6 +1534,57 @@ body {
 .math-op {
   padding: 0 3px;
   font-weight: 700;
+}
+
+.math-sym {
+  display: inline-block;
+  padding: 0 4px;
+  font-weight: 700;
+}
+
+/* Fallback Column Vector */
+.math-vector {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 0 2px;
+  font-style: normal;
+}
+
+.math-vector .vec-bracket {
+  font-size: 1.5em;
+  font-weight: 300;
+  line-height: 1;
+  color: currentColor;
+}
+
+.math-vector .vec-col {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 3px;
+  font-size: 0.88em;
+  line-height: 1.15;
+}
+
+.math-vector .vec-cell {
+  padding: 1px 0;
+}
+
+/* Fallback recurring dot notation */
+.recurring-dot {
+  position: relative;
+  display: inline-block;
+}
+
+.recurring-dot::after {
+  content: '˙';
+  position: absolute;
+  top: -0.55em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1em;
+  font-weight: 900;
 }
 
 /* ============================================================== */

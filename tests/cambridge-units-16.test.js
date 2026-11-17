@@ -223,6 +223,37 @@ test('MathRenderer converts LaTeX fractions and operations into beautiful HTML t
 
   const renderedPow = MathRenderer.render('\\(x^2 + 5\\)');
   assert.ok(renderedPow.includes('<sup>2</sup>'), 'Must format exponent');
+
+  // Deep Edge Cases: Bare LaTeX without delimiters
+  const bareFrac = MathRenderer.render('\\frac{7}{20}');
+  assert.ok(bareFrac.includes('math-frac'), 'Bare \\frac must render to math-frac');
+  assert.ok(bareFrac.includes('7') && bareFrac.includes('20'), 'Must contain 7 and 20');
+  assert.ok(!bareFrac.includes('\\frac'), 'Must not leak raw \\frac command');
+
+  // Mixed numbers
+  const mixedFrac = MathRenderer.render('3\\frac{1}{4}');
+  assert.ok(mixedFrac.includes('math-frac'), 'Mixed number must render fraction');
+  assert.ok(mixedFrac.includes('3') && mixedFrac.includes('1') && mixedFrac.includes('4'));
+  assert.ok(!mixedFrac.includes('\\frac'));
+
+  // Nested braces in fractions
+  const nestedFrac = MathRenderer.render('$\\frac{\\text{R } 150}{3}$');
+  assert.ok(nestedFrac.includes('math-frac'), 'Nested braces fraction must render');
+  assert.ok(!nestedFrac.includes('\\frac'));
+
+  // Column vectors
+  const vector = MathRenderer.render('$\\begin{pmatrix} 6 \\\\ -5 \\end{pmatrix}$');
+  assert.ok(vector.includes('math-vector'), 'Vector must render math-vector');
+  assert.ok(vector.includes('6') && vector.includes('-5'));
+  assert.ok(!vector.includes('\\begin'));
+
+  // Logical symbols
+  const syms = MathRenderer.render('\\(A \\implies B \\dots x \\to y\\)');
+  assert.ok(syms.includes('⟹') && syms.includes('…') && syms.includes('→'));
+
+  // Recurring decimals
+  const rec = MathRenderer.render('\\(0.\\dot{3}\\)');
+  assert.ok(rec.includes('recurring-dot') && rec.includes('3'));
 });
 
 test('SpeechCoach converts math notations to clear English words', () => {
@@ -237,14 +268,42 @@ test('SpeechCoach converts math notations to clear English words', () => {
 
   const spoken4 = SpeechCoach.toSpokenEnglish('Justin has R 150');
   assert.ok(spoken4.includes('150 Rand'));
+
+  // Edge cases: Mixed numbers and vectors
+  const spokenMixed = SpeechCoach.toSpokenEnglish('3\\frac{1}{4}');
+  assert.ok(spokenMixed.includes('3 and one quarter'), `Expected "3 and one quarter", got "${spokenMixed}"`);
+
+  const spokenVec = SpeechCoach.toSpokenEnglish('\\begin{pmatrix} 6 \\\\ -5 \\end{pmatrix}');
+  assert.ok(spokenVec.includes('column vector with top 6 and bottom negative 5'), `Got "${spokenVec}"`);
+
+  const spokenDeg = SpeechCoach.toSpokenEnglish('45^\\circ and 90°');
+  assert.ok(spokenDeg.includes('45 degrees') && spokenDeg.includes('90 degrees'));
 });
 
 test('Kainos Cambridge Exams Catalog and Simulator logic', () => {
   assert.equal(KAINOS_PAPERS_CATALOG.length, 4, 'Must have 4 exam papers');
 
+  // Verify all 4 papers have substantial questions
+  KAINOS_PAPERS_CATALOG.forEach(paper => {
+    assert.ok(paper.sampleQuestions.length >= 6, `Paper ${paper.id} must have at least 6 questions, had ${paper.sampleQuestions.length}`);
+    paper.sampleQuestions.forEach(q => {
+      assert.ok(q.options.includes(q.answer), `Question ${q.id} answer ${q.answer} must be in options`);
+      assert.ok(q.marks >= 1, `Question ${q.id} must award marks`);
+      assert.ok(q.memo && q.tutorTip, `Question ${q.id} must have memo and tutor tip`);
+    });
+  });
+
   const sim = new KainosExamSimulator('stage7-p1');
   assert.equal(sim.paper.id, 'stage7-p1');
-  assert.ok(sim.questions.length >= 5);
+  assert.ok(sim.questions.length >= 6);
+
+  // Timer test
+  assert.equal(sim.getFormattedTime(), '60:00');
+  let tickedTime = '';
+  sim.startTimer((formatted) => { tickedTime = formatted; });
+  assert.ok(sim.timerInterval, 'Timer interval must be running');
+  sim.stopTimer();
+  assert.strictEqual(sim.timerInterval, null, 'Timer must be stopped');
 
   const q1 = sim.getCurrentQuestion();
   assert.ok(q1);
@@ -253,4 +312,21 @@ test('Kainos Cambridge Exams Catalog and Simulator logic', () => {
   assert.equal(sim.userAnswers.length, 1);
   assert.equal(sim.userAnswers[0].isCorrect, true);
   assert.equal(sim.userAnswers[0].marksAwarded, q1.marks);
+});
+
+test('Angle visualizer geometry: reflex angles do not clip outside viewBox', () => {
+  const cx = 180;
+  const cy = 160;
+  const r = 110;
+  const viewBoxW = 360;
+  const viewBoxH = 320;
+
+  for (let deg = 5; deg <= 355; deg += 5) {
+    const rad = (deg * Math.PI) / 180;
+    const x = cx + r * Math.cos(-rad);
+    const y = cy + r * Math.sin(-rad);
+
+    assert.ok(x >= 0 && x <= viewBoxW, `Ray X coordinate ${x} at ${deg}° must be inside viewBox width`);
+    assert.ok(y >= 0 && y <= viewBoxH, `Ray Y coordinate ${y} at ${deg}° must be inside viewBox height`);
+  }
 });

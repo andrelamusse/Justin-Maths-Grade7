@@ -2,10 +2,12 @@
 // Visual, hands-on, ADHD/dyscalculia friendly learning tools:
 // 1. Equation Balance Scale
 // 2. Interactive Fraction Wall
-// 3. Angle Visualizer & Parallel Line Explorer
+// 3. Angle Visualizer & Protractor
 // 4. Integer Thermometer & Number Line
 // 5. Cartesian 4-Quadrant Coordinate Plotter
 // 6. Ratio Bar Model Visualizer
+
+import { MathRenderer } from './math-renderer.js';
 
 export class ManipulativesLab {
   constructor() {
@@ -74,10 +76,10 @@ export class ManipulativesLab {
     let leftUnits = 4;
     let rightX = 0;
     let rightUnits = 10;
-    const xSecret = 3; // Weight of 1x
+    let currentXSecret = 3;
 
-    const getLeftWeight = () => leftX * xSecret + leftUnits;
-    const getRightWeight = () => rightX * xSecret + rightUnits;
+    const getLeftWeight = () => leftX * currentXSecret + leftUnits;
+    const getRightWeight = () => rightX * currentXSecret + rightUnits;
 
     card.innerHTML = `
       <div class="tool-header">
@@ -85,9 +87,17 @@ export class ManipulativesLab {
           <span class="tool-icon">⚖️</span>
           <div>
             <h3>Equation Balance Scale</h3>
-            <p>Solve <strong>2x + 4 = 10</strong> by keeping both sides balanced!</p>
+            <p>Solve linear equations by keeping both sides balanced!</p>
           </div>
         </div>
+      </div>
+
+      <div class="preset-equations-row" style="margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <span style="font-weight:700; font-size:0.85rem; color:var(--text-secondary);">Equations:</span>
+        <button class="action-pill util eq-preset-btn active" data-lx="2" data-lu="4" data-rx="0" data-ru="10" data-xs="3">2x + 4 = 10</button>
+        <button class="action-pill util eq-preset-btn" data-lx="3" data-lu="2" data-rx="0" data-ru="11" data-xs="3">3x + 2 = 11</button>
+        <button class="action-pill util eq-preset-btn" data-lx="1" data-lu="6" data-rx="0" data-ru="9" data-xs="3">x + 6 = 9</button>
+        <button class="action-pill util eq-preset-btn" data-lx="4" data-lu="2" data-rx="0" data-ru="14" data-xs="3">4x + 2 = 14</button>
       </div>
 
       <div class="scale-visual-area">
@@ -140,13 +150,18 @@ export class ManipulativesLab {
       </div>
 
       <div class="balance-actions-bar">
-        <button class="action-pill util" id="subtract-4-both-btn">⚡ Take 4 from Both Sides</button>
-        <button class="action-pill util" id="halve-both-btn">➗ Halve Both Sides (÷ 2)</button>
-        <button class="action-pill reset" id="reset-balance-btn">↺ Reset (2x + 4 = 10)</button>
+        <button class="action-pill util" id="subtract-units-both-btn">⚡ Subtract Units from Both Sides</button>
+        <button class="action-pill util" id="divide-x-both-btn">➗ Divide Both Sides by x</button>
+        <button class="action-pill reset" id="reset-balance-btn">↺ Reset Equation</button>
       </div>
     `;
 
     this.container.appendChild(card);
+
+    let initialLeftX = 2;
+    let initialLeftUnits = 4;
+    let initialRightX = 0;
+    let initialRightUnits = 10;
 
     const updateVisual = () => {
       const beam = card.querySelector('#scale-beam');
@@ -193,6 +208,24 @@ export class ManipulativesLab {
       }
     };
 
+    // Preset equations
+    card.querySelectorAll('.eq-preset-btn').forEach(btn => {
+      btn.onclick = (e) => {
+        card.querySelectorAll('.eq-preset-btn').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        initialLeftX = parseInt(e.currentTarget.dataset.lx, 10);
+        initialLeftUnits = parseInt(e.currentTarget.dataset.lu, 10);
+        initialRightX = parseInt(e.currentTarget.dataset.rx, 10);
+        initialRightUnits = parseInt(e.currentTarget.dataset.ru, 10);
+        currentXSecret = parseInt(e.currentTarget.dataset.xs, 10);
+        leftX = initialLeftX;
+        leftUnits = initialLeftUnits;
+        rightX = initialRightX;
+        rightUnits = initialRightUnits;
+        updateVisual();
+      };
+    });
+
     card.querySelector('#left-add-x').onclick = () => { leftX++; updateVisual(); };
     card.querySelector('#left-sub-x').onclick = () => { if (leftX > 0) leftX--; updateVisual(); };
     card.querySelector('#left-add-unit').onclick = () => { leftUnits++; updateVisual(); };
@@ -203,23 +236,34 @@ export class ManipulativesLab {
     card.querySelector('#right-add-unit').onclick = () => { rightUnits++; updateVisual(); };
     card.querySelector('#right-sub-unit').onclick = () => { if (rightUnits > 0) rightUnits--; updateVisual(); };
 
-    card.querySelector('#subtract-4-both-btn').onclick = () => {
-      if (leftUnits >= 4 && rightUnits >= 4) {
-        leftUnits -= 4;
-        rightUnits -= 4;
+    card.querySelector('#subtract-units-both-btn').onclick = () => {
+      const minUnits = Math.min(leftUnits, rightUnits);
+      if (minUnits > 0) {
+        leftUnits -= minUnits;
+        rightUnits -= minUnits;
         updateVisual();
       }
     };
 
-    card.querySelector('#halve-both-btn').onclick = () => {
-      if (leftX % 2 === 0 && leftUnits % 2 === 0 && rightX % 2 === 0 && rightUnits % 2 === 0) {
-        leftX /= 2; leftUnits /= 2; rightX /= 2; rightUnits /= 2;
+    card.querySelector('#divide-x-both-btn').onclick = () => {
+      const activeX = leftX > 0 ? leftX : rightX;
+      if (activeX > 1 && leftUnits === 0 && rightUnits % activeX === 0) {
+        if (leftX > 0) {
+          leftX = 1;
+          rightUnits /= activeX;
+        } else {
+          rightX = 1;
+          leftUnits /= activeX;
+        }
         updateVisual();
       }
     };
 
     card.querySelector('#reset-balance-btn').onclick = () => {
-      leftX = 2; leftUnits = 4; rightX = 0; rightUnits = 10;
+      leftX = initialLeftX;
+      leftUnits = initialLeftUnits;
+      rightX = initialRightX;
+      rightUnits = initialRightUnits;
       updateVisual();
     };
 
@@ -279,7 +323,7 @@ export class ManipulativesLab {
         block.dataset.num = i + 1;
         block.dataset.denom = row.count;
         block.style.backgroundColor = row.color;
-        block.textContent = row.count === 1 ? '1 Whole' : `1/${row.count}`;
+        block.innerHTML = row.count === 1 ? '1 Whole' : MathRenderer.render(`\\frac{1}{${row.count}}`);
 
         block.onclick = () => {
           const selectedNumerator = i + 1;
@@ -287,29 +331,34 @@ export class ManipulativesLab {
           const targetVal = selectedNumerator / selectedDenominator;
 
           const equivalents = [];
-          card.querySelectorAll('.fraction-block').forEach(b => {
-            const bNum = parseInt(b.dataset.num, 10);
-            const bDenom = parseInt(b.dataset.denom, 10);
-            const val = bNum / bDenom;
-            if (Math.abs(val - targetVal) < 0.0001) {
-              b.classList.add('active-brick');
-              equivalents.push(bNum === bDenom ? '1' : `${bNum}/${bDenom}`);
-            } else {
-              b.classList.remove('active-brick');
+          denominations.forEach(r => {
+            const numReq = Math.round(targetVal * r.count);
+            const isEq = Math.abs(numReq / r.count - targetVal) < 0.0001;
+            const rowBlocks = card.querySelectorAll(`.fraction-block[data-denom="${r.count}"]`);
+            rowBlocks.forEach((b, bIdx) => {
+              if (isEq && bIdx < numReq) {
+                b.classList.add('active-brick');
+              } else {
+                b.classList.remove('active-brick');
+              }
+            });
+            if (isEq) {
+              equivalents.push(r.count === 1 ? '1' : `\\frac{${numReq}}{${r.count}}`);
             }
           });
 
           const dec = targetVal.toFixed(3);
           const pct = (targetVal * 100).toFixed(1);
-          const eqText = equivalents.length > 1 ? equivalents.join(' = ') : `${selectedNumerator}/${selectedDenominator}`;
+          const eqFormatted = equivalents.map(eq => MathRenderer.render(eq)).join(' = ');
 
           infoBox.innerHTML = `
-            <div style="font-weight:700; margin-bottom: 4px;">
-              Equivalents: <span style="color:#059669; font-size:1.15rem;">${eqText}</span>
+            <div style="font-weight:700; margin-bottom: 6px;">
+              Equivalent Value: <span style="font-size:1.15rem; color:var(--color-green);">${eqFormatted}</span>
             </div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:0.95rem;">
+            <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:0.95rem;">
               <span>Decimal: <strong>${dec}</strong></span>
               <span>Percentage: <strong>${pct}%</strong></span>
+              <span>Proportion of 1 Whole: <strong>${Math.round(targetVal * 100)}%</strong></span>
             </div>
           `;
         };
@@ -339,7 +388,7 @@ export class ManipulativesLab {
       </div>
 
       <div class="angle-display-wrap">
-        <svg id="angle-svg" viewBox="0 0 360 260" class="angle-svg"></svg>
+        <svg id="angle-svg" viewBox="0 0 360 320" class="angle-svg"></svg>
       </div>
 
       <div class="angle-slider-bar">
@@ -385,7 +434,7 @@ export class ManipulativesLab {
       compText.textContent = deg <= 90 ? `${90 - deg}°` : 'N/A (> 90°)';
 
       const cx = 180;
-      const cy = 180;
+      const cy = 160;
       const r = 110;
 
       const baseEndX = cx + r;
@@ -402,6 +451,11 @@ export class ManipulativesLab {
       const arcPath = `M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 ${largeArc} 0 ${arcEndX} ${arcEndY}`;
 
       let html = `
+        <!-- Protractor dial guide -->
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="2,4"/>
+        <line x1="${cx - r}" y1="${cy}" x2="${cx + r}" y2="${cy}" stroke="#cbd5e1" stroke-width="1"/>
+        <line x1="${cx}" y1="${cy - r}" x2="${cx}" y2="${cy + r}" stroke="#cbd5e1" stroke-width="1"/>
+
         <!-- Origin Vertex -->
         <circle cx="${cx}" cy="${cy}" r="6" fill="#1e293b"/>
         <!-- Arc -->
@@ -519,7 +573,7 @@ export class ManipulativesLab {
           <span class="tool-icon">📍</span>
           <div>
             <h3>Cartesian 4-Quadrant Coordinate Grid</h3>
-            <p>Click anywhere on the grid or adjust sliders to plot (x, y).</p>
+            <p>Click or tap anywhere on the grid or adjust sliders to plot (x, y).</p>
           </div>
         </div>
       </div>
@@ -572,7 +626,6 @@ export class ManipulativesLab {
       infoBox.innerHTML = `Point: <strong style="color:#2563eb; font-size:1.15rem;">(${ptX}, ${ptY})</strong> lies in <strong>${quadrant}</strong>`;
 
       // Render SVG coordinate plane (-5 to +5)
-      // SVG width/height = 320. Origin cx = 160, cy = 160. Scale: 1 unit = 26px
       const cx = 160;
       const cy = 160;
       const unit = 26;
@@ -632,7 +685,7 @@ export class ManipulativesLab {
       updateGrid();
     });
 
-    svg.addEventListener('click', (e) => {
+    const handlePointerAction = (e) => {
       const rect = svg.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
@@ -649,7 +702,9 @@ export class ManipulativesLab {
       sliderX.value = ptX;
       sliderY.value = ptY;
       updateGrid();
-    });
+    };
+
+    svg.addEventListener('pointerdown', handlePointerAction);
 
     updateGrid();
   }

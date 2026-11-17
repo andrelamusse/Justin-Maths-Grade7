@@ -32,6 +32,8 @@ export class SpeechCoach {
    * Translates LaTeX / mathematical expressions into spoken English words.
    * e.g. -8 - (-12) => "negative 8 minus negative 12"
    * \frac{3}{4} => "three quarters" or "3 over 4"
+   * 3\frac{1}{4} => "3 and one quarter"
+   * \begin{pmatrix} 6 \\ -5 \end{pmatrix} => "column vector with top 6 and bottom negative 5"
    */
   static toSpokenEnglish(text) {
     if (!text) return '';
@@ -41,7 +43,18 @@ export class SpeechCoach {
     // Remove HTML tags
     s = s.replace(/<[^>]*>/g, ' ');
 
-    // Fractions \frac{a}{b}
+    // South African Currency
+    s = s.replace(/\\text\{\s*R\s*\}\s*(\d+)/g, '$1 Rand');
+    s = s.replace(/\bR\s*(\d+)/g, '$1 Rand');
+
+    // Matrix / Column vectors
+    s = s.replace(/\\begin\{pmatrix\}\s*([^\\]+?)\s*\\\\\s*([^\\}]+?)\s*\\end\{pmatrix\}/g, 'column vector with top $1 and bottom $2');
+
+    // Mixed fractions
+    s = s.replace(/([0-9]+)\s*\\frac/g, '$1 and \\frac');
+    s = s.replace(/([0-9]+)\s+([0-9]+)\/([0-9]+)/g, '$1 and $2 over $3');
+
+    // Common standard fractions \frac{a}{b}
     s = s.replace(/\\frac\{1\}\{2\}/g, 'one half');
     s = s.replace(/\\frac\{1\}\{4\}/g, 'one quarter');
     s = s.replace(/\\frac\{3\}\{4\}/g, 'three quarters');
@@ -49,12 +62,23 @@ export class SpeechCoach {
     s = s.replace(/\\frac\{2\}\{3\}/g, 'two thirds');
     s = s.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1 over $2');
 
+    // Recurring decimals
+    s = s.replace(/\\dot\{([^{}]+)\}/g, 'recurring $1');
+
+    // Mathematical logical symbols
+    s = s.replace(/\\implies/g, ' which means that ');
+    s = s.replace(/\\to/g, ' maps to ');
+    s = s.replace(/\\dots/g, ' and so on ');
+
     // Roots
     s = s.replace(/\\sqrt\[3\]\{([^{}]+)\}/g, 'the cube root of $1');
     s = s.replace(/\\sqrt\{([^{}]+)\}/g, 'the square root of $1');
     s = s.replace(/√([0-9a-zA-Z]+)/g, 'the square root of $1');
 
-    // Powers
+    // Powers & Units
+    s = s.replace(/cm\^?3|cm³/g, 'cubic centimetres');
+    s = s.replace(/cm\^?2|cm²/g, 'square centimetres');
+    s = s.replace(/m\^?2|m²/g, 'square metres');
     s = s.replace(/([a-zA-Z0-9]+)\^2/g, '$1 squared');
     s = s.replace(/([a-zA-Z0-9]+)\^3/g, '$1 cubed');
     s = s.replace(/([a-zA-Z0-9]+)\^\{([^{}]+)\}/g, '$1 to the power of $2');
@@ -67,18 +91,18 @@ export class SpeechCoach {
     s = s.replace(/\\geq|≥/g, ' is greater than or equal to ');
     s = s.replace(/\\neq|≠/g, ' is not equal to ');
     s = s.replace(/=/g, ' equals ');
+    s = s.replace(/([0-9]+)(?:\^?\\circ|°)/g, '$1 degrees ');
     s = s.replace(/°|\\circ/g, ' degrees ');
+    s = s.replace(/\^/g, ' ');
 
     // Negative numbers
     s = s.replace(/-\s*(\d+)/g, 'negative $1');
     s = s.replace(/−\s*(\d+)/g, 'negative $1');
 
-    // South African Currency
-    s = s.replace(/R\s*(\d+)/g, '$1 Rand');
-
     // Clean up LaTeX wrappers
     s = s.replace(/\\\(|\\\)|\\\[|\\\]|\$|\$\$/g, ' ');
     s = s.replace(/\\text\{([^{}]+)\}/g, '$1');
+    s = s.replace(/\\,/g, ' ');
 
     // Collapse multiple spaces
     s = s.replace(/\s+/g, ' ').trim();

@@ -69,10 +69,19 @@ export class JustinMathsApp {
 
     // Check URL hash for routing
     const hash = window.location.hash.replace('#', '');
-    if (hash && ['units', 'practice', 'manipulatives', 'exams', 'grinder'].includes(hash)) {
+    if (hash && ['units', 'detail', 'practice', 'manipulatives', 'exams', 'grinder'].includes(hash)) {
       this.switchTab(hash);
     } else {
       this.switchTab('units');
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('hashchange', () => {
+        const h = window.location.hash.replace('#', '');
+        if (h && ['units', 'detail', 'practice', 'manipulatives', 'exams', 'grinder'].includes(h) && h !== this.activeTab) {
+          this.switchTab(h);
+        }
+      });
     }
   }
 
@@ -186,6 +195,17 @@ export class JustinMathsApp {
     const activePane = document.getElementById(`pane-${tabName}`);
     if (activePane) activePane.classList.add('active');
 
+    // Keep URL hash in sync without reloading
+    try {
+      if (typeof window !== 'undefined' && window.location) {
+        if (window.location.hash.replace('#', '') !== tabName) {
+          window.location.hash = tabName;
+        }
+      }
+    } catch (e) {
+      // Ignore
+    }
+
     // Scroll to top of view
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -276,12 +296,18 @@ export class JustinMathsApp {
 
     container.innerHTML = `
       <div class="unit-detail-container">
+        <div class="unit-detail-nav-row" style="margin-bottom:12px;">
+          <button class="action-pill util" id="detail-back-units-btn" style="padding:8px 16px; font-size:0.88rem; display:inline-flex; align-items:center; gap:6px;">
+            <span>&larr;</span> All 16 Cambridge Units
+          </button>
+        </div>
+
         <div class="unit-detail-header">
           <div class="unit-header-title-box">
             <h2>Unit ${unit.unit}: ${unit.title}</h2>
             <div class="meta-sub">Cambridge Framework: ${unit.cambridgeRef} &bull; Strand: ${unit.strand}</div>
           </div>
-          <div style="display:flex; gap:8px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <button class="voice-coach-btn" id="unit-speak-btn">
               🗣️ Listen to Lesson
             </button>
@@ -340,6 +366,10 @@ export class JustinMathsApp {
 
     speakBtn.onclick = () => {
       globalSpeech.toggle(`${unit.title}. ${unit.lesson.keyIdea}. ${unit.lesson.spokenExplanation}`);
+    };
+
+    container.querySelector('#detail-back-units-btn').onclick = () => {
+      this.switchTab('units');
     };
 
     container.querySelector('#start-unit-quiz-btn').onclick = () => {
@@ -586,9 +616,11 @@ export class JustinMathsApp {
       const rect = canvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const scaleX = rect.width > 0 ? (canvas.width / rect.width) : 1;
+      const scaleY = rect.height > 0 ? (canvas.height / rect.height) : 1;
       return {
-        x: clientX - rect.left,
-        y: clientY - rect.top
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
       };
     };
 
@@ -684,6 +716,16 @@ export class JustinMathsApp {
     const container = document.getElementById('exam-sim-workspace');
     if (!container) return;
 
+    this.examSim.startTimer(
+      (timeStr) => {
+        const timerBox = document.getElementById('sim-timer-box');
+        if (timerBox) timerBox.textContent = `⏱️ ${timeStr}`;
+      },
+      () => {
+        this.renderExamSimResults();
+      }
+    );
+
     this.renderExamSimStep();
   }
 
@@ -714,7 +756,7 @@ export class JustinMathsApp {
             <span style="font-size:0.85rem; color:var(--text-muted);">Question ${progress} &bull; [${q.marks} Mark${q.marks > 1 ? 's' : ''}]</span>
           </div>
           <div class="exam-timer-chip" id="sim-timer-box">
-            ⏱️ ${paper.durationMinutes}:00
+            ⏱️ ${this.examSim.getFormattedTime()}
           </div>
         </div>
 
@@ -738,6 +780,7 @@ export class JustinMathsApp {
   }
 
   renderExamSimResults() {
+    this.examSim.stopTimer();
     const container = document.getElementById('exam-sim-workspace');
     if (!container) return;
 
@@ -781,6 +824,7 @@ export class JustinMathsApp {
     `;
 
     container.querySelector('#btn-return-exam-catalog').onclick = () => {
+      this.examSim.stopTimer();
       container.innerHTML = '';
       this.switchTab('exams');
     };
