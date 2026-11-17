@@ -1,5 +1,6 @@
 // app.js - Grade 7 English Mathematics Academy Main Engine
 import { GRADE_7_STRANDS } from './curriculum-data.js';
+import { CAMBRIDGE_BOOK_7_UNITS } from './cambridge-book7.js';
 import { Grade7Tools } from './interactive-tools.js';
 import { speechReader } from './speech.js';
 
@@ -169,11 +170,13 @@ export class Grade7AcademyApp {
     const practiceWrap = document.getElementById('practice-workspace');
     const toolsWrap = document.getElementById('tools-workspace');
     const examWrap = document.getElementById('exam-workspace');
+    const textbookWrap = document.getElementById('textbook-workspace');
 
     if (lessonWrap) lessonWrap.classList.toggle('hidden', viewName !== 'lesson');
     if (practiceWrap) practiceWrap.classList.toggle('hidden', viewName !== 'practice');
     if (toolsWrap) toolsWrap.classList.toggle('hidden', viewName !== 'tools');
     if (examWrap) examWrap.classList.toggle('hidden', viewName !== 'exam');
+    if (textbookWrap) textbookWrap.classList.toggle('hidden', viewName !== 'textbook');
 
     if (viewName === 'lesson') {
       this.renderLessonView();
@@ -183,7 +186,33 @@ export class Grade7AcademyApp {
       this.tools.renderCurrentTool();
     } else if (viewName === 'exam') {
       this.startExamMode();
+    } else if (viewName === 'textbook') {
+      this.renderTextbookView();
     }
+  }
+
+  renderTextbookView() {
+    const wrap = document.getElementById('textbook-workspace');
+    if (!wrap) return;
+    wrap.innerHTML = `
+      <div style="padding: 16px;">
+        <h2 style="font-size:1.4rem; font-weight:800; margin-bottom:8px;">📘 Cambridge Lower Secondary Mathematics Learner's Book 7</h2>
+        <p style="color:var(--text-secondary); margin-bottom:20px;">Units 1 to 16 Syllabus mapping for Justin at Kainos Cambridge School.</p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:16px;">
+          ${CAMBRIDGE_BOOK_7_UNITS.map(u => `
+            <div class="tool-card" style="padding:16px;">
+              <span class="hl-badge" style="background:#dbeafe; color:#1e40af; font-weight:800; padding:2px 8px; border-radius:4px; font-size:0.8rem;">Unit ${u.unit}</span>
+              <h3 style="font-size:1.1rem; margin:8px 0 4px;">${u.title}</h3>
+              <small style="color:#2563eb; font-weight:600;">${u.cambridgeRef}</small>
+              <p style="font-size:0.85rem; margin:8px 0; color:var(--text-secondary);">${u.summary}</p>
+              <div style="background:var(--bg-secondary); padding:8px; border-radius:6px; font-size:0.82rem; margin-top:8px;">
+                <strong>Key Rule:</strong> ${u.keyRule}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
   }
 
   renderCurrentView() {

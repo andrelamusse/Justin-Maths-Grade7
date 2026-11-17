@@ -13,17 +13,19 @@
     <!-- Header -->
     <header class="academy-header">
       <div class="brand-wrap">
-        <a href="../index.html" class="back-hub-link" title="Return to Portal">&larr; Back to Hub</a>
+        <div class="brand-top-row">
+          <a href="../index.html" class="back-hub-link" title="Return to Portal">&larr; Back to Hub</a>
+          <span class="mastery-stars-badge" id="total-mastery-stars">⭐ 0 Topics Mastered</span>
+        </div>
         <h1 class="academy-title">📐 Justin's Grade 7 Maths Academy</h1>
       </div>
 
       <div class="header-meta">
         <a href="../cambridge-stage7-exams/index.html" class="control-btn grinder-bridge-btn" style="background:#DBEAFE;color:#1E40AF;border-color:#3B82F6;font-weight:800;" title="Cambridge Exam Papers &amp; Memos (Printable PDFs)">🎓 Cambridge PDFs</a>
-        <a href="../basic-math-grinder/ratio.html" class="control-btn grinder-bridge-btn" style="background:#FEF3C7;color:#92400E;border-color:#F59E0B;font-weight:800;" title="Open Grade 7 Ratio &amp; Rate Exam Cram">⚖️ Ratio Exam Cram</a>
+        <a href="../basic-math-grinder/ratio.html" class="control-btn grinder-bridge-btn" style="background:#FEF3C7;color:#92400E;border-color:#F59E0B;font-weight:800;" title="Open Grade 7 Ratio &amp; Rate Exam Cram">⚖️ Ratio Cram</a>
         <a href="../basic-math-grinder/index.html" class="control-btn grinder-bridge-btn" title="Open the Neuro-Visual Basic Math Grinder">🧠 Practice Basics</a>
-        <span class="mastery-stars-badge" id="total-mastery-stars">⭐ 0 Topics Mastered</span>
-        <button id="theme-toggle-btn" class="control-btn" title="Toggle Theme">🎨 Theme: LIGHT</button>
-        <button id="font-toggle-btn" class="control-btn" title="Toggle Dyslexic Font">🔤 Font: Lexend</button>
+        <button id="theme-toggle-btn" class="control-btn" title="Toggle Theme">🎨 Theme</button>
+        <button id="font-toggle-btn" class="control-btn" title="Toggle Dyslexic Font">🔤 Font</button>
       </div>
     </header>
 
@@ -46,10 +48,11 @@
           </div>
 
           <div class="modes-tabs-row" role="tablist">
-            <button class="nav-view-tab active" data-view="lesson" role="tab">📖 Lessons & Strategy</button>
+            <button class="nav-view-tab active" data-view="lesson" role="tab">📖 Lessons &amp; Strategy</button>
             <button class="nav-view-tab" data-view="practice" role="tab">✍️ Practice Quiz</button>
             <button class="nav-view-tab" data-view="tools" role="tab">🛠️ Interactive Tools Lab</button>
             <button class="nav-view-tab" data-view="exam" role="tab">🏆 Challenge Exam</button>
+            <button class="nav-view-tab" data-view="textbook" role="tab" style="color:#1d4ed8; font-weight:800;">📘 Cambridge Book 7 Units</button>
           </div>
         </section>
 
@@ -78,6 +81,11 @@
 
           <!-- 4. Challenge Exam Workspace -->
           <div id="exam-workspace" class="hidden">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- 5. Cambridge Learner's Book 7 Workspace -->
+          <div id="textbook-workspace" class="hidden">
             <!-- Rendered by JS -->
           </div>
         </section>

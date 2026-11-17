@@ -2,198 +2,195 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Justin's Math Studio | Grade 7 Academy & Neuro-Visual Grinder</title>
-  <meta name="description" content="Dual math learning suite: Ground-up neuro-visual basic arithmetic grinder for ADHD/dyscalculia learners plus comprehensive Grade 7 English Mathematics academy.">
-  <link rel="stylesheet" href="hub-styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Justin's Cambridge Grade 7 Maths Academy | Kainos Cambridge School</title>
+  <meta name="description" content="Complete Cambridge Lower Secondary Stage 7 Mathematics Academy for Justin at Kainos Cambridge School in Vanderbijlpark. 16 Units, ADHD-friendly visual lessons, Easy/Medium/Hard practice, 6 interactive virtual manipulatives, and past exam papers.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- KaTeX for Beautiful Textbook Mathematical Typography -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 </head>
-<body>
-  <!-- Hub Header -->
-  <header class="hub-header">
-    <div class="hub-header-inner">
-      <div class="hub-brand">
-        <h1>🚀 Justin's Math Studio</h1>
-        <p class="hub-tagline">Visual, verbal, and intuitive maths — built for the way Justin's brain learns best.</p>
-        <div style="margin-top: 10px;">
-          <a href="./basic-math-grinder/ratio.html" style="display:inline-flex;align-items:center;gap:8px;background:#F59E0B;color:#0F172A;font-weight:800;padding:10px 18px;border-radius:10px;text-decoration:none;box-shadow:0 4px 12px rgba(245,158,11,0.35);">⚖️ Ratio Exam Cram (Tomorrow's Test!) &rarr;</a>
+<body class="font-lexend theme-light">
+  <!-- Application Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-section">
+        <div class="brand-crest">🎓</div>
+        <div class="brand-text">
+          <h1>Justin's Cambridge Maths Academy</h1>
+          <div class="student-tagline">Justin Lamusse &bull; Kainos Cambridge School &bull; Vanderbijlpark (Grade 7)</div>
         </div>
       </div>
 
-      <!-- Overall stats -->
-      <div class="overall-stats-bar" aria-label="Justin's Combined Achievements">
-        <div class="stat-box">
-          <span class="stat-num" id="stat-total-xp">0</span>
-          <span class="stat-label">Total XP</span>
+      <div class="header-stats">
+        <div class="stat-chip xp" title="Total Experience Points">
+          <span id="stat-xp">0 XP</span>
         </div>
-        <div class="stat-box">
-          <span class="stat-num" id="stat-total-solved">0</span>
-          <span class="stat-label">Problems Solved</span>
+        <div class="stat-chip streak" title="Current Daily Practice Streak">
+          <span id="stat-streak">0 🔥</span>
         </div>
-        <div class="stat-box">
-          <span class="stat-num" id="stat-best-streak">0</span>
-          <span class="stat-label">Best Streak 🔥</span>
+        <div class="stat-chip mastery" title="Mastered Cambridge Stage 7 Units">
+          <span id="stat-mastery">0/16 ⭐</span>
         </div>
-        <div class="stat-box">
-          <span class="stat-num" id="stat-mastered-topics">0</span>
-          <span class="stat-label">Grade 7 Topics ⭐</span>
-        </div>
-        <div style="display: flex; align-items: center;">
-          <a href="./cambridge-stage7-exams/index.html" class="control-btn" style="text-decoration:none; padding:8px 14px; background:#1e40af; border:1px solid #3b82f6; border-radius:10px; color:#fff; font-weight:700; font-size:0.85rem; display:inline-flex; align-items:center; gap:6px;">
-            🎓 Cambridge Exam Papers &amp; Memos
-          </a>
-        </div>
+      </div>
+
+      <div class="header-controls">
+        <button id="btn-toggle-font" class="icon-btn" title="Toggle Dyslexia-Friendly Font (Lexend / OpenDyslexic)" aria-label="Toggle Font">🔤</button>
+        <button id="btn-toggle-theme" class="icon-btn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">🎨</button>
+        <button id="btn-toggle-sound" class="icon-btn" title="Toggle Audio Sound Chimes" aria-label="Toggle Sound">🔊</button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="hub-main">
-    <div class="section-title-wrap">
-      <h2>Choose Your Math Mission</h2>
-      <p>Start with the foundational grinder to build automatic number sense, or dive into the full Grade 7 English curriculum.</p>
+  <!-- Sticky Navigation Tabs -->
+  <nav class="primary-nav-bar" aria-label="Primary Application Navigation">
+    <div class="nav-bar-inner">
+      <button class="nav-tab-btn active" data-tab="units">
+        <span>📘</span> Cambridge Units (1–16)
+      </button>
+      <button class="nav-tab-btn" data-tab="detail">
+        <span>📖</span> Lesson Strategy
+      </button>
+      <button class="nav-tab-btn" data-tab="practice">
+        <span>✍️</span> Practice Arena
+      </button>
+      <button class="nav-tab-btn" data-tab="manipulatives">
+        <span>🛠️</span> Manipulatives Lab
+      </button>
+      <button class="nav-tab-btn" data-tab="exams">
+        <span>🎓</span> Kainos Past Papers
+      </button>
+      <button class="nav-tab-btn" data-tab="grinder">
+        <span>⚡</span> Rapid Grinder
+      </button>
     </div>
+  </nav>
 
-    <!-- The 2 Application Cards -->
-    <div class="apps-grid">
-      <!-- APP 2: The Neuro-Visual Basic Math Grinder (PRIORITY APPLICATION) -->
-      <article class="app-card card-primary">
-        <div class="card-badge-priority">⭐ Priority Foundation &bull; Start Here</div>
-        
-        <div class="card-hero">
-          <div class="card-icon">🧠</div>
-          <div class="card-heading">
-            <h3>Neuro-Visual Basic Math Grinder</h3>
-            <div class="card-subtitle">Built for ADHD, Dyscalculia &amp; Visual Learners</div>
-          </div>
+  <!-- Main Content Workspace -->
+  <main class="main-content">
+    <!-- PANE 1: ALL 16 CAMBRIDGE UNITS -->
+    <section id="pane-units" class="tab-pane active" aria-label="Cambridge Stage 7 Units">
+      <div class="units-overview-header">
+        <div>
+          <h2>Cambridge Stage 7 Curriculum Framework</h2>
+          <p>Complete 16 Units from Cambridge Lower Secondary Learner's Book 7 with visual lessons &amp; multi-tier practice.</p>
         </div>
 
-        <p class="card-description">
-          When you cannot "see the math in your head", mental arithmetic feels impossible. This app turns abstract numbers into tangible, visual, and spoken blocks so your brain naturally builds rock-solid number sense through repetition without anxiety.
-        </p>
-
-        <ul class="card-features-list">
-          <li>🎮 <strong>Streamlined 7 Categories:</strong> Addition, Subtraction, Multiplication, Division, Mixed (+ &amp; -), Mixed (&times; &amp; &divide;), All 4 Mixed.</li>
-          <li>📄 <strong>6 Full Past Exam Papers:</strong> Term 1, Term 2, Mid-Year, and Year-End past papers with unlimited fresh number variants &amp; memorandums.</li>
-          <li>🚀 <strong>4 Difficulty Modes:</strong> Easy, Medium, Hard, and All (Gradual progressive grinding that ramps up with streaks).</li>
-          <li>🎯 <strong>Multisensory Visuals:</strong> Ten-Frames, Base-10 Blocks, Frog-jump Number Lines, and Arrays.</li>
-          <li>🗣️ <strong>Verbal Voice Coach:</strong> Spoken step-by-step mental math tricks in clear English.</li>
-          <li>🛡️ <strong>Zero Anxiety &amp; Streak Shield:</strong> Gentle guidance on mistakes, streak rewards, and XP levels.</li>
-          <li>✏️ <strong>Built-In Touch Scratchpad:</strong> Draw, sketch, and count right on the screen.</li>
-        </ul>
-
-        <a href="./basic-math-grinder/index.html" class="launch-btn launch-primary-btn">
-          Launch Basic Math Grinder &rarr;
-        </a>
-      </article>
-
-      <!-- APP 1: Justin's Grade 7 English Maths Academy -->
-      <article class="app-card card-secondary">
-        <div class="card-badge-curriculum">📚 Complete Grade 7 Curriculum</div>
-
-        <div class="card-hero">
-          <div class="card-icon">📐</div>
-          <div class="card-heading">
-            <h3>Grade 7 English Maths Academy</h3>
-            <div class="card-subtitle">Complete Syllabus &bull; 5 Strands &bull; Interactive Labs</div>
-          </div>
+        <div class="strand-filter-chips">
+          <button class="strand-chip active" data-strand="all">All 16 Units</button>
+          <button class="strand-chip" data-strand="Number">🔢 Number</button>
+          <button class="strand-chip" data-strand="Algebra">📐 Algebra</button>
+          <button class="strand-chip" data-strand="Geometry">📏 Geometry &amp; Measure</button>
+          <button class="strand-chip" data-strand="Statistics">📊 Data &amp; Probability</button>
         </div>
+      </div>
 
-        <p class="card-description">
-          A complete, visual learning suite covering the entire Grade 7 English mathematics curriculum. Combines bite-sized interactive lessons with virtual manipulative labs and practice quizzes.
-        </p>
-
-        <ul class="card-features-list">
-          <li>🔢 <strong>Numbers &amp; Operations:</strong> Integers, Exponents, Square Roots, Fractions, Decimals, % Profit &amp; Loss.</li>
-          <li>📈 <strong>Patterns &amp; Algebra:</strong> Sequence rules ($T_n$), like terms, and solving linear equations ($2x + 4 = 10$).</li>
-          <li>📐 <strong>Geometry &amp; Shapes:</strong> Angle classifications, triangle 180° theorem, 3D faces, edges &amp; vertices.</li>
-          <li>📏 <strong>Measurement:</strong> Perimeter, Area of rectangles &amp; triangles, Volume &amp; Capacity ($V = l \times b \times h$).</li>
-          <li>📊 <strong>Data &amp; Probability:</strong> Mean, Median, Mode, Range, and theoretical probability.</li>
-          <li>⚖️ <strong>Interactive Virtual Labs:</strong> Equation Balance Scale, Fraction Wall, Protractor &amp; Thermometer.</li>
-        </ul>
-
-        <a href="./grade7-academy/index.html" class="launch-btn launch-secondary-btn">
-          Launch Grade 7 Academy &rarr;
-        </a>
-      </article>
-
-      <!-- APP 3: Cambridge Exam Papers & Memorandums (Printable PDFs) -->
-      <article class="app-card card-exams">
-        <div class="card-badge-priority" style="background:#dbeafe; color:#1e40af;">📄 Real Exam Papers &bull; Printable PDFs</div>
-
-        <div class="card-hero">
-          <div class="card-icon">🎓</div>
-          <div class="card-heading">
-            <h3>Cambridge Exam Papers &amp; Memos</h3>
-            <div class="card-subtitle">Stage 6 (Standard 5) &amp; Stage 7 (Grade 7) &bull; Vanderbijlpark</div>
-          </div>
-        </div>
-
-        <p class="card-description">
-          Authentic Cambridge past exam papers tailored for Justin's private school year-end mathematics exams. Covers both Stage 6 Checkpoint (Standard 5 exit, both papers non-calculator) and Stage 7 Lower Secondary with official mark schemes and tutor coaching notes.
-        </p>
-
-        <ul class="card-features-list">
-          <li>🎒 <strong>Stage 6 Checkpoint (Std 5 Exit):</strong> Paper 1 (Non-Calc, 40 marks) &amp; Paper 2 (Non-Calc, 40 marks).</li>
-          <li>📐 <strong>Stage 7 Lower Secondary:</strong> Paper 1 (Non-Calc, 45 marks) &amp; Paper 2 (Calculator, 45 marks).</li>
-          <li>🖨️ <strong>Printable Headless PDFs:</strong> High-resolution vector exam papers with student working spaces.</li>
-          <li>✅ <strong>Complete Memorandums:</strong> Step-by-step Cambridge M/A/B marking codes &amp; worked solutions.</li>
-          <li>💡 <strong>Tutor Coaching Tips:</strong> 4 specialized ADHD &amp; dyscalculia coaching strategies per paper.</li>
-          <li>🌐 <strong>Interactive Web Views:</strong> View on tablet/mobile or print directly to A4.</li>
-        </ul>
-
-        <a href="./cambridge-stage7-exams/index.html" class="launch-btn launch-exams-btn">
-          Explore Cambridge Exam Papers &amp; Memos &rarr;
-        </a>
-      </article>
-    </div>
-
-    <!-- Pedagogy & Learning Guide for Parents/Tutors -->
-    <section class="pedagogy-card">
-      <h3>💡 How These Apps Help Justin's Brain Learn</h3>
-      <p>Research-backed strategies implemented specifically for ADHD, dyscalculia, and working-memory challenges:</p>
-
-      <div class="pedagogy-grid">
-        <div class="pedagogy-box">
-          <h4>🧩 Concrete &rarr; Pictorial &rarr; Abstract</h4>
-          <p>Instead of forcing Justin to manipulate abstract digits mentally, we provide physical representations (ten-frames for making 10, rods for tens, frog hops for jumps). The brain grounds the number physically first.</p>
-        </div>
-
-        <div class="pedagogy-box">
-          <h4>🎧 Dual-Coding (Visual + Verbal)</h4>
-          <p>Listening to a calm verbal explanation while visually seeing counters move bypasses dyslexia and working memory bottlenecks, doubling cognitive retention.</p>
-        </div>
-
-        <div class="pedagogy-box">
-          <h4>⚡ Dopamine-Driven Low Friction</h4>
-          <p>ADHD brains crave immediate feedback and shut down under punitive stress. Here, questions appear one at a time, mistakes give gentle hints with zero score penalty, and streaks award XP celebration!</p>
-        </div>
+      <div class="units-grid" id="units-grid">
+        <!-- Rendered by app.js -->
       </div>
     </section>
 
-    <!-- GitHub Pages Hosting Info -->
-    <section class="github-guide-card">
-      <h3>🌐 Official Deployment &amp; GitHub Hosting</h3>
-      <p>This dual-application suite is published and live on GitHub Pages with zero build steps or server dependencies:</p>
+    <!-- PANE 2: UNIT DETAIL & LESSON -->
+    <section id="pane-detail" class="tab-pane" aria-label="Unit Lesson Detail">
+      <div id="unit-detail-workspace">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
 
-      <div style="margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 12px;">
-        <a href="https://andrelamusse.github.io/Justin-Maths-Grade7/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: #38BDF8; color: #0F172A; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none;">🚀 Live Web Deployment</a>
-        <a href="https://github.com/andrelamusse/Justin-Maths-Grade7" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: #334155; color: #F8FAFC; font-weight: 600; padding: 10px 18px; border-radius: 8px; text-decoration: none;">📁 GitHub Repository</a>
+    <!-- PANE 3: PRACTICE QUIZ ARENA -->
+    <section id="pane-practice" class="tab-pane" aria-label="Practice Quiz Arena">
+      <div id="practice-workspace">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- PANE 4: 6 INTERACTIVE MANIPULATIVES LAB -->
+    <section id="pane-manipulatives" class="tab-pane" aria-label="Interactive Virtual Manipulatives">
+      <div class="units-overview-header">
+        <div>
+          <h2>Virtual Hands-On Math Manipulatives</h2>
+          <p>Explore concepts visually: balance linear equations, compare fractions, manipulate angles, and split ratios.</p>
+        </div>
       </div>
 
-      <ol class="github-steps">
-        <li><strong>Repository:</strong> <code>https://github.com/andrelamusse/Justin-Maths-Grade7</code></li>
-        <li><strong>Deployment Source:</strong> Branch <code>main</code> &bull; Folder <code>/ (root)</code></li>
-        <li><strong>Live URL:</strong> <code>https://andrelamusse.github.io/Justin-Maths-Grade7/</code></li>
-        <li>Justin can access both apps anytime on any PC, iPad, Chromebook, or mobile phone!</li>
-      </ol>
+      <div class="manipulatives-nav-bar">
+        <button class="manipulative-tab-btn active" data-tool="balance">⚖️ Equation Balance</button>
+        <button class="manipulative-tab-btn" data-tool="fractions">🧱 Fraction Wall</button>
+        <button class="manipulative-tab-btn" data-tool="angles">📐 Angle Visualizer</button>
+        <button class="manipulative-tab-btn" data-tool="integers">🌡️ Integer Thermometer</button>
+        <button class="manipulative-tab-btn" data-tool="coordinates">📍 Coordinate Grid</button>
+        <button class="manipulative-tab-btn" data-tool="ratio">🍫 Ratio Bar Model</button>
+      </div>
+
+      <div id="manipulatives-content">
+        <!-- Rendered by manipulatives.js -->
+      </div>
+    </section>
+
+    <!-- PANE 5: KAINOS CAMBRIDGE PAST PAPERS HUB -->
+    <section id="pane-exams" class="tab-pane" aria-label="Kainos Cambridge Past Papers">
+      <div class="exams-hub-header">
+        <h2>Kainos Cambridge School Assessment Center</h2>
+        <p>Progression test past papers for Grade 7 (Paper 1 Non-Calculator, Paper 2 Calculator) &amp; Primary Checkpoint Stage 6 bridge exams. Includes full marking memorandums, tutor coaching tips for Justin, and downloadable PDFs.</p>
+      </div>
+
+      <div id="exam-sim-workspace">
+        <!-- When active, test simulation renders here -->
+      </div>
+
+      <div class="papers-catalog-grid" id="papers-catalog-grid">
+        <!-- Catalog cards rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- PANE 6: RAPID FOUNDATIONAL ARITHMETIC GRINDER -->
+    <section id="pane-grinder" class="tab-pane" aria-label="Rapid Arithmetic Grinder">
+      <div class="units-overview-header">
+        <div>
+          <h2>Rapid Arithmetic &amp; Speed Grinder</h2>
+          <p>Sharpen mental math reflexes in addition, subtraction, multiplication, division, and ratios.</p>
+        </div>
+      </div>
+
+      <div class="papers-catalog-grid">
+        <article class="paper-catalog-card">
+          <div class="paper-card-badge-row">
+            <span class="paper-code-badge" style="background:#059669;">FOUNDATION</span>
+            <span class="paper-mode-badge calc">Mental Math</span>
+          </div>
+          <h3>🧠 Neuro-Visual Basic Math Grinder</h3>
+          <p class="paper-description-text">
+            Build lightning-fast number sense using ten-frames, frog jump number lines, and spoken mental math strategies.
+          </p>
+          <a href="./basic-math-grinder/index.html" class="btn-start-sim" style="text-decoration:none; display:inline-block; text-align:center;">
+            Open Basic Math Grinder &rarr;
+          </a>
+        </article>
+
+        <article class="paper-catalog-card">
+          <div class="paper-card-badge-row">
+            <span class="paper-code-badge" style="background:#D97706;">HIGH-PRIORITY</span>
+            <span class="paper-mode-badge calc">Cram Mode</span>
+          </div>
+          <h3>⚖️ Grade 7 Ratio &amp; Proportion Exam Cram</h3>
+          <p class="paper-description-text">
+            Intensive training on simplifying ratios, dividing amounts, unitary method, and best-buy comparisons.
+          </p>
+          <a href="./basic-math-grinder/ratio.html" class="btn-start-sim" style="text-decoration:none; display:inline-block; text-align:center; background:#D97706;">
+            Open Ratio Exam Cram &rarr;
+          </a>
+        </article>
+      </div>
     </section>
   </main>
 
-  <footer class="hub-footer">
-    <p>Justin's Math Studio &bull; Specially engineered with care &bull; Ready for GitHub Pages &amp; Offline Browsing</p>
+  <footer style="text-align:center; padding: 24px 16px; font-size:0.85rem; color:var(--text-muted); border-top:1px solid var(--border-color); background:var(--bg-surface);">
+    Justin's Cambridge Lower Secondary Mathematics Stage 7 &bull; Kainos Cambridge School, Vanderbijlpark &bull; Built with KaTeX Mathematical Typography
   </footer>
 
-  <script src="hub.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

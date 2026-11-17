@@ -1,156 +1,99 @@
-# 🚀 Justin's Math Suite: Grade 7 Academy & Neuro-Visual Grinder
+# 🎓 Justin's Cambridge Lower Secondary Grade 7 Mathematics Academy
+### Kainos Cambridge School &bull; Vanderbijlpark, South Africa
 
-A specialized dual-application mathematics learning suite engineered for **Justin**, a Grade 7 learner who experiences difficulties visualizing arithmetic in his head (ADHD, dyscalculia, dyslexia, or working memory challenges).
+A unified, comprehensive, ADHD & dyscalculia friendly mathematics web application engineered specifically for **Justin Lamusse** at **Kainos Cambridge School** in Vanderbijlpark, South Africa.
 
-Both applications are 100% self-contained, high-performance static web apps hosted directly on **GitHub Pages** with **zero build steps** and **zero external dependencies**.
-
----
-
-## 🌐 Official Live Deployment & Repository Endpoints
-
-- 🌐 **Live Suite Master Hub:** [https://andrelamusse.github.io/Justin-Maths-Grade7/](https://andrelamusse.github.io/Justin-Maths-Grade7/)
-- 🧠 **Live Neuro-Visual Basic Math Grinder:** [https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/](https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/)
-- 📐 **Live Grade 7 English Maths Academy:** [https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/](https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/)
-- 📁 **Official GitHub Repository:** [https://github.com/andrelamusse/Justin-Maths-Grade7](https://github.com/andrelamusse/Justin-Maths-Grade7)
+Hosted live on GitHub Pages: **[https://andrelamusse.github.io/Justin-Maths-Grade7/](https://andrelamusse.github.io/Justin-Maths-Grade7/)**
 
 ---
 
-## 🌟 The Two Applications
+## 🌟 What This Application Delivers
 
-### 1. 🧠 Neuro-Visual Basic Math Grinder (`/basic-math-grinder/`)
-> **The Priority Application** — Master the foundational core operations ($1+4$, $7+3$, $34+23$, $2 \times 4$, $12 \div 3$).
-
-- **The Problem It Solves:** When a learner cannot picture quantities in their mind, traditional mental drills fail and cause cognitive shutdown.
-- **7 Streamlined Practice Categories:**
-  1. ➕ **Addition (+)** — Facts up to 10, teen bridges, and 2-digit sums with regrouping.
-  2. ➖ **Subtraction (-)** — Facts within 5/10, teen bridges, and 2-digit differences with borrowing.
-  3. ✖️ **Multiplication (×)** — 2x/5x/10x doubles, core tables, and mastery mix up to 12x12.
-  4. ➗ **Division (÷)** — Halves (÷2), ÷5, ÷10, and mastery division up to 144.
-  5. ➕➖ **Mixed Addition & Subtraction (+ & -)** — Blended practice switching between adding and taking away.
-  6. ✖️➗ **Mixed Multiplication & Division (× & ÷)** — Blended practice linking tables to equal sharing.
-  7. 🎲 **All 4 Operations Mixed (+, -, ×, ÷)** — Comprehensive challenge across all basic math operations.
-- **4 Sub-Category Difficulty Levels:**
-  - 🌱 **Easy** — Foundational micro-basics, small numbers, and facts within 10.
-  - ⚡ **Medium** — Bridges to 10, 2-digit operations without regrouping, and intermediate tables.
-  - 🔥 **Hard** — 2-digit regrouping/carrying, borrowing, and upper times tables up to 144.
-  - 🚀 **All (Gradual)** — Dynamic ramp-up grinding mode: starts easy and gets progressively harder as Justin builds streaks.
-- **Multisensory CPA Visualizations (Concrete $\to$ Pictorial $\to$ Abstract):**
-  - **Ten-Frames & Double Ten-Frames:** Red and blue physical counters filling 10-grids, making "bridging to 10" visible and tangible.
-  - **Base-Ten (Dienes) Blocks:** 3D-styled Ten Rods and Unit Cubes for 2-digit numbers ($34 + 23$), showing place-value grouping and regrouping/carrying.
-  - **Interactive Number Line (Frog Leap):** Animated arcs showing forward jumps for addition and backward hops for subtraction.
-  - **Dot Array Grids:** Visual arrays for multiplication ($2 \times 4$ shows 2 rows of 4 tiles), linking to repeated addition.
-  - **Equal Sharing Groups:** Dividing cookies into colored plates with count badges.
-- **Verbal Voice Coach (Web Speech API):**
-  - Speaks step-by-step mental math tricks in clear, unhurried English (e.g. *"Nine is almost 10! Add 10, then step back 1"* or *"Let's break 34 + 23 into tens and ones"*).
-- **ADHD-Friendly Dopamine Loop:**
-  - Single question on screen with zero cognitive clutter.
-  - No stress timers by default.
-  - **Streak Shield:** Wrong answers gently drop streak by only 1 instead of resetting to 0, preventing emotional frustration.
-  - Joyful synthesized audio chimes (Web Audio API) and confetti rewards on streaks.
-  - On-screen touch keypad + physical keyboard support (Enter, 0-9, Backspace).
-  - Built-in scratchpad for digital doodling and working out problems.
+### 1. 📘 Full Cambridge Stage 7 Syllabus Scope (Learner's Book 7, Units 1 to 16)
+Every single unit of the Cambridge Lower Secondary Stage 7 Mathematics curriculum is fully implemented:
+1. **Unit 1: Integers & Directed Numbers** (`7Ni.01 - 7Ni.05`) — Directed numbers, negative operations, zero pairs, square roots, cube roots.
+2. **Unit 2: Expressions, Formulae & Linear Equations** (`7Ae.01 - 7Ae.07`) — Like terms, bracket expansion, balance model equation solving.
+3. **Unit 3: Place Value & Decimals** (`7Np.01 - 7Np.04`) — Powers of 10, multiplying/dividing by 0.1 and 0.01, decimal rounding.
+4. **Unit 4: Decimals, Fractions & Percentages** (`7Nf.01 - 7Nf.06`) — Equivalence trio, recurring decimals, fractions of quantities.
+5. **Unit 5: Angles & Constructions** (`7Gg.01 - 7Gg.06`) — Angles on lines (180°), points (360°), parallel line alternate (Z) and corresponding (F) angles, triangle sum.
+6. **Unit 6: Collecting & Displaying Data** (`7Ss.01 - 7Ss.04`) — Discrete vs continuous, frequency tables, two-way tables, pie charts.
+7. **Unit 7: Fractions & Mixed Numbers** (`7Nf.07 - 7Nf.12`) — Unlike denominators (LCD), fraction multiplication, Keep-Change-Flip (KCF) division.
+8. **Unit 8: Shapes, Symmetry & 3D Polyhedra** (`7Gg.07 - 7Gg.12`) — Euler's formula ($F + V - E = 2$), rotational symmetry, nets of solids.
+9. **Unit 9: Sequences & Functions** (`7As.01 - 7As.05`) — Term-to-term, position-to-term $n$-th term formula ($T_n = dn + c$).
+10. **Unit 10: Percentages & Financial Maths** (`7Nf.13 - 7Nf.16`) — Discounts, percentage increase/decrease, profit/loss, simple interest ($I = \frac{P \cdot r \cdot t}{100}$).
+11. **Unit 11: Graphs & Coordinates** (`7As.06 - 7As.09`) — 4 quadrants, horizontal ($y = c$) and vertical ($x = k$) lines, conversion graphs.
+12. **Unit 12: Ratio & Proportion** (`7Nf.17 - 7Nf.20`) — Simplifying ratios, dividing amounts (bar models), unitary method, best buys.
+13. **Unit 13: Probability & Likelihood** (`7Sp.01 - 7Sp.04`) — 0 to 1 probability scale, theoretical probability, complementary events ($1 - P$).
+14. **Unit 14: Position & Transformation** (`7Gg.13 - 7Gg.16`) — Three-figure bearings (clockwise from North), translations, reflections, rotations.
+15. **Unit 15: Area, Perimeter & Volume** (`7Gg.17 - 7Gg.22`) — Compound L-shapes, triangle area ($\frac{1}{2}bh$), cuboid volume and surface area.
+16. **Unit 16: Interpreting & Comparing Data** (`7Ss.05 - 7Ss.08`) — Mean, median, mode, range (consistency comparisons).
 
 ---
 
-### 2. 📐 Justin's Grade 7 English Maths Academy (`/grade7-academy/`)
-> Full curriculum mastery aligned with South African CAPS / UK KS3 / Common Core Grade 7 English Mathematics.
-
-- **Strand 1: Numbers & Operations:**
-  - Integers & Directed Numbers (positive/negative rules, number line).
-  - Exponents, Squares, Cubes, Square Roots ($\sqrt{81}$) and Cube Roots ($\sqrt[3]{64}$).
-  - Common Fractions (simplifying, adding/subtracting unlike denominators, multiplying).
-  - Decimals, Percentages & Financial Maths (discounts, profit & loss).
-- **Strand 2: Patterns, Functions & Algebra:**
-  - Number Sequences and $T_n$ formulas ($4n - 1$).
-  - Algebraic Expressions, variables, coefficients, and combining like terms.
-  - Solving Linear Equations ($2x + 4 = 16$).
-- **Strand 3: Space & Shape (Geometry):**
-  - Angles (Acute, Right, Obtuse, Straight, Reflex) and complementary/supplementary angles.
-  - Triangle interior angle sum ($180^\circ$) and triangle classifications.
-  - 3D Polyhedra (Faces, Edges, Vertices for prisms and pyramids).
-- **Strand 4: Measurement:**
-  - Perimeter and Area of Rectangles and Triangles ($A = \frac{1}{2} b \times h$).
-  - Surface Area and Volume of Rectangular Prisms ($V = l \times b \times h$).
-  - Metric unit conversions ($mm \leftrightarrow cm \leftrightarrow m \leftrightarrow km$, $g \leftrightarrow kg$, $mL \leftrightarrow L$).
-- **Strand 5: Data Handling & Probability:**
-  - Mean, Median, Mode, and Range calculations.
-  - Probability scale (Impossible $0$ to Certain $1$).
-- **Interactive Virtual Labs:**
-  - ⚖️ **Equation Balance Scale:** Interactive two-pan balance scale to visualize equations.
-  - 🧱 **Fraction Wall:** Interactive alignment of halves, thirds, quarters, fifths, sixths, eighths, tenths, twelfths.
-  - 📐 **Angle Protractor:** Real-time rotating angle ray with angle classification.
-  - 🌡️ **Integer Thermometer:** Freezing point $0^\circ\text{C}$ with warming (+) and cooling (-).
-- **Challenge Exam Mode:**
-  - 10-question randomized mock test with detailed report card and percentage breakdown.
+### 2. 🧠 Neuro-Visual ADHD & Dyscalculia Learning Architecture
+- **Concrete $\to$ Visual $\to$ Abstract (CVA):** Every lesson begins with tactile/real-world analogies (e.g. freezing winter mornings along the Vaal River at $-3^\circ\text{C}$, pocket money in South African Rand R), progresses to visual mental models, and concludes with clear mathematical rules.
+- **Audio Dual-Coding (SpeechCoach):** Integrated Web Speech API reads lessons, worked examples, and hints aloud with natural pronunciation of mathematical symbols.
+- **Justin's Watch-Out Traps:** Specific ADHD coaching callouts highlighting common stumbling blocks before they occur.
+- **Multi-Tier Practice Arena:** Every unit features 3 distinct difficulty tiers:
+  - 🟢 **Easy:** Scaffolded numbers and direct conceptual recall.
+  - 🟡 **Medium:** Standard Cambridge exam-style questions.
+  - 🔴 **Hard:** Multi-step problem solving and reasoning.
+  - ⚡ **All Tiers:** Progressive mode for streak ramp-up.
+- **Touch Scratchpad / Whiteboard:** Built directly into quiz and exam screens so Justin can sketch working, frog jumps, or calculations on his phone or laptop screen.
 
 ---
 
-## 🧭 Master Portal Hub (`/index.html`)
-
-The repository root includes a launchpad connecting both applications:
-- Displays Justin's aggregate XP, problems solved, highest streak, and mastered topics.
-- Direct quick-launch links to both apps.
-- Comprehensive pedagogy guide for parents and tutors.
-- GitHub Pages setup guide.
+### 3. 📐 Textbook-Grade Mathematical Typography
+- Integrated with **KaTeX** via CDN + a pure CSS/HTML fallback parser.
+- Fractions are rendered vertically ($\frac{a}{b}$), operations are rendered with proper mathematical symbols ($\times$, $\div$, $\pm$, $-$), roots ($\sqrt{x}$, $\sqrt[3]{x}$), powers ($x^2$), and degrees ($^\circ$).
+- **Zero raw programming syntax** (no `2/3`, `*`, `sqrt(x)`).
 
 ---
 
-## 🌐 How Hosted on GitHub & GitHub Pages
-
-Since all code is written in vanilla HTML5, CSS3, and ES6+ modules without any build tools or external servers, hosting is 100% free and automated on GitHub Pages:
-
-### Live Application URLs
-- 🚀 **Master Hub:** [https://andrelamusse.github.io/Justin-Maths-Grade7/](https://andrelamusse.github.io/Justin-Maths-Grade7/)
-- 🧠 **Basic Math Grinder:** [https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/](https://andrelamusse.github.io/Justin-Maths-Grade7/basic-math-grinder/)
-- 📐 **Grade 7 Academy:** [https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/](https://andrelamusse.github.io/Justin-Maths-Grade7/grade7-academy/)
-
-### Repository & Deployment Setup
-- **GitHub Repository:** [https://github.com/andrelamusse/Justin-Maths-Grade7](https://github.com/andrelamusse/Justin-Maths-Grade7)
-- **Deployment Branch:** `main`
-- **Root Directory:** `/` (Root directory containing `index.html`)
-- **HTTPS Enforcement:** Enabled
-
-Both apps are immediately usable on desktops, laptops, Chromebooks, iPads, tablets, and mobile phones!
+### 4. 🛠️ 6 Interactive Virtual Manipulatives Lab
+1. ⚖️ **Linear Equation Balance Scale:** SVG balance beam that realistically tilts; add/remove $x$-blocks and unit weights to both sides to solve linear equations visually.
+2. 🧱 **Interactive Fraction Wall:** Tap any fraction brick (from 1 whole down to $\frac{1}{12}$) to highlight all vertically aligned equivalent fractions with instant decimal and percentage conversions.
+3. 📐 **Angle Protractor & Visualizer:** Real-time rotating angle ray with classification (acute, right, obtuse, straight, reflex) and complementary/supplementary partner calculations.
+4. 🌡️ **Integer Thermometer & Number Line:** Dual vertical mercury tube and horizontal number line to visualize positive and negative values with zero freezing reference.
+5. 📍 **Cartesian 4-Quadrant Coordinate Plotter:** Interactive coordinate plane ($-5$ to $+5$) with quadrant detection and projection lines.
+6. 🍫 **Ratio Bar Model Visualizer:** Enter ratio parts and total Rand amount to dynamically render proportional blocks showing the exact value of 1 part and each person's share.
 
 ---
 
-## 💻 Running Locally (Offline)
+### 5. 🎓 Kainos Cambridge School Assessment Center
+- **Cambridge Stage 7 Progression Tests:**
+  - **Paper 1 (Non-Calculator):** 45 Marks, 1 Hour.
+  - **Paper 2 (Calculator Allowed):** 45 Marks, 1 Hour.
+- **Cambridge Primary Checkpoint Stage 6 Bridge Exams:**
+  - **Paper 1 & Paper 2 (Non-Calculator):** 40 Marks each (diagnostic bridge).
+- **Features:**
+  - In-app interactive test simulator mode with countdown timer, marking scheme, and detailed question-by-question report card.
+  - Direct links to official formatted printable HTML exams and downloadable PDFs located in `./cambridge-stage7-exams/`.
+  - Comprehensive memorandums with teacher coaching notes tailored for Justin.
 
-You can run the suite locally anytime:
-- Simply double-click `index.html` to open it in Chrome, Edge, Safari, or Firefox.
-- Or start a quick local server using Python or Node.js:
-  ```bash
-  # Using Node:
-  npx serve .
-  # OR using Python:
-  python -m http.server 8000
-  ```
-  Then visit `http://localhost:8000`.
+---
+
+### 6. 📱 100% Responsive for Mobile Phone & Laptop
+- Zero horizontal scrolling (`overflow-x: hidden`).
+- Fluid touch targets ($\ge 48\text{px}$) for phone use.
+- Accessible font toggle (**Lexend** / **OpenDyslexic**).
+- High-contrast Light Mode and Dark Mode.
+- LocalStorage persistence for XP, streaks, mastered units, and display settings.
 
 ---
 
 ## 🧪 Automated Test Suite
 
-The project includes an automated test suite verifying mathematical correctness, question generation, CPA visualizer models, and edge cases:
+Run the full automated test suite using Node.js built-in test runner:
 
 ```bash
-node --test tests/*.test.js
+node --test
 ```
 
-### Test Coverage Highlights:
-- **`tests/basic-math.test.js`**: Validates question generators for $+$, $-$, $\times$, $\div$ across all difficulty levels, no division by zero, exact integer quotients, and verbal speech script generation.
-- **`tests/grade7.test.js`**: Validates curriculum structure across all 5 strands and checks mathematical accuracy of answer keys.
-- **`tests/visualizers.test.js`**: Validates ten-frame slot math, base-ten tens/ones decomposition, and multiplication arrays.
-- **`tests/edge-cases.test.js`**: 1,000-iteration stress testing with randomized operands ensuring zero `NaN` values, clean math, and exhaustive question bank checks.
-
----
-
-## 🧠 Pedagogy Note for Justin's Learning
-
-1. **Start with the Basic Math Grinder for 10–15 minutes daily**:
-   - Have Justin grind Level 1 and Level 2 addition and subtraction facts.
-   - Encourage him to tap **"📢 Explain"** so he hears the logic aloud.
-   - Encourage him to tap **"Show Visualizer 👁️"** to see the red/blue dots and blocks until the visual patterns lock into his memory.
-2. **Transition to Grade 7 Academy**:
-   - Use the **Interactive Tools Lab** first (e.g. playing with the Equation Balance Scale or Fraction Wall) before tackling the quizzes.
-   - Use the **"Read Aloud"** button on lessons to prevent reading fatigue.
+All 45 automated tests verify:
+- Complete 16-unit Cambridge Stage 7 syllabus sequence.
+- CVA lesson structure and personal coaching tips across all units.
+- Multi-tier questions with valid single matching answers.
+- Exact mathematical accuracy across arithmetic, fractions, equations, geometry, ratio, probability, and statistics.
+- KaTeX typography rendering engine and speech translation.
+- Past exam paper catalog, PDF file integrity, and grading simulator logic.
