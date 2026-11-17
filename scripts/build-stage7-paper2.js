@@ -1,0 +1,1057 @@
+// scripts/build-stage7-paper2.js
+const fs = require('fs');
+const path = require('path');
+
+const EXAM_DIR = path.resolve(__dirname, '../cambridge-stage7-exams');
+
+function getHead(title) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>${title}</title>
+<style>
+  @page {
+    size: A4;
+    margin: 15mm 14mm 16mm 14mm;
+  }
+  @media print {
+    body { font-size: 10.5pt; color: #000; background: #fff; }
+    .page-break { page-break-after: always; break-after: page; }
+    .no-print { display: none !important; }
+    .question-block { page-break-inside: avoid; break-inside: avoid; }
+    .memo-table tr { page-break-inside: avoid; break-inside: avoid; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+  .exam-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+  .cambridge-header {
+    border-bottom: 2.5px solid #000;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+  .cambridge-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .crest-text {
+    font-weight: 800;
+    font-size: 13.5pt;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #0f172a;
+  }
+  .sub-crest {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 3px;
+  }
+  .school-crest {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1e40af;
+    margin-top: 2px;
+  }
+  .paper-code-box {
+    text-align: right;
+    font-weight: 800;
+    font-size: 10.5pt;
+    line-height: 1.3;
+    border-left: 2px solid #cbd5e1;
+    padding-left: 12px;
+  }
+  .exam-details-title {
+    margin-top: 12px;
+    font-size: 13.5pt;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #0f172a;
+  }
+  .exam-meta-sub {
+    text-align: center;
+    font-size: 10.5pt;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #334155;
+  }
+  .candidate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px 0;
+  }
+  .candidate-table td {
+    border: 1.5px solid #000;
+    padding: 6px 10px;
+    font-size: 10pt;
+  }
+  .label-cell {
+    width: 25%;
+    font-weight: 700;
+    background-color: #f8fafc;
+  }
+  .fill-cell {
+    width: 75%;
+  }
+  .instructions-box {
+    border: 1.5px solid #000;
+    padding: 11px 15px;
+    font-size: 9pt;
+    margin-bottom: 20px;
+    background: #fcfcfc;
+  }
+  .instructions-box h4 {
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    font-size: 9.5pt;
+    font-weight: 800;
+  }
+  .instructions-box ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .instructions-box li {
+    margin-bottom: 3px;
+  }
+  .badge-mode {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 8.5pt;
+    font-weight: 800;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-nocalc { background: #000; color: #fff; }
+  .badge-calc { background: #1e40af; color: #fff; }
+
+  /* Mathematical Typography */
+  .math, .math-expr {
+    font-family: 'Cambria Math', 'Times New Roman', Cambria, Georgia, serif;
+    font-size: 1.05em;
+    font-style: normal;
+  }
+  var {
+    font-style: italic;
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+  }
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: -0.62em;
+    text-align: center;
+    padding: 0 2px;
+    line-height: 1;
+    font-size: 0.9em;
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+  }
+  .frac .top {
+    border-bottom: 1.3px solid currentColor;
+    padding-bottom: 1.5px;
+  }
+  .frac .bottom {
+    padding-top: 1.5px;
+  }
+  .radical {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+  }
+  .radicand {
+    border-top: 1.3px solid currentColor;
+    padding: 0 2px;
+    margin-left: 1px;
+  }
+  .root-deg {
+    font-size: 0.65em;
+    margin-right: -2px;
+    vertical-align: super;
+  }
+  .math-op {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    padding: 0 2px;
+  }
+  sup { font-size: 0.72em; vertical-align: super; line-height: 0; }
+  sub { font-size: 0.72em; vertical-align: sub; line-height: 0; }
+
+  .question-block {
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .q-num {
+    font-weight: 800;
+    font-size: 10.5pt;
+    display: inline-block;
+    width: 26px;
+    vertical-align: top;
+  }
+  .q-body {
+    display: inline-block;
+    width: calc(100% - 32px);
+    vertical-align: top;
+    font-size: 10.5pt;
+  }
+  .q-part {
+    margin-top: 7px;
+    margin-left: 6px;
+  }
+  .part-label {
+    font-weight: 700;
+    display: inline-block;
+    width: 24px;
+    vertical-align: top;
+  }
+  .part-content {
+    display: inline-block;
+    width: calc(100% - 28px);
+    vertical-align: top;
+  }
+  .working-space {
+    min-height: 40px;
+    margin: 5px 0;
+  }
+  .working-space.large {
+    min-height: 75px;
+  }
+  .answer-line-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 5px;
+    font-weight: 700;
+  }
+  .dots-line {
+    display: inline-block;
+    border-bottom: 1px dotted #000;
+    min-width: 140px;
+    height: 18px;
+    margin: 0 4px;
+  }
+  .marks-bracket {
+    font-weight: 800;
+    font-size: 10pt;
+    min-width: 28px;
+    text-align: right;
+  }
+  .diagram-container {
+    text-align: center;
+    margin: 10px 0;
+  }
+  .center-table {
+    margin: 10px auto;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+  }
+  .center-table th, .center-table td {
+    border: 1px solid #000;
+    padding: 5px 12px;
+    text-align: center;
+  }
+  .center-table th {
+    background: #f1f5f9;
+  }
+  .footer-copyright {
+    border-top: 1px solid #94a3b8;
+    margin-top: 22px;
+    padding-top: 6px;
+    font-size: 8pt;
+    color: #475569;
+    display: flex;
+    justify-content: space-between;
+  }
+  .print-btn-bar {
+    background: #1e40af;
+    color: #fff;
+    padding: 9px 16px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 9.5pt;
+  }
+  .print-btn-bar:hover { background: #1d4ed8; }
+
+  /* Marking Scheme Memo Styling */
+  .memo-container {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+  .header-memo {
+    border-bottom: 2.5px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+  }
+  .title-memo {
+    font-size: 13.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #0f172a;
+  }
+  .sub-memo {
+    font-size: 9.5pt;
+    color: #334155;
+    font-weight: 700;
+  }
+  .rubric-info-box {
+    background: #eff6ff;
+    border-left: 4px solid #1e40af;
+    padding: 8px 12px;
+    font-size: 9pt;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .memo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+    font-size: 9.5pt;
+  }
+  .memo-table th, .memo-table td {
+    border: 1px solid #334155;
+    padding: 6px 9px;
+    vertical-align: top;
+  }
+  .memo-table th {
+    background: #e2e8f0;
+    text-align: left;
+    font-weight: 800;
+  }
+  .col-q { width: 8%; text-align: center; font-weight: bold; }
+  .col-ans { width: 32%; font-weight: bold; color: #1e3a8a; }
+  .col-marks { width: 10%; text-align: center; font-weight: bold; }
+  .col-notes { width: 50%; }
+
+  .mark-badge {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 800;
+    font-size: 8pt;
+    margin-right: 3px;
+  }
+  .m-mark { background: #dbeafe; color: #1e40af; }
+  .a-mark { background: #dcfce7; color: #166534; }
+  .b-mark { background: #fef3c7; color: #92400e; }
+
+  .coaching-section {
+    background: #fffbeb;
+    border: 1.5px solid #f59e0b;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 18px 0;
+  }
+  .coaching-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #92400e;
+    margin-bottom: 8px;
+  }
+  .coaching-tip-card {
+    background: #ffffff;
+    border: 1px solid #fde68a;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 9pt;
+  }
+  .coaching-tip-card h5 {
+    margin: 0 0 3px 0;
+    color: #b45309;
+    font-size: 9.5pt;
+    font-weight: 800;
+  }
+</style>
+</head>
+<body>
+`;
+}
+
+function candidateTable() {
+  return `
+  <table class="candidate-table">
+    <tr>
+      <td class="label-cell">Candidate Name:</td>
+      <td class="fill-cell" style="font-size: 12pt; font-weight: bold; color: #1e3a8a;">Justin Lamusse</td>
+    </tr>
+    <tr>
+      <td class="label-cell">School / Centre:</td>
+      <td class="fill-cell">Kainos Cambridge School, Vanderbijlpark</td>
+    </tr>
+    <tr>
+      <td class="label-cell">Grade / Stage:</td>
+      <td class="fill-cell">Grade 7 / Cambridge Stage 7 (Lower Secondary)</td>
+    </tr>
+  </table>
+  `;
+}
+
+// ==============================================================
+// STAGE 7 PAPER 2 (CALCULATOR PERMITTED)
+// ==============================================================
+const s7p2Html = getHead('Cambridge Stage 7 Mathematics - Paper 2 (Calculator)') + `
+<div class="exam-container">
+  <div class="print-btn-bar no-print" onclick="window.print()">
+    🖨️ Click Here to Print or Save this Exam Paper as PDF
+  </div>
+
+  <div class="cambridge-header">
+    <div class="cambridge-title-row">
+      <div>
+        <div class="crest-text">Cambridge Lower Secondary Progression Test</div>
+        <div class="sub-crest">Mathematics Curriculum Framework Stage 7 &bull; Grade 7</div>
+        <div class="school-crest">Kainos Cambridge School &bull; Vanderbijlpark</div>
+      </div>
+      <div class="paper-code-box">
+        STAGE 7<br>
+        PAPER 2<br>
+        0862 / 02
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-details-title">Mathematics Stage 7 — Paper 2</div>
+  <div class="exam-meta-sub">
+    Calculator Permitted &bull; Time Allowed: 1 Hour &bull; Total Marks: 45
+  </div>
+
+  ${candidateTable()}
+
+  <div class="instructions-box">
+    <span class="badge-mode badge-calc">CALCULATOR PERMITTED IN PAPER 2</span>
+    <h4>Read these instructions carefully before you begin:</h4>
+    <ul>
+      <li>Answer <strong>all</strong> questions in the spaces provided on this question paper.</li>
+      <li>You should show <strong>all</strong> your working on the paper. Method marks may be awarded even if the final answer is incorrect.</li>
+      <li>A scientific or standard electronic calculator is permitted in this paper.</li>
+      <li>Use black or dark blue pen. You may use an HB pencil for diagrams and graphs.</li>
+      <li>The number of marks is shown in brackets <strong>[ ]</strong> at the end of each question or part question.</li>
+      <li>The total number of marks for this paper is <strong>45</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-block">
+    <span class="q-num">1</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          The number <span class="math">47.386</span> is given.
+          <div style="margin-top: 5px;">(i) Round <span class="math">47.386</span> to 1 decimal place: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+          <div style="margin-top: 5px;">(ii) Round <span class="math">47.386</span> to 2 decimal places: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          By rounding each number to 1 significant figure, estimate the value of:
+          <div style="margin: 4px 0; font-weight: bold; text-align: center;"><span class="math"><span class="frac"><span class="top">49.8 &times; 20.4</span><span class="bottom">9.9</span></span></span></div>
+          <div class="working-space">Show your estimation working:</div>
+          <div class="answer-line-row">Estimated Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block">
+    <span class="q-num">2</span>
+    <div class="q-body">
+      A supermarket in Vanderbijlpark sells two different box sizes of breakfast cereal:
+      <div style="margin: 8px 0; padding: 8px 12px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; font-size:10pt;">
+        <strong>Box A:</strong> <span class="math">750 g</span> for <span class="math">R48.00</span><br>
+        <strong>Box B:</strong> <span class="math">1.2 kg</span> for <span class="math">R72.00</span>
+      </div>
+      Show clear mathematical working to determine which box size offers the <strong>best value for money</strong> per kilogram.
+      <div class="working-space large"></div>
+      <div class="answer-line-row">Box with best value: <span class="dots-line" style="min-width: 140px;"></span> <span class="marks-bracket">[3]</span></div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block">
+    <span class="q-num">3</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          A mountain bicycle is priced at <span class="math">R2400</span>. In a seasonal sale, the shop offers a <span class="math">15%</span> discount.<br>
+          Calculate the sale price of the bicycle.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Sale Price = R <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Justin buys a collectible video game for <span class="math">R350</span> and later sells it online for <span class="math">R420</span>.<br>
+          Calculate Justin's <strong>percentage profit</strong>.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Percentage Profit = <span class="dots-line"></span> % <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q4 -->
+  <div class="question-block">
+    <span class="q-num">4</span>
+    <div class="q-body">
+      The diagram shows an L-shaped concrete patio laid in a garden in Vanderbijlpark. All corners are right angles.
+      <div class="diagram-container">
+        <svg width="280" height="150" viewBox="0 0 280 150" style="background:#fff;">
+          <polygon points="40,20 180,20 180,70 120,70 120,130 40,130" fill="#f1f5f9" stroke="#000" stroke-width="2"/>
+          <text x="100" y="15" font-family="Arial" font-size="10" font-weight="bold">6 m</text>
+          <text x="185" y="50" font-family="Arial" font-size="10" font-weight="bold">3 m</text>
+          <text x="145" y="65" font-family="Arial" font-size="10" font-weight="bold">3 m</text>
+          <text x="125" y="105" font-family="Arial" font-size="10" font-weight="bold">4 m</text>
+          <text x="75" y="145" font-family="Arial" font-size="10" font-weight="bold">3 m</text>
+          <text x="15" y="80" font-family="Arial" font-size="10" font-weight="bold">7 m</text>
+        </svg>
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Calculate the total perimeter of the patio.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Perimeter = <span class="dots-line"></span> m <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Calculate the total surface area of the patio.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Total Area = <span class="dots-line"></span> m<sup>2</sup> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-block">
+    <span class="q-num">5</span>
+    <div class="q-body">
+      On a map of Gauteng, the scale is given as <span class="math">1 : 25 000</span>.<br>
+      The straight distance along a road between two checkpoints on the map is <span class="math">6.8 cm</span>.<br>
+      Calculate the actual real-world distance between the two checkpoints in <strong>kilometres (km)</strong>.
+      <div class="working-space large"></div>
+      <div class="answer-line-row">Actual distance = <span class="dots-line"></span> km <span class="marks-bracket">[3]</span></div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block">
+    <span class="q-num">6</span>
+    <div class="q-body">
+      A rectangular glass aquarium has the following internal dimensions:<br>
+      Length = <span class="math">60 cm</span>, Width = <span class="math">30 cm</span>, Height = <span class="math">40 cm</span>.
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Calculate the volume of the aquarium in <span class="math">cm<sup>3</sup></span>.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Volume = <span class="dots-line"></span> cm<sup>3</sup> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Given that <span class="math">1 litre = 1000 cm<sup>3</sup></span>, calculate the maximum capacity of the aquarium in <strong>litres</strong>.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Capacity = <span class="dots-line"></span> litres <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q7 -->
+  <div class="question-block">
+    <span class="q-num">7</span>
+    <div class="q-body">
+      The diagram shows two parallel lines <span class="math"><var>AB</var></span> and <span class="math"><var>CD</var></span> intersected by a transversal line <span class="math"><var>EF</var></span>.
+      <div class="diagram-container">
+        <svg width="300" height="130" viewBox="0 0 300 130" style="background:#fff;">
+          <line x1="30" y1="40" x2="270" y2="40" stroke="#000" stroke-width="2"/>
+          <line x1="30" y1="95" x2="270" y2="95" stroke="#000" stroke-width="2"/>
+          <line x1="70" y1="120" x2="230" y2="15" stroke="#000" stroke-width="2"/>
+          <text x="275" y="44" font-family="Arial" font-size="11" font-weight="bold">AB</text>
+          <text x="275" y="99" font-family="Arial" font-size="11" font-weight="bold">CD</text>
+          <text x="180" y="35" font-family="Arial" font-size="11" font-weight="bold">64°</text>
+          <text x="125" y="90" font-family="Arial" font-size="11" font-weight="bold">a°</text>
+          <text x="155" y="115" font-family="Arial" font-size="11" font-weight="bold">b°</text>
+        </svg>
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          State the value of angle <span class="math"><var>a</var></span>. Give a geometric reason.
+          <div class="answer-line-row"><var>a</var> = <span class="dots-line"></span>° Reason: <span class="dots-line" style="min-width: 180px;"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          State the value of angle <span class="math"><var>b</var></span>. Give a geometric reason.
+          <div class="answer-line-row"><var>b</var> = <span class="dots-line"></span>° Reason: <span class="dots-line" style="min-width: 180px;"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-block">
+    <span class="q-num">8</span>
+    <div class="q-body">
+      A Grade 7 class at Kainos Cambridge School recorded their quiz scores (out of 25):
+      <table class="center-table">
+        <tr><th>Score (<var>x</var>)</th><td>10</td><td>15</td><td>20</td><td>25</td></tr>
+        <tr><th>Frequency (<var>f</var>)</th><td>3</td><td>8</td><td>6</td><td>3</td></tr>
+      </table>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Write down the <strong>modal score</strong>.
+          <div class="answer-line-row">Mode = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 6px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the <strong>median score</strong>.
+          <div class="answer-line-row">Median = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 6px;">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Calculate the <strong>mean score</strong> of the class.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Mean = <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 6px;">
+        <span class="part-label">(d)</span>
+        <div class="part-content">
+          State the <strong>range</strong> of the scores.
+          <div class="answer-line-row">Range = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-block">
+    <span class="q-num">9</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Solve the equation with variable on both sides:
+          <div style="margin: 4px 0; font-weight: bold;"><span class="math">7(<var>x</var> &minus; 3) = 4<var>x</var> + 15</span></div>
+          <div class="working-space"></div>
+          <div class="answer-line-row"><var>x</var> = <span class="dots-line"></span> <span class="marks-bracket">[3]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Solve the equation with a fraction:
+          <div style="margin: 4px 0; font-weight: bold;"><span class="math"><span class="frac"><span class="top">2<var>x</var> + 5</span><span class="bottom">3</span></span> = 7</span></div>
+          <div class="working-space"></div>
+          <div class="answer-line-row"><var>x</var> = <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q10 -->
+  <div class="question-block">
+    <span class="q-num">10</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Translate the point <span class="math"><var>A</var>(1, 2)</span> by the column vector <span class="math"><span class="frac"><span class="top">4</span><span class="bottom">&minus;3</span></span></span>.<br>
+          Write down the coordinates of the image point <span class="math"><var>A'</var></span>.
+          <div class="answer-line-row"><var>A'</var> = ( <span class="dots-line" style="min-width: 50px;"></span> , <span class="dots-line" style="min-width: 50px;"></span> ) <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          The point <span class="math"><var>B</var>(3, 4)</span> is rotated <span class="math">90°</span> clockwise about the origin <span class="math">(0, 0)</span>.<br>
+          Write down the coordinates of image point <span class="math"><var>B'</var></span>.
+          <div class="answer-line-row"><var>B'</var> = ( <span class="dots-line" style="min-width: 50px;"></span> , <span class="dots-line" style="min-width: 50px;"></span> ) <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question-block">
+    <span class="q-num">11</span>
+    <div class="q-body">
+      A delivery van travels from Vanderbijlpark to Pretoria.<br>
+      The van travels a distance of <span class="math">120 km</span> in <span class="math">1 hour and 30 minutes</span>, stops for <span class="math">30 minutes</span> to make deliveries, and then returns <span class="math">120 km</span> back to Vanderbijlpark in <span class="math">2 hours</span>.
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Calculate the average speed of the van on the outward journey to Pretoria in <strong>km/h</strong>.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Average Speed = <span class="dots-line"></span> km/h <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Calculate the total time of the entire return trip in hours, and state the overall average speed for the full journey (including delivery stop).
+          <div class="working-space"></div>
+          <div class="answer-line-row">Overall Average Speed = <span class="dots-line"></span> km/h <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-block">
+    <span class="q-num">12</span>
+    <div class="q-body">
+      The universal set &xi; consists of whole numbers from 1 to 20 inclusive.<br>
+      Set <span class="math"><var>A</var> = {multiples of 3}</span> and Set <span class="math"><var>B</var> = {odd numbers}</span>.
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          List the members of the intersection set <span class="math"><var>A</var> &cap; <var>B</var></span>.
+          <div class="answer-line-row"><var>A</var> &cap; <var>B</var> = { <span class="dots-line" style="min-width: 180px;"></span> } <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the number of elements in set <span class="math"><var>A</var></span>, denoted <var>n</var>(<var>A</var>).
+          <div class="answer-line-row"><var>n</var>(<var>A</var>) = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    <span>&copy; Cambridge University Press &amp; Assessment / Stage 7 Mathematics Practice</span>
+    <span>Kainos Cambridge School, Vanderbijlpark &bull; Total Marks: 45</span>
+  </div>
+</div>
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(EXAM_DIR, 'Cambridge_Stage7_Mathematics_Paper2_Calculator.html'), s7p2Html, 'utf8');
+
+// ==============================================================
+// STAGE 7 PAPER 2 MARK SCHEME & MEMO
+// ==============================================================
+const s7p2MemoHtml = getHead('Cambridge Stage 7 Mathematics Paper 2 - Mark Scheme & Teaching Memo') + `
+<div class="memo-container">
+  <div class="print-btn-bar no-print" onclick="window.print()">
+    🖨️ Click Here to Print or Save this Mark Scheme / Memo as PDF
+  </div>
+
+  <div class="header-memo">
+    <div class="title-memo">Cambridge Lower Secondary Mathematics — Stage 7</div>
+    <div class="sub-memo">Mark Scheme &amp; Teacher Pedagogical Memorandum &bull; Paper 2 (Calculator Permitted) &bull; Maximum Mark: 45</div>
+    <div style="font-size: 9pt; font-weight: bold; color: #1e40af; margin-top: 3px;">Kainos Cambridge School &bull; Vanderbijlpark &bull; Candidate: Justin Lamusse</div>
+  </div>
+
+  <div class="rubric-info-box">
+    <strong>Cambridge Assessment Marking Symbols Guide:</strong><br>
+    <strong>M Marks:</strong> Method marks for showing correct mathematical working steps.<br>
+    <strong>A Marks:</strong> Accuracy marks awarded <em>only</em> if the corresponding M mark has been earned.<br>
+    <strong>B Marks:</strong> Unconditional independent marks awarded for correct answers, values, or statements.<br>
+    <strong>ft:</strong> Follow-through marks awarded when subsequent working is correct following an earlier arithmetic slip.
+  </div>
+
+  <table class="memo-table">
+    <thead>
+      <tr>
+        <th class="col-q">Q</th>
+        <th class="col-ans">Official Marking Key</th>
+        <th class="col-marks">Marks</th>
+        <th class="col-notes">Guidance &amp; Marking Breakdown</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-q">1 (a)</td>
+        <td class="col-ans">(i) 47.4<br>(ii) 47.39</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span><br><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">
+          <strong>B1:</strong> 47.4 (next digit is 8 &ge; 5 so round up).<br>
+          <strong>B1:</strong> 47.39 (next digit is 6 &ge; 5 so round up).
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">1 (b)</td>
+        <td class="col-ans">100</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">Rounding each to 1 sig fig: (50 &times; 20) &divide; 10 = 1000 &divide; 10 = 100.</td>
+      </tr>
+      <tr>
+        <td class="col-q">2</td>
+        <td class="col-ans">Box B is better value</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Unit price for Box A: R48.00 &divide; 0.75 kg = R64.00 per kg.<br>
+          <strong>M1:</strong> Unit price for Box B: R72.00 &divide; 1.2 kg = R60.00 per kg.<br>
+          <strong>A1:</strong> Correct conclusion comparing prices: Box B is cheaper by R4.00/kg.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">3 (a)</td>
+        <td class="col-ans">R2040</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Discount = 0.15 &times; 2400 = R360 (or 2400 &times; 0.85).<br>
+          <strong>A1:</strong> Sale price = 2400 &minus; 360 = R2040.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">3 (b)</td>
+        <td class="col-ans">20%</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Profit = 420 &minus; 350 = R70. Percentage = (70 &divide; 350) &times; 100.<br>
+          <strong>A1:</strong> Exactly 20%.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">4 (a)</td>
+        <td class="col-ans">26 m</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Summing all 6 sides: 6 + 3 + 3 + 4 + 3 + 7.<br>
+          <strong>A1:</strong> 26 m.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">4 (b)</td>
+        <td class="col-ans">30 m<sup>2</sup></td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Split into two rectangles: (6 &times; 3) + (3 &times; 4) = 18 + 12 (or (3 &times; 7) + (3 &times; 3) = 21 + 9).<br>
+          <strong>A1:</strong> Total Area = 30 m<sup>2</sup>.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">5</td>
+        <td class="col-ans">1.7 km</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Multiply by scale: 6.8 &times; 25 000 = 170 000 cm.<br>
+          <strong>M1:</strong> Convert cm to metres: 170 000 &divide; 100 = 1700 m.<br>
+          <strong>A1:</strong> Convert to kilometres: 1700 &divide; 1000 = 1.7 km.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">6 (a)</td>
+        <td class="col-ans">72 000 cm<sup>3</sup></td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Volume = length &times; width &times; height = 60 &times; 30 &times; 40.<br>
+          <strong>A1:</strong> 72 000 cm<sup>3</sup>.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">6 (b)</td>
+        <td class="col-ans">72 litres</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Divide cm<sup>3</sup> by 1000: 72 000 &divide; 1000.<br>
+          <strong>A1:</strong> 72 litres.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">7 (a)</td>
+        <td class="col-ans"><var>a</var> = 64°</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span><br><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">
+          <strong>B1:</strong> 64°.<br>
+          <strong>B1:</strong> Reason: "Alternate angles are equal" (accept Z-angles with correct vocabulary).
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">7 (b)</td>
+        <td class="col-ans"><var>b</var> = 116°</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span><br><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">
+          <strong>B1:</strong> 116° (180 &minus; 64 = 116).<br>
+          <strong>B1:</strong> Reason: "Angles on a straight line add to 180°" or "Allied / co-interior angles add to 180°".
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">8 (a)</td>
+        <td class="col-ans">Mode = 15</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">Highest frequency is 8, corresponding to score 15.</td>
+      </tr>
+      <tr>
+        <td class="col-q">8 (b)</td>
+        <td class="col-ans">Median = 15</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">Total students = 20. Median is average of 10th and 11th values, both 15.</td>
+      </tr>
+      <tr>
+        <td class="col-q">8 (c)</td>
+        <td class="col-ans">Mean = 16.75 (or 16.8)</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Sum = (10 &times; 3) + (15 &times; 8) + (20 &times; 6) + (25 &times; 3) = 30 + 120 + 120 + 75 = 345.<br>
+          <strong>A1:</strong> 345 &divide; 20 = 16.75 (accept 16.8).
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">8 (d)</td>
+        <td class="col-ans">Range = 15</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">Highest score &minus; lowest score = 25 &minus; 10 = 15.</td>
+      </tr>
+      <tr>
+        <td class="col-q">9 (a)</td>
+        <td class="col-ans"><var>x</var> = 12</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Expand bracket: 7<var>x</var> &minus; 21 = 4<var>x</var> + 15.<br>
+          <strong>M1:</strong> Subtract 4<var>x</var> and add 21: 3<var>x</var> = 36.<br>
+          <strong>A1:</strong> <var>x</var> = 12.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">9 (b)</td>
+        <td class="col-ans"><var>x</var> = 8</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Multiply by 3: 2<var>x</var> + 5 = 21 &rArr; 2<var>x</var> = 16.<br>
+          <strong>A1:</strong> <var>x</var> = 8.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">10 (a)</td>
+        <td class="col-ans"><var>A'</var>(5, &minus;1)</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> <var>x</var>-coord: 1 + 4 = 5; <var>y</var>-coord: 2 + (&minus;3) = &minus;1.<br>
+          <strong>A1:</strong> (5, &minus;1).
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">10 (b)</td>
+        <td class="col-ans"><var>B'</var>(4, &minus;3)</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Rule for 90° clockwise rotation: (<var>x</var>, <var>y</var>) &rarr; (<var>y</var>, &minus;<var>x</var>).<br>
+          <strong>A1:</strong> (4, &minus;3).
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">11 (a)</td>
+        <td class="col-ans">80 km/h</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Time = 1.5 hours. Speed = distance &divide; time = 120 &divide; 1.5.<br>
+          <strong>A1:</strong> 80 km/h.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">11 (b)</td>
+        <td class="col-ans">60 km/h</td>
+        <td class="col-marks"><span class="mark-badge m-mark">M1</span><br><span class="mark-badge a-mark">A1</span></td>
+        <td class="col-notes">
+          <strong>M1:</strong> Total distance = 240 km. Total time = 1.5 + 0.5 + 2 = 4.0 hours.<br>
+          <strong>A1:</strong> Overall speed = 240 &divide; 4 = 60 km/h.
+        </td>
+      </tr>
+      <tr>
+        <td class="col-q">12 (a)</td>
+        <td class="col-ans">{3, 9, 15}</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">Multiples of 3 that are odd up to 20: 3, 9, 15.</td>
+      </tr>
+      <tr>
+        <td class="col-q">12 (b)</td>
+        <td class="col-ans">6</td>
+        <td class="col-marks"><span class="mark-badge b-mark">B1</span></td>
+        <td class="col-notes">Multiples of 3 &le; 20 are {3, 6, 9, 12, 15, 18}, so <var>n</var>(<var>A</var>) = 6.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section class="coaching-section">
+    <div class="coaching-title">👨‍🏫 Tutor Pedagogical Coaching Guide for Justin Lamusse</div>
+    <div class="coaching-tip-card">
+      <h5>1. Calculator Syntax vs Order of Operations (Q1b, Q9b)</h5>
+      <p>When computing with fractions or multiple terms on a calculator, remind Justin to use parentheses for numerators: <span class="math">(2 &times; 8 + 5) &divide; 3</span>, rather than typing in sequence which might divide only the last term.</p>
+    </div>
+    <div class="coaching-tip-card">
+      <h5>2. Unit Conversion Chains in Scale Drawings (Q5)</h5>
+      <p>Coach Justin on the 2-step metric ladder: <span class="math">cm &rarr; m (&divide; 100) &rarr; km (&divide; 1000)</span>. Total division is by 100 000. Skipping steps leads to decimal place errors.</p>
+    </div>
+    <div class="coaching-tip-card">
+      <h5>3. Area of Compound L-Shapes (Q4b)</h5>
+      <p>Encourage Justin to physically draw a dotted line on the paper splitting the L into two distinct rectangles (Rectangle A and Rectangle B). Label the dimensions of each rectangle clearly before calculating areas to avoid using overlapping outer lengths.</p>
+    </div>
+    <div class="coaching-tip-card">
+      <h5>4. Average Speed with Breaks (Q11b)</h5>
+      <p>Ensure Justin calculates total distance divided by total elapsed time (including stationary delivery time), never averaging the separate speeds!</p>
+    </div>
+  </section>
+
+  <div class="footer-copyright">
+    <span>&copy; Cambridge Assessment International Education &bull; Stage 7 Marking Guide</span>
+    <span>Kainos Cambridge School, Vanderbijlpark &bull; Total Marks: 45</span>
+  </div>
+</div>
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(EXAM_DIR, 'Cambridge_Stage7_Mathematics_Paper2_MarkScheme_Memo.html'), s7p2MemoHtml, 'utf8');
+
+console.log('Paper 2 & Memo written.');

@@ -61,15 +61,16 @@ Every single unit of the Cambridge Lower Secondary Stage 7 Mathematics curriculu
 ---
 
 ### 5. 🎓 Kainos Cambridge School Assessment Center
-- **Cambridge Stage 7 Progression Tests:**
-  - **Paper 1 (Non-Calculator):** 45 Marks, 1 Hour.
-  - **Paper 2 (Calculator Allowed):** 45 Marks, 1 Hour.
-- **Cambridge Primary Checkpoint Stage 6 Bridge Exams:**
-  - **Paper 1 & Paper 2 (Non-Calculator):** 40 Marks each (diagnostic bridge).
+- **Cambridge Stage 7 Examination Suite (Strictly Grade 7):**
+  - **Paper 1 (Non-Calculator):** 45 Marks, 1 Hour &bull; Progression Test 0862/01.
+  - **Paper 2 (Calculator Allowed):** 45 Marks, 1 Hour &bull; Progression Test 0862/02.
+  - **Mid-Year Progression Paper (Non-Calculator):** 45 Marks, 1 Hour &bull; Kainos School Exam 0862/MY.
+  - **End-of-Year Final Paper (Calculator Allowed):** 45 Marks, 1 Hour &bull; Kainos School Exam 0862/EY.
 - **Features:**
+  - Zero "coding mathematics" or raw programming syntax: pristine mathematical typography with true vertical fractions, real radicals, superscripts, and negative signs.
   - In-app interactive test simulator mode with countdown timer, marking scheme, and detailed question-by-question report card.
-  - Direct links to official formatted printable HTML exams and downloadable PDFs located in `./cambridge-stage7-exams/`.
-  - Comprehensive memorandums with teacher coaching notes tailored for Justin.
+  - Direct links to official formatted printable HTML exams and downloadable high-resolution vector PDFs located in `./cambridge-stage7-exams/`.
+  - Comprehensive memorandums with teacher coaching notes tailored specifically for Justin Lamusse (ADHD and dyscalculia-friendly).
 
 ---
 
