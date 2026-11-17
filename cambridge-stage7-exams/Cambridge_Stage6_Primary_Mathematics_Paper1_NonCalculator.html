@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cambridge Primary Checkpoint / Stage 6 Mathematics - Paper 1 (Non-Calculator)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  @media print {
+    body { font-size: 11pt; color: #000; }
+    .page-break { page-break-after: always; break-after: page; }
+    .no-print { display: none !important; }
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+  .exam-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+  .cambridge-header {
+    border-bottom: 2px solid #000;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .cambridge-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .crest-text {
+    font-weight: 800;
+    font-size: 15pt;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .sub-crest {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #333;
+  }
+  .paper-code-box {
+    text-align: right;
+    font-weight: 700;
+    font-size: 11pt;
+  }
+  .exam-details-title {
+    margin-top: 15px;
+    font-size: 14pt;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .exam-meta-sub {
+    text-align: center;
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .candidate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0 25px 0;
+  }
+  .candidate-table td {
+    border: 1px solid #000;
+    padding: 8px 10px;
+    font-size: 10.5pt;
+  }
+  .label-cell {
+    width: 25%;
+    font-weight: 700;
+    background-color: #f7f7f7;
+  }
+  .fill-cell {
+    width: 75%;
+  }
+  .instructions-box {
+    border: 1.5px solid #000;
+    padding: 14px 18px;
+    font-size: 10pt;
+    margin-bottom: 25px;
+    background: #fafafa;
+  }
+  .instructions-box h4 {
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    font-size: 10.5pt;
+  }
+  .instructions-box ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .instructions-box li {
+    margin-bottom: 5px;
+  }
+  .badge-no-calc {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 9.5pt;
+    font-weight: 800;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  .question-block {
+    margin-bottom: 24px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .q-num {
+    font-weight: 800;
+    font-size: 11.5pt;
+    display: inline-block;
+    width: 28px;
+    vertical-align: top;
+  }
+  .q-body {
+    display: inline-block;
+    width: calc(100% - 35px);
+    vertical-align: top;
+    font-size: 11pt;
+  }
+  .q-part {
+    margin-top: 8px;
+    margin-left: 10px;
+  }
+  .part-label {
+    font-weight: 700;
+    display: inline-block;
+    width: 24px;
+  }
+  .part-content {
+    display: inline-block;
+    width: calc(100% - 30px);
+    vertical-align: top;
+  }
+  .working-space {
+    min-height: 44px;
+    margin: 6px 0;
+  }
+  .answer-line-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 6px;
+    font-weight: 700;
+  }
+  .dots-line {
+    display: inline-block;
+    border-bottom: 1px dotted #000;
+    min-width: 140px;
+    height: 18px;
+    margin: 0 4px;
+  }
+  .marks-bracket {
+    font-weight: 800;
+    font-size: 10.5pt;
+    min-width: 30px;
+    text-align: right;
+  }
+  .footer-copyright {
+    border-top: 1px solid #666;
+    margin-top: 30px;
+    padding-top: 8px;
+    font-size: 8.5pt;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+  }
+  .print-btn-bar {
+    background: #2563EB;
+    color: #fff;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="exam-container">
+  <div class="print-btn-bar no-print" onclick="window.print()">
+    🖨️ Click Here to Print or Save this Exam Paper as PDF
+  </div>
+
+  <div class="cambridge-header">
+    <div class="cambridge-title-row">
+      <div>
+        <div class="crest-text">Cambridge Primary Checkpoint / Year-End Examination</div>
+        <div class="sub-crest">Mathematics Curriculum Framework Stage 6 (Old SA Standard 5 / Grade 7 Entry Equivalence)</div>
+      </div>
+      <div class="paper-code-box">
+        STAGE 6<br>
+        PAPER 1<br>
+        0845 / 0096
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-details-title">Mathematics Stage 6 — Paper 1</div>
+  <div class="exam-meta-sub">
+    Non-Calculator &bull; Time Allowed: 45 Minutes &bull; Total Marks: 40
+  </div>
+
+  <table class="candidate-table">
+    <tr>
+      <td class="label-cell">Candidate Name:</td>
+      <td class="fill-cell" style="font-size: 13pt; font-weight: bold; color: #1e3a8a;">Justin</td>
+    </tr>
+    <tr>
+      <td class="label-cell">School / Centre:</td>
+      <td class="fill-cell">Cambridge Private School, Vanderbijlpark</td>
+    </tr>
+    <tr>
+      <td class="label-cell">Stage / Level:</td>
+      <td class="fill-cell">Cambridge Primary Exit / Grade 7 (Standard 5 Equivalence)</td>
+    </tr>
+  </table>
+
+  <div class="instructions-box">
+    <span class="badge-no-calc">NO CALCULATORS ALLOWED</span>
+    <h4>Read these instructions carefully:</h4>
+    <ul>
+      <li>Answer <strong>all</strong> questions in the spaces provided.</li>
+      <li>You should show <strong>all</strong> your working on the paper.</li>
+      <li>Calculators are <strong>NOT</strong> permitted in Paper 1.</li>
+      <li>The total number of marks for this paper is <strong>40</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-block">
+    <span class="q-num">1</span>
+    <div class="q-body">
+      Work out:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(358 + 276\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(502 - 187\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block">
+    <span class="q-num">2</span>
+    <div class="q-body">
+      Calculate:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(48 \times 7\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(156 \div 4\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block">
+    <span class="q-num">3</span>
+    <div class="q-body">
+      Here are four temperature readings in degrees Celsius (°C):
+      <div style="font-weight: bold; margin: 6px 0; text-align: center;">
+        \(-5^\circ\text{C}, \quad 3^\circ\text{C}, \quad -8^\circ\text{C}, \quad 0^\circ\text{C}, \quad -2^\circ\text{C}\)
+      </div>
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Write the temperatures in order, starting with the coldest:
+          <div class="answer-line-row">Coldest: <span class="dots-line" style="min-width: 250px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          What is the difference in temperature between \(-8^\circ\text{C}\) and \(3^\circ\text{C}\)?
+          <div class="answer-line-row">Difference: <span class="dots-line"></span> °C <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block">
+    <span class="q-num">4</span>
+    <div class="q-body">
+      Round \(3.67\) to:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          the nearest whole number: <span class="dots-line"></span> <span class="marks-bracket">[1]</span>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          one decimal place (nearest tenth): <span class="dots-line"></span> <span class="marks-bracket">[1]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q5 -->
+  <div class="question-block">
+    <span class="q-num">5</span>
+    <div class="q-body">
+      Work out:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(\frac{2}{7} + \frac{3}{7}\)
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(\frac{3}{4} - \frac{1}{2}\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Find \(\frac{2}{5}\) of \(45\text{ kg}\).
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> kg <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block">
+    <span class="q-num">6</span>
+    <div class="q-body">
+      Calculate:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(20 - 4 \times 3\)
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \((15 + 9) \div (8 - 2)\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-block">
+    <span class="q-num">7</span>
+    <div class="q-body">
+      Write the missing numbers to make each statement true:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(4.5\text{ km} = \) <span class="dots-line" style="min-width: 100px;"></span> \(\text{metres}\) <span class="marks-bracket">[1]</span>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(3200\text{ g} = \) <span class="dots-line" style="min-width: 100px;"></span> \(\text{kg}\) <span class="marks-bracket">[1]</span>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          \(750\text{ ml} = \) <span class="dots-line" style="min-width: 100px;"></span> \(\text{litres}\) <span class="marks-bracket">[1]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-block">
+    <span class="q-num">8</span>
+    <div class="q-body">
+      Find \(25\%\) of \(R160\).
+      <div class="working-space"></div>
+      <div class="answer-line-row">Answer: R <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q9 -->
+  <div class="question-block">
+    <span class="q-num">9</span>
+    <div class="q-body">
+      A rectangle has a length of \(9\text{ cm}\) and a width of \(4\text{ cm}\).
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Find the perimeter of the rectangle.
+          <div class="answer-line-row">Perimeter = <span class="dots-line"></span> cm <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the area of the rectangle.
+          <div class="answer-line-row">Area = <span class="dots-line"></span> cm² <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-block">
+    <span class="q-num">10</span>
+    <div class="q-body">
+      Angles in a triangle add up to \(180^\circ\).<br>
+      A triangle has two angles measuring \(70^\circ\) and \(45^\circ\).
+      <div class="q-part">
+        <div class="part-content" style="width: 100%;">
+          Calculate the size of the third angle.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Third angle = <span class="dots-line"></span>° <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="question-block">
+    <span class="q-num">11</span>
+    <div class="q-body">
+      Here is a sequence of numbers:
+      <div style="font-weight: bold; text-align: center; margin: 6px 0;">
+        \(6, \quad 11, \quad 16, \quad 21, \quad 26, \quad \dots\)
+      </div>
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Write down the next two numbers in the sequence:
+          <div class="answer-line-row">Next numbers: <span class="dots-line" style="min-width: 80px;"></span> and <span class="dots-line" style="min-width: 80px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Explain why the number \(48\) cannot be in this sequence.
+          <div class="answer-line-row">Reason: <span class="dots-line" style="min-width: 250px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="question-block">
+    <span class="q-num">12</span>
+    <div class="q-body">
+      Share \(R60\) in the ratio \(1 : 2\).
+      <div class="working-space"></div>
+      <div class="answer-line-row">Share 1: R <span class="dots-line" style="min-width: 80px;"></span> &bull; Share 2: R <span class="dots-line" style="min-width: 80px;"></span> <span class="marks-bracket">[2]</span></div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="question-block">
+    <span class="q-num">13</span>
+    <div class="q-body">
+      Justin has a 6-sided fair dice numbered 1 to 6. He rolls the dice once.
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Find the probability of rolling a number greater than 4. Give your answer as a simplified fraction.
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the probability of rolling an even number.
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="question-block">
+    <span class="q-num">14</span>
+    <div class="q-body">
+      Justin buys 3 notebooks costing R15 each and 2 pens costing R8 each.<br>
+      He pays with a R100 note. Calculate how much change he should receive in Rand.
+      <div class="working-space"></div>
+      <div class="answer-line-row">Change = R <span class="dots-line"></span> <span class="marks-bracket">[3]</span></div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q15 -->
+  <div class="question-block">
+    <span class="q-num">15</span>
+    <div class="q-body">
+      Factors and Primes:
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          List all the factors of \(18\):
+          <div class="answer-line-row">Factors: <span class="dots-line" style="min-width: 220px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Write down the prime numbers between \(10\) and \(20\):
+          <div class="answer-line-row">Primes: <span class="dots-line" style="min-width: 220px;"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="question-block">
+    <span class="q-num">16</span>
+    <div class="q-body">
+      Three vertices of a rectangle are plotted on a coordinate grid at:<br>
+      <div style="font-weight: bold; margin: 4px 0 8px 10px;">
+        \(A(1, 2), \quad B(5, 2), \quad C(5, 6)\)
+      </div>
+      Write down the coordinates of vertex \(D\) to complete the rectangle.
+      <div class="working-space"></div>
+      <div class="answer-line-row">Coordinates of \(D\) = ( <span class="dots-line" style="min-width: 50px;"></span> , <span class="dots-line" style="min-width: 50px;"></span> ) <span class="marks-bracket">[2]</span></div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="question-block">
+    <span class="q-num">17</span>
+    <div class="q-body">
+      A rugby match starts at \(14:35\) and finishes at \(16:10\).<br>
+      How long did the rugby match last? Give your answer in hours and minutes.
+      <div class="working-space"></div>
+      <div class="answer-line-row">Duration = <span class="dots-line" style="min-width: 60px;"></span> hours and <span class="dots-line" style="min-width: 60px;"></span> minutes <span class="marks-bracket">[2]</span></div>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="question-block">
+    <span class="q-num">18</span>
+    <div class="q-body">
+      The table shows the number of goals scored by five players in a school football team:
+      <table style="width: 85%; margin: 10px auto; border-collapse: collapse; text-align: center; font-size: 10.5pt;">
+        <thead>
+          <tr style="background: #e2e8f0;">
+            <th style="border: 1px solid #333; padding: 6px;">Player</th>
+            <th style="border: 1px solid #333; padding: 6px;">Liam</th>
+            <th style="border: 1px solid #333; padding: 6px;">Justin</th>
+            <th style="border: 1px solid #333; padding: 6px;">Sipho</th>
+            <th style="border: 1px solid #333; padding: 6px;">Ethan</th>
+            <th style="border: 1px solid #333; padding: 6px;">Kagiso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 1px solid #333; padding: 6px; font-weight: bold;">Goals</td>
+            <td style="border: 1px solid #333; padding: 6px;">4</td>
+            <td style="border: 1px solid #333; padding: 6px; font-weight: bold; color: #1e3a8a;">7</td>
+            <td style="border: 1px solid #333; padding: 6px;">3</td>
+            <td style="border: 1px solid #333; padding: 6px;">7</td>
+            <td style="border: 1px solid #333; padding: 6px;">5</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Find the total number of goals scored by the five players.
+          <div class="answer-line-row">Total goals = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the mode (most common number of goals).
+          <div class="answer-line-row">Mode = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+      <div class="q-part">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Find the range of the number of goals scored.
+          <div class="answer-line-row">Range = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    <span>© Cambridge University Press &amp; Assessment / Primary Mathematics Checkpoint</span>
+    <span>[End of Paper 1 &bull; 40 Marks]</span>
+  </div>
+</div>
+
+</body>
+</html>

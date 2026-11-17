@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cambridge Lower Secondary Mathematics - Stage 7 Paper 2 (Calculator)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  @media print {
+    body { font-size: 11pt; color: #000; }
+    .page-break { page-break-after: always; break-after: page; }
+    .no-print { display: none !important; }
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+  .exam-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+  .cambridge-header {
+    border-bottom: 2px solid #000;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .cambridge-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .crest-text {
+    font-weight: 800;
+    font-size: 15pt;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .sub-crest {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #333;
+  }
+  .paper-code-box {
+    text-align: right;
+    font-weight: 700;
+    font-size: 11pt;
+  }
+  .exam-details-title {
+    margin-top: 15px;
+    font-size: 14pt;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .exam-meta-sub {
+    text-align: center;
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .candidate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0 25px 0;
+  }
+  .candidate-table td {
+    border: 1px solid #000;
+    padding: 8px 10px;
+    font-size: 10.5pt;
+  }
+  .label-cell {
+    width: 25%;
+    font-weight: 700;
+    background-color: #f7f7f7;
+  }
+  .fill-cell {
+    width: 75%;
+  }
+  .instructions-box {
+    border: 1.5px solid #000;
+    padding: 14px 18px;
+    font-size: 10pt;
+    margin-bottom: 25px;
+    background: #fafafa;
+  }
+  .instructions-box h4 {
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    font-size: 10.5pt;
+  }
+  .instructions-box ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .instructions-box li {
+    margin-bottom: 5px;
+  }
+  .badge-calc {
+    display: inline-block;
+    background: #2563EB;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 9.5pt;
+    font-weight: 800;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  .question-block {
+    margin-bottom: 26px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .q-num {
+    font-weight: 800;
+    font-size: 11.5pt;
+    display: inline-block;
+    width: 28px;
+    vertical-align: top;
+  }
+  .q-body {
+    display: inline-block;
+    width: calc(100% - 35px);
+    vertical-align: top;
+    font-size: 11pt;
+  }
+  .q-part {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .part-label {
+    font-weight: 700;
+    display: inline-block;
+    width: 24px;
+  }
+  .part-content {
+    display: inline-block;
+    width: calc(100% - 30px);
+    vertical-align: top;
+  }
+  .working-space {
+    min-height: 48px;
+    margin: 8px 0;
+  }
+  .working-space.large {
+    min-height: 85px;
+  }
+  .answer-line-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 8px;
+    font-weight: 700;
+  }
+  .dots-line {
+    display: inline-block;
+    border-bottom: 1px dotted #000;
+    min-width: 140px;
+    height: 18px;
+    margin: 0 4px;
+  }
+  .marks-bracket {
+    font-weight: 800;
+    font-size: 10.5pt;
+    min-width: 30px;
+    text-align: right;
+  }
+  .diagram-container {
+    text-align: center;
+    margin: 12px 0;
+  }
+  .center-table {
+    margin: 10px auto;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+  }
+  .center-table th, .center-table td {
+    border: 1px solid #000;
+    padding: 6px 14px;
+    text-align: center;
+  }
+  .center-table th {
+    background: #f0f0f0;
+  }
+  .footer-copyright {
+    border-top: 1px solid #666;
+    margin-top: 30px;
+    padding-top: 8px;
+    font-size: 8.5pt;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+  }
+  .print-btn-bar {
+    background: #2563EB;
+    color: #fff;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="exam-container">
+  <div class="print-btn-bar no-print" onclick="window.print()">
+    🖨️ Click Here to Print or Save this Exam Paper as PDF
+  </div>
+
+  <!-- Cover Page Header -->
+  <div class="cambridge-header">
+    <div class="cambridge-title-row">
+      <div>
+        <div class="crest-text">Cambridge Lower Secondary Progression Test</div>
+        <div class="sub-crest">Mathematics Curriculum Framework Stage 7 (Equivalent to Grade 7)</div>
+      </div>
+      <div class="paper-code-box">
+        STAGE 7<br>
+        PAPER 2<br>
+        0862 / 1112
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-details-title">Mathematics Stage 7 — Paper 2</div>
+  <div class="exam-meta-sub">
+    Calculator Permitted &bull; Time Allowed: 1 Hour &bull; Total Marks: 45
+  </div>
+
+  <table class="candidate-table">
+    <tr>
+      <td class="label-cell">Candidate Name:</td>
+      <td class="fill-cell" style="font-size: 13pt; font-weight: bold; color: #1e3a8a;">Justin</td>
+    </tr>
+    <tr>
+      <td class="label-cell">School / Centre:</td>
+      <td class="fill-cell">Cambridge Private School, Vanderbijlpark</td>
+    </tr>
+    <tr>
+      <td class="label-cell">Grade / Stage:</td>
+      <td class="fill-cell">Grade 7 / Cambridge Stage 7</td>
+    </tr>
+  </table>
+
+  <div class="instructions-box">
+    <span class="badge-calc">SCIENTIFIC CALCULATORS MAY BE USED</span>
+    <h4>Read these instructions carefully before you begin:</h4>
+    <ul>
+      <li>Answer <strong>all</strong> questions in the spaces provided on this question paper.</li>
+      <li>You should show <strong>all</strong> your working on the paper. Method marks may be awarded even if the final answer is incorrect.</li>
+      <li>A <strong>scientific calculator</strong> may be used for this paper.</li>
+      <li>Give non-exact numerical answers correct to 3 significant figures, or 1 decimal place for angles, unless specified otherwise.</li>
+      <li>The number of marks is shown in brackets <strong>[ ]</strong> at the end of each question or part question.</li>
+      <li>The total number of marks for this paper is <strong>45</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- QUESTION SECTION -->
+  <!-- ============================================================ -->
+
+  <!-- Q1: Rounding & Estimation -->
+  <div class="question-block">
+    <span class="q-num">1</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          The number \(47.386\) is given.
+          <div style="margin-top: 6px;">(i) Round \(47.386\) to 1 decimal place: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+          <div style="margin-top: 6px;">(ii) Round \(47.386\) to 2 decimal places: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          By rounding each number to 1 significant figure, estimate the value of:
+          <div style="margin: 4px 0; font-weight: bold; text-align: center;">\(\frac{49.8 \times 20.4}{9.9}\)</div>
+          <div class="working-space">Show your estimation working:</div>
+          <div class="answer-line-row">Estimated Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Unit Rate & Best Buy -->
+  <div class="question-block">
+    <span class="q-num">2</span>
+    <div class="q-body">
+      A supermarket in Vanderbijlpark sells two different box sizes of breakfast cereal:
+      <div style="margin: 10px 0; padding: 10px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px;">
+        <strong>Box A:</strong> \(750\text{ g}\) for \(R48.00\)<br>
+        <strong>Box B:</strong> \(1.2\text{ kg}\) for \(R72.00\)
+      </div>
+      Show clear working to determine which box size offers the <strong>best value for money</strong> per kilogram.
+      <div class="working-space large"></div>
+      <div class="answer-line-row">Box with best value: <span class="dots-line" style="min-width: 140px;"></span> <span class="marks-bracket">[3]</span></div>
+    </div>
+  </div>
+
+  <!-- Q3: Percentages & Financial Maths -->
+  <div class="question-block">
+    <span class="q-num">3</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          A bicycle is priced at \(R2400\). In a seasonal sale, the shop offers a \(15\%\) discount.
+          Calculate the sale price of the bicycle.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Sale Price = R <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Justin buys a collectible video game for \(R350\) and later sells it for \(R420\).<br>
+          Calculate Justin's <strong>percentage profit</strong>.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Percentage Profit = <span class="dots-line"></span> % <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q4: Formulas & Substitution -->
+  <div class="question-block">
+    <span class="q-num">4</span>
+    <div class="q-body">
+      The formula connecting speed \(s\), distance \(d\), and time \(t\) is:
+      <div style="text-align: center; font-size: 12pt; font-weight: bold; margin: 6px 0;">
+        \(s = \frac{d}{t}\)
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          A family travels \(195\text{ km}\) from Vanderbijlpark to a holiday resort in \(2.5\text{ hours}\).<br>
+          Calculate their average speed in \(\text{km/h}\).
+          <div class="answer-line-row">Speed = <span class="dots-line"></span> km/h <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Rearrange the formula \(s = \frac{d}{t}\) to make distance \(d\) the subject of the formula.
+          <div class="answer-line-row">\(d = \) <span class="dots-line" style="min-width: 140px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Given that \(x = 4\) and \(y = -3\), work out the exact value of:
+          <div style="font-weight: bold; margin: 4px 0;">\(2x^2 - 3y\)</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: Perimeter, Area and Volume -->
+  <div class="question-block">
+    <span class="q-num">5</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          The diagram shows an L-shaped paved patio. All angles are right angles (\(90^\circ\)).
+          <div class="diagram-container">
+            <!-- SVG L-shape compound area diagram -->
+            <svg width="280" height="180" viewBox="0 0 280 180" style="background:#fff;">
+              <!-- Outer L boundary -->
+              <polygon points="40,20 220,20 220,90 130,90 130,160 40,160" fill="#eff6ff" stroke="#1e3a8a" stroke-width="2"/>
+              <!-- Dimensions text -->
+              <text x="120" y="15" font-family="Arial" font-size="11" font-weight="bold">10 m</text>
+              <text x="230" y="60" font-family="Arial" font-size="11" font-weight="bold">4 m</text>
+              <text x="160" y="105" font-family="Arial" font-size="11" font-weight="bold">5 m</text>
+              <text x="75" y="175" font-family="Arial" font-size="11" font-weight="bold">5 m</text>
+              <text x="10" y="95" font-family="Arial" font-size="11" font-weight="bold">8 m</text>
+            </svg>
+          </div>
+          Calculate:
+          <div style="margin-top: 6px;">(i) The total perimeter of the patio.</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">Perimeter = <span class="dots-line"></span> m <span class="marks-bracket">[2]</span></div>
+
+          <div style="margin-top: 10px;">(ii) The total area of the patio.</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">Area = <span class="dots-line"></span> m² <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 14px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          A glass aquarium is a rectangular prism measuring \(60\text{ cm}\) long, \(40\text{ cm}\) wide, and \(30\text{ cm}\) high.
+          <div style="margin-top: 6px;">(i) Calculate the volume of the aquarium in \(\text{cm}^3\).</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">Volume = <span class="dots-line"></span> cm³ <span class="marks-bracket">[1]</span></div>
+
+          <div style="margin-top: 6px;">(ii) Convert this volume into litres (\(1\text{ litre} = 1000\text{ cm}^3\)).</div>
+          <div class="answer-line-row">Capacity = <span class="dots-line"></span> litres <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q6: Quadrilateral Angles -->
+  <div class="question-block">
+    <span class="q-num">6</span>
+    <div class="q-body">
+      The diagram shows a quadrilateral. The angles are marked as \(2x^\circ\), \(3x^\circ\), \(4x^\circ\), and a right angle (\(90^\circ\)).
+      <div class="diagram-container">
+        <!-- SVG Quadrilateral with algebraic angles -->
+        <svg width="260" height="150" viewBox="0 0 260 150">
+          <polygon points="50,120 210,120 180,30 80,30" fill="#f8fafc" stroke="#000" stroke-width="2"/>
+          <text x="65" y="110" font-family="Arial" font-size="11" font-weight="bold">90°</text>
+          <text x="180" y="110" font-family="Arial" font-size="11" font-weight="bold">2x°</text>
+          <text x="155" y="50" font-family="Arial" font-size="11" font-weight="bold">3x°</text>
+          <text x="90" y="50" font-family="Arial" font-size="11" font-weight="bold">4x°</text>
+          <!-- Right angle symbol at bottom left -->
+          <polyline points="50,105 65,105 65,120" fill="none" stroke="#000" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Form an equation in terms of \(x\) and solve it to find the value of \(x\).
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(x = \) <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Calculate the size of the <strong>largest angle</strong> in the quadrilateral.
+          <div class="answer-line-row">Largest angle = <span class="dots-line"></span>° <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7: Scale Drawings & Maps -->
+  <div class="question-block">
+    <span class="q-num">7</span>
+    <div class="q-body">
+      A town planning map of Vanderbijlpark has a scale of \(1 : 25\,000\).<br>
+      On the map, the distance between Justin's school and the Vaal River is \(8.4\text{ cm}\).
+      <div class="q-part">
+        <div class="part-content" style="width: 100%;">
+          Calculate the actual real-world distance between the school and the river in <strong>kilometres (km)</strong>.
+          <div class="working-space large">Show your working:</div>
+          <div class="answer-line-row">Actual distance = <span class="dots-line"></span> km <span class="marks-bracket">[3]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8: Statistics & Frequency Tables -->
+  <div class="question-block">
+    <span class="q-num">8</span>
+    <div class="q-body">
+      Twenty learners in Justin's Grade 7 class took a mental maths test marked out of 10.<br>
+      Their results are shown in the frequency table:
+
+      <table class="center-table">
+        <tr>
+          <th>Test Score</th>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th>Frequency (Number of learners)</th>
+          <td>3</td>
+          <td>5</td>
+          <td>7</td>
+          <td>4</td>
+          <td>1</td>
+        </tr>
+      </table>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Write down the <strong>mode</strong> (modal score).
+          <div class="answer-line-row">Mode = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the <strong>median</strong> test score.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Median = <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Calculate the <strong>mean</strong> test score.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Mean = <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 8px;">
+        <span class="part-label">(d)</span>
+        <div class="part-content">
+          Calculate the <strong>range</strong> of the scores.
+          <div class="answer-line-row">Range = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q9: Probability & Relative Frequency -->
+  <div class="question-block">
+    <span class="q-num">9</span>
+    <div class="q-body">
+      A spinner with 4 colored sectors (Red, Blue, Green, Yellow) is spun \(120\) times.<br>
+      The table shows the experimental results:
+
+      <table class="center-table">
+        <tr>
+          <th>Color</th>
+          <td>Red</td>
+          <td>Blue</td>
+          <td>Green</td>
+          <td>Yellow</td>
+        </tr>
+        <tr>
+          <th>Frequency</th>
+          <td>36</td>
+          <td>28</td>
+          <td>32</td>
+          <td>24</td>
+        </tr>
+      </table>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Calculate the experimental probability (relative frequency) of landing on <strong>Red</strong>. Give your answer as a simplified fraction.
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          If the spinner is fair with 4 equal-sized sectors, how many times would you <em>theoretically expect</em> the spinner to land on Red in \(120\) spins?
+          <div class="working-space"></div>
+          <div class="answer-line-row">Expected Red spins = <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10: Multi-Step Equations -->
+  <div class="question-block">
+    <span class="q-num">10</span>
+    <div class="q-body">
+      Solve the following equations:
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(\frac{2x - 3}{5} = 7\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(x = \) <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(3(2y + 5) - 4(y - 1) = 31\)
+          <div class="working-space large"></div>
+          <div class="answer-line-row">\(y = \) <span class="dots-line"></span> <span class="marks-bracket">[3]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11: Ratio Word Problem -->
+  <div class="question-block">
+    <span class="q-num">11</span>
+    <div class="q-body">
+      In a private school with \(420\) students in total, the ratio of boys to girls is \(4 : 3\).
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Show that there are \(240\) boys and \(180\) girls initially in the school.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Verified [1]</div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          At the start of the next term, \(15\) new girls join the school and \(5\) boys leave.<br>
+          Write the <strong>new ratio</strong> of boys to girls in its <strong>simplest integer form</strong>.
+          <div class="working-space large"></div>
+          <div class="answer-line-row">New ratio (Boys : Girls) = <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    <span>© Cambridge University Press &amp; Assessment / Stage 7 Mathematics Practice</span>
+    <span>[End of Examination Paper 2]</span>
+  </div>
+</div>
+
+</body>
+</html>

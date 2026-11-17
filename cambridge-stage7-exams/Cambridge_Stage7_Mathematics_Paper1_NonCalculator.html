@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cambridge Lower Secondary Mathematics - Stage 7 Paper 1 (Non-Calculator)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  @media print {
+    body { font-size: 11pt; color: #000; }
+    .page-break { page-break-after: always; break-after: page; }
+    .no-print { display: none !important; }
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+  .exam-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+  .cambridge-header {
+    border-bottom: 2px solid #000;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .cambridge-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .crest-text {
+    font-weight: 800;
+    font-size: 15pt;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .sub-crest {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #333;
+  }
+  .paper-code-box {
+    text-align: right;
+    font-weight: 700;
+    font-size: 11pt;
+  }
+  .exam-details-title {
+    margin-top: 15px;
+    font-size: 14pt;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .exam-meta-sub {
+    text-align: center;
+    font-size: 11pt;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .candidate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0 25px 0;
+  }
+  .candidate-table td {
+    border: 1px solid #000;
+    padding: 8px 10px;
+    font-size: 10.5pt;
+  }
+  .label-cell {
+    width: 25%;
+    font-weight: 700;
+    background-color: #f7f7f7;
+  }
+  .fill-cell {
+    width: 75%;
+  }
+  .instructions-box {
+    border: 1.5px solid #000;
+    padding: 14px 18px;
+    font-size: 10pt;
+    margin-bottom: 25px;
+    background: #fafafa;
+  }
+  .instructions-box h4 {
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    font-size: 10.5pt;
+  }
+  .instructions-box ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .instructions-box li {
+    margin-bottom: 5px;
+  }
+  .badge-no-calc {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 9.5pt;
+    font-weight: 800;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  .question-block {
+    margin-bottom: 26px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .q-num {
+    font-weight: 800;
+    font-size: 11.5pt;
+    display: inline-block;
+    width: 28px;
+    vertical-align: top;
+  }
+  .q-body {
+    display: inline-block;
+    width: calc(100% - 35px);
+    vertical-align: top;
+    font-size: 11pt;
+  }
+  .q-part {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .part-label {
+    font-weight: 700;
+    display: inline-block;
+    width: 24px;
+  }
+  .part-content {
+    display: inline-block;
+    width: calc(100% - 30px);
+    vertical-align: top;
+  }
+  .working-space {
+    min-height: 48px;
+    margin: 8px 0;
+  }
+  .working-space.large {
+    min-height: 85px;
+  }
+  .answer-line-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 8px;
+    font-weight: 700;
+  }
+  .dots-line {
+    display: inline-block;
+    border-bottom: 1px dotted #000;
+    min-width: 140px;
+    height: 18px;
+    margin: 0 4px;
+  }
+  .marks-bracket {
+    font-weight: 800;
+    font-size: 10.5pt;
+    min-width: 30px;
+    text-align: right;
+  }
+  .diagram-container {
+    text-align: center;
+    margin: 12px 0;
+  }
+  .center-table {
+    margin: 10px auto;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+  }
+  .center-table th, .center-table td {
+    border: 1px solid #000;
+    padding: 6px 14px;
+    text-align: center;
+  }
+  .center-table th {
+    background: #f0f0f0;
+  }
+  .footer-copyright {
+    border-top: 1px solid #666;
+    margin-top: 30px;
+    padding-top: 8px;
+    font-size: 8.5pt;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+  }
+  .print-btn-bar {
+    background: #2563EB;
+    color: #fff;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="exam-container">
+  <div class="print-btn-bar no-print" onclick="window.print()">
+    🖨️ Click Here to Print or Save this Exam Paper as PDF
+  </div>
+
+  <!-- Cover Page Header -->
+  <div class="cambridge-header">
+    <div class="cambridge-title-row">
+      <div>
+        <div class="crest-text">Cambridge Lower Secondary Progression Test</div>
+        <div class="sub-crest">Mathematics Curriculum Framework Stage 7 (Equivalent to Grade 7)</div>
+      </div>
+      <div class="paper-code-box">
+        STAGE 7<br>
+        PAPER 1<br>
+        0862 / 1112
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-details-title">Mathematics Stage 7 — Paper 1</div>
+  <div class="exam-meta-sub">
+    Non-Calculator &bull; Time Allowed: 1 Hour &bull; Total Marks: 45
+  </div>
+
+  <table class="candidate-table">
+    <tr>
+      <td class="label-cell">Candidate Name:</td>
+      <td class="fill-cell" style="font-size: 13pt; font-weight: bold; color: #1e3a8a;">Justin</td>
+    </tr>
+    <tr>
+      <td class="label-cell">School / Centre:</td>
+      <td class="fill-cell">Cambridge Private School, Vanderbijlpark</td>
+    </tr>
+    <tr>
+      <td class="label-cell">Grade / Stage:</td>
+      <td class="fill-cell">Grade 7 / Cambridge Stage 7</td>
+    </tr>
+  </table>
+
+  <div class="instructions-box">
+    <span class="badge-no-calc">NO CALCULATORS ALLOWED IN PAPER 1</span>
+    <h4>Read these instructions carefully before you begin:</h4>
+    <ul>
+      <li>Answer <strong>all</strong> questions in the spaces provided on this question paper.</li>
+      <li>You should show <strong>all</strong> your working on the paper. Method marks may be awarded even if the final answer is incorrect.</li>
+      <li>Calculators are <strong>NOT</strong> permitted in this examination paper.</li>
+      <li>Use black or dark blue pen. You may use an HB pencil for diagrams and graphs.</li>
+      <li>The number of marks is shown in brackets <strong>[ ]</strong> at the end of each question or part question.</li>
+      <li>The total number of marks for this paper is <strong>45</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- QUESTION SECTION -->
+  <!-- ============================================================ -->
+
+  <!-- Q1: Negative Integers -->
+  <div class="question-block">
+    <span class="q-num">1</span>
+    <div class="q-body">
+      Work out the value of each calculation:
+      
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(-7 + 12\)
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(4 \times (-6)\)
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          \((-24) \div (-4)\)
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Order of Operations (BIDMAS) -->
+  <div class="question-block">
+    <span class="q-num">2</span>
+    <div class="q-body">
+      Work out:
+      <div style="margin: 8px 0; font-size: 12pt; font-weight: bold; text-align: center;">
+        \(18 - 3 \times (4 + 2)\)
+      </div>
+      <div class="working-space">Show your working here:</div>
+      <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+    </div>
+  </div>
+
+  <!-- Q3: Primes & Factors -->
+  <div class="question-block">
+    <span class="q-num">3</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Write \(72\) as a product of its prime factors in index form (using powers).
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line" style="min-width: 200px;"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 14px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the <strong>Highest Common Factor (HCF)</strong> and <strong>Lowest Common Multiple (LCM)</strong> of \(24\) and \(36\).
+          <div class="working-space"></div>
+          <div class="answer-line-row">HCF = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+          <div class="answer-line-row">LCM = <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q4: Fractions Arithmetic -->
+  <div class="question-block">
+    <span class="q-num">4</span>
+    <div class="q-body">
+      Work out the following fraction calculations. Give each answer in its <strong>simplest form</strong> (and as a mixed number where appropriate).
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          \(\frac{3}{5} + \frac{1}{4}\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 14px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          \(2 \frac{1}{3} \times \frac{3}{7}\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 14px;">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          \(\frac{4}{9} \div \frac{2}{3}\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: Decimals -->
+  <div class="question-block">
+    <span class="q-num">5</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Calculate: \(4.6 \times 0.3\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Calculate: \(5.4 \div 0.09\)
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6: Powers and Roots -->
+  <div class="question-block">
+    <span class="q-num">6</span>
+    <div class="q-body">
+      Work out the exact value of:
+      <div style="margin: 8px 0; font-size: 12pt; font-weight: bold; text-align: center;">
+        \(4^3 - \sqrt{144} + \sqrt[3]{27}\)
+      </div>
+      <div class="working-space"></div>
+      <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+    </div>
+  </div>
+
+  <!-- Q7: Percentages without Calculator -->
+  <div class="question-block">
+    <span class="q-num">7</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Work out \(35\%\) of \(80\).
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Convert \(\frac{7}{20}\) into:
+          <div style="margin-top: 6px;">(i) a decimal: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+          <div style="margin-top: 6px;">(ii) a percentage: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q8: Number Sequences -->
+  <div class="question-block">
+    <span class="q-num">8</span>
+    <div class="q-body">
+      Here are the first four terms of an arithmetic sequence:
+      <div style="text-align: center; font-size: 13pt; font-weight: bold; margin: 8px 0;">
+        \(7, \quad 11, \quad 15, \quad 19, \quad \dots\)
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          State the term-to-term rule of this sequence.
+          <div class="answer-line-row">Answer: <span class="dots-line" style="min-width: 220px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the position-to-term (\(n^{\text{th}}\) term) formula for this sequence in terms of \(n\).
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(n^{\text{th}}\text{ term} = \) <span class="dots-line" style="min-width: 180px;"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Use your formula from (b) to find the \(50^{\text{th}}\) term of this sequence.
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9: Algebra (Simplifying, Expanding, Equations) -->
+  <div class="question-block">
+    <span class="q-num">9</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Simplify by collecting like terms:
+          <div style="margin: 4px 0; font-weight: bold;">\(5x + 3y - 2x + 7y\)</div>
+          <div class="answer-line-row">Answer: <span class="dots-line" style="min-width: 180px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Expand the bracket:
+          <div style="margin: 4px 0; font-weight: bold;">\(4(3m - 5)\)</div>
+          <div class="answer-line-row">Answer: <span class="dots-line" style="min-width: 180px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(c)</span>
+        <div class="part-content">
+          Solve the linear equation:
+          <div style="margin: 4px 0; font-weight: bold;">\(3x + 8 = 29\)</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(x = \) <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(d)</span>
+        <div class="part-content">
+          Solve the equation:
+          <div style="margin: 4px 0; font-weight: bold;">\(5(2y - 1) = 35\)</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(y = \) <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Q10: Geometry - Angles -->
+  <div class="question-block">
+    <span class="q-num">10</span>
+    <div class="q-body">
+      The diagram shows a triangle \(ABC\) with line \(BCD\) extended in a straight line.
+      <div class="diagram-container">
+        <!-- SVG Vector Triangle Diagram with External Angle -->
+        <svg width="360" height="180" viewBox="0 0 360 180" style="background:#fff;">
+          <!-- Straight base line BCD -->
+          <line x1="40" y1="140" x2="330" y2="140" stroke="#000" stroke-width="2"/>
+          <!-- Triangle side AB -->
+          <line x1="60" y1="140" x2="160" y2="40" stroke="#000" stroke-width="2"/>
+          <!-- Triangle side AC -->
+          <line x1="160" y1="40" x2="230" y2="140" stroke="#000" stroke-width="2"/>
+          
+          <!-- Vertices Labels -->
+          <text x="50" y="160" font-family="Arial" font-size="12" font-weight="bold">B</text>
+          <text x="155" y="30" font-family="Arial" font-size="12" font-weight="bold">A</text>
+          <text x="225" y="160" font-family="Arial" font-size="12" font-weight="bold">C</text>
+          <text x="325" y="160" font-family="Arial" font-size="12" font-weight="bold">D</text>
+          
+          <!-- Angle values -->
+          <text x="75" y="130" font-family="Arial" font-size="11" font-weight="bold">65°</text>
+          <text x="152" y="65" font-family="Arial" font-size="11" font-weight="bold">50°</text>
+          <text x="200" y="130" font-family="Arial" font-size="11" font-weight="bold">x°</text>
+          <text x="250" y="130" font-family="Arial" font-size="11" font-weight="bold">y°</text>
+
+          <!-- Angle arcs -->
+          <path d="M 80 140 A 20 20 0 0 0 74 125" fill="none" stroke="#2563EB" stroke-width="1.5"/>
+          <path d="M 153 50 A 20 20 0 0 0 170 54" fill="none" stroke="#2563EB" stroke-width="1.5"/>
+          <path d="M 215 140 A 20 20 0 0 1 220 126" fill="none" stroke="#EF4444" stroke-width="1.5"/>
+          <path d="M 230 140 A 20 20 0 0 0 245 130" fill="none" stroke="#10B981" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Find the value of angle \(x\). State the geometric rule used.
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(x = \) <span class="dots-line"></span>° Reason: <span class="dots-line" style="min-width: 200px;"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the value of external angle \(y\).
+          <div class="working-space"></div>
+          <div class="answer-line-row">\(y = \) <span class="dots-line"></span>° <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11: Coordinates & Reflection -->
+  <div class="question-block">
+    <span class="q-num">11</span>
+    <div class="q-body">
+      Points \(P(-3, 2)\), \(Q(1, 2)\), and \(R(-1, 5)\) are the vertices of an isosceles triangle on a coordinate grid.
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Write down the equation of the line of symmetry of triangle \(PQR\).
+          <div class="answer-line-row">Line equation: <span class="dots-line" style="min-width: 160px;"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Triangle \(PQR\) is reflected in the \(x\)-axis (\(y = 0\)) to form triangle \(P'Q'R'\).<br>
+          Write down the coordinates of vertex \(P'\).
+          <div class="answer-line-row">\(P' = (\) <span class="dots-line" style="min-width: 60px;"></span> , <span class="dots-line" style="min-width: 60px;"></span> \()\) <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12: Probability -->
+  <div class="question-block">
+    <span class="q-num">12</span>
+    <div class="q-body">
+      A bag contains \(5\) red counters, \(4\) blue counters, and \(3\) yellow counters.<br>
+      A counter is chosen at random from the bag.
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Find the probability that the counter is blue. Give your answer as a fraction in its simplest form.
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 10px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Find the probability that the counter is <strong>NOT</strong> red.
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[1]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13: Ratio -->
+  <div class="question-block">
+    <span class="q-num">13</span>
+    <div class="q-body">
+      <div class="q-part">
+        <span class="part-label">(a)</span>
+        <div class="part-content">
+          Simplify the ratio:
+          <div style="font-weight: bold; margin: 4px 0;">\(40\text{ cm} : 1.2\text{ m}\)</div>
+          <div class="working-space"></div>
+          <div class="answer-line-row">Answer: <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+
+      <div class="q-part" style="margin-top: 12px;">
+        <span class="part-label">(b)</span>
+        <div class="part-content">
+          Share \(R180\) among three brothers in the ratio \(2 : 3 : 4\).<br>
+          Calculate the amount the youngest brother receives (smallest share).
+          <div class="working-space"></div>
+          <div class="answer-line-row">Smallest share = R <span class="dots-line"></span> <span class="marks-bracket">[2]</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    <span>© Cambridge University Press &amp; Assessment / Stage 7 Mathematics Practice</span>
+    <span>[Turn Over for Blank Page / End of Paper]</span>
+  </div>
+</div>
+
+</body>
+</html>

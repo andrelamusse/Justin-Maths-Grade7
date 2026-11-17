@@ -129,7 +129,7 @@ body {
 /* App Launch Cards Grid */
 .apps-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
   gap: 24px;
 }
 
@@ -158,6 +158,20 @@ body {
 
 .app-card.card-secondary {
   border-color: #8B5CF6;
+}
+
+.app-card.card-exams {
+  border-color: #2563EB;
+}
+
+.launch-exams-btn {
+  background: #2563EB;
+  color: #FFFFFF;
+}
+
+.launch-exams-btn:hover {
+  background: #1D4ED8;
+}
 }
 
 .card-badge-priority {
