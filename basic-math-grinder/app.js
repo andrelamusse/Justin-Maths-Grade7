@@ -693,15 +693,19 @@ export class MathGrinderApp {
         // Level 3: Decimal Addition (e.g. 4.6 + 7.82, 12.4 + 3.75)
         const mode = Math.random();
         if (mode < 0.5) {
-          const aInt = Math.floor(Math.random() * 80) + 15; // 1.5 to 9.4
-          const bInt = Math.floor(Math.random() * 600) + 120; // 1.20 to 7.19
-          a = cleanNum(aInt / 10);
-          b = cleanNum(bInt / 100);
+          const aWhole = Math.floor(Math.random() * 8) + 1; // 1 to 8
+          const aTenth = Math.floor(Math.random() * 9) + 1; // 1 to 9
+          a = cleanNum(aWhole + aTenth / 10);
+          const bWhole = Math.floor(Math.random() * 6) + 1; // 1 to 6
+          const bHund = Math.floor(Math.random() * 89) + 11; // 11 to 99
+          b = cleanNum(bWhole + bHund / 100);
         } else {
-          const aInt = Math.floor(Math.random() * 90) + 35; // 3.5 to 12.4
-          const bInt = Math.floor(Math.random() * 90) + 25; // 2.5 to 11.4
-          a = cleanNum(aInt / 10);
-          b = cleanNum(bInt / 10);
+          const aWhole = Math.floor(Math.random() * 9) + 3; // 3 to 11
+          const aTenth = Math.floor(Math.random() * 9) + 1; // 1 to 9
+          a = cleanNum(aWhole + aTenth / 10);
+          const bWhole = Math.floor(Math.random() * 9) + 2; // 2 to 10
+          const bTenth = Math.floor(Math.random() * 9) + 1; // 1 to 9
+          b = cleanNum(bWhole + bTenth / 10);
         }
         result = cleanNum(a + b);
       } else if (level === 4) {
