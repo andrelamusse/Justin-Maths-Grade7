@@ -21,19 +21,31 @@ export class MathVisualizer {
 
     // Choose the best visual model for the problem
     if (operation === '+' || operation === '-') {
-      const useTenFrame = (operation === '+' && (a + b) <= 20) || (operation === '-' && a <= 20);
+      const isCleanSmallInt = Number.isInteger(a) && Number.isInteger(b) && a >= 0 && b >= 0;
+      const useTenFrame = isCleanSmallInt && ((operation === '+' && (a + b) <= 20) || (operation === '-' && a <= 20 && a >= b));
+
       if (useTenFrame) {
         wrapper.appendChild(this.createTenFrameElement(operation, a, b, result));
         wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
       } else {
-        wrapper.appendChild(this.createBaseTenElement(operation, a, b, result));
+        if (isCleanSmallInt && a <= 999 && b <= 999 && (operation === '+' || a >= b)) {
+          wrapper.appendChild(this.createBaseTenElement(operation, a, b, result));
+        }
         wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
       }
     } else if (operation === '×' || operation === '*') {
-      wrapper.appendChild(this.createArrayElement(a, b, result));
-      wrapper.appendChild(this.createRepeatedAdditionElement(a, b, result));
+      if (Number.isInteger(a) && Number.isInteger(b) && a > 0 && b > 0 && a <= 15 && b <= 15) {
+        wrapper.appendChild(this.createArrayElement(a, b, result));
+        wrapper.appendChild(this.createRepeatedAdditionElement(a, b, result));
+      } else {
+        wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
+      }
     } else if (operation === '÷' || operation === '/') {
-      wrapper.appendChild(this.createSharingElement(a, b, result));
+      if (Number.isInteger(a) && Number.isInteger(b) && a > 0 && b > 0 && a <= 144) {
+        wrapper.appendChild(this.createSharingElement(a, b, result));
+      } else {
+        wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
+      }
     }
 
     this.container.appendChild(wrapper);
@@ -276,16 +288,14 @@ export class MathVisualizer {
     const svgWrapper = document.createElement('div');
     svgWrapper.className = 'number-line-svg-container';
 
-    // Compute range of number line
-    let minVal = 0;
-    let maxVal = 20;
+    // Compute range of number line (supports directed negative numbers and decimals)
+    const minRaw = Math.min(a, result);
+    const maxRaw = Math.max(a, result);
+    let minVal = Math.floor((minRaw - 2) / 5) * 5;
+    let maxVal = Math.ceil((maxRaw + 3) / 5) * 5;
 
-    if (op === '+') {
-      minVal = Math.max(0, Math.floor((Math.min(a, result) - 2) / 5) * 5);
-      maxVal = Math.ceil((result + 3) / 5) * 5;
-    } else {
-      minVal = Math.max(0, Math.floor((Math.min(result, a) - 2) / 5) * 5);
-      maxVal = Math.ceil((a + 3) / 5) * 5;
+    if (minRaw >= 0 && minVal < 0) {
+      minVal = 0;
     }
     if (maxVal - minVal < 10) maxVal = minVal + 10;
 

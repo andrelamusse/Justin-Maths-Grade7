@@ -1,11 +1,12 @@
-// speech-scripts.js - Neuro-cognitive verbal explanations for dyscalculia/ADHD learners
-// Generates clear, non-overwhelming, spoken step-by-step guidance.
+// speech-scripts.js - Neuro-cognitive verbal explanations for Grade 7 (Cambridge Stage 7 Standards)
+// Generates clear, non-overwhelming, spoken step-by-step guidance for mental arithmetic.
 
 export function generateVerbalExplanation(operation, a, b, result) {
   switch (operation) {
     case '+':
       return generateAdditionExplanation(a, b, result);
     case '-':
+    case '−':
       return generateSubtractionExplanation(a, b, result);
     case '×':
     case '*':
@@ -18,31 +19,60 @@ export function generateVerbalExplanation(operation, a, b, result) {
   }
 }
 
+function hasDecimals(...nums) {
+  return nums.some(n => typeof n === 'number' && !Number.isInteger(n));
+}
+
 function generateAdditionExplanation(a, b, result) {
-  // Adding 1
+  // 1. Directed Numbers / Negative Integers
+  if (a < 0 && b < 0) {
+    return `Both numbers are negative. Start at ${a} and move ${Math.abs(b)} steps further into the negatives to get ${result}!`;
+  }
+  if (a < 0 && b >= 0) {
+    return `Start in the negative zone at ${a}. Adding ${b} moves you ${b} steps to the right across zero, landing on ${result}!`;
+  }
+  if (a >= 0 && b < 0) {
+    return `Adding a negative is the same as subtracting! ${a} minus ${Math.abs(b)} leaves ${result}!`;
+  }
+
+  // 2. Decimals
+  if (hasDecimals(a, b, result)) {
+    return `Line up the decimal points! Add tenths to tenths and hundredths to hundredths: ${a} plus ${b} equals ${result}!`;
+  }
+
+  // 3. Adding 1
   if (a === 1) return `Start at ${b}, and count up just one more: that gives ${result}!`;
   if (b === 1) return `Start at ${a}, and count up just one more: that gives ${result}!`;
 
-  // Doubles
+  // 4. Doubles
   if (a === b && a <= 12) return `A double! Double ${a} is ${result}.`;
 
-  // Facts making 10 (Number bonds to 10)
+  // 5. Facts making 10 (Number bonds to 10)
   if (a + b === 10) {
     return `${a} and ${b} are best friends of 10! Together they make a full ten-frame of 10.`;
   }
 
-  // Single digit basics within 5
+  // 6. 3-Digit Column Addition
+  if (a >= 100 || b >= 100) {
+    const aHundreds = Math.floor(a / 100) * 100;
+    const bHundreds = Math.floor(b / 100) * 100;
+    const aRest = a % 100;
+    const bRest = b % 100;
+    return `Add column by column! First hundreds: ${aHundreds} + ${bHundreds} = ${aHundreds + bHundreds}. Then tens and ones: ${aRest} + ${bRest} = ${aRest + bRest}. Combined: ${result}!`;
+  }
+
+  // 7. Single digit basics within 5
   if (a <= 5 && b <= 5) {
     return `Imagine ${a} counters, then add ${b} more. Count them together: ${result}!`;
   }
 
-  // Adding 9 trick (for sums greater than 10)
+  // 8. Adding 9 trick (for sums greater than 10)
   if ((a === 9 || b === 9) && a + b > 10) {
     const other = a === 9 ? b : a;
     return `Here is a secret trick for adding 9! Nine is almost 10. First add 10 to ${other} to get ${other + 10}. Then step back by 1. That leaves ${result}!`;
   }
 
-  // Making 10 bridge
+  // 9. Making 10 bridge
   if (a < 10 && b < 10 && a + b > 10) {
     const bigger = Math.max(a, b);
     const smaller = Math.min(a, b);
@@ -51,13 +81,13 @@ function generateAdditionExplanation(a, b, result) {
     return `Let's make a 10 first! ${bigger} needs ${needFor10} more to fill up a 10. Split ${smaller} into ${needFor10} and ${remaining}. ${bigger} plus ${needFor10} is 10, plus ${remaining} more makes ${result}!`;
   }
 
-  // Near doubles (e.g. 6 + 7)
+  // 10. Near doubles (e.g. 6 + 7)
   if (Math.abs(a - b) === 1 && a < 10 && b < 10) {
     const smaller = Math.min(a, b);
     return `This is a near-double! Double ${smaller} is ${smaller * 2}, plus 1 more makes ${result}!`;
   }
 
-  // Two digit numbers without carry (e.g. 34 + 23)
+  // 11. Two digit numbers without carry (e.g. 34 + 23)
   if (a >= 10 && b >= 10 && (a % 10) + (b % 10) < 10) {
     const aTens = Math.floor(a / 10) * 10;
     const bTens = Math.floor(b / 10) * 10;
@@ -68,7 +98,7 @@ function generateAdditionExplanation(a, b, result) {
     return `Let's break this into tens and ones! First the tens: ${aTens} plus ${bTens} is ${tensSum}. Now the ones: ${aOnes} plus ${bOnes} is ${onesSum}. Put them together: ${tensSum} plus ${onesSum} equals ${result}!`;
   }
 
-  // Two digit numbers with carry (e.g. 48 + 27)
+  // 12. Two digit numbers with carry (e.g. 48 + 27)
   if (a >= 10 && b >= 10) {
     const aTens = Math.floor(a / 10) * 10;
     const bTens = Math.floor(b / 10) * 10;
@@ -79,7 +109,7 @@ function generateAdditionExplanation(a, b, result) {
     return `Let's solve this step by step. First add the tens: ${aTens} plus ${bTens} is ${tensSum}. Next add the ones: ${aOnes} plus ${bOnes} is ${onesSum}. Finally, add ${tensSum} plus ${onesSum} to get ${result}!`;
   }
 
-  // Two digit plus one digit (e.g. 24 + 5 or 38 + 7)
+  // 13. Two digit plus one digit (e.g. 24 + 5 or 38 + 7)
   if ((a >= 10 && b < 10) || (b >= 10 && a < 10)) {
     const twoD = a >= 10 ? a : b;
     const oneD = a >= 10 ? b : a;
@@ -93,11 +123,34 @@ function generateAdditionExplanation(a, b, result) {
     }
   }
 
-  // Fallback
   return `${a} plus ${b} equals ${result}. Count the blocks to see the total!`;
 }
 
 function generateSubtractionExplanation(a, b, result) {
+  // 1. Directed Numbers / Negative Subtrahends / Negative Results
+  if (b < 0) {
+    return `Subtracting a negative turns into adding a positive! Two negatives next to each other flip to positive: ${a} + ${Math.abs(b)} = ${result}!`;
+  }
+  if (a < 0 && b >= 0) {
+    return `Start at ${a} and subtract ${b}, moving ${b} steps further left into the negatives to reach ${result}!`;
+  }
+  if (a >= 0 && b > a) {
+    return `Starting at ${a} and subtracting ${b} moves you past zero into the negatives, landing on ${result}!`;
+  }
+
+  // 2. Decimals
+  if (hasDecimals(a, b, result)) {
+    return `Line up the decimal points! Subtract tenths from tenths and hundredths from hundredths: ${a} minus ${b} equals ${result}!`;
+  }
+
+  // 3. 3-Digit Subtraction Across Zeros (e.g. 500 - 268)
+  if (a >= 100 && (a % 100 === 0 || (a % 100) < 10)) {
+    const bH = Math.floor(b / 100) * 100;
+    const bT = Math.floor((b % 100) / 10) * 10;
+    const bO = b % 10;
+    return `Subtract across zeros in stages! Start with ${a}: minus ${bH} is ${a - bH}, minus ${bT} is ${a - bH - bT}, minus ${bO} leaves ${result}!`;
+  }
+
   if (b === 1) {
     return `Start at ${a}, and take one step backward on the number line. You land on ${result}!`;
   }
@@ -155,8 +208,33 @@ function generateSubtractionExplanation(a, b, result) {
 }
 
 function generateMultiplicationExplanation(a, b, result) {
+  // 1. Directed Numbers
+  if (a < 0 && b < 0) {
+    return `Multiplying two negative numbers gives a positive result! A negative times a negative is positive: ${Math.abs(a)} times ${Math.abs(b)} is ${result}!`;
+  }
+  if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
+    return `Multiplying numbers with different signs gives a negative result! ${Math.abs(a)} times ${Math.abs(b)} is ${Math.abs(result)}, so the answer is ${result}!`;
+  }
+
+  // 2. Decimals
+  if (hasDecimals(a, b, result)) {
+    return `Count decimal places! Multiply the numbers as whole integers, then place the decimal point: ${a} times ${b} equals ${result}!`;
+  }
+
+  // 3. Squares
+  if (a === b) {
+    return `Squaring a number means multiplying it by itself: ${a} squared (${a}²) equals ${result}!`;
+  }
+
+  // 4. Powers of 10 mental multiplication (e.g. 40 × 70)
+  if (a >= 20 && b >= 20 && a % 10 === 0 && b % 10 === 0) {
+    const aLead = a / 10;
+    const bLead = b / 10;
+    return `Mental shortcut: ${aLead} times ${bLead} is ${aLead * bLead}. Now attach the two zeros to get ${result}!`;
+  }
+
   if (a === 1) return `One group of ${b} is just ${b}!`;
-  if (b === 1) return `${a} group of 1 is just ${a}!`;
+  if (b === 1) return `${a} groups of 1 is just ${a}!`;
   if (a === 2) return `Multiplying by 2 means doubling! Double ${b} is ${result}.`;
   if (b === 2) return `Multiplying by 2 means doubling! Double ${a} is ${result}.`;
 
@@ -174,6 +252,19 @@ function generateMultiplicationExplanation(a, b, result) {
 }
 
 function generateDivisionExplanation(a, b, result) {
+  // 1. Directed Numbers
+  if (a < 0 && b < 0) {
+    return `Dividing two negative numbers gives a positive result! Like signs make a positive: ${Math.abs(a)} divided by ${Math.abs(b)} is ${result}!`;
+  }
+  if ((a < 0 && b > 0) || (a > 0 && b < 0)) {
+    return `Dividing numbers with opposite signs gives a negative result! ${Math.abs(a)} divided by ${Math.abs(b)} is ${Math.abs(result)}, so the result is ${result}!`;
+  }
+
+  // 2. Decimals
+  if (hasDecimals(a, b, result)) {
+    return `To divide with decimals, multiply both numbers by powers of 10 to make the divisor a whole number: ${a} divided by ${b} equals ${result}!`;
+  }
+
   if (b === 1) return `Sharing ${a} items with 1 person means they get all ${a}!`;
   if (a === b) return `Sharing ${a} items among ${b} people means everyone gets exactly 1!`;
   if (b === 2) return `Dividing by 2 means finding half! Half of ${a} is ${result}.`;

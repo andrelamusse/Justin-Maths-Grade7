@@ -672,7 +672,19 @@ body.theme-dark .tier-hard {
 }
 
 .key-btn.key-back {
+  grid-column: span 2;
   color: #F59E0B;
+}
+
+.key-btn.key-minus {
+  color: #2563EB;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.key-btn.key-dot {
+  font-weight: 800;
+  font-size: 1.8rem;
 }
 
 .key-btn.key-submit {

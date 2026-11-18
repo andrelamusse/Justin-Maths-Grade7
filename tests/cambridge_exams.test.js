@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const examDir = path.resolve(__dirname, '../cambridge-stage7-exams');
 
-test('Cambridge Stage 7 Exams: All 8 HTML & PDF files exist and are populated', () => {
+test('Cambridge Stage 7 Exams: All 12 HTML & PDF files exist and are populated', () => {
   const expectedFiles = [
     // Stage 7 Paper 1 (Non-Calculator) & Memo
     'Cambridge_Stage7_Mathematics_Paper1_NonCalculator.html',
@@ -30,6 +30,16 @@ test('Cambridge Stage 7 Exams: All 8 HTML & PDF files exist and are populated', 
     'Cambridge_Stage7_Mathematics_EndOfYear_Paper2_Calculator.pdf',
     'Cambridge_Stage7_Mathematics_EndOfYear_MarkScheme_Memo.html',
     'Cambridge_Stage7_Mathematics_EndOfYear_MarkScheme_Memo.pdf',
+    // Cambridge Stage 7 Mock Paper 1 (Non-Calculator) & Memo
+    'Cambridge_Stage7_Mathematics_Mock_Paper1_NonCalculator.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper1_NonCalculator.pdf',
+    'Cambridge_Stage7_Mathematics_Mock_Paper1_MarkScheme_Memo.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper1_MarkScheme_Memo.pdf',
+    // Cambridge Stage 7 Mock Paper 2 (Calculator Permitted) & Memo
+    'Cambridge_Stage7_Mathematics_Mock_Paper2_Calculator.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper2_Calculator.pdf',
+    'Cambridge_Stage7_Mathematics_Mock_Paper2_MarkScheme_Memo.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper2_MarkScheme_Memo.pdf',
     // Portal Index
     'index.html'
   ];
@@ -51,7 +61,11 @@ test('Cambridge Stage 7 Typography: Zero raw coding math or unrendered LaTeX in 
     'Cambridge_Stage7_Mathematics_MidYear_Paper1_NonCalculator.html',
     'Cambridge_Stage7_Mathematics_MidYear_MarkScheme_Memo.html',
     'Cambridge_Stage7_Mathematics_EndOfYear_Paper2_Calculator.html',
-    'Cambridge_Stage7_Mathematics_EndOfYear_MarkScheme_Memo.html'
+    'Cambridge_Stage7_Mathematics_EndOfYear_MarkScheme_Memo.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper1_NonCalculator.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper1_MarkScheme_Memo.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper2_Calculator.html',
+    'Cambridge_Stage7_Mathematics_Mock_Paper2_MarkScheme_Memo.html'
   ];
 
   for (const file of htmlFiles) {
@@ -74,6 +88,8 @@ test('Cambridge Stage 7 Papers: Correct mark allocations and calculator rules', 
   const p2Html = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_Paper2_Calculator.html'), 'utf8');
   const myHtml = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_MidYear_Paper1_NonCalculator.html'), 'utf8');
   const eyHtml = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_EndOfYear_Paper2_Calculator.html'), 'utf8');
+  const m1Html = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_Mock_Paper1_NonCalculator.html'), 'utf8');
+  const m2Html = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_Mock_Paper2_Calculator.html'), 'utf8');
 
   assert.ok(p1Html.includes('NO CALCULATORS ALLOWED'), 'Stage 7 Paper 1 must be non-calculator');
   assert.ok(p1Html.includes('Total Marks: 45'), 'Stage 7 Paper 1 is 45 marks');
@@ -86,6 +102,12 @@ test('Cambridge Stage 7 Papers: Correct mark allocations and calculator rules', 
 
   assert.ok(eyHtml.includes('CALCULATOR PERMITTED'), 'End-of-Year allows calculator');
   assert.ok(eyHtml.includes('Total Marks: 45'), 'End-of-Year is 45 marks');
+
+  assert.ok(m1Html.includes('NO CALCULATORS ALLOWED'), 'Mock 1 is non-calculator');
+  assert.ok(m1Html.includes('Total Marks: 45'), 'Mock 1 is 45 marks');
+
+  assert.ok(m2Html.includes('CALCULATOR PERMITTED'), 'Mock 2 allows calculator');
+  assert.ok(m2Html.includes('Total Marks: 45'), 'Mock 2 is 45 marks');
 });
 
 test('Cambridge Stage 7 Memorandums: Contain Tutor Pedagogical Coaching Guide for Justin', () => {
@@ -93,11 +115,15 @@ test('Cambridge Stage 7 Memorandums: Contain Tutor Pedagogical Coaching Guide fo
   const m2Html = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_Paper2_MarkScheme_Memo.html'), 'utf8');
   const myMHtml = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_MidYear_MarkScheme_Memo.html'), 'utf8');
   const eyMHtml = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_EndOfYear_MarkScheme_Memo.html'), 'utf8');
+  const mock1MHtml = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_Mock_Paper1_MarkScheme_Memo.html'), 'utf8');
+  const mock2MHtml = fs.readFileSync(path.join(examDir, 'Cambridge_Stage7_Mathematics_Mock_Paper2_MarkScheme_Memo.html'), 'utf8');
 
   assert.ok(m1Html.includes('Tutor Pedagogical Coaching Guide for Justin Lamusse'), 'Memo 1 must have coaching guide');
   assert.ok(m2Html.includes('Tutor Pedagogical Coaching Guide for Justin Lamusse'), 'Memo 2 must have coaching guide');
   assert.ok(myMHtml.includes('Tutor Pedagogical Coaching Guide for Justin Lamusse'), 'Mid-Year Memo must have coaching guide');
   assert.ok(eyMHtml.includes('Tutor Pedagogical Coaching Guide for Justin Lamusse'), 'End-of-Year Memo must have coaching guide');
+  assert.ok(mock1MHtml.includes('Tutor Pedagogical Coaching Guide for Justin Lamusse'), 'Mock 1 Memo must have coaching guide');
+  assert.ok(mock2MHtml.includes('Tutor Pedagogical Coaching Guide for Justin Lamusse'), 'Mock 2 Memo must have coaching guide');
 });
 
 test('Cambridge Stage 7 Portal Index: Strictly Stage 7 with zero Stage 6 references', () => {

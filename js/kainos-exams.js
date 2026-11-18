@@ -352,6 +352,170 @@ export const KAINOS_PAPERS_CATALOG = [
         tutorTip: '1 is NOT prime! The prime numbers on a die are 2, 3, and 5.'
       }
     ]
+  },
+  {
+    id: 'stage7-m1',
+    code: '0862/M1',
+    title: 'Cambridge Stage 7 Mock Exam — Paper 1',
+    mode: 'Non-Calculator',
+    calculatorAllowed: false,
+    durationMinutes: 60,
+    totalMarks: 45,
+    description: 'Cambridge Lower Secondary Stage 7 Mock Examination Paper 1 (Non-Calculator). Rigorous exam testing directed numbers, mixed fractions, co-interior angles, linear equations, and coordinate reflections.',
+    pdfUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper1_NonCalculator.pdf',
+    htmlUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper1_NonCalculator.html',
+    memoPdfUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper1_MarkScheme_Memo.pdf',
+    memoHtmlUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper1_MarkScheme_Memo.html',
+    sampleQuestions: [
+      {
+        id: 's7m1-q1',
+        num: 1,
+        part: '(a)',
+        q: 'Calculate: \\(-14 - (-8)\\)',
+        marks: 1,
+        options: ['-6', '6', '-22', '22'],
+        answer: '-6',
+        memo: 'Award 1 mark for -6. Two negatives touching make addition: -14 + 8 = -6.',
+        tutorTip: 'Subtracting a negative means moving right on the number line: -14 + 8 = -6.'
+      },
+      {
+        id: 's7m1-q2',
+        num: 1,
+        part: '(b)',
+        q: 'Calculate: \\((-9) \\times (-7)\\)',
+        marks: 1,
+        options: ['63', '-63', '56', '-56'],
+        answer: '63',
+        memo: 'Award 1 mark for +63. Multiplying two negatives gives a positive.',
+        tutorTip: 'Same signs multiplied always result in a positive integer: (-)(-) = (+).'
+      },
+      {
+        id: 's7m1-q3',
+        num: 2,
+        part: '',
+        q: 'Work out in simplest form: \\(3\\frac{1}{5} \\div \\frac{8}{15}\\)',
+        marks: 2,
+        options: ['6', '5', '4', '8'],
+        answer: '6',
+        memo: '16/5 × 15/8 = (16/8) × (15/5) = 2 × 3 = 6.',
+        tutorTip: 'Convert mixed number to improper fraction 16/5, then invert 8/15 to 15/8 and cross-cancel.'
+      },
+      {
+        id: 's7m1-q4',
+        num: 3,
+        part: '',
+        q: 'Calculate: \\(4.8 \\div 0.12\\)',
+        marks: 2,
+        options: ['40', '4', '0.4', '400'],
+        answer: '40',
+        memo: 'Multiply numerator and denominator by 100: 480 ÷ 12 = 40.',
+        tutorTip: 'Shift the decimal point two places to the right on both numbers: 480 ÷ 12 = 40.'
+      },
+      {
+        id: 's7m1-q5',
+        num: 5,
+        part: '',
+        q: 'Two parallel lines are crossed by a transversal. If an interior angle is \\(72^\\circ\\), what is the size of the co-interior angle?',
+        marks: 2,
+        options: ['108°', '72°', '18°', '90°'],
+        answer: '108°',
+        memo: 'Co-interior (allied) angles add up to 180°: 180° - 72° = 108°.',
+        tutorTip: 'Co-interior C-angles inside parallel lines always sum to 180°.'
+      },
+      {
+        id: 's7m1-q6',
+        num: 6,
+        part: '',
+        q: 'Solve the equation: \\(5(2x - 3) = 35\\)',
+        marks: 2,
+        options: ['5', '4', '3', '6'],
+        answer: '5',
+        memo: 'Divide by 5: 2x - 3 = 7. Add 3: 2x = 10. Divide by 2: x = 5.',
+        tutorTip: 'Either divide both sides by 5 first or expand brackets: 10x - 15 = 35 => 10x = 50 => x = 5.'
+      }
+    ]
+  },
+  {
+    id: 'stage7-m2',
+    code: '0862/M2',
+    title: 'Cambridge Stage 7 Mock Exam — Paper 2',
+    mode: 'Calculator Permitted',
+    calculatorAllowed: true,
+    durationMinutes: 60,
+    totalMarks: 45,
+    description: 'Cambridge Lower Secondary Stage 7 Mock Examination Paper 2 (Calculator Permitted). Rigorous exam covering multi-step equations with fractions, simple interest, average speed, compound area, and bearings.',
+    pdfUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper2_Calculator.pdf',
+    htmlUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper2_Calculator.html',
+    memoPdfUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper2_MarkScheme_Memo.pdf',
+    memoHtmlUrl: 'cambridge-stage7-exams/Cambridge_Stage7_Mathematics_Mock_Paper2_MarkScheme_Memo.html',
+    sampleQuestions: [
+      {
+        id: 's7m2-q1',
+        num: 1,
+        part: '',
+        q: 'Use a calculator to evaluate: \\(\\frac{4.7^3 - \\sqrt{125.44}}{3.2 \\times 1.65}\\). Give your answer correct to 3 significant figures.',
+        marks: 3,
+        options: ['17.6', '17.55', '18.0', '16.8'],
+        answer: '17.6',
+        memo: 'Numerator = 103.823 - 11.2 = 92.623. Denominator = 5.28. 92.623 / 5.28 = 17.5422... rounds to 17.6 (3 s.f.).',
+        tutorTip: 'Calculate the numerator and denominator separately before dividing, or use brackets on your calculator!'
+      },
+      {
+        id: 's7m2-q2',
+        num: 2,
+        part: '',
+        q: 'Solve the equation: \\(\\frac{3x - 4}{5} = \\frac{x + 6}{2}\\)',
+        marks: 4,
+        options: ['38', '19', '28', '14'],
+        answer: '38',
+        memo: 'Cross-multiply: 2(3x - 4) = 5(x + 6) => 6x - 8 = 5x + 30 => x = 38.',
+        tutorTip: 'Cross-multiply across the equals sign to eliminate fractions in one clean step.'
+      },
+      {
+        id: 's7m2-q3',
+        num: 3,
+        part: '',
+        q: 'Justin invests R 5000 at 6% simple interest per year for 3 years. What is the total interest earned?',
+        marks: 2,
+        options: ['R 900', 'R 300', 'R 5900', 'R 1200'],
+        answer: 'R 900',
+        memo: 'I = P × r × t = 5000 × 0.06 × 3 = R 900.',
+        tutorTip: 'Simple interest formula: I = (P × R × T) / 100.'
+      },
+      {
+        id: 's7m2-q4',
+        num: 4,
+        part: '',
+        q: 'A tourist bus travels 231 km in 2 hours and 45 minutes. Calculate its average speed in km/h.',
+        marks: 3,
+        options: ['84 km/h', '82 km/h', '90 km/h', '77 km/h'],
+        answer: '84 km/h',
+        memo: '45 mins = 45/60 = 0.75 hours. Total time = 2.75 hours. Speed = 231 ÷ 2.75 = 84 km/h.',
+        tutorTip: 'Never divide by 2.45! 45 minutes is 3 quarters of an hour, which is 0.75 hours.'
+      },
+      {
+        id: 's7m2-q5',
+        num: 5,
+        part: '',
+        q: 'A metal plate is a square of side 10 cm with a semicircle of diameter 8 cm cut out. Using \\(\\pi = 3.142\\), calculate the remaining area.',
+        marks: 4,
+        options: ['74.87 cm²', '80.00 cm²', '64.87 cm²', '87.43 cm²'],
+        answer: '74.87 cm²',
+        memo: 'Square area = 10² = 100 cm². Semicircle radius = 4 cm. Semicircle area = 0.5 × 3.142 × 16 = 25.136 cm². Remaining area = 100 - 25.136 = 74.864 cm² ≈ 74.87 cm².',
+        tutorTip: 'Remember that radius is HALF the diameter: 8 ÷ 2 = 4 cm. Semicircle area is half of πr².'
+      },
+      {
+        id: 's7m2-q6',
+        num: 6,
+        part: '',
+        q: 'Lighthouse L is on a bearing of \\(140^\\circ\\) from Harbour H. What is the back-bearing of Harbour H from Lighthouse L?',
+        marks: 2,
+        options: ['320°', '040°', '220°', '310°'],
+        answer: '320°',
+        memo: 'Bearing < 180°, so add 180°: 140° + 180° = 320°.',
+        tutorTip: 'For back-bearing: if original bearing is less than 180°, ADD 180°.'
+      }
+    ]
   }
 ];
 

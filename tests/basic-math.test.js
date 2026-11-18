@@ -1,7 +1,7 @@
-// basic-math.test.js - Automated tests for Basic Math Grinder logic
+// basic-math.test.js - Automated tests for Basic Math Grinder Grade 7 logic
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MathGrinderApp, LEVEL_DEFINITIONS, CATEGORIES, SUB_CATEGORIES, PAST_EXAM_PAPERS } from '../basic-math-grinder/app.js';
+import { MathGrinderApp, LEVEL_DEFINITIONS, CATEGORIES, SUB_CATEGORIES, PAST_EXAM_PAPERS, cleanNum } from '../basic-math-grinder/app.js';
 import { generateVerbalExplanation } from '../basic-math-grinder/speech-scripts.js';
 
 test('Level definitions are configured for all 4 operations', () => {
@@ -63,30 +63,29 @@ test('Category-based question generation produces correct operations for all 7 c
   for (let i = 0; i < 30; i++) {
     const q = app.generateQuestion('add', 'easy');
     assert.equal(q.op, '+');
-    assert.equal(q.result, q.a + q.b);
+    assert.equal(q.result, cleanNum(q.a + q.b));
   }
 
   // 2. Subtraction only
   for (let i = 0; i < 30; i++) {
     const q = app.generateQuestion('sub', 'easy');
     assert.equal(q.op, '-');
-    assert.ok(q.a >= q.b);
-    assert.equal(q.result, q.a - q.b);
+    assert.ok(q.a > q.b);
+    assert.equal(q.result, cleanNum(q.a - q.b));
   }
 
   // 3. Multiplication only
   for (let i = 0; i < 30; i++) {
     const q = app.generateQuestion('mul', 'easy');
     assert.equal(q.op, '×');
-    assert.equal(q.result, q.a * q.b);
+    assert.equal(q.result, cleanNum(q.a * q.b));
   }
 
   // 4. Division only
   for (let i = 0; i < 30; i++) {
     const q = app.generateQuestion('div', 'easy');
     assert.equal(q.op, '÷');
-    assert.equal(q.a % q.b, 0);
-    assert.equal(q.result, q.a / q.b);
+    assert.equal(q.result, cleanNum(q.a / q.b));
   }
 
   // 5. Mixed Addition & Subtraction produces both + and -
@@ -95,11 +94,8 @@ test('Category-based question generation produces correct operations for all 7 c
     const q = app.generateQuestion('mixed_add_sub', 'medium');
     assert.ok(q.op === '+' || q.op === '-', `Invalid op ${q.op} in mixed_add_sub`);
     opsSeenAddSub.add(q.op);
-    if (q.op === '+') assert.equal(q.result, q.a + q.b);
-    if (q.op === '-') {
-      assert.ok(q.a >= q.b);
-      assert.equal(q.result, q.a - q.b);
-    }
+    if (q.op === '+') assert.equal(q.result, cleanNum(q.a + q.b));
+    if (q.op === '-') assert.equal(q.result, cleanNum(q.a - q.b));
   }
   assert.ok(opsSeenAddSub.has('+'), 'mixed_add_sub must generate addition questions');
   assert.ok(opsSeenAddSub.has('-'), 'mixed_add_sub must generate subtraction questions');
@@ -110,11 +106,8 @@ test('Category-based question generation produces correct operations for all 7 c
     const q = app.generateQuestion('mixed_mul_div', 'medium');
     assert.ok(q.op === '×' || q.op === '÷', `Invalid op ${q.op} in mixed_mul_div`);
     opsSeenMulDiv.add(q.op);
-    if (q.op === '×') assert.equal(q.result, q.a * q.b);
-    if (q.op === '÷') {
-      assert.equal(q.a % q.b, 0);
-      assert.equal(q.result, q.a / q.b);
-    }
+    if (q.op === '×') assert.equal(q.result, cleanNum(q.a * q.b));
+    if (q.op === '÷') assert.equal(q.result, cleanNum(q.a / q.b));
   }
   assert.ok(opsSeenMulDiv.has('×'), 'mixed_mul_div must generate multiplication questions');
   assert.ok(opsSeenMulDiv.has('÷'), 'mixed_mul_div must generate division questions');
@@ -123,14 +116,14 @@ test('Category-based question generation produces correct operations for all 7 c
   const opsSeenAll = new Set();
   for (let i = 0; i < 100; i++) {
     const q = app.generateQuestion('all_mixed', 'medium');
-    assert.ok(['+', '-', '×', '÷'].includes(q.op), `Invalid op ${q.op} in all_mixed`);
+    assert.ok(['+', '-', '−', '×', '÷'].includes(q.op), `Invalid op ${q.op} in all_mixed`);
     opsSeenAll.add(q.op);
-    if (q.op === '+') assert.equal(q.result, q.a + q.b);
-    if (q.op === '-') assert.equal(q.result, q.a - q.b);
-    if (q.op === '×') assert.equal(q.result, q.a * q.b);
-    if (q.op === '÷') assert.equal(q.result, q.a / q.b);
+    if (q.op === '+') assert.equal(q.result, cleanNum(q.a + q.b));
+    if (q.op === '-' || q.op === '−') assert.equal(q.result, cleanNum(q.a - q.b));
+    if (q.op === '×') assert.equal(q.result, cleanNum(q.a * q.b));
+    if (q.op === '÷') assert.equal(q.result, cleanNum(q.a / q.b));
   }
-  assert.equal(opsSeenAll.size, 4, 'all_mixed must generate all 4 operations (+, -, ×, ÷)');
+  assert.ok(opsSeenAll.size >= 4, 'all_mixed must generate all 4 operations (+, -, ×, ÷)');
 });
 
 test('Gradual ramp-up mode ("all") transitions difficulty as streak builds', () => {
@@ -156,8 +149,8 @@ test('Gradual ramp-up mode ("all") transitions difficulty as streak builds', () 
   app.streak = 0;
   const qEasy = app.generateQuestion('add', 'all');
   assert.equal(qEasy.tier, 'easy');
-  assert.ok(qEasy.a < 10 && qEasy.b <= 10, 'Easy addition must use single digit operands');
-  assert.ok(qEasy.result <= 11, 'Easy addition sums within basics range');
+  assert.ok(qEasy.a >= 10 && qEasy.b >= 10, 'Easy Grade 7 addition must use 2-digit operands');
+  assert.equal(qEasy.result, cleanNum(qEasy.a + qEasy.b));
 
   app.streak = 4;
   const qMedium = app.generateQuestion('add', 'all');
@@ -190,18 +183,22 @@ test('MathGrinderApp generates valid addition questions for all levels', () => {
     for (let trial = 0; trial < 20; trial++) {
       const q = app.generateQuestion('+', lvl);
       assert.equal(q.op, '+');
-      assert.ok(q.a >= 1, `a must be >= 1, got ${q.a}`);
-      assert.ok(q.b >= 1, `b must be >= 1, got ${q.b}`);
-      assert.equal(q.result, q.a + q.b, `Addition failed: ${q.a} + ${q.b} != ${q.result}`);
+      assert.equal(q.result, cleanNum(q.a + q.b), `Addition failed: ${q.a} + ${q.b} != ${q.result}`);
 
       if (lvl === 1) {
-        assert.ok(q.a <= 5 && q.b <= 5, `Level 1 numbers must be <= 5`);
+        // Level 1: 2-digit regrouping
+        assert.ok(q.a >= 10 && q.b >= 10, `Level 1 addition must be 2-digit, got ${q.a}, ${q.b}`);
+        assert.ok((q.a % 10) + (q.b % 10) >= 10, `Level 1 addition must regroup in ones`);
+      } else if (lvl === 2) {
+        // Level 2: 3-digit column addition
+        assert.ok(q.a >= 100 || q.b >= 100, `Level 2 addition should have 3-digit operands`);
+      } else if (lvl === 3) {
+        // Level 3: Decimal addition
+        assert.equal(q.result, cleanNum(q.a + q.b));
       } else if (lvl === 4) {
-        assert.ok(q.a >= 10 && q.b >= 10, `Level 4 should have 2-digit numbers`);
-        assert.ok((q.a % 10) + (q.b % 10) < 10, `Level 4 must not have carry in ones`);
-      } else if (lvl === 5) {
-        assert.ok(q.a >= 10 && q.b >= 10, `Level 5 should have 2-digit numbers`);
-        assert.ok((q.a % 10) + (q.b % 10) >= 10, `Level 5 should have regrouping/carry`);
+        // Level 4: Directed numbers (integers across zero)
+        assert.ok(q.a < 0 || q.b < 0, `Level 4 addition must include directed numbers`);
+        assert.equal(q.result, q.a + q.b);
       }
     }
   }
@@ -213,22 +210,23 @@ test('MathGrinderApp generates valid subtraction questions for all levels', () =
     for (let trial = 0; trial < 20; trial++) {
       const q = app.generateQuestion('-', lvl);
       assert.equal(q.op, '-');
-      assert.ok(q.a >= q.b, `Subtraction cannot yield negative: ${q.a} - ${q.b}`);
-      assert.equal(q.result, q.a - q.b, `Subtraction math incorrect: ${q.a} - ${q.b} != ${q.result}`);
+      assert.equal(q.result, cleanNum(q.a - q.b), `Subtraction math incorrect: ${q.a} - ${q.b} != ${q.result}`);
 
       if (lvl === 1) {
-        assert.ok(q.a <= 5, `Level 1 subtraction must be within 5`);
+        // Level 1: 2-digit borrowing
+        assert.ok(q.a >= 20 && q.b >= 10, `Level 1 subtraction must be 2-digit: ${q.a} - ${q.b}`);
+        assert.ok((q.a % 10) < (q.b % 10), `Level 1 subtraction must require borrowing: ${q.a} - ${q.b}`);
+        assert.ok(q.a > q.b, `Level 1 subtraction must have positive result`);
+      } else if (lvl === 2) {
+        // Level 2: 3-digit subtraction across zeros
+        assert.ok(q.a >= 200 && q.b >= 100, `Level 2 subtraction must be 3-digit across zeros`);
+        assert.ok(q.a > q.b);
       } else if (lvl === 3) {
-        assert.ok(q.a >= 11 && q.a <= 18, `Level 3 must be a teen number: ${q.a}`);
-        assert.ok(q.b <= 9, `Level 3 subtrahend must be single digit: ${q.b}`);
-        assert.ok((q.a % 10) < q.b, `Level 3 must bridge across 10: ${q.a} - ${q.b}`);
-        assert.ok(q.result >= 1 && q.result <= 9, `Level 3 result must be single digit: ${q.result}`);
+        // Level 3: Decimal subtraction
+        assert.equal(q.result, cleanNum(q.a - q.b));
       } else if (lvl === 4) {
-        assert.ok(q.a >= 20 && q.b >= 10, `Level 4 subtraction should be 2-digit`);
-        assert.ok((q.a % 10) >= (q.b % 10), `Level 4 subtraction must not require borrowing`);
-      } else if (lvl === 5) {
-        assert.ok(q.a >= 20 && q.b >= 10, `Level 5 subtraction should be 2-digit`);
-        assert.ok((q.a % 10) < (q.b % 10), `Level 5 subtraction must require borrowing`);
+        // Level 4: Directed subtraction (negative numbers or crossing zero)
+        assert.equal(q.result, cleanNum(q.a - q.b));
       }
     }
   }
@@ -240,21 +238,21 @@ test('MathGrinderApp generates valid multiplication questions', () => {
     for (let trial = 0; trial < 20; trial++) {
       const q = app.generateQuestion('×', lvl);
       assert.equal(q.op, '×');
-      assert.equal(q.result, q.a * q.b, `Multiplication incorrect: ${q.a} × ${q.b} != ${q.result}`);
-      assert.ok(q.a > 0 && q.b > 0, `Operands must be positive`);
+      assert.equal(q.result, cleanNum(q.a * q.b), `Multiplication incorrect: ${q.a} × ${q.b} != ${q.result}`);
+      assert.ok(q.a !== 0 && q.b !== 0, `Operands must not be zero`);
     }
   }
 });
 
-test('MathGrinderApp generates valid division questions with whole integer results', () => {
+test('MathGrinderApp generates valid division questions with whole integer results for speed facts', () => {
   const app = new MathGrinderApp();
-  for (let lvl = 1; lvl <= 4; lvl++) {
+  for (let lvl of [1, 2, 4]) {
     for (let trial = 0; trial < 20; trial++) {
       const q = app.generateQuestion('÷', lvl);
       assert.equal(q.op, '÷');
-      assert.ok(q.b > 0, `Divisor cannot be zero`);
-      assert.equal(q.a % q.b, 0, `Division must divide evenly with 0 remainder: ${q.a} ÷ ${q.b}`);
-      assert.equal(q.result, q.a / q.b, `Division math incorrect: ${q.a} ÷ ${q.b} != ${q.result}`);
+      assert.ok(q.b !== 0, `Divisor cannot be zero`);
+      assert.equal(q.result, cleanNum(q.a / q.b), `Division math incorrect: ${q.a} ÷ ${q.b} != ${q.result}`);
+      assert.ok(Number.isInteger(q.result), `Quotient for lvl ${lvl} should be integer: ${q.result}`);
     }
   }
 });
@@ -278,7 +276,7 @@ test('generateVerbalExplanation produces cognitive explanations for all operatio
 
   // Test 9+1 number bonds to 10
   const text9Plus1 = generateVerbalExplanation('+', 9, 1, 10);
-  assert.ok(text9Plus1.includes('best friends of 10') || text9Plus1.includes('count up just one more'), '9+1 should use making 10 or count up 1 rather than 9s trick');
+  assert.ok(text9Plus1.includes('best friends of 10') || text9Plus1.includes('count up just one more'), '9+1 should use making 10 or count up 1');
 
   // Test multiplication
   const textMult = generateVerbalExplanation('×', 2, 4, 8);
@@ -286,27 +284,25 @@ test('generateVerbalExplanation produces cognitive explanations for all operatio
 
   // Test division
   const textDiv = generateVerbalExplanation('÷', 12, 3, 4);
-  assert.ok(textDiv.includes('groups') || textDiv.includes('shared'), 'Should mention groups or sharing');
+  assert.ok(textDiv.includes('groups') || textDiv.includes('sharing'), 'Should mention groups or sharing');
 });
 
-test('Division Level 4 can generate tables up to 12 and dividends up to 144', () => {
+test('Division Level 1 generates 144 ÷ 12 speed facts up to 144', () => {
   const app = new MathGrinderApp();
-  let sawAbove100 = false;
-  let sawDivisor11Or12 = false;
+  let sawAbove50 = false;
 
-  for (let i = 0; i < 300; i++) {
-    const q = app.generateQuestion('÷', 4);
-    if (q.a > 100) sawAbove100 = true;
-    if (q.b >= 11) sawDivisor11Or12 = true;
+  for (let i = 0; i < 100; i++) {
+    const q = app.generateQuestion('÷', 1);
+    if (q.a > 50) sawAbove50 = true;
     assert.ok(q.a <= 144, `Dividend should not exceed 144, got ${q.a}`);
-    assert.equal(q.a % q.b, 0, `Must divide evenly: ${q.a} / ${q.b}`);
+    assert.equal(q.result, cleanNum(q.a / q.b));
+    assert.ok(Number.isInteger(q.result));
   }
 
-  assert.ok(sawAbove100, 'Should generate dividends above 100 in mastery division');
-  assert.ok(sawDivisor11Or12, 'Should generate divisors 11 or 12 in mastery division');
+  assert.ok(sawAbove50, 'Should generate dividends above 50 in 144 ÷ 12 speed facts');
 });
 
-test('Verbal speech explanations never contain negative numbers for subtraction', () => {
+test('Verbal speech explanations never contain negative numbers for subtraction where a >= b >= 1', () => {
   for (let a = 1; a <= 100; a++) {
     for (let b = 1; b <= a; b++) {
       const res = a - b;
@@ -320,7 +316,6 @@ test('Verbal speech explanations never contain negative numbers for subtraction'
 
 test('Step-by-step breakdown handles teen subtractions with jumping or place-value steps', () => {
   const app = new MathGrinderApp();
-  // Mock breakdown container DOM
   const container = { innerHTML: '', classList: { contains: () => false, remove: () => {}, add: () => {} } };
   const btn = { textContent: '' };
   app.dom = { breakdownContainer: container, breakdownBtn: btn };
@@ -354,13 +349,10 @@ test('Past Exam Papers suite has 6 complete papers with 15 mathematically verifi
 
     // Verify every static question is mathematically exact
     for (const q of paper.questions) {
-      if (q.op === '+') assert.equal(q.result, q.a + q.b);
-      if (q.op === '-') assert.equal(q.result, q.a - q.b);
-      if (q.op === '×') assert.equal(q.result, q.a * q.b);
-      if (q.op === '÷') {
-        assert.equal(q.a % q.b, 0);
-        assert.equal(q.result, q.a / q.b);
-      }
+      if (q.op === '+') assert.equal(q.result, cleanNum(q.a + q.b));
+      if (q.op === '-') assert.equal(q.result, cleanNum(q.a - q.b));
+      if (q.op === '×') assert.equal(q.result, cleanNum(q.a * q.b));
+      if (q.op === '÷') assert.equal(q.result, cleanNum(q.a / q.b));
     }
 
     // Test standard paper execution and grading
@@ -369,7 +361,7 @@ test('Past Exam Papers suite has 6 complete papers with 15 mathematically verifi
 
     for (let i = 0; i < 15; i++) {
       const q = exam.questions[i];
-      const entered = i < 13 ? q.result : 9999; // 13 right, 2 wrong
+      const entered = i < 13 ? q.result : 9999;
       app.submitExamAnswer(entered);
     }
 
@@ -385,10 +377,10 @@ test('Past Exam Papers suite has 6 complete papers with 15 mathematically verifi
     assert.equal(variantExam.questions.length, 15);
     assert.equal(variantExam.isVariant, true);
     for (const vq of variantExam.questions) {
-      if (vq.op === '+') assert.equal(vq.result, vq.a + vq.b);
-      if (vq.op === '-') assert.equal(vq.result, vq.a - vq.b);
-      if (vq.op === '×') assert.equal(vq.result, vq.a * vq.b);
-      if (vq.op === '÷') assert.equal(vq.result, vq.a / vq.b);
+      if (vq.op === '+') assert.equal(vq.result, cleanNum(vq.a + vq.b));
+      if (vq.op === '-') assert.equal(vq.result, cleanNum(vq.a - vq.b));
+      if (vq.op === '×') assert.equal(vq.result, cleanNum(vq.a * vq.b));
+      if (vq.op === '÷') assert.equal(vq.result, cleanNum(vq.a / vq.b));
     }
   }
 });

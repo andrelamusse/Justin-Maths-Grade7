@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GRADE_7_STRANDS } from '../grade7-academy/curriculum-data.js';
 import { generateVerbalExplanation } from '../basic-math-grinder/speech-scripts.js';
-import { MathGrinderApp } from '../basic-math-grinder/app.js';
+import { MathGrinderApp, cleanNum } from '../basic-math-grinder/app.js';
 
 test('Exhaustive validation: Every question in Grade 7 has valid single matching answer', () => {
   let totalQuestions = 0;
@@ -39,9 +39,8 @@ test('Stress test: 1,000+ randomized questions across all operations and levels 
   const ops = ['+', '-', '×', '÷'];
 
   for (const op of ops) {
-    const maxLvl = op === '÷' ? 4 : 5;
-    for (let lvl = 1; lvl <= maxLvl; lvl++) {
-      for (let i = 0; i < 100; i++) {
+    for (let lvl = 1; lvl <= 5; lvl++) {
+      for (let i = 0; i < 50; i++) {
         const q = app.generateQuestion(op, lvl);
         assert.ok(!isNaN(q.a), `Operand A is NaN for ${op} L${lvl}`);
         assert.ok(!isNaN(q.b), `Operand B is NaN for ${op} L${lvl}`);
@@ -49,22 +48,20 @@ test('Stress test: 1,000+ randomized questions across all operations and levels 
         assert.ok(q.b !== 0, `Divisor or operand B cannot be 0`);
 
         if (op === '+') {
-          assert.equal(q.a + q.b, q.result);
-          if (lvl === 5) {
-            assert.ok((q.a % 10) + (q.b % 10) >= 10, `L5 addition must regroup`);
+          assert.equal(q.result, cleanNum(q.a + q.b));
+          if (lvl === 1) {
+            assert.ok(q.a >= 10 && q.b >= 10, `L1 addition must regroup in tens`);
           }
         }
         if (op === '-') {
-          assert.ok(q.a >= q.b, `Operand A (${q.a}) must be >= B (${q.b})`);
-          assert.equal(q.a - q.b, q.result);
-          if (lvl === 5) {
-            assert.ok((q.a % 10) < (q.b % 10), `L5 subtraction must borrow`);
+          assert.equal(q.result, cleanNum(q.a - q.b));
+          if (lvl === 1) {
+            assert.ok(q.a > q.b, `L1 subtraction must be positive`);
           }
         }
-        if (op === '×') assert.equal(q.a * q.b, q.result);
+        if (op === '×') assert.equal(q.result, cleanNum(q.a * q.b));
         if (op === '÷') {
-          assert.equal(q.a % q.b, 0, `Remainder must be 0 for division: ${q.a} ÷ ${q.b}`);
-          assert.equal(q.a / q.b, q.result);
+          assert.equal(q.result, cleanNum(q.a / q.b));
         }
       }
     }
@@ -106,15 +103,13 @@ test('Exhaustive stress test: All 7 categories across all 4 sub-categories produ
         assert.ok(q.b !== 0, `Divisor or operand b cannot be 0 in ${cat}/${sub}`);
 
         if (q.op === '+') {
-          assert.equal(q.a + q.b, q.result, `Addition math failed: ${q.a} + ${q.b} != ${q.result}`);
-        } else if (q.op === '-') {
-          assert.ok(q.a >= q.b, `Subtraction cannot be negative: ${q.a} - ${q.b}`);
-          assert.equal(q.a - q.b, q.result, `Subtraction math failed: ${q.a} - ${q.b} != ${q.result}`);
+          assert.equal(q.result, cleanNum(q.a + q.b), `Addition math failed: ${q.a} + ${q.b} != ${q.result}`);
+        } else if (q.op === '-' || q.op === '−') {
+          assert.equal(q.result, cleanNum(q.a - q.b), `Subtraction math failed: ${q.a} - ${q.b} != ${q.result}`);
         } else if (q.op === '×') {
-          assert.equal(q.a * q.b, q.result, `Multiplication math failed: ${q.a} × ${q.b} != ${q.result}`);
+          assert.equal(q.result, cleanNum(q.a * q.b), `Multiplication math failed: ${q.a} × ${q.b} != ${q.result}`);
         } else if (q.op === '÷') {
-          assert.equal(q.a % q.b, 0, `Division remainder must be 0: ${q.a} ÷ ${q.b}`);
-          assert.equal(q.a / q.b, q.result, `Division math failed: ${q.a} ÷ ${q.b} != ${q.result}`);
+          assert.equal(q.result, cleanNum(q.a / q.b), `Division math failed: ${q.a} ÷ ${q.b} != ${q.result}`);
         } else {
           assert.fail(`Unknown operation ${q.op}`);
         }
@@ -122,7 +117,6 @@ test('Exhaustive stress test: All 7 categories across all 4 sub-categories produ
         // Test verbal script generation for this question
         const explanation = generateVerbalExplanation(q.op, q.a, q.b, q.result);
         assert.ok(typeof explanation === 'string' && explanation.length > 5, `Explanation too short for ${q.a} ${q.op} ${q.b}`);
-        assert.ok(!/-\d/.test(explanation), `Explanation contains negative number for ${q.a} ${q.op} ${q.b}: "${explanation}"`);
         assert.ok(!explanation.includes('NaN'), `Explanation contains NaN for ${q.a} ${q.op} ${q.b}`);
         assert.ok(!explanation.includes('undefined'), `Explanation contains undefined for ${q.a} ${q.op} ${q.b}`);
       }

@@ -3,38 +3,39 @@ import { MathVisualizer } from './visualizers.js';
 import { sound } from './audio.js';
 import { generateVerbalExplanation } from './speech-scripts.js';
 
-// Level definitions (Preserved for full backwards compatibility)
+// Level definitions for Cambridge Stage 7 Non-Calculator Arithmetic
 export const LEVEL_DEFINITIONS = {
   '+': [
-    { id: 1, name: 'Micro Basics (1 - 5)', desc: '1+4, 2+3, 1+1...' },
-    { id: 2, name: 'Making 10', desc: '7+3, 6+4, 8+2...' },
-    { id: 3, name: 'Teens & Bridges', desc: '8+5, 9+7, 7+6...' },
-    { id: 4, name: '2-Digit (No Regrouping)', desc: '34+23, 42+15...' },
-    { id: 5, name: '2-Digit (With Regrouping)', desc: '48+27, 39+45...' }
+    { id: 1, name: '2-Digit Regrouping', desc: '48 + 37, 65 + 28, 76 + 59...' },
+    { id: 2, name: '3-Digit Column Addition', desc: '347 + 285, 458 + 376, 529 + 184...' },
+    { id: 3, name: 'Decimal Addition', desc: '4.6 + 7.82, 12.4 + 3.75, 0.65 + 1.8...' },
+    { id: 4, name: 'Directed Numbers (Integers)', desc: '-18 + 25, -34 + (-17), -45 + 60...' },
+    { id: 5, name: 'Stage 7 Addition Mastery', desc: 'Multi-digit, decimals & directed integers' }
   ],
   '-': [
-    { id: 1, name: 'Facts within 5', desc: '5-2, 4-1, 3-2...' },
-    { id: 2, name: 'Facts within 10', desc: '10-4, 8-3, 9-5...' },
-    { id: 3, name: 'Teen Bridges', desc: '14-6, 13-5, 17-9...' },
-    { id: 4, name: '2-Digit (No Borrowing)', desc: '47-23, 68-35...' },
-    { id: 5, name: '2-Digit (With Borrowing)', desc: '52-28, 71-34...' }
+    { id: 1, name: '2-Digit Borrowing', desc: '52 - 28, 71 - 34, 83 - 47...' },
+    { id: 2, name: '3-Digit Subtraction Across Zeros', desc: '500 - 268, 704 - 389, 602 - 245...' },
+    { id: 3, name: 'Decimal Subtraction', desc: '15.4 - 8.65, 20.0 - 6.35, 8.2 - 3.75...' },
+    { id: 4, name: 'Directed Numbers (Negative Subtraction)', desc: '-14 - (-8), -25 - 13, 8 - 23...' },
+    { id: 5, name: 'Stage 7 Subtraction Mastery', desc: 'Multi-digit, decimals & negative integers' }
   ],
   '×': [
-    { id: 1, name: '2x, 5x, 10x Tables', desc: 'Double, nickels & tens' },
-    { id: 2, name: '3x, 4x Tables', desc: 'Triples & double-doubles' },
-    { id: 3, name: '6x, 7x, 8x, 9x Tables', desc: 'Upper times tables' },
-    { id: 4, name: '11x & 12x Tables', desc: 'Eleventh & twelfth facts' },
-    { id: 5, name: 'Mastery Mix (1 - 12)', desc: 'All times tables mix' }
+    { id: 1, name: '12×12 Speed Tables', desc: '7 × 8, 9 × 6, 12 × 7, 8 × 12...' },
+    { id: 2, name: 'Multi-Digit Mental Multiplication', desc: '14 × 6, 25 × 16, 40 × 70, 15 × 8...' },
+    { id: 3, name: 'Decimal Multiplication', desc: '0.4 × 0.08, 1.2 × 1.2, 0.03 × 0.5...' },
+    { id: 4, name: 'Directed Numbers & Squares / Roots', desc: '(-7) × (-4), 6 × (-9), 7² = 49, √144 = 12...' },
+    { id: 5, name: 'Stage 7 Multiplication Mastery', desc: 'Tables, decimals, powers & directed numbers' }
   ],
   '÷': [
-    { id: 1, name: 'Halves & ÷2', desc: '8÷2, 14÷2, 20÷2...' },
-    { id: 2, name: '÷5 & ÷10', desc: '35÷5, 70÷10, 45÷5...' },
-    { id: 3, name: '÷3 & ÷4', desc: '24÷3, 36÷4, 28÷4...' },
-    { id: 4, name: 'Mastery Division', desc: 'Even division up to 144' }
+    { id: 1, name: '144 ÷ 12 Speed Facts', desc: '72 ÷ 8, 96 ÷ 8, 108 ÷ 9, 132 ÷ 11...' },
+    { id: 2, name: 'Multi-Digit Mental Division', desc: '180 ÷ 15, 360 ÷ 12, 150 ÷ 25, 240 ÷ 20...' },
+    { id: 3, name: 'Decimal Division', desc: '4.8 ÷ 0.12, 7.2 ÷ 9, 36 ÷ 0.6, 4.5 ÷ 0.5...' },
+    { id: 4, name: 'Directed Number Division', desc: '(-72) ÷ (-8), (-56) ÷ 7, 81 ÷ (-9)...' },
+    { id: 5, name: 'Stage 7 Division Mastery', desc: 'Multi-digit, decimals & directed integers' }
   ]
 };
 
-// Streamlined 7 Category Definitions
+// Streamlined 7 Category Definitions for Cambridge Stage 7
 export const CATEGORIES = [
   {
     id: 'add',
@@ -42,7 +43,7 @@ export const CATEGORIES = [
     symbol: '+',
     icon: '➕',
     ops: ['+'],
-    desc: 'Practice addition facts'
+    desc: 'Multi-digit regrouping, decimals & directed integers'
   },
   {
     id: 'sub',
@@ -50,7 +51,7 @@ export const CATEGORIES = [
     symbol: '-',
     icon: '➖',
     ops: ['-'],
-    desc: 'Practice subtraction facts'
+    desc: 'Column borrowing across zeros, decimals & negative numbers'
   },
   {
     id: 'mul',
@@ -58,7 +59,7 @@ export const CATEGORIES = [
     symbol: '×',
     icon: '✖️',
     ops: ['×'],
-    desc: 'Practice multiplication tables'
+    desc: '12×12 speed tables, multi-digit, decimals & squares/roots'
   },
   {
     id: 'div',
@@ -66,7 +67,7 @@ export const CATEGORIES = [
     symbol: '÷',
     icon: '➗',
     ops: ['÷'],
-    desc: 'Practice division facts'
+    desc: 'Speed division facts, multi-digit, decimals & directed numbers'
   },
   {
     id: 'mixed_add_sub',
@@ -75,7 +76,7 @@ export const CATEGORIES = [
     symbol: '+ & -',
     icon: '➕➖',
     ops: ['+', '-'],
-    desc: 'Mixed addition and subtraction problems'
+    desc: 'Mixed addition and subtraction with directed integers'
   },
   {
     id: 'mixed_mul_div',
@@ -84,7 +85,7 @@ export const CATEGORIES = [
     symbol: '× & ÷',
     icon: '✖️➗',
     ops: ['×', '÷'],
-    desc: 'Mixed multiplication and division problems'
+    desc: 'Mixed multiplication and division with decimals and signs'
   },
   {
     id: 'all_mixed',
@@ -93,7 +94,7 @@ export const CATEGORIES = [
     symbol: '+, -, ×, ÷',
     icon: '🎲',
     ops: ['+', '-', '×', '÷'],
-    desc: 'All 4 operations combined'
+    desc: 'All 4 operations combined with BIDMAS order of operations'
   }
 ];
 
@@ -103,25 +104,25 @@ export const SUB_CATEGORIES = [
     id: 'easy',
     name: 'Easy',
     icon: '🌱',
-    desc: 'Core fundamentals & small numbers'
+    desc: 'Grade 7 speed tables & 2-digit regrouping'
   },
   {
     id: 'medium',
     name: 'Medium',
     icon: '⚡',
-    desc: 'Bridges to 10 & 2-digit basics'
+    desc: '3-digit column calculations & decimals'
   },
   {
     id: 'hard',
     name: 'Hard',
     icon: '🔥',
-    desc: 'Regrouping, borrowing & upper tables'
+    desc: 'Directed numbers, squares/roots & BIDMAS'
   },
   {
     id: 'all',
     name: 'All (Gradual)',
     icon: '🚀',
-    desc: 'Progressive mode: dynamically ramps up difficulty as questions are solved'
+    desc: 'Progressive ramp-up from core speed facts to advanced Stage 7 arithmetic'
   }
 ];
 
@@ -277,6 +278,27 @@ export const PAST_EXAM_PAPERS = [
       { section: 'Section C: Final Exam Word Problems', op: '÷', a: 144, b: 12, result: 12, marks: 3, level: 4, wordPrompt: '144 chairs are arranged in 12 equal rows in the school hall. How many chairs are in each row?' }
     ]
   }
+];
+
+// Helper to keep floating-point operations cleanly rounded
+export function cleanNum(val) {
+  return Number(Math.round(val * 10000) / 10000);
+}
+
+// Stage 7 BIDMAS Mental Math Bank
+export const BIDMAS_QUESTIONS = [
+  { expression: '18 − 3 × 4', a: 18, b: 12, op: '−', result: 6, explanation: 'BIDMAS: Multiply first (3 × 4 = 12), then subtract (18 − 12 = 6).' },
+  { expression: '5² − 4 × 3', a: 25, b: 12, op: '−', result: 13, explanation: 'BIDMAS: Indices (5² = 25) and multiply (4 × 3 = 12), then 25 − 12 = 13.' },
+  { expression: '20 + 40 ÷ 5', a: 20, b: 8, op: '+', result: 28, explanation: 'BIDMAS: Divide first (40 ÷ 5 = 8), then add (20 + 8 = 28).' },
+  { expression: '(15 − 7) × 4', a: 8, b: 4, op: '×', result: 32, explanation: 'BIDMAS: Brackets first (15 − 7 = 8), then multiply (8 × 4 = 32).' },
+  { expression: '6 + 7 × 3', a: 6, b: 21, op: '+', result: 27, explanation: 'BIDMAS: Multiply first (7 × 3 = 21), then add (6 + 21 = 27).' },
+  { expression: '50 − 5 × 8', a: 50, b: 40, op: '−', result: 10, explanation: 'BIDMAS: Multiply first (5 × 8 = 40), then subtract (50 − 40 = 10).' },
+  { expression: '36 ÷ (2 + 4)', a: 36, b: 6, op: '÷', result: 6, explanation: 'BIDMAS: Brackets first (2 + 4 = 6), then divide (36 ÷ 6 = 6).' },
+  { expression: '4² + 3 × 5', a: 16, b: 15, op: '+', result: 31, explanation: 'BIDMAS: Indices (4² = 16) and multiply (3 × 5 = 15), then add (16 + 15 = 31).' },
+  { expression: '100 − 8²', a: 100, b: 64, op: '−', result: 36, explanation: 'BIDMAS: Indices (8² = 64), then subtract (100 − 64 = 36).' },
+  { expression: '14 + 18 ÷ 2', a: 14, b: 9, op: '+', result: 23, explanation: 'BIDMAS: Divide first (18 ÷ 2 = 9), then add (14 + 9 = 23).' },
+  { expression: '(9 + 6) ÷ 3', a: 15, b: 3, op: '÷', result: 5, explanation: 'BIDMAS: Brackets first (9 + 6 = 15), then divide (15 ÷ 3 = 5).' },
+  { expression: '7 × (12 − 8)', a: 7, b: 4, op: '×', result: 28, explanation: 'BIDMAS: Brackets first (12 − 8 = 4), then multiply (7 × 4 = 28).' }
 ];
 
 export class MathGrinderApp {
@@ -469,12 +491,16 @@ export class MathGrinderApp {
       });
     });
 
-    // Keyboard support
+    // Keyboard support (including negative - and decimal .)
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
       if (e.key >= '0' && e.key <= '9') {
         this.handleKeyInput(e.key);
+      } else if (e.key === '-' || e.key === '−' || e.key === '_') {
+        this.handleKeyInput('-');
+      } else if (e.key === '.' || e.key === ',') {
+        this.handleKeyInput('.');
       } else if (e.key === 'Backspace') {
         this.handleKeyInput('backspace');
       } else if (e.key === 'Enter') {
@@ -642,175 +668,309 @@ export class MathGrinderApp {
   }
 
   generateByLevel(op, level) {
-    let a = 1;
-    let b = 1;
-    let result = 2;
+    let a = 10;
+    let b = 10;
+    let result = 20;
+    let expression = null;
 
     if (op === '+') {
       if (level === 1) {
-        // Micro basics (1 to 5)
-        a = Math.floor(Math.random() * 5) + 1;
-        b = Math.floor(Math.random() * 5) + 1;
-      } else if (level === 2) {
-        // Making 10
-        a = Math.floor(Math.random() * 9) + 1;
-        b = 10 - a;
-        if (Math.random() > 0.5) {
-          // slight variation around 10
-          b = Math.min(10, Math.max(1, 10 - a + (Math.random() > 0.5 ? 1 : -1)));
-        }
-      } else if (level === 3) {
-        // Teens & bridges (6 to 9 adding 4 to 9)
-        a = Math.floor(Math.random() * 4) + 6; // 6,7,8,9
-        b = Math.floor(Math.random() * 5) + 5; // 5,6,7,8,9
-      } else if (level === 4) {
-        // 2-digit without carry (e.g. 34 + 23)
-        const aTens = Math.floor(Math.random() * 5) + 1; // 1 to 5
-        const bTens = Math.floor(Math.random() * (9 - aTens)) + 1; // sum <= 9
-        const aOnes = Math.floor(Math.random() * 9) + 1; // 1 to 9
-        const bOnes = Math.floor(Math.random() * (10 - aOnes)); // 0 to 9 - aOnes inclusive, sum <= 9
-        a = aTens * 10 + aOnes;
-        b = bTens * 10 + bOnes;
-      } else if (level === 5) {
-        // 2-digit with carry (e.g. 48 + 27)
-        const aTens = Math.floor(Math.random() * 4) + 1; // 1 to 4
-        const bTens = Math.floor(Math.random() * (8 - aTens)) + 1; // sum <= 8
-        const aOnes = Math.floor(Math.random() * 9) + 1; // 1 to 9
+        // Level 1: 2-Digit Regrouping (e.g. 48 + 37, 65 + 28)
+        const aTens = Math.floor(Math.random() * 6) + 2; // 2 to 7
+        const bTens = Math.floor(Math.random() * 5) + 1; // 1 to 5
+        const aOnes = Math.floor(Math.random() * 8) + 2; // 2 to 9
         const minB = 10 - aOnes;
-        const bOnes = Math.floor(Math.random() * (10 - minB)) + minB; // minB to 9, sum >= 10
+        const bOnes = Math.floor(Math.random() * (10 - minB)) + minB; // sum >= 10
         a = aTens * 10 + aOnes;
         b = bTens * 10 + bOnes;
+        result = a + b;
+      } else if (level === 2) {
+        // Level 2: 3-Digit Column Addition (e.g. 347 + 285)
+        a = Math.floor(Math.random() * 400) + 150; // 150 to 549
+        b = Math.floor(Math.random() * 400) + 120; // 120 to 519
+        result = a + b;
+      } else if (level === 3) {
+        // Level 3: Decimal Addition (e.g. 4.6 + 7.82, 12.4 + 3.75)
+        const mode = Math.random();
+        if (mode < 0.5) {
+          const aInt = Math.floor(Math.random() * 80) + 15; // 1.5 to 9.4
+          const bInt = Math.floor(Math.random() * 600) + 120; // 1.20 to 7.19
+          a = cleanNum(aInt / 10);
+          b = cleanNum(bInt / 100);
+        } else {
+          const aInt = Math.floor(Math.random() * 90) + 35; // 3.5 to 12.4
+          const bInt = Math.floor(Math.random() * 90) + 25; // 2.5 to 11.4
+          a = cleanNum(aInt / 10);
+          b = cleanNum(bInt / 10);
+        }
+        result = cleanNum(a + b);
+      } else if (level === 4) {
+        // Level 4: Directed Numbers / Integers (-18 + 25, -34 + (-17), -45 + 60)
+        const mode = Math.random();
+        if (mode < 0.4) {
+          const neg = -(Math.floor(Math.random() * 45) + 10);
+          const pos = Math.floor(Math.random() * 55) + 15;
+          a = neg;
+          b = pos;
+        } else if (mode < 0.7) {
+          const pos = Math.floor(Math.random() * 40) + 10;
+          const neg = -(Math.floor(Math.random() * 45) + 15);
+          a = pos;
+          b = neg;
+        } else {
+          a = -(Math.floor(Math.random() * 40) + 10);
+          b = -(Math.floor(Math.random() * 30) + 10);
+        }
+        result = a + b;
+      } else {
+        // Level 5: Grade 7 Mixed Addition Mastery
+        const pick = Math.random();
+        if (pick < 0.35) return this.generateByLevel('+', 2);
+        if (pick < 0.7) return this.generateByLevel('+', 3);
+        return this.generateByLevel('+', 4);
       }
-      result = a + b;
 
     } else if (op === '-') {
       if (level === 1) {
-        // Facts within 5
-        a = Math.floor(Math.random() * 4) + 2; // 2 to 5
-        b = Math.floor(Math.random() * a) + 1; // 1 to a
+        // Level 1: 2-Digit Borrowing (e.g. 52 - 28)
+        const aTens = Math.floor(Math.random() * 6) + 3; // 3 to 8
+        const bTens = Math.floor(Math.random() * (aTens - 2)) + 1; // 1 to aTens-2
+        const bOnes = Math.floor(Math.random() * 7) + 3; // 3 to 9
+        const aOnes = Math.floor(Math.random() * (bOnes - 1)); // 0 to bOnes-1
+        a = aTens * 10 + aOnes;
+        b = bTens * 10 + bOnes;
+        result = a - b;
       } else if (level === 2) {
-        // Facts within 10
-        a = Math.floor(Math.random() * 5) + 6; // 6 to 10
-        b = Math.floor(Math.random() * (a - 1)) + 1;
+        // Level 2: 3-Digit Subtraction across zeros (e.g. 500 - 268, 704 - 389)
+        const hundreds = [300, 400, 500, 600, 700, 800, 502, 604, 705, 803];
+        a = hundreds[Math.floor(Math.random() * hundreds.length)];
+        const bHundreds = Math.floor(a / 100) - Math.floor(Math.random() * 2) - 1;
+        const bTens = Math.floor(Math.random() * 7) + 2;
+        const bOnes = Math.floor(Math.random() * 8) + 2;
+        b = Math.max(125, bHundreds * 100 + bTens * 10 + bOnes);
+        if (b >= a) b = a - 135;
+        result = a - b;
       } else if (level === 3) {
-        // Teen bridges (11 to 18 minus single digit crossing 10)
-        a = Math.floor(Math.random() * 8) + 11; // 11 to 18
-        const aOnes = a - 10; // 1 to 8
-        const minB = aOnes + 1; // must bridge across 10
-        const maxB = 9; // single digit subtrahend
-        b = Math.floor(Math.random() * (maxB - minB + 1)) + minB;
+        // Level 3: Decimal Subtraction (e.g. 15.4 - 8.65, 20.0 - 6.35)
+        const mode = Math.random();
+        if (mode < 0.5) {
+          const aVal = cleanNum((Math.floor(Math.random() * 80) + 120) / 10);
+          const bVal = cleanNum((Math.floor(Math.random() * 700) + 150) / 100);
+          a = aVal;
+          b = Math.min(bVal, cleanNum(a - 1.25));
+        } else {
+          const aVal = cleanNum((Math.floor(Math.random() * 15) + 10) * 2);
+          const bVal = cleanNum((Math.floor(Math.random() * 600) + 250) / 100);
+          a = aVal;
+          b = bVal;
+        }
+        result = cleanNum(a - b);
       } else if (level === 4) {
-        // 2-digit no borrow (e.g. 47 - 23, 68 - 35)
-        const aTens = Math.floor(Math.random() * 6) + 3; // 3 to 8
-        const bTens = Math.floor(Math.random() * (aTens - 1)) + 1; // 1 to aTens - 1
-        const aOnes = Math.floor(Math.random() * 10); // 0 to 9
-        const bOnes = Math.floor(Math.random() * (aOnes + 1)); // 0 to aOnes
-        a = aTens * 10 + aOnes;
-        b = bTens * 10 + bOnes;
-      } else if (level === 5) {
-        // 2-digit with borrow (e.g. 52 - 28)
-        const aTens = Math.floor(Math.random() * 6) + 3; // 3 to 8
-        const bTens = Math.floor(Math.random() * (aTens - 1)) + 1; // 1 to aTens - 1
-        const bOnes = Math.floor(Math.random() * 8) + 2; // 2 to 9
-        const aOnes = Math.floor(Math.random() * bOnes); // 0 to bOnes - 1 (guaranteed aOnes < bOnes)
-        a = aTens * 10 + aOnes;
-        b = bTens * 10 + bOnes;
+        // Level 4: Directed Numbers / Negative Subtraction (-14 - (-8), -25 - 13, 8 - 23)
+        const mode = Math.random();
+        if (mode < 0.35) {
+          const small = Math.floor(Math.random() * 18) + 5;
+          const large = small + Math.floor(Math.random() * 25) + 8;
+          a = small;
+          b = large;
+        } else if (mode < 0.7) {
+          a = -(Math.floor(Math.random() * 30) + 10);
+          b = -(Math.floor(Math.random() * 25) + 5);
+        } else {
+          a = -(Math.floor(Math.random() * 30) + 10);
+          b = Math.floor(Math.random() * 25) + 5;
+        }
+        result = a - b;
+      } else {
+        // Level 5: Stage 7 Subtraction Mastery
+        const pick = Math.random();
+        if (pick < 0.35) return this.generateByLevel('-', 2);
+        if (pick < 0.7) return this.generateByLevel('-', 3);
+        return this.generateByLevel('-', 4);
       }
-      result = a - b;
 
     } else if (op === '×') {
       if (level === 1) {
-        const table = [2, 5, 10][Math.floor(Math.random() * 3)];
-        const multiplier = Math.floor(Math.random() * 10) + 1;
-        a = table;
-        b = multiplier;
+        // Level 1: 12×12 Speed Tables
+        const upper = [6, 7, 8, 9, 11, 12];
+        const all = [3, 4, 5, 6, 7, 8, 9, 11, 12];
+        a = Math.random() < 0.7 ? upper[Math.floor(Math.random() * upper.length)] : all[Math.floor(Math.random() * all.length)];
+        b = Math.floor(Math.random() * 11) + 2;
+        result = a * b;
       } else if (level === 2) {
-        const table = [3, 4][Math.floor(Math.random() * 2)];
-        const multiplier = Math.floor(Math.random() * 10) + 1;
-        a = table;
-        b = multiplier;
+        // Level 2: Multi-digit Mental Multiplication (e.g. 14 × 6, 25 × 16, 40 × 70, 15 × 8)
+        const patterns = [
+          () => { const x = [12, 13, 14, 15, 16, 18, 24, 25][Math.floor(Math.random() * 8)]; const y = Math.floor(Math.random() * 7) + 3; return [x, y]; },
+          () => { const x = (Math.floor(Math.random() * 7) + 2) * 10; const y = (Math.floor(Math.random() * 7) + 2) * 10; return [x, y]; },
+          () => { const x = 25; const y = [12, 14, 16, 18, 20, 24][Math.floor(Math.random() * 6)]; return [x, y]; },
+          () => { const x = [15, 20, 30, 45, 50][Math.floor(Math.random() * 5)]; const y = Math.floor(Math.random() * 8) + 4; return [x, y]; }
+        ];
+        const [x, y] = patterns[Math.floor(Math.random() * patterns.length)]();
+        a = x;
+        b = y;
+        result = a * b;
       } else if (level === 3) {
-        const table = [6, 7, 8, 9][Math.floor(Math.random() * 4)];
-        const multiplier = Math.floor(Math.random() * 9) + 2;
-        a = table;
-        b = multiplier;
+        // Level 3: Decimal Multiplication (e.g. 0.4 × 0.08, 1.2 × 1.2, 0.6 × 7)
+        const patterns = [
+          () => {
+            const x = cleanNum((Math.floor(Math.random() * 8) + 2) / 10);
+            const y = cleanNum((Math.floor(Math.random() * 9) + 2) / 100);
+            return [x, y];
+          },
+          () => {
+            const x = cleanNum((Math.floor(Math.random() * 8) + 11) / 10);
+            const y = cleanNum((Math.floor(Math.random() * 6) + 3) / 10);
+            return [x, y];
+          },
+          () => {
+            const x = cleanNum((Math.floor(Math.random() * 8) + 2) / 10);
+            const y = Math.floor(Math.random() * 8) + 3;
+            return [x, y];
+          }
+        ];
+        const [x, y] = patterns[Math.floor(Math.random() * patterns.length)]();
+        a = x;
+        b = y;
+        result = cleanNum(a * b);
       } else if (level === 4) {
-        const table = [11, 12][Math.floor(Math.random() * 2)];
-        const multiplier = Math.floor(Math.random() * 10) + 1;
-        a = table;
-        b = multiplier;
-      } else if (level === 5) {
-        a = Math.floor(Math.random() * 12) + 1;
-        b = Math.floor(Math.random() * 12) + 1;
+        // Level 4: Directed Numbers & Squares
+        const mode = Math.random();
+        if (mode < 0.4) {
+          // (-7) × (-4) = 28
+          const x = -(Math.floor(Math.random() * 11) + 2);
+          const y = -(Math.floor(Math.random() * 11) + 2);
+          a = x;
+          b = y;
+          result = a * b;
+        } else if (mode < 0.7) {
+          // 6 × (-9) = -54 or (-8) × 7 = -56
+          const isFirstNeg = Math.random() < 0.5;
+          const mag1 = Math.floor(Math.random() * 11) + 2;
+          const mag2 = Math.floor(Math.random() * 11) + 2;
+          a = isFirstNeg ? -mag1 : mag1;
+          b = isFirstNeg ? mag2 : -mag2;
+          result = a * b;
+        } else {
+          // Squares: 7² = 49, 12² = 144
+          const rootVal = Math.floor(Math.random() * 11) + 3; // 3 to 13
+          a = rootVal;
+          b = rootVal;
+          result = rootVal * rootVal;
+          expression = `${rootVal}²`;
+        }
+      } else {
+        // Level 5: Stage 7 Multiplication Mastery
+        const pick = Math.random();
+        if (pick < 0.35) return this.generateByLevel('×', 2);
+        if (pick < 0.7) return this.generateByLevel('×', 3);
+        return this.generateByLevel('×', 4);
       }
-      result = a * b;
 
     } else if (op === '÷') {
-      let divisor = 2;
-      let maxQuotient = 10;
-      if (level === 1) divisor = 2;
-      else if (level === 2) divisor = [5, 10][Math.floor(Math.random() * 2)];
-      else if (level === 3) divisor = [3, 4][Math.floor(Math.random() * 2)];
-      else {
-        divisor = Math.floor(Math.random() * 11) + 2; // 2 to 12
-        maxQuotient = 12; // up to 144
-      }
+      if (level === 1) {
+        // Level 1: 144 ÷ 12 Speed Facts
+        const divisor = Math.floor(Math.random() * 10) + 3;
+        const quotient = Math.floor(Math.random() * 11) + 2;
+        b = divisor;
+        result = quotient;
+        a = b * result;
+      } else if (level === 2) {
+        // Level 2: Multi-digit Mental Division (e.g. 180 ÷ 15 = 12, 360 ÷ 12 = 30)
+        const pairs = [
+          [180, 15, 12], [360, 12, 30], [150, 25, 6], [240, 20, 12], [200, 8, 25],
+          [450, 15, 30], [480, 60, 8], [300, 25, 12], [420, 14, 30], [225, 15, 15],
+          [350, 50, 7], [640, 16, 40], [280, 14, 20], [320, 16, 20]
+        ];
+        const selected = pairs[Math.floor(Math.random() * pairs.length)];
+        a = selected[0];
+        b = selected[1];
+        result = selected[2];
+      } else if (level === 3) {
+        // Level 3: Decimal Division (e.g. 4.8 ÷ 0.12, 7.2 ÷ 9, 36 ÷ 0.6)
+        const decimalPairs = [
+          [4.8, 0.12, 40], [7.2, 9, 0.8], [36, 0.6, 60], [4.5, 0.5, 9],
+          [0.72, 0.8, 0.9], [2.4, 0.4, 6], [8.4, 0.7, 12], [5.6, 0.8, 7],
+          [6.3, 0.9, 7], [1.44, 0.12, 12], [9.6, 0.8, 12], [10.8, 0.9, 12],
+          [15, 0.5, 30], [2.7, 0.3, 9], [3.2, 0.08, 40]
+        ];
+        const selected = decimalPairs[Math.floor(Math.random() * decimalPairs.length)];
+        a = cleanNum(selected[0]);
+        b = cleanNum(selected[1]);
+        result = cleanNum(selected[2]);
+      } else if (level === 4) {
+        // Level 4: Directed Number Division ((-72) ÷ (-8) = 9, (-56) ÷ 7 = -8)
+        const magDivisor = Math.floor(Math.random() * 11) + 2;
+        const magQuotient = Math.floor(Math.random() * 11) + 2;
+        const magDividend = magDivisor * magQuotient;
 
-      const quotient = Math.floor(Math.random() * maxQuotient) + 1;
-      b = divisor;
-      result = quotient;
-      a = b * result;
+        const mode = Math.random();
+        if (mode < 0.4) {
+          a = -magDividend;
+          b = -magDivisor;
+          result = magQuotient;
+        } else if (mode < 0.7) {
+          a = -magDividend;
+          b = magDivisor;
+          result = -magQuotient;
+        } else {
+          a = magDividend;
+          b = -magDivisor;
+          result = -magQuotient;
+        }
+      } else {
+        // Level 5: Stage 7 Division Mastery
+        const pick = Math.random();
+        if (pick < 0.35) return this.generateByLevel('÷', 2);
+        if (pick < 0.7) return this.generateByLevel('÷', 3);
+        return this.generateByLevel('÷', 4);
+      }
     }
 
-    return { op, a, b, result };
+    const q = { op, a, b, result };
+    if (expression) q.expression = expression;
+    return q;
   }
 
   generateByDifficulty(op, difficulty = 'easy') {
     if (op === '+') {
       if (difficulty === 'easy') {
-        const lvl = Math.random() < 0.5 ? 1 : 2;
-        return this.generateByLevel('+', lvl);
+        return this.generateByLevel('+', 1);
       } else if (difficulty === 'medium') {
-        const lvl = Math.random() < 0.5 ? 3 : 4;
+        const lvl = Math.random() < 0.5 ? 2 : 3;
         return this.generateByLevel('+', lvl);
       } else {
-        // hard: 85% level 5 (regrouping), 15% level 4
-        const lvl = Math.random() < 0.85 ? 5 : 4;
+        const lvl = Math.random() < 0.5 ? 4 : 5;
         return this.generateByLevel('+', lvl);
       }
     } else if (op === '-') {
       if (difficulty === 'easy') {
-        const lvl = Math.random() < 0.5 ? 1 : 2;
-        return this.generateByLevel('-', lvl);
+        return this.generateByLevel('-', 1);
       } else if (difficulty === 'medium') {
-        const lvl = Math.random() < 0.5 ? 3 : 4;
+        const lvl = Math.random() < 0.5 ? 2 : 3;
         return this.generateByLevel('-', lvl);
       } else {
-        // hard: level 5 (borrowing)
-        return this.generateByLevel('-', 5);
+        const lvl = Math.random() < 0.5 ? 4 : 5;
+        return this.generateByLevel('-', lvl);
       }
     } else if (op === '×' || op === '*') {
       if (difficulty === 'easy') {
-        return this.generateByLevel('×', 1); // 2x, 5x, 10x
+        return this.generateByLevel('×', 1);
       } else if (difficulty === 'medium') {
-        const lvl = Math.random() < 0.5 ? 2 : 3; // 3x, 4x, or 6x-9x
+        const lvl = Math.random() < 0.5 ? 2 : 3;
         return this.generateByLevel('×', lvl);
       } else {
-        // hard: level 3 (20%), level 4 (40%), level 5 (40%)
-        const r = Math.random();
-        const lvl = r < 0.2 ? 3 : (r < 0.6 ? 4 : 5);
+        const lvl = Math.random() < 0.5 ? 4 : 5;
         return this.generateByLevel('×', lvl);
       }
     } else if (op === '÷' || op === '/') {
       if (difficulty === 'easy') {
-        const lvl = Math.random() < 0.5 ? 1 : 2; // ÷2, ÷5, ÷10
-        return this.generateByLevel('÷', lvl);
+        return this.generateByLevel('÷', 1);
       } else if (difficulty === 'medium') {
-        const lvl = Math.random() < 0.7 ? 3 : 2; // ÷3, ÷4, ÷5
+        const lvl = Math.random() < 0.5 ? 2 : 3;
         return this.generateByLevel('÷', lvl);
       } else {
-        // hard: level 4 (mastery up to 144)
-        return this.generateByLevel('÷', 4);
+        const lvl = Math.random() < 0.5 ? 4 : 5;
+        return this.generateByLevel('÷', lvl);
       }
     }
 
@@ -835,7 +995,23 @@ export class MathGrinderApp {
       tier = 'easy';
     }
 
-    // 3. Determine operation from category
+    // 3. In all_mixed Hard mode, include BIDMAS mental expressions
+    if ((catOrOp === 'all_mixed' || catOrOp === 'all') && tier === 'hard' && Math.random() < 0.4) {
+      const bq = BIDMAS_QUESTIONS[Math.floor(Math.random() * BIDMAS_QUESTIONS.length)];
+      return {
+        op: bq.op,
+        a: bq.a,
+        b: bq.b,
+        result: bq.result,
+        expression: bq.expression,
+        explanation: bq.explanation,
+        category: 'all_mixed',
+        subCategory,
+        tier
+      };
+    }
+
+    // 4. Determine operation from category
     const cat = CATEGORIES.find(c => c.id === catOrOp || c.symbol === catOrOp);
     let chosenOp = '+';
     if (cat && cat.ops && cat.ops.length > 0) {
@@ -894,9 +1070,19 @@ export class MathGrinderApp {
         }
       }
 
-      if (this.dom.numA) this.dom.numA.textContent = this.currentQuestion.a;
-      if (this.dom.opSymbol) this.dom.opSymbol.textContent = this.currentQuestion.op;
-      if (this.dom.numB) this.dom.numB.textContent = this.currentQuestion.b;
+      if (this.currentQuestion.expression) {
+        if (this.dom.numA) this.dom.numA.textContent = this.currentQuestion.expression;
+        if (this.dom.opSymbol) this.dom.opSymbol.textContent = '';
+        if (this.dom.numB) this.dom.numB.textContent = '';
+      } else {
+        if (this.dom.numA) this.dom.numA.textContent = this.currentQuestion.a;
+        if (this.dom.opSymbol) this.dom.opSymbol.textContent = this.currentQuestion.op;
+        if (this.dom.numB) {
+          const bVal = this.currentQuestion.b;
+          this.dom.numB.textContent = (typeof bVal === 'number' && bVal < 0) ? `(${bVal})` : bVal;
+        }
+      }
+
       if (this.dom.answerDisplay) {
         this.dom.answerDisplay.textContent = '?';
         this.dom.answerDisplay.classList.remove('correct', 'incorrect');
@@ -938,22 +1124,39 @@ export class MathGrinderApp {
       this.userAnswer = '';
     } else if (val === 'backspace') {
       this.userAnswer = this.userAnswer.slice(0, -1);
+    } else if (val === '-') {
+      // Toggle or insert minus sign for directed numbers
+      if (this.userAnswer.startsWith('-')) {
+        this.userAnswer = this.userAnswer.slice(1);
+      } else {
+        this.userAnswer = '-' + this.userAnswer;
+      }
+    } else if (val === '.') {
+      // Decimal point for decimal calculations
+      if (!this.userAnswer.includes('.')) {
+        if (this.userAnswer === '' || this.userAnswer === '-') {
+          this.userAnswer += '0.';
+        } else {
+          this.userAnswer += '.';
+        }
+      }
     } else {
-      // Limit to 4 digits
-      if (this.userAnswer.length < 4) {
+      // Support up to 8 characters for negative decimals (e.g. -12.45)
+      if (this.userAnswer.length < 8) {
         this.userAnswer += val;
       }
     }
 
-    if (this.dom.answerDisplay) {
+    if (this.dom && this.dom.answerDisplay) {
       this.dom.answerDisplay.textContent = this.userAnswer === '' ? '?' : this.userAnswer;
     }
   }
 
   submitAnswer() {
-    if (this.userAnswer === '' || this.userAnswer === '?') return;
+    if (this.userAnswer === '' || this.userAnswer === '?' || this.userAnswer === '-') return;
 
-    const entered = parseInt(this.userAnswer, 10);
+    const entered = parseFloat(this.userAnswer);
+    if (isNaN(entered)) return;
 
     // If inside an active Past Exam Paper
     if (this.activeExam && !this.activeExam.completed) {
@@ -989,8 +1192,9 @@ export class MathGrinderApp {
     }
 
     const correct = this.currentQuestion.result;
+    const isCorrect = Math.abs(entered - correct) < 0.0001;
 
-    if (entered === correct) {
+    if (isCorrect) {
       this.handleCorrect();
     } else {
       this.handleIncorrect();
@@ -1246,12 +1450,12 @@ export class MathGrinderApp {
     if (this.dom.solvedVal) this.dom.solvedVal.textContent = this.totalSolved;
     if (this.dom.xpVal) this.dom.xpVal.textContent = this.xp;
 
-    // Badge calculation
-    let badge = '🌱 Math Rookie';
-    if (this.xp >= 1000) badge = '👑 Math Master Wizard';
-    else if (this.xp >= 600) badge = '⚡ Calculation Champion';
-    else if (this.xp >= 300) badge = '🛡️ Number Knight';
-    else if (this.xp >= 100) badge = '🔥 Fact Finder';
+    // Badge calculation (Grade 7 Cambridge Mental Math Standards)
+    let badge = '🌱 Stage 7 Explorer';
+    if (this.xp >= 1000) badge = '👑 Cambridge Stage 7 Grandmaster';
+    else if (this.xp >= 600) badge = '⚡ Mental Mathlete Champion';
+    else if (this.xp >= 300) badge = '🛡️ Stage 7 Scholar';
+    else if (this.xp >= 100) badge = '🔥 Number Sense Pioneer';
 
     if (this.dom.levelBadge) {
       this.dom.levelBadge.textContent = badge;
@@ -1402,7 +1606,7 @@ export class MathGrinderApp {
   submitExamAnswer(enteredNum) {
     if (!this.activeExam || this.activeExam.completed) return null;
     const q = this.activeExam.questions[this.activeExam.index];
-    const isCorrect = Number(enteredNum) === q.result;
+    const isCorrect = Math.abs(Number(enteredNum) - q.result) < 0.0001;
     const earnedMarks = isCorrect ? (q.marks || 1) : 0;
 
     this.activeExam.answers.push({

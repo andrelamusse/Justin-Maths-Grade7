@@ -2,6 +2,9 @@
 // Learner's Book 7 Syllabus for Justin at Kainos Cambridge School in Vanderbijlpark, South Africa.
 // All mathematical formulas use proper LaTeX notation and are rendered using MathRenderer.
 
+import { TOPIC_PAST_EXAM_QUESTIONS } from './topic-past-exam-questions.js';
+import { EXPANDED_UNIT_QUESTIONS } from './expanded-unit-questions.js';
+
 export const CAMBRIDGE_STAGE_7_UNITS = [
   {
     id: 'unit1-integers',
@@ -1561,3 +1564,14 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
     }
   }
 ];
+
+// Attach expanded curriculum questions and authentic past exam paper questions
+CAMBRIDGE_STAGE_7_UNITS.forEach(unit => {
+  const extra = EXPANDED_UNIT_QUESTIONS[unit.id];
+  if (extra) {
+    if (extra.easy) unit.questions.easy.push(...extra.easy);
+    if (extra.medium) unit.questions.medium.push(...extra.medium);
+    if (extra.hard) unit.questions.hard.push(...extra.hard);
+  }
+  unit.questions.exam = TOPIC_PAST_EXAM_QUESTIONS[unit.id] || [];
+});

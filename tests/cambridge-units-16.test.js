@@ -47,7 +47,7 @@ test('Multi-tier practice: Every unit has Easy, Medium, and Hard questions with 
     for (const tier of tiers) {
       const qList = unit.questions[tier];
       assert.ok(Array.isArray(qList), `Unit ${unit.unit} missing question tier ${tier}`);
-      assert.ok(qList.length >= 2, `Unit ${unit.unit} tier ${tier} must have at least 2 questions`);
+      assert.ok(qList.length >= 6, `Unit ${unit.unit} tier ${tier} must have at least 6 questions, got ${qList.length}`);
 
       for (const q of qList) {
         totalQuestions++;
@@ -70,7 +70,7 @@ test('Multi-tier practice: Every unit has Easy, Medium, and Hard questions with 
     }
   }
 
-  assert.ok(totalQuestions >= 96, `Expected at least 96 questions across 16 units, got ${totalQuestions}`);
+  assert.ok(totalQuestions >= 288, `Expected at least 288 curriculum questions across 16 units, got ${totalQuestions}`);
 });
 
 test('Mathematical verification of curriculum questions across all 16 units', () => {
@@ -281,9 +281,9 @@ test('SpeechCoach converts math notations to clear English words', () => {
 });
 
 test('Kainos Cambridge Exams Catalog and Simulator logic', () => {
-  assert.equal(KAINOS_PAPERS_CATALOG.length, 4, 'Must have 4 exam papers');
+  assert.equal(KAINOS_PAPERS_CATALOG.length, 6, 'Must have 6 exam papers');
 
-  // Verify all 4 papers have substantial questions
+  // Verify all 6 papers have substantial questions
   KAINOS_PAPERS_CATALOG.forEach(paper => {
     assert.ok(paper.sampleQuestions.length >= 6, `Paper ${paper.id} must have at least 6 questions, had ${paper.sampleQuestions.length}`);
     paper.sampleQuestions.forEach(q => {
@@ -312,6 +312,52 @@ test('Kainos Cambridge Exams Catalog and Simulator logic', () => {
   assert.equal(sim.userAnswers.length, 1);
   assert.equal(sim.userAnswers[0].isCorrect, true);
   assert.equal(sim.userAnswers[0].marksAwarded, q1.marks);
+});
+
+test('Topic-by-topic past exam bank: Every one of the 16 units has at least 5 past exam questions from across 6 papers', () => {
+  let totalTopicExamQuestions = 0;
+  for (const unit of CAMBRIDGE_STAGE_7_UNITS) {
+    const examList = unit.questions.exam;
+    assert.ok(Array.isArray(examList), `Unit ${unit.unit} must have an exam questions list`);
+    assert.ok(examList.length >= 5, `Unit ${unit.unit} must have at least 5 past exam questions, got ${examList.length}`);
+
+    for (const q of examList) {
+      totalTopicExamQuestions++;
+      assert.ok(q.id, `Unit ${unit.unit} exam question missing id`);
+      assert.ok(q.sourcePaper, `Question ${q.id} missing sourcePaper citation`);
+      assert.ok(q.sourceBadge, `Question ${q.id} missing sourceBadge`);
+      assert.ok(q.marks >= 1, `Question ${q.id} must award marks`);
+      assert.ok(q.q && q.q.length > 5, `Question ${q.id} missing prompt`);
+      assert.ok(Array.isArray(q.options) && q.options.length === 4, `Question ${q.id} must have 4 options`);
+      const uniqueOpts = new Set(q.options);
+      assert.equal(uniqueOpts.size, 4, `Question ${q.id} options must all be unique`);
+      assert.ok(q.options.includes(q.answer), `Question ${q.id} answer "${q.answer}" must match one of options`);
+      assert.ok(q.hint && q.hint.length > 8, `Question ${q.id} missing hint`);
+      assert.ok(Array.isArray(q.stepByStep) && q.stepByStep.length >= 2, `Question ${q.id} missing stepByStep`);
+      assert.ok(q.explanation && q.explanation.length > 8, `Question ${q.id} missing explanation`);
+      assert.ok(q.memo && q.memo.length > 5, `Question ${q.id} missing Cambridge marking memo`);
+      assert.ok(q.tutorTip && q.tutorTip.length > 5, `Question ${q.id} missing tutor tip`);
+    }
+  }
+  assert.ok(totalTopicExamQuestions >= 80, `Expected at least 80 topic past exam questions, got ${totalTopicExamQuestions}`);
+});
+
+test('Expanded Unit Question Tallies: Every unit has >= 23 questions (18 curriculum + 5 exam) totaling 368+ questions', () => {
+  let grandTotal = 0;
+  for (const unit of CAMBRIDGE_STAGE_7_UNITS) {
+    const easyCount = unit.questions.easy.length;
+    const medCount = unit.questions.medium.length;
+    const hardCount = unit.questions.hard.length;
+    const examCount = (unit.questions.exam || []).length;
+    const unitTotal = easyCount + medCount + hardCount + examCount;
+    assert.ok(easyCount >= 6, `Unit ${unit.unit} must have >= 6 easy questions`);
+    assert.ok(medCount >= 6, `Unit ${unit.unit} must have >= 6 medium questions`);
+    assert.ok(hardCount >= 6, `Unit ${unit.unit} must have >= 6 hard questions`);
+    assert.ok(examCount >= 5, `Unit ${unit.unit} must have >= 5 past exam questions`);
+    assert.ok(unitTotal >= 23, `Unit ${unit.unit} must have >= 23 total questions, got ${unitTotal}`);
+    grandTotal += unitTotal;
+  }
+  assert.ok(grandTotal >= 368, `Grand total must be at least 368 questions, got ${grandTotal}`);
 });
 
 test('Angle visualizer geometry: reflex angles do not clip outside viewBox', () => {

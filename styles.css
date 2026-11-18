@@ -661,6 +661,25 @@ body {
 .tier-pill[data-tier="medium"].active { background: var(--color-amber); }
 .tier-pill[data-tier="hard"].active { background: var(--color-rose); }
 
+.mode-pill {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: var(--radius-xl);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.mode-pill.active {
+  background: #1e40af;
+  color: #fff;
+  border-color: #1e40af;
+  box-shadow: var(--shadow-sm);
+}
+
 .quiz-card {
   background: var(--bg-card);
   border: 2px solid var(--border-color);

@@ -28,7 +28,7 @@
           ⚡ XP: <span id="xp-val">0</span>
         </div>
         <div class="stat-item badge-item" title="Current mastery badge">
-          <span id="level-badge">🌱 Math Rookie</span>
+          <span id="level-badge">🌱 Stage 7 Explorer</span>
         </div>
       </div>
 
@@ -201,7 +201,7 @@
         <canvas id="scratchpad-canvas" class="scratchpad-canvas"></canvas>
       </section>
 
-      <!-- On-Screen Keypad -->
+      <!-- On-Screen Keypad (Grade 7 with negative and decimal) -->
       <section class="keypad-container" aria-label="Number keypad">
         <button class="key-btn" data-val="1">1</button>
         <button class="key-btn" data-val="2">2</button>
@@ -212,8 +212,10 @@
         <button class="key-btn" data-val="7">7</button>
         <button class="key-btn" data-val="8">8</button>
         <button class="key-btn" data-val="9">9</button>
-        <button class="key-btn key-clear" data-val="clear" title="Clear input">C</button>
+        <button class="key-btn key-minus" data-val="-" title="Negative / Minus sign (− / ±)">− / ±</button>
         <button class="key-btn" data-val="0">0</button>
+        <button class="key-btn key-dot" data-val="." title="Decimal point (.)">.</button>
+        <button class="key-btn key-clear" data-val="clear" title="Clear input">C</button>
         <button class="key-btn key-back" data-val="backspace" title="Delete last digit">⌫</button>
         <button class="key-btn key-submit" id="submit-btn" title="Check answer">Check Answer ↵</button>
       </section>
