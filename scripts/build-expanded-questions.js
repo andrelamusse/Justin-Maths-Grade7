@@ -359,37 +359,37 @@ const EXPANDED_DATA = {
       {
         id: 'u7-e3',
         q: 'Convert \\(\\frac{19}{4}\\) to a mixed number',
-        options: ['4 3/4', '4 1/4', '3 3/4', '5 1/4'],
-        answer: '4 3/4',
+        options: ['4\\frac{3}{4}', '4\\frac{1}{4}', '3\\frac{3}{4}', '5\\frac{1}{4}'],
+        answer: '4\\frac{3}{4}',
         hint: '19 divided by 4 is 4 with remainder 3.',
-        stepByStep: ['19 ÷ 4 = 4 remainder 3.', 'Write as 4 3/4.'],
+        stepByStep: ['\\19 \\ 4 = 4\\ remainder 3.', 'Write as \\4\\{3}{4}\\.'],
         explanation: '\\(\\frac{19}{4} = 4\\frac{3}{4}\\).'
       },
       {
         id: 'u7-e4',
         q: 'Work out: \\(\\frac{2}{7} + \\frac{3}{7}\\)',
-        options: ['5/7', '5/14', '6/7', '1/7'],
-        answer: '5/7',
+        options: ['\\frac{5}{7}', '\\frac{5}{14}', '\\frac{6}{7}', '\\frac{1}{7}'],
+        answer: '\\frac{5}{7}',
         hint: 'The denominators are the same, so add the numerators directly.',
-        stepByStep: ['Add numerators: 2 + 3 = 5.', 'Keep denominator 7: 5/7.'],
+        stepByStep: ['Add numerators: 2 + 3 = 5.', 'Keep denominator 7: \\\\{5}{7}\\.'],
         explanation: '\\(\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}\\).'
       },
       {
         id: 'u7-e5',
         q: 'Simplify \\(\\frac{16}{24}\\) to its lowest terms',
-        options: ['2/3', '4/6', '3/4', '1/2'],
-        answer: '2/3',
+        options: ['\\frac{2}{3}', '\\frac{4}{6}', '\\frac{3}{4}', '\\frac{1}{2}'],
+        answer: '\\frac{2}{3}',
         hint: 'Divide numerator and denominator by their HCF of 8.',
-        stepByStep: ['16 ÷ 8 = 2.', '24 ÷ 8 = 3.', 'Fraction = 2/3.'],
+        stepByStep: ['16 ÷ 8 = 2.', '24 ÷ 8 = 3.', 'Fraction = \\\\{2}{3}\\.'],
         explanation: '\\(\\frac{16}{24} = \\frac{2}{3}\\).'
       },
       {
         id: 'u7-e6',
         q: 'Convert \\(3\\frac{2}{5}\\) to an improper fraction',
-        options: ['17/5', '15/5', '11/5', '13/5'],
-        answer: '17/5',
+        options: ['\\frac{17}{5}', '\\frac{15}{5}', '\\frac{11}{5}', '\\frac{13}{5}'],
+        answer: '\\frac{17}{5}',
         hint: 'Multiply whole number by denominator and add numerator: (3 × 5) + 2.',
-        stepByStep: ['3 × 5 = 15.', '15 + 2 = 17.', 'Improper fraction = 17/5.'],
+        stepByStep: ['3 × 5 = 15.', '15 + 2 = 17.', 'Improper fraction = \\\\{17}{5}\\.'],
         explanation: '\\(3\\frac{2}{5} = \\frac{17}{5}\\).'
       }
     ],
@@ -397,26 +397,26 @@ const EXPANDED_DATA = {
       {
         id: 'u7-m3',
         q: 'Calculate: \\(\\frac{3}{4} + \\frac{2}{5}\\)',
-        options: ['23/20', '5/9', '1 1/20', '19/20'],
-        answer: '23/20',
-        hint: 'Find common denominator 20: 15/20 + 8/20.',
-        stepByStep: ['3/4 = 15/20.', '2/5 = 8/20.', '15/20 + 8/20 = 23/20.'],
+        options: ['\\frac{23}{20}', '\\frac{5}{9}', '1\\frac{1}{20}', '\\frac{19}{20}'],
+        answer: '\\frac{23}{20}',
+        hint: 'Find common denominator 20: \\\\{15}{20} + \\{8}{20}\\.',
+        stepByStep: ['\\(\\frac{3}{4} = \\frac{15}{20}\\).', '\\(\\frac{2}{5} = \\frac{8}{20}\\).', '\\(\\frac{15}{20} + \\frac{8}{20} = \\frac{23}{20}\\).'],
         explanation: '\\(\\frac{3}{4} + \\frac{2}{5} = \\frac{15 + 8}{20} = \\frac{23}{20}\\).'
       },
       {
         id: 'u7-m4',
         q: 'Calculate: \\(\\frac{5}{6} - \\frac{1}{4}\\)',
-        options: ['7/12', '4/2', '2/3', '1/2'],
-        answer: '7/12',
+        options: ['\\frac{7}{12}', '\\frac{4}{2}', '\\frac{2}{3}', '\\frac{1}{2}'],
+        answer: '\\frac{7}{12}',
         hint: 'Lowest common multiple of 6 and 4 is 12.',
-        stepByStep: ['5/6 = 10/12.', '1/4 = 3/12.', '10/12 - 3/12 = 7/12.'],
+        stepByStep: ['\\(\\frac{5}{6} = \\frac{10}{12}\\).', '\\(\\frac{1}{4} = \\frac{3}{12}\\).', '\\(\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}\\).'],
         explanation: '\\(\\frac{5}{6} - \\frac{1}{4} = \\frac{10 - 3}{12} = \\frac{7}{12}\\).'
       },
       {
         id: 'u7-m5',
         q: 'Work out: \\(\\frac{4}{9} \\times \\frac{3}{8}\\) in simplest form',
-        options: ['1/6', '12/72', '1/4', '2/9'],
-        answer: '1/6',
+        options: ['\\frac{1}{6}', '\\frac{12}{72}', '\\frac{1}{4}', '\\frac{2}{9}'],
+        answer: '\\frac{1}{6}',
         hint: 'Cross-cancel common factors before multiplying.',
         stepByStep: ['Cancel 4 with 8: 1 and 2.', 'Cancel 3 with 9: 1 and 3.', 'Multiply numerators: 1 × 1 = 1.', 'Multiply denominators: 3 × 2 = 6.'],
         explanation: '\\(\\frac{4}{9} \\times \\frac{3}{8} = \\frac{1}{6}\\).'
@@ -424,10 +424,10 @@ const EXPANDED_DATA = {
       {
         id: 'u7-m6',
         q: 'Calculate: \\(\\frac{5}{8} \\div \\frac{3}{4}\\) in simplest form',
-        options: ['5/6', '15/32', '6/5', '1 1/4'],
-        answer: '5/6',
-        hint: 'Multiply by the reciprocal of 3/4, which is 4/3.',
-        stepByStep: ['Rewrite as (5/8) × (4/3).', 'Cancel 4 with 8 to get 1 and 2.', '(5 × 1) / (2 × 3) = 5/6.'],
+        options: ['\\frac{5}{6}', '\\frac{15}{32}', '\\frac{6}{5}', '1\\frac{1}{4}'],
+        answer: '\\frac{5}{6}',
+        hint: 'Multiply by the reciprocal of \\\\{3}{4}\\, which is \\\\{4}{3}\\.',
+        stepByStep: ['Rewrite as \\(\\frac{5}{8} \\times \\frac{4}{3}\\).', 'Cancel 4 with 8 to get 1 and 2.', '\\(\\frac{5 \\times 1}{2 \\times 3} = \\frac{5}{6}\\).'],
         explanation: '\\(\\frac{5}{8} \\div \\frac{3}{4} = \\frac{5}{8} \\times \\frac{4}{3} = \\frac{5}{6}\\).'
       }
     ],
@@ -435,37 +435,37 @@ const EXPANDED_DATA = {
       {
         id: 'u7-h3',
         q: 'Work out: \\(2\\frac{1}{3} + 1\\frac{3}{4}\\)',
-        options: ['4 1/12', '3 4/7', '3 11/12', '4 5/12'],
-        answer: '4 1/12',
-        hint: 'Common denominator for 3 and 4 is 12: 1/3 = 4/12 and 3/4 = 9/12.',
-        stepByStep: ['2 4/12 + 1 9/12 = 3 13/12.', 'Convert 13/12 to 1 1/12.', '3 + 1 1/12 = 4 1/12.'],
+        options: ['4\\frac{1}{12}', '3\\frac{4}{7}', '3\\frac{11}{12}', '4\\frac{5}{12}'],
+        answer: '4\\frac{1}{12}',
+        hint: 'Common denominator for 3 and 4 is 12: \\\\{1}{3} = \\{4}{12}\\ and \\\\{3}{4} = \\{9}{12}\\.',
+        stepByStep: ['\\(2\\frac{4}{12} + 1\\frac{9}{12} = 3\\frac{13}{12}\\).', 'Convert \\(\\frac{13}{12}\\) to \\(1\\frac{1}{12}\\).', '\\(3 + 1\\frac{1}{12} = 4\\frac{1}{12}\\).'],
         explanation: '\\(2\\frac{1}{3} + 1\\frac{3}{4} = 4\\frac{1}{12}\\).'
       },
       {
         id: 'u7-h4',
         q: 'Calculate: \\(3\\frac{1}{2} - 1\\frac{5}{6}\\)',
-        options: ['1 2/3', '1 1/3', '2 1/3', '1 5/6'],
-        answer: '1 2/3',
-        hint: 'Convert to improper fractions: 7/2 - 11/6.',
-        stepByStep: ['7/2 = 21/6.', '21/6 - 11/6 = 10/6.', '10/6 simplifies to 5/3 = 1 2/3.'],
+        options: ['1\\frac{2}{3}', '1\\frac{1}{3}', '2\\frac{1}{3}', '1\\frac{5}{6}'],
+        answer: '1\\frac{2}{3}',
+        hint: 'Convert to improper fractions: \\\\{7}{2} - \\{11}{6}\\.',
+        stepByStep: ['\\(\\frac{7}{2} = \\frac{21}{6}\\).', '\\(\\frac{21}{6} - \\frac{11}{6} = \\frac{10}{6}\\).', '\\(\\frac{10}{6}\\) simplifies to \\(\\frac{5}{3} = 1\\frac{2}{3}\\).'],
         explanation: '\\(3\\frac{1}{2} - 1\\frac{5}{6} = 1\\frac{2}{3}\\).'
       },
       {
         id: 'u7-h5',
         q: 'A recipe uses \\(2\\frac{1}{4}\\text{ cups}\\) of flour. Justin wants to make \\(1\\frac{1}{2}\\) batches. How many cups of flour does he need?',
-        options: ['3 3/8 cups', '3 1/8 cups', '3 1/2 cups', '4 1/4 cups'],
-        answer: '3 3/8 cups',
-        hint: 'Multiply (9/4) by (3/2).',
-        stepByStep: ['2 1/4 = 9/4, and 1 1/2 = 3/2.', '(9/4) × (3/2) = 27/8.', '27/8 = 3 3/8 cups.'],
+        options: ['3\\frac{3}{8}\\text{ cups}', '3\\frac{1}{8}\\text{ cups}', '3\\frac{1}{2}\\text{ cups}', '4\\frac{1}{4}\\text{ cups}'],
+        answer: '3\\frac{3}{8}\\text{ cups}',
+        hint: 'Multiply \\\\{9}{4}\\ by \\\\{3}{2}\\.',
+        stepByStep: ['\\(2\\frac{1}{4} = \\frac{9}{4}\\), and \\(1\\frac{1}{2} = \\frac{3}{2}\\).', '\\(\\frac{9}{4} \\times \\frac{3}{2} = \\frac{27}{8}\\).', '\\(\\frac{27}{8} = 3\\frac{3}{8}\\text{ cups}\\).'],
         explanation: '\\(2\\frac{1}{4} \\times 1\\frac{1}{2} = 3\\frac{3}{8}\\text{ cups}\\).'
       },
       {
         id: 'u7-h6',
         q: 'Work out: \\(1\\frac{7}{8} \\div 2\\frac{1}{2}\\) in simplest form',
-        options: ['3/4', '4/5', '1/2', '7/10'],
-        answer: '3/4',
-        hint: 'Convert to improper fractions: 15/8 ÷ 5/2, then flip and multiply.',
-        stepByStep: ['15/8 ÷ 5/2 = (15/8) × (2/5).', 'Cancel 15 with 5 = 3, and 2 with 8 = 4.', 'Result = 3/4.'],
+        options: ['\\frac{3}{4}', '\\frac{4}{5}', '\\frac{1}{2}', '\\frac{7}{10}'],
+        answer: '\\frac{3}{4}',
+        hint: 'Convert to improper fractions: \\\\{15}{8} \\ \\{5}{2}\\, then flip and multiply.',
+        stepByStep: ['\\(\\frac{15}{8} \\div \\frac{5}{2} = \\frac{15}{8} \\times \\frac{2}{5}\\).', 'Cancel 15 with 5 = 3, and 2 with 8 = 4.', 'Result = \\(\\frac{3}{4}\\).'],
         explanation: '\\(1\\frac{7}{8} \\div 2\\frac{1}{2} = \\frac{3}{4}\\).'
       }
     ]
@@ -719,10 +719,10 @@ const EXPANDED_DATA = {
       {
         id: 'u4-e4',
         q: 'Convert \\(40\\%\\) to a fraction in simplest form',
-        options: ['2/5', '4/10', '4/5', '1/4'],
-        answer: '2/5',
-        hint: 'Write 40/100 and divide top and bottom by 20.',
-        stepByStep: ['40/100.', 'Divide by 20: 2/5.'],
+        options: ['\\frac{2}{5}', '\\frac{4}{10}', '\\frac{4}{5}', '\\frac{1}{4}'],
+        answer: '\\frac{2}{5}',
+        hint: 'Write \\\\{40}{100}\\ and divide top and bottom by 20.',
+        stepByStep: ['\\(\\{40}{100}\\).', 'Divide by 20: \\(\\frac{2}{5}\\).'],
         explanation: '\\(40\\% = \\frac{40}{100} = \\frac{2}{5}\\).'
       },
       {
@@ -759,17 +759,17 @@ const EXPANDED_DATA = {
         q: 'Convert \\(\\frac{3}{8}\\) to a decimal',
         options: ['0.375', '0.38', '0.35', '0.425'],
         answer: '0.375',
-        hint: '1/8 is 0.125. Multiply 0.125 by 3.',
-        stepByStep: ['1/8 = 0.125.', '3 × 0.125 = 0.375.'],
+        hint: 'Since \\\\{1}{8} = 0.125\\, multiply 0.125 by 3.',
+        stepByStep: ['\\(\\frac{1}{8} = 0.125\\).', '3 × 0.125 = 0.375.'],
         explanation: '\\(\\frac{3}{8} = 0.375\\).'
       },
       {
         id: 'u4-m5',
         q: 'Arrange in order from smallest to largest: \\(\\frac{3}{5}, 65\\%, 0.58\\)',
-        options: ['0.58, 3/5, 65%', '3/5, 0.58, 65%', '65%, 3/5, 0.58', '0.58, 65%, 3/5'],
-        answer: '0.58, 3/5, 65%',
-        hint: 'Convert all to decimals: 3/5 = 0.60, 65% = 0.65, 0.58.',
-        stepByStep: ['0.58 = 0.58.', '3/5 = 0.60.', '65% = 0.65.', 'Order: 0.58 < 0.60 < 0.65.'],
+        options: ['0.58, \\frac{3}{5}, 65%', '\\frac{3}{5}, 0.58, 65%', '65%, \\frac{3}{5}, 0.58', '0.58, 65%, \\frac{3}{5}'],
+        answer: '0.58, \\frac{3}{5}, 65%',
+        hint: 'Convert all to decimals: \\\\{3}{5} = 0.60\\, \\65\\ = 0.65\\, 0.58.',
+        stepByStep: ['0.58 = 0.58.', '\\(\\frac{3}{5} = 0.60\\).', '65% = 0.65.', 'Order: 0.58 < 0.60 < 0.65.'],
         explanation: 'In order: \\(0.58, \\frac{3}{5}, 65\\%\\).'
       },
       {
@@ -777,7 +777,7 @@ const EXPANDED_DATA = {
         q: 'In a class of \\(30\\) learners, \\(18\\) walk to school. What percentage walk to school?',
         options: ['60%', '54%', '65%', '50%'],
         answer: '60%',
-        hint: '18/30 simplifies to 3/5 = 60%.',
+        hint: '\\\\{18}{30}\\ simplifies to \\\\{3}{5} = 60\\\\.',
         stepByStep: ['18 ÷ 30 = 0.60.', '0.60 × 100 = 60%.'],
         explanation: '\\(\\frac{18}{30} \\times 100 = 60\\%\\).'
       }
@@ -788,8 +788,8 @@ const EXPANDED_DATA = {
         q: 'Justin scored \\(34\\) out of \\(40\\) in a science quiz. What is his percentage mark?',
         options: ['85%', '82.5%', '80%', '87.5%'],
         answer: '85%',
-        hint: '34/40 = 17/20. Multiply numerator and denominator by 5.',
-        stepByStep: ['34/40 = 17/20.', '17 × 5 = 85, so 85/100 = 85%.'],
+        hint: '\\\\{34}{40} = \\{17}{20}\\. Multiply numerator and denominator by 5.',
+        stepByStep: ['\\(\\frac{34}{40} = \\frac{17}{20}\\).', '\\17 \\ 5 = 85\\, so \\\\{85}{100} = 85\\\\.'],
         explanation: '\\(\\frac{34}{40} \\times 100 = 85\\%\\).'
       },
       {
@@ -1219,7 +1219,7 @@ const EXPANDED_DATA = {
         options: ['(1, 3)', '(2, 6)', '(-1, 3)', '(1, 5)'],
         answer: '(1, 3)',
         hint: 'Midpoint formula: ((x1 + x2)/2, (y1 + y2)/2).',
-        stepByStep: ['(-3 + 5) / 2 = 2 / 2 = 1.', '(8 + (-2)) / 2 = 6 / 2 = 3.', 'Midpoint = (1, 3).'],
+        stepByStep: ['\\\\{-3 + 5}{2} = \\{2}{2} = 1\\.', '\\\\{8 + (-2)}{2} = \\{6}{2} = 3\\.', 'Midpoint = (1, 3).'],
         explanation: 'Midpoint is \\((1, 3)\\).'
       },
       {
@@ -1265,8 +1265,8 @@ const EXPANDED_DATA = {
         q: 'A travel graph shows Justin cycling \\(18\\text{ km}\\) in \\(45\\text{ minutes}\\). What is his average speed in \\(\\text{km/h}\\)?',
         options: ['24 km/h', '20 km/h', '18 km/h', '22.5 km/h'],
         answer: '24 km/h',
-        hint: '45 minutes = 0.75 hours (or 3/4 hour). Speed = 18 ÷ 0.75.',
-        stepByStep: ['45 mins = 3/4 hour.', '18 ÷ (3/4) = 18 × (4/3) = 24 km/h.'],
+        hint: '45 minutes = 0.75 hours (or \\\\{3}{4}\\ hour). Speed = \\18 \\ 0.75 = 24\\{ km/h}\\.',
+        stepByStep: ['45 minutes = \\\\{3}{4}\\ hour.', '\\18 \\ \\{3}{4} = 18 \\ \\{4}{3} = 24\\{ km/h}\\.'],
         explanation: 'Speed = \\(24\\text{ km/h}\\).'
       },
       {
@@ -1316,7 +1316,7 @@ const EXPANDED_DATA = {
         options: ['R 100', 'R 50', 'R 150', 'R 105'],
         answer: 'R 100',
         hint: 'Interest = (P × R × T) / 100.',
-        stepByStep: ['Use simple interest formula: I = (P × R × T) / 100.', 'Calculate: (1000 × 5 × 2) / 100 = 10 000 / 100 = R 100.'],
+        stepByStep: ['Use simple interest formula: I = (P × R × T) / 100.', 'Calculate: \\\\{1000 \\ 5 \\ 2}{100} = \\{10\,000}{100} = \\{R } 100\\.'],
         explanation: 'Interest = \\(\\text{R } 100\\).'
       },
       {
@@ -1335,7 +1335,7 @@ const EXPANDED_DATA = {
         q: 'Store A sells \\(500\\text{ g}\\) of cereal for \\(\\text{R } 35\\). Store B sells \\(750\\text{ g}\\) for \\(\\text{R } 48\\). Which is better value?',
         options: ['Store B (R 0.064/g vs R 0.070/g)', 'Store A (cheaper total cost)', 'Both are equal value', 'Cannot compare different sizes'],
         answer: 'Store B (R 0.064/g vs R 0.070/g)',
-        hint: 'Calculate price per gram: 35/500 = 0.070 vs 48/750 = 0.064.',
+        hint: 'Calculate price per gram: \\\\{35}{500} = 0.070\\ vs \\\\{48}{750} = 0.064\\.',
         stepByStep: ['Store A: 35 ÷ 500 = R 0.070 per gram.', 'Store B: 48 ÷ 750 = R 0.064 per gram.', 'Store B is cheaper per gram.'],
         explanation: 'Store B is better value.'
       },
@@ -1382,8 +1382,8 @@ const EXPANDED_DATA = {
         q: 'A phone bought for \\(\\text{R } 4500\\) is sold for \\(\\text{R } 3600\\). Calculate the percentage loss',
         options: ['20%', '25%', '15%', '18%'],
         answer: '20%',
-        hint: 'Loss = 4500 - 3600 = 900. Percentage loss = (900 / 4500) × 100.',
-        stepByStep: ['Loss = R 900.', '(900 / 4500) × 100 = (1/5) × 100 = 20%.'],
+        hint: 'Loss = \\4500 - 3600 = 900\\. Percentage loss = \\\\{900}{4500} \\ 100 = 20\\\\.',
+        stepByStep: ['Loss = R 900.', '\\\\{900}{4500} \\ 100 = \\{1}{5} \\ 100 = 20\\\\.'],
         explanation: 'Percentage loss = \\(20\\%\\).'
       },
       {
@@ -1412,10 +1412,10 @@ const EXPANDED_DATA = {
       {
         id: 'u13-e3',
         q: 'A standard 6-sided die is rolled. What is the probability of rolling a 4?',
-        options: ['1/6', '4/6', '1/4', '1/2'],
-        answer: '1/6',
+        options: ['\\frac{1}{6}', '\\frac{4}{6}', '\\frac{1}{4}', '\\frac{1}{2}'],
+        answer: '\\frac{1}{6}',
         hint: 'There is only one face with a 4 out of 6 possible outcomes.',
-        stepByStep: ['1 favorable outcome (4).', '6 total outcomes.', 'Probability = 1/6.'],
+        stepByStep: ['1 favorable outcome (4).', '6 total outcomes.', 'Probability = \\(\\frac{1}{6}\\).'],
         explanation: '\\(P(4) = \\frac{1}{6}\\).'
       },
       {
@@ -1430,19 +1430,19 @@ const EXPANDED_DATA = {
       {
         id: 'u13-e5',
         q: 'A spinner has 8 equal sections numbered 1 to 8. What is the probability of landing on an even number?',
-        options: ['1/2', '3/8', '5/8', '1/4'],
-        answer: '1/2',
+        options: ['\\frac{1}{2}', '\\frac{3}{8}', '\\frac{5}{8}', '\\frac{1}{4}'],
+        answer: '\\frac{1}{2}',
         hint: 'Even numbers are {2, 4, 6, 8} (4 numbers out of 8).',
-        stepByStep: ['Even numbers = 4.', '4/8 simplifies to 1/2.'],
+        stepByStep: ['Even numbers = 4.', '\\(\\frac{4}{8}\\) simplifies to \\(\\frac{1}{2}\\).'],
         explanation: '\\(P(\\text{even}) = \\frac{4}{8} = \\frac{1}{2}\\).'
       },
       {
         id: 'u13-e6',
         q: 'A bag contains 7 red pens and 3 blue pens. What is the probability of picking a blue pen?',
-        options: ['3/10', '7/10', '1/3', '3/7'],
-        answer: '3/10',
+        options: ['\\frac{3}{10}', '\\frac{7}{10}', '\\frac{1}{3}', '\\frac{3}{7}'],
+        answer: '\\frac{3}{10}',
         hint: 'Total pens = 7 + 3 = 10. Blue pens = 3.',
-        stepByStep: ['Total pens = 10.', 'Blue pens = 3.', 'Probability = 3/10.'],
+        stepByStep: ['Total pens = 10.', 'Blue pens = 3.', 'Probability = \\(\\frac{3}{10}\\).'],
         explanation: '\\(P(\\text{blue}) = \\frac{3}{10}\\).'
       }
     ],
@@ -1450,10 +1450,10 @@ const EXPANDED_DATA = {
       {
         id: 'u13-m3',
         q: 'A card is drawn from a standard deck of 52 cards. What is the probability of drawing a King?',
-        options: ['1/13', '4/13', '1/52', '1/4'],
-        answer: '1/13',
-        hint: 'There are 4 Kings in a 52-card deck: 4/52.',
-        stepByStep: ['4 Kings out of 52 cards.', '4/52 simplifies to 1/13.'],
+        options: ['\\frac{1}{13}', '\\frac{4}{13}', '\\frac{1}{52}', '\\frac{1}{4}'],
+        answer: '\\frac{1}{13}',
+        hint: 'There are 4 Kings in a 52-card deck: \\\\{4}{52}\\.',
+        stepByStep: ['4 Kings out of 52 cards.', '\\(\\frac{4}{52}\\) simplifies to \\(\\frac{1}{13}\\).'],
         explanation: '\\(P(\\text{King}) = \\frac{4}{52} = \\frac{1}{13}\\).'
       },
       {
@@ -1468,19 +1468,19 @@ const EXPANDED_DATA = {
       {
         id: 'u13-m5',
         q: 'A 6-sided die is rolled. What is the probability of getting a prime number?',
-        options: ['1/2', '1/3', '2/3', '1/6'],
-        answer: '1/2',
+        options: ['\\frac{1}{2}', '\\frac{1}{3}', '\\frac{2}{3}', '\\frac{1}{6}'],
+        answer: '\\frac{1}{2}',
         hint: 'The prime numbers on a die are 2, 3, and 5 (3 numbers).',
-        stepByStep: ['Primes: {2, 3, 5}. (1 is not prime!).', '3 out of 6 outcomes = 3/6 = 1/2.'],
+        stepByStep: ['Primes: {2, 3, 5}. (1 is not prime!).', '3 out of 6 outcomes: \\(\\frac{3}{6} = \\frac{1}{2}\\).'],
         explanation: '\\(P(\\text{prime}) = \\frac{3}{6} = \\frac{1}{2}\\).'
       },
       {
         id: 'u13-m6',
         q: 'A spinner has 5 sectors: 2 Green, 2 Red, 1 Yellow. What is the probability of NOT landing on Green?',
-        options: ['3/5', '2/5', '1/5', '4/5'],
-        answer: '3/5',
+        options: ['\\frac{3}{5}', '\\frac{2}{5}', '\\frac{1}{5}', '\\frac{4}{5}'],
+        answer: '\\frac{3}{5}',
         hint: 'Not Green = 2 Red + 1 Yellow = 3 sectors.',
-        stepByStep: ['Non-green sectors = 3.', 'Total sectors = 5.', 'Probability = 3/5.'],
+        stepByStep: ['Non-green sectors = 3.', 'Total sectors = 5.', 'Probability = \\(\\frac{3}{5}\\).'],
         explanation: '\\(P(\\text{not Green}) = \\frac{3}{5}\\).'
       }
     ],
@@ -1488,28 +1488,28 @@ const EXPANDED_DATA = {
       {
         id: 'u13-h3',
         q: 'Two fair coins are tossed together. What is the probability of getting at least one Head?',
-        options: ['3/4', '1/2', '1/4', '2/3'],
-        answer: '3/4',
+        options: ['\\frac{3}{4}', '\\frac{1}{2}', '\\frac{1}{4}', '\\frac{2}{3}'],
+        answer: '\\frac{3}{4}',
         hint: 'Sample space: {HH, HT, TH, TT}. Only TT has no Heads.',
-        stepByStep: ['Possible outcomes = 4 (HH, HT, TH, TT).', 'At least one Head: HH, HT, TH (3 outcomes).', 'Probability = 3/4.'],
+        stepByStep: ['Possible outcomes = 4 (HH, HT, TH, TT).', 'At least one Head: HH, HT, TH (3 outcomes).', 'Probability = \\(\\frac{3}{4}\\).'],
         explanation: '\\(P(\\text{at least 1 H}) = \\frac{3}{4}\\).'
       },
       {
         id: 'u13-h4',
         q: 'Two fair 6-sided dice are rolled and their scores added. What is the probability of getting a total of 7?',
-        options: ['1/6', '7/36', '1/12', '5/36'],
-        answer: '1/6',
+        options: ['\\frac{1}{6}', '\\frac{7}{36}', '\\frac{1}{12}', '\\frac{5}{36}'],
+        answer: '\\frac{1}{6}',
         hint: 'Pairs that sum to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 pairs.',
-        stepByStep: ['Total pairs = 36.', '6 pairs sum to 7.', '6/36 = 1/6.'],
+        stepByStep: ['Total pairs = 36.', '6 pairs sum to 7.', '\\(\\frac{6}{36} = \\frac{1}{6}\\).'],
         explanation: '\\(P(\\text{sum } 7) = \\frac{6}{36} = \\frac{1}{6}\\).'
       },
       {
         id: 'u13-h5',
         q: 'A box has 4 blue, 6 white, and 5 green socks. What is the probability of picking a sock that is NOT white?',
-        options: ['3/5', '2/5', '9/15', '2/3'],
-        answer: '3/5',
+        options: ['\\frac{3}{5}', '\\frac{2}{5}', '\\frac{9}{15}', '\\frac{2}{3}'],
+        answer: '\\frac{3}{5}',
         hint: 'Total socks = 4 + 6 + 5 = 15. Not white = 4 + 5 = 9.',
-        stepByStep: ['Not white = 4 blue + 5 green = 9.', '9/15 simplifies to 3/5.'],
+        stepByStep: ['Not white = 4 blue + 5 green = 9.', '\\(\\frac{9}{15}\\) simplifies to \\(\\frac{3}{5}\\).'],
         explanation: '\\(P(\\text{not white}) = \\frac{9}{15} = \\frac{3}{5}\\).'
       },
       {
@@ -1695,7 +1695,7 @@ const EXPANDED_DATA = {
         q: 'Calculate the area of a trapezium with parallel sides \\(9\\text{ cm}\\) and \\(15\\text{ cm}\\) and height \\(8\\text{ cm}\\)',
         options: ['96 cm²', '192 cm²', '84 cm²', '120 cm²'],
         answer: '96 cm²',
-        hint: 'Area = 1/2 × (a + b) × h.',
+        hint: 'Area = \\\\{1}{2}(a + b)h\\.',
         stepByStep: ['a + b = 9 + 15 = 24.', 'Half of 24 = 12.', '12 × 8 = 96 cm².'],
         explanation: 'Area = \\(96\\text{ cm}^2\\).'
       },
@@ -1705,7 +1705,7 @@ const EXPANDED_DATA = {
         options: ['44 cm', '22 cm', '154 cm', '88 cm'],
         answer: '44 cm',
         hint: 'Circumference = 2 × π × r.',
-        stepByStep: ['Use the circumference formula: C = 2 × π × r.', 'Substitute values: 2 × (22/7) × 7 = 2 × 22 = 44 cm.'],
+        stepByStep: ['Use the circumference formula: C = 2 × π × r.', 'Substitute values: \\2 \\ \\{22}{7} \\ 7 = 2 \\ 22 = 44\\{ cm}\\.'],
         explanation: 'Circumference = \\(44\\text{ cm}\\).'
       },
       {
@@ -1733,8 +1733,8 @@ const EXPANDED_DATA = {
         q: 'A circle has an area of \\(154\\text{ cm}^2\\). Using \\(\\pi = \\frac{22}{7}\\), calculate its radius',
         options: ['7 cm', '14 cm', '3.5 cm', '49 cm'],
         answer: '7 cm',
-        hint: 'Area = π × r². r² = 154 ÷ (22/7) = 154 × (7/22) = 49.',
-        stepByStep: ['r² = 154 × (7/22) = 7 × 7 = 49.', 'r = √49 = 7 cm.'],
+        hint: 'Area = \\(\\pi r^2\\). \\(r^2 = 154 \\div \\frac{22}{7} = 154 \\times \\frac{7}{22} = 49\\).',
+        stepByStep: ['\\(r^2 = 154 \\times \\frac{7}{22} = 7 \\times 7 = 49\\).', '\\(r = \\sqrt{49} = 7\\text{ cm}\\).'],
         explanation: 'Radius = \\(7\\text{ cm}\\).'
       },
       {
@@ -1803,8 +1803,8 @@ const EXPANDED_DATA = {
         q: 'In a pie chart of 120 learners, 30 choose swimming. What angle should represent swimming?',
         options: ['90°', '60°', '45°', '120°'],
         answer: '90°',
-        hint: 'Fraction = 30/120 = 1/4. Angle = 1/4 × 360°.',
-        stepByStep: ['30 / 120 = 1/4.', '1/4 × 360° = 90°.'],
+        hint: 'Fraction = \\\\{30}{120} = \\{1}{4}\\. Angle = \\\\{1}{4} \\ 360^\\ = 90^\\\\.',
+        stepByStep: ['\\\\{30}{120} = \\{1}{4}\\.', '\\\\{1}{4} \\ 360^\\ = 90^\\\\.'],
         explanation: 'Angle = \\(90^\\circ\\).'
       },
       {
@@ -1830,7 +1830,7 @@ const EXPANDED_DATA = {
         q: 'A pie chart has an angle of \\(45^\\circ\\) for cycling. If 8 students cycle, how many students are there in total?',
         options: ['64', '56', '72', '80'],
         answer: '64',
-        hint: '45° is 1/8 of a full circle (360° ÷ 45° = 8). Total students = 8 × 8.',
+        hint: '\\45^\\\\ is \\\\{1}{8}\\ of a full circle (\\360^\\ \\ 45^\\ = 8\\). Total students = \\8 \\ 8 = 64\\.',
         stepByStep: ['360° ÷ 45° = 8 sectors.', '8 × 8 = 64 students.'],
         explanation: 'Total students = \\(64\\).'
       }
@@ -1859,8 +1859,8 @@ const EXPANDED_DATA = {
         q: 'A stem-and-leaf plot has 19 ordered values. Which position gives the median?',
         options: ['10th value', '9.5th value', '9th value', '11th value'],
         answer: '10th value',
-        hint: '(n + 1) / 2 = (19 + 1) / 2 = 10th value.',
-        stepByStep: ['n = 19 is odd.', '(19 + 1) / 2 = 20 / 2 = 10th value.'],
+        hint: '\\\\{n + 1}{2} = \\{19 + 1}{2} = 10^{\\{th}}\\ value.',
+        stepByStep: ['n = 19 is odd.', '\\\\{19 + 1}{2} = \\{20}{2} = 10^{\\{th}}\\ value.'],
         explanation: 'Median is the \\(10^{\\text{th}}\\) value.'
       },
       {

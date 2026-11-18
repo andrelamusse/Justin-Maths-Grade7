@@ -7,9 +7,11 @@ import {
   CATEGORIES,
   SUB_CATEGORIES,
   BIDMAS_QUESTIONS,
+  PAST_EXAM_PAPERS,
   cleanNum
 } from '../basic-math-grinder/app.js';
 import { generateVerbalExplanation } from '../basic-math-grinder/speech-scripts.js';
+import { MathVisualizer } from '../basic-math-grinder/visualizers.js';
 
 test('Grade 7 Level definitions: All 4 operations have exactly 5 authentic Stage 7 levels', () => {
   const ops = ['+', '-', '×', '÷'];
@@ -303,3 +305,130 @@ test('Verbal speech explanations explain Grade 7 operations intelligently', () =
   const expDivDec = generateVerbalExplanation('÷', 4.8, 0.12, 40);
   assert.ok(expDivDec.includes('powers of 10') || expDivDec.includes('whole number') || expDivDec.includes('decimals'));
 });
+
+test('toggleBreakdown handles negative operands, decimals, squares, and BIDMAS expressions without throwing RangeError', () => {
+  const app = new MathGrinderApp();
+  const container = {
+    innerHTML: '',
+    classList: {
+      contains: () => false,
+      remove: () => {},
+      add: () => {}
+    }
+  };
+  const btn = { textContent: '' };
+  app.dom = { breakdownContainer: container, breakdownBtn: btn };
+
+  const testCases = [
+    // Multiplication negative operands (previously threw RangeError with Array(a).fill(b))
+    { op: '×', a: -7, b: -4, result: 28 },
+    { op: '×', a: -5, b: 6, result: -30 },
+    { op: '×', a: 8, b: -9, result: -72 },
+    // Decimals in multiplication
+    { op: '×', a: 0.4, b: 0.08, result: 0.032 },
+    { op: '×', a: 1.2, b: 1.2, result: 1.44 },
+    // Squares
+    { op: '×', a: 7, b: 7, result: 49 },
+    // Multi-digit mental partition
+    { op: '×', a: 25, b: 16, result: 400 },
+    { op: '×', a: 14, b: 6, result: 84 },
+    // Division negatives & decimals
+    { op: '÷', a: -72, b: -8, result: 9 },
+    { op: '÷', a: -56, b: 7, result: -8 },
+    { op: '÷', a: 4.8, b: 0.12, result: 40 },
+    { op: '÷', a: 180, b: 15, result: 12 },
+    // Addition negatives & decimals
+    { op: '+', a: -18, b: 25, result: 7 },
+    { op: '+', a: -34, b: -17, result: -51 },
+    { op: '+', a: 4.6, b: 7.82, result: 12.42 },
+    { op: '+', a: 347, b: 285, result: 632 },
+    // Subtraction negatives & decimals
+    { op: '-', a: 12, b: -8, result: 20 },
+    { op: '-', a: -14, b: 8, result: -22 },
+    { op: '-', a: 8, b: 23, result: -15 },
+    { op: '-', a: 15.4, b: 8.65, result: 6.75 },
+    { op: '-', a: 500, b: 268, result: 232 },
+    // BIDMAS expressions
+    { op: 'BIDMAS', a: 0, b: 0, result: 6, expression: '18 - 3 × 4', explanation: 'BIDMAS: 3 × 4 = 12, then 18 - 12 = 6' }
+  ];
+
+  for (const tc of testCases) {
+    app.currentQuestion = tc;
+    assert.doesNotThrow(() => {
+      app.toggleBreakdown(true);
+    }, `toggleBreakdown crashed on question: ${JSON.stringify(tc)}`);
+    assert.ok(container.innerHTML.length > 20, `Breakdown HTML should not be empty for ${JSON.stringify(tc)}`);
+  }
+});
+
+test('MathVisualizer normalizes Unicode minus and handles directed integers and operations cleanly', () => {
+  // Minimal DOM mock for MathVisualizer in node
+  const createElementMock = (tag) => {
+    const el = {
+      tagName: tag,
+      className: '',
+      children: [],
+      style: {},
+      _innerHTML: '',
+      get innerHTML() { return this._innerHTML; },
+      set innerHTML(val) {
+        this._innerHTML = val;
+        if (val === '') this.children = [];
+      },
+      appendChild: (child) => { el.children.push(child); return child; },
+      setAttribute: () => {},
+      removeAttribute: () => {}
+    };
+    return el;
+  };
+  globalThis.document = { createElement: createElementMock };
+
+  const vis = new MathVisualizer();
+  const host = createElementMock('div');
+  vis.container = host;
+
+  // 1. Unicode minus '−'
+  vis.render('−', 52, 28, 24);
+  assert.equal(host.children.length, 1);
+  assert.ok(host.children[0].className.includes('visualizer-wrapper'));
+
+  // 2. Directed integer multiplication
+  vis.render('×', -7, -4, 28);
+  assert.equal(host.children.length, 1);
+
+  // 3. Decimal division
+  vis.render('÷', 4.8, 0.12, 40);
+  assert.equal(host.children.length, 1);
+
+  // 4. Directed addition across zero
+  vis.render('+', -18, 25, 7);
+  assert.equal(host.children.length, 1);
+});
+
+test('PAST_EXAM_PAPERS in basic-math-grinder contains strictly Grade 7 problems with zero toddler math', () => {
+  assert.equal(PAST_EXAM_PAPERS.length, 6, 'Must have exactly 6 past exam papers');
+
+  for (const paper of PAST_EXAM_PAPERS) {
+    assert.equal(paper.questions.length, 15, `Paper ${paper.id} must have 15 questions`);
+    let totalMarks = 0;
+
+    for (const q of paper.questions) {
+      totalMarks += q.marks;
+
+      // Disallow elementary toddler math: both operands single-digit whole integers with elementary addition/subtraction like 4+5=9, 7+3=10, 9-4=5
+      if (['+', '-'].includes(q.op) && Number.isInteger(q.a) && Number.isInteger(q.b)) {
+        const isToddlerSingleDigit = q.a <= 10 && q.b <= 10 && q.result <= 15 && q.a >= 0 && q.b >= 0;
+        assert.ok(!isToddlerSingleDigit, `Paper ${paper.id} contains toddler math question: ${q.a} ${q.op} ${q.b} = ${q.result}`);
+      }
+
+      // Ensure mathematical accuracy
+      if (q.op === '+') assert.equal(q.result, cleanNum(q.a + q.b));
+      if (q.op === '-') assert.equal(q.result, cleanNum(q.a - q.b));
+      if (q.op === '×') assert.equal(q.result, cleanNum(q.a * q.b));
+      if (q.op === '÷') assert.equal(q.result, cleanNum(q.a / q.b));
+    }
+
+    assert.equal(paper.totalMarks, totalMarks, `Paper ${paper.id} totalMarks mismatch`);
+  }
+});
+

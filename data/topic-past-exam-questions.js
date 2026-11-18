@@ -238,7 +238,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       options: ['35%', '70%', '14%', '3.5%'],
       answer: '35%',
       hint: 'Multiply top and bottom by 5 to get a denominator of 100.',
-      stepByStep: ['7/20 = (7 × 5)/(20 × 5) = 35/100.', '35/100 = 35%.'],
+      stepByStep: ['\\(\\frac{7}{20} = \\frac{7 \\times 5}{20 \\times 5} = \\frac{35}{100}\\).', '\\(\\frac{35}{100} = 35\\%\\).'],
       explanation: '\\(\\frac{7}{20} = \\frac{35}{100} = 35\\%\\).',
       memo: 'B1 for 35%.',
       tutorTip: 'Percent means out of 100! Turn the bottom into 100.'
@@ -266,9 +266,9 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       options: ['20%', '17%', '25%', '15%'],
       answer: '20%',
       hint: 'Change = 85 - 68 = 17. Percentage decrease = (change / original) × 100.',
-      stepByStep: ['85 - 68 = 17 hours lost.', '(17 / 85) × 100 = 0.2 × 100 = 20%.'],
+      stepByStep: ['85 - 68 = 17 hours lost.', '\\(\\frac{17}{85} \\times 100 = 0.2 \\times 100 = 20\\%\\).'],
       explanation: '\\(\\frac{17}{85} \\times 100 = 20\\%\\).',
-      memo: 'M1 for (17/85) × 100, A1 for 20%.',
+      memo: 'M1 for \\(\\frac{17}{85} \\times 100\\), A1 for 20%.',
       tutorTip: 'Always divide by the ORIGINAL starting amount!'
     },
     {
@@ -277,13 +277,13 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/M1',
       marks: 1,
       q: 'Which of the following is equivalent to \\(37.5\\%\\)?',
-      options: ['3/8', '3/4', '3/5', '7/20'],
-      answer: '3/8',
-      hint: '37.5% = 0.375 = 375/1000 = 3/8.',
-      stepByStep: ['37.5% = 37.5 / 100 = 375 / 1000.', 'Divide top and bottom by 125 = 3/8.'],
+      options: ['\\frac{3}{8}', '\\frac{3}{4}', '\\frac{3}{5}', '\\frac{7}{20}'],
+      answer: '\\frac{3}{8}',
+      hint: '\\(37.5\\% = 0.375 = \\frac{375}{1000} = \\frac{3}{8}\\).',
+      stepByStep: ['\\(37.5\\% = \\frac{37.5}{100} = \\frac{375}{1000}\\).', 'Divide top and bottom by 125: \\(\\frac{3}{8}\\).'],
       explanation: '\\(37.5\\% = \\frac{3}{8}\\).',
-      memo: 'B1 for 3/8.',
-      tutorTip: 'Remember: 1/8 = 12.5%, so 3/8 = 37.5%.'
+      memo: 'B1 for \\(\\frac{3}{8}\\).',
+      tutorTip: 'Remember: Remember: \\(\\frac{1}{8} = 12.5\\%\\), so \\(\\frac{3}{8} = 37.5\\%\\).'
     },
     {
       id: 'u4-ex5',
@@ -369,7 +369,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Angles on a straight line add to 180°. Total parts = 5.',
       stepByStep: ['180 ÷ 5 = 36° per part.', 'Larger angle = 3 × 36° = 108°.'],
       explanation: '\\(3 \\times 36^\\circ = 108^\\circ\\).',
-      memo: 'M1 for 180/5 = 36, A1 for 108°.',
+      memo: 'M1 for \\(180 \\div 5 = 36\\), A1 for 108°.',
       tutorTip: 'Divide 180 by total parts, then multiply by 3.'
     }
   ],
@@ -395,12 +395,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/MY',
       marks: 2,
       q: 'In a survey of 30 learners, 18 are boys and 12 are girls. What fraction of the learners are girls (in simplest form)?',
-      options: ['2/5', '3/5', '1/3', '2/3'],
-      answer: '2/5',
+      options: ['\\frac{2}{5}', '\\frac{3}{5}', '\\frac{1}{3}', '\\frac{2}{3}'],
+      answer: '\\frac{2}{5}',
       hint: 'Girls = 12 out of 30. Simplify by dividing by 6.',
-      stepByStep: ['12 / 30.', 'Divide top and bottom by 6 = 2 / 5.'],
+      stepByStep: ['\\(\\frac{12}{30}\\).', 'Divide top and bottom by 6: \\(\\frac{2}{5}\\).'],
       explanation: '\\(\\frac{12}{30} = \\frac{2}{5}\\).',
-      memo: 'M1 for 12/30, A1 for 2/5.',
+      memo: 'M1 for \\(\\frac{12}{30}\\), A1 for \\(\\frac{2}{5}\\).',
       tutorTip: 'Always simplify fractions by dividing by the Highest Common Factor.'
     },
     {
@@ -454,12 +454,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/01',
       marks: 2,
       q: 'Calculate: \\(\\frac{3}{5} + \\frac{1}{4}\\)',
-      options: ['17/20', '4/9', '4/20', '7/10'],
-      answer: '17/20',
+      options: ['\\frac{17}{20}', '\\frac{4}{9}', '\\frac{4}{20}', '\\frac{7}{10}'],
+      answer: '\\frac{17}{20}',
       hint: 'Common denominator of 5 and 4 is 20.',
-      stepByStep: ['3/5 = 12/20.', '1/4 = 5/20.', '12/20 + 5/20 = 17/20.'],
+      stepByStep: ['\\(\\frac{3}{5} = \\frac{12}{20}\\).', '\\(\\frac{1}{4} = \\frac{5}{20}\\).', '\\(\\frac{12}{20} + \\frac{5}{20} = \\frac{17}{20}\\).'],
       explanation: '\\(\\frac{12}{20} + \\frac{5}{20} = \\frac{17}{20}\\).',
-      memo: 'M1 for common denominator 20, A1 for 17/20.',
+      memo: 'M1 for common denominator 20, A1 for \\(\\frac{17}{20}\\).',
       tutorTip: 'Never add bottom numbers together!'
     },
     {
@@ -468,12 +468,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/01',
       marks: 2,
       q: 'Calculate: \\(2\\frac{1}{3} \\times \\frac{3}{7}\\)',
-      options: ['1', '2/7', '7/3', '1 1/7'],
+      options: ['1', '\\frac{2}{7}', '\\frac{7}{3}', '1\\frac{1}{7}'],
       answer: '1',
-      hint: 'Change 2 1/3 into the improper fraction 7/3 first.',
-      stepByStep: ['2 1/3 = (2 × 3 + 1)/3 = 7/3.', '(7/3) × (3/7) = 21/21 = 1.'],
+      hint: 'Change \\(2\\frac{1}{3}\\) into the improper fraction \\(\\frac{7}{3}\\) first.',
+      stepByStep: ['\\(2\\frac{1}{3} = \\frac{2 \\times 3 + 1}{3} = \\frac{7}{3}\\).', '\\(\\frac{7}{3} \\times \\frac{3}{7} = \\frac{21}{21} = 1\\).'],
       explanation: '\\(\\frac{7}{3} \\times \\frac{3}{7} = 1\\).',
-      memo: 'M1 for 7/3, A1 for 1.',
+      memo: 'M1 for \\(\\frac{7}{3}\\), A1 for 1.',
       tutorTip: 'Turn mixed numbers into top-heavy fractions before multiplying.'
     },
     {
@@ -482,12 +482,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/01',
       marks: 2,
       q: 'Calculate: \\(\\frac{4}{9} \\div \\frac{2}{3}\\)',
-      options: ['2/3', '8/27', '1/3', '3/2'],
-      answer: '2/3',
-      hint: 'Keep 4/9, Change ÷ to ×, Flip 2/3 to 3/2.',
-      stepByStep: ['4/9 × 3/2 = 12/18.', 'Simplify by dividing top and bottom by 6: 2/3.'],
+      options: ['\\frac{2}{3}', '\\frac{8}{27}', '\\frac{1}{3}', '\\frac{3}{2}'],
+      answer: '\\frac{2}{3}',
+      hint: 'Keep \\(\\frac{4}{9}\\), Change \\(\\div\\) to \\(\\times\\), Flip \\(\\frac{2}{3}\\) to \\(\\frac{3}{2}\\).',
+      stepByStep: ['\\(\\frac{4}{9} \\times \\frac{3}{2} = \\frac{12}{18}\\).', 'Simplify by dividing top and bottom by 6: \\(\\frac{2}{3}\\).'],
       explanation: '\\(\\frac{4}{9} \\times \\frac{3}{2} = \\frac{2}{3}\\).',
-      memo: 'M1 for reciprocal multiplication, A1 for 2/3.',
+      memo: 'M1 for reciprocal multiplication, A1 for \\(\\frac{2}{3}\\).',
       tutorTip: 'Keep-Change-Flip (KFC) for fraction division!'
     },
     {
@@ -496,12 +496,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/MY',
       marks: 2,
       q: 'Calculate: \\(3\\frac{3}{4} - 1\\frac{2}{3}\\)',
-      options: ['2 1/12', '2 1/4', '1 11/12', '2 5/12'],
-      answer: '2 1/12',
+      options: ['2\\frac{1}{12}', '2\\frac{1}{4}', '1\\frac{11}{12}', '2\\frac{5}{12}'],
+      answer: '2\\frac{1}{12}',
       hint: 'Common denominator for 4 and 3 is 12.',
-      stepByStep: ['3 9/12 - 1 8/12.', '3 - 1 = 2, and 9/12 - 8/12 = 1/12.', 'Result = 2 1/12.'],
+      stepByStep: ['\\(3\\frac{9}{12} - 1\\frac{8}{12}\\).', '\\(3 - 1 = 2\\), and \\(\\frac{9}{12} - \\frac{8}{12} = \\frac{1}{12}\\).', 'Result = \\(2\\frac{1}{12}\\).'],
       explanation: '\\(3\\frac{9}{12} - 1\\frac{8}{12} = 2\\frac{1}{12}\\).',
-      memo: 'M1 for common denominator 12, A1 for 2 1/12.',
+      memo: 'M1 for common denominator 12, A1 for \\(2\\frac{1}{12}\\).',
       tutorTip: 'Subtract whole parts and fraction parts separately when numerator is larger.'
     },
     {
@@ -510,12 +510,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/M1',
       marks: 2,
       q: 'Calculate: \\(1\\frac{5}{6} + 2\\frac{3}{8}\\)',
-      options: ['4 5/24', '3 8/14', '4 1/24', '3 11/24'],
-      answer: '4 5/24',
+      options: ['4\\frac{5}{24}', '3\\frac{8}{14}', '4\\frac{1}{24}', '3\\frac{11}{24}'],
+      answer: '4\\frac{5}{24}',
       hint: 'Common denominator of 6 and 8 is 24.',
-      stepByStep: ['1 20/24 + 2 9/24 = 3 29/24.', '29/24 = 1 5/24.', '3 + 1 5/24 = 4 5/24.'],
+      stepByStep: ['\\(1\\frac{20}{24} + 2\\frac{9}{24} = 3\\frac{29}{24}\\).', '\\(\\frac{29}{24} = 1\\frac{5}{24}\\).', '\\(3 + 1\\frac{5}{24} = 4\\frac{5}{24}\\).'],
       explanation: '\\(1\\frac{20}{24} + 2\\frac{9}{24} = 4\\frac{5}{24}\\).',
-      memo: 'M1 for denominator 24, A1 for 4 5/24.',
+      memo: 'M1 for denominator 24, A1 for \\(4\\frac{5}{24}\\).',
       tutorTip: 'If the top is bigger than the bottom, convert into another whole number.'
     }
   ],
@@ -560,7 +560,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Sum = (5 - 2) × 180° = 540°. Divide by 5.',
       stepByStep: ['3 × 180° = 540°.', '540° ÷ 5 = 108°.'],
       explanation: '\\(\\frac{540^\\circ}{5} = 108^\\circ\\).',
-      memo: 'M1 for 540/5, A1 for 108°.',
+      memo: 'M1 for \\(540 \\div 5\\), A1 for 108°.',
       tutorTip: 'Count triangles inside: 5 sides gives 3 triangles of 180°.'
     },
     {
@@ -675,10 +675,10 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       q: 'Justin buys a video game for R350 and sells it for R420. Calculate his percentage profit.',
       options: ['20%', '16.7%', '25%', '15%'],
       answer: '20%',
-      hint: 'Profit = 420 - 350 = 70. Percentage profit = (70 / 350) × 100.',
-      stepByStep: ['Profit = R 70.', '(70 / 350) × 100 = (1/5) × 100 = 20%.'],
+      hint: 'Profit = \\(420 - 350 = 70\\). Percentage profit = \\(\\frac{70}{350} \\times 100 = 20\\%\\).',
+      stepByStep: ['Profit = R 70.', '\\(\\frac{70}{350} \\times 100 = \\frac{1}{5} \\times 100 = 20\\%\\).'],
       explanation: '\\(\\frac{70}{350} \\times 100 = 20\\%\\).',
-      memo: 'M1 for (70/350)*100, A1 for 20%.',
+      memo: 'M1 for \\(\\frac{70}{350} \\times 100\\), A1 for 20%.',
       tutorTip: 'Always divide profit by the COST price, not selling price.'
     },
     {
@@ -692,7 +692,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Multiply 450 by 18.50.',
       stepByStep: ['Each 1 USD converts to R18.50.', 'Multiply the USD amount by the rate: 450 × 18.50 = R 8325.'],
       explanation: '\\(450 \\times 18.50 = R 8325\\).',
-      memo: 'M1 for 450 * 18.50, A1 for R 8325.',
+      memo: 'M1 for \\(450 \\times 18.50\\), A1 for R 8325.',
       tutorTip: 'Converting from USD to ZAR means multiplying by the exchange rate.'
     },
     {
@@ -704,7 +704,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       options: ['R 200', 'R 192', 'R 210', 'R 190'],
       answer: 'R 200',
       hint: '120% = R240. Find 100% by dividing by 1.2.',
-      stepByStep: ['120% = 240.', '1% = 240 / 120 = 2.', '100% = 2 × 100 = R 200.'],
+      stepByStep: ['120% = 240.', '\\(1\\% = \\frac{240}{120} = 2\\).', '100% = 2 × 100 = R 200.'],
       explanation: '\\(240 \\div 1.2 = R 200\\).',
       memo: 'M1 for 120% = 240, A1 for R 200.',
       tutorTip: 'Do not subtract 20% of 240! That gives the wrong starting point.'
@@ -718,7 +718,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       options: ['R 900', 'R 300', 'R 1000', 'R 950'],
       answer: 'R 900',
       hint: 'Interest = (Principal × Rate × Time) / 100.',
-      stepByStep: ['Use simple interest formula: I = (P × R × T) / 100.', 'Substitute values: (5000 × 6 × 3) / 100 = 90 000 / 100 = R 900.'],
+      stepByStep: ['Use simple interest formula: I = (P × R × T) / 100.', 'Substitute values: \\(\\frac{5000 \\times 6 \\times 3}{100} = \\frac{90\,000}{100} = \\text{R } 900\\).'],
       explanation: '\\(\\frac{5000 \\times 6 \\times 3}{100} = R 900\\).',
       memo: 'M1 for formula, A1 for R 900.',
       tutorTip: 'Simple interest: multiply principal, rate, and years, then divide by 100.'
@@ -791,7 +791,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       options: ['(-1, 3)', '(-2, 6)', '(3, -1)', '(-1, 4)'],
       answer: '(-1, 3)',
       hint: 'Add x-values and halve: (-4 + 2)/2. Add y-values and halve: (7 + -1)/2.',
-      stepByStep: ['x: (-4 + 2) / 2 = -2 / 2 = -1.', 'y: (7 + -1) / 2 = 6 / 2 = 3.', 'Midpoint = (-1, 3).'],
+      stepByStep: ['\\(x = \\frac{-4 + 2}{2} = \\frac{-2}{2} = -1\\).', '\\(y = \\frac{7 + (-1)}{2} = \\frac{6}{2} = 3\\).', 'Midpoint = (-1, 3).'],
       explanation: 'Midpoint = \\((-1, 3)\\).',
       memo: 'M1 for adding and halving, A1 for (-1, 3).',
       tutorTip: 'Midpoint is the average of the coordinates: add and divide by 2.'
@@ -838,7 +838,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Total parts = 2 + 3 + 4 = 9 parts. Find 1 part: 180 ÷ 9 = 20.',
       stepByStep: ['Total parts = 9.', '1 part = 180 ÷ 9 = R 20.', 'Smallest share (2 parts) = 2 × 20 = R 40.'],
       explanation: '\\(2 \\times R 20 = R 40\\).',
-      memo: 'M1 for 180/9 = 20, A1 for R 40.',
+      memo: 'M1 for \\(180 \\div 9 = 20\\), A1 for R 40.',
       tutorTip: 'Add parts, divide to find 1 part, multiply by desired share.'
     },
     {
@@ -850,7 +850,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       options: ['Box B (R60/kg vs R64/kg)', 'Box A (R64/kg vs R60/kg)', 'Both equal', 'Box A (cheaper pack)'],
       answer: 'Box B (R60/kg vs R64/kg)',
       hint: 'Find price per kg: Box A = 48 ÷ 0.75 = 64. Box B = 72 ÷ 1.2 = 60.',
-      stepByStep: ['Box A: R 48 / 0.75 kg = R 64 per kg.', 'Box B: R 72 / 1.2 kg = R 60 per kg.', 'Box B is cheaper per kg.'],
+      stepByStep: ['Box A: \\(\\text{R } 48 \\div 0.75\\text{ kg} = \\text{R } 64\\text{ per kg}\\).', 'Box B: \\(\\text{R } 72 \\div 1.2\\text{ kg} = \\text{R } 60\\text{ per kg}\\).', 'Box B is cheaper per kg.'],
       explanation: 'Box B costs R60/kg compared to Box A at R64/kg.',
       memo: 'M1 for Box A unit rate, M1 for Box B unit rate, A1 for Box B.',
       tutorTip: 'Unit rate: divide cost by quantity to compare on equal footing!'
@@ -892,12 +892,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/01',
       marks: 1,
       q: 'A bag has 5 red, 4 blue, and 3 yellow counters. What is the probability of picking a blue counter?',
-      options: ['1/3', '4/12', '1/4', '1/2'],
-      answer: '1/3',
-      hint: 'Total counters = 5 + 4 + 3 = 12. P(blue) = 4/12 = 1/3.',
-      stepByStep: ['Total = 12.', 'Blue = 4.', '4/12 simplifies to 1/3.'],
+      options: ['\\frac{1}{3}', '\\frac{4}{12}', '\\frac{1}{4}', '\\frac{1}{2}'],
+      answer: '\\frac{1}{3}',
+      hint: 'Total counters = \\(5 + 4 + 3 = 12\\). \\(P(\\text{blue}) = \\frac{4}{12} = \\frac{1}{3}\\).',
+      stepByStep: ['Total counters = 12.', 'Blue counters = 4.', '\\(\\frac{4}{12}\\) simplifies to \\(\\frac{1}{3}\\).'],
       explanation: '\\(\\frac{4}{12} = \\frac{1}{3}\\).',
-      memo: 'B1 for 1/3 (simplest form).',
+      memo: 'B1 for \\(\\frac{1}{3}\\) (simplest form).',
       tutorTip: 'Probability is favorable outcomes over total possible outcomes.'
     },
     {
@@ -906,12 +906,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/01',
       marks: 1,
       q: 'With 5 red, 4 blue, and 3 yellow counters, what is the probability of NOT picking a red counter?',
-      options: ['7/12', '5/12', '1/2', '3/4'],
-      answer: '7/12',
+      options: ['\\frac{7}{12}', '\\frac{5}{12}', '\\frac{1}{2}', '\\frac{3}{4}'],
+      answer: '\\frac{7}{12}',
       hint: 'Counters that are not red = 4 blue + 3 yellow = 7.',
-      stepByStep: ['Not red = 4 + 3 = 7.', 'Total = 12.', 'Probability = 7/12.'],
+      stepByStep: ['Not red = \\(4 + 3 = 7\\).', 'Total counters = 12.', 'Probability = \\(\\frac{7}{12}\\).'],
       explanation: '\\(1 - \\frac{5}{12} = \\frac{7}{12}\\).',
-      memo: 'B1 for 7/12.',
+      memo: 'B1 for \\(\\frac{7}{12}\\).',
       tutorTip: 'Complement rule: P(not A) = 1 - P(A).'
     },
     {
@@ -920,12 +920,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/EY',
       marks: 2,
       q: 'A fair die is rolled and a fair coin is tossed. What is the probability of getting a prime number and Heads?',
-      options: ['1/4', '1/2', '1/3', '1/6'],
-      answer: '1/4',
-      hint: 'Primes on die are {2, 3, 5} = 3/6 = 1/2. Coin Heads = 1/2.',
-      stepByStep: ['P(prime) = 3/6 = 1/2.', 'P(Heads) = 1/2.', '1/2 × 1/2 = 1/4.'],
+      options: ['\\frac{1}{4}', '\\frac{1}{2}', '\\frac{1}{3}', '\\frac{1}{6}'],
+      answer: '\\frac{1}{4}',
+      hint: 'Primes on die are \\(\{2, 3, 5\}\\): \\(P(\\text{prime}) = \\frac{3}{6} = \\frac{1}{2}\\). Coin \\(P(\\text{Heads}) = \\frac{1}{2}\\).',
+      stepByStep: ['\\(P(\\text{prime}) = \\frac{3}{6} = \\frac{1}{2}\\).', '\\(P(\\text{Heads}) = \\frac{1}{2}\\).', '\\(\\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}\\).'],
       explanation: '\\(\\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}\\).',
-      memo: 'M1 for (3/6) * (1/2), A1 for 1/4.',
+      memo: 'M1 for \\(\\frac{3}{6} \\times \\frac{1}{2}\\), A1 for \\(\\frac{1}{4}\\).',
       tutorTip: '1 is not prime! The primes on a die are 2, 3, and 5.'
     },
     {
@@ -948,12 +948,12 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       sourceBadge: '0862/M2',
       marks: 2,
       q: 'Two 4-sided spinners (each 1 to 4) are spun. What is the probability that the sum of the numbers is 5?',
-      options: ['1/4', '4/16', '3/16', '5/16'],
-      answer: '1/4',
+      options: ['\\frac{1}{4}', '\\frac{4}{16}', '\\frac{3}{16}', '\\frac{5}{16}'],
+      answer: '\\frac{1}{4}',
       hint: 'Pairs summing to 5: (1,4), (2,3), (3,2), (4,1) = 4 pairs out of 16.',
-      stepByStep: ['Total outcomes = 4 × 4 = 16.', 'Ways to get 5: (1,4), (2,3), (3,2), (4,1) = 4.', '4/16 = 1/4.'],
+      stepByStep: ['Total outcomes = 4 × 4 = 16.', 'Ways to get 5: (1,4), (2,3), (3,2), (4,1) = 4.', '\\(\\frac{4}{16} = \\frac{1}{4}\\).'],
       explanation: '\\(\\frac{4}{16} = \\frac{1}{4}\\).',
-      memo: 'M1 for identifying 4 combinations, A1 for 1/4.',
+      memo: 'M1 for identifying 4 combinations, A1 for \\(\\frac{1}{4}\\).',
       tutorTip: 'Draw a 4x4 grid to visualize all pairs of numbers.'
     }
   ],
@@ -1043,7 +1043,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Calculate the area of both rectangles and add them together.',
       stepByStep: ['Rectangle 1: 6 × 3 = 18 m².', 'Rectangle 2: 3 × 4 = 12 m².', '18 + 12 = 30 m².'],
       explanation: '\\(18 + 12 = 30\\text{ m}^2\\).',
-      memo: 'M1 for (6*3)+(3*4), A1 for 30 m².',
+      memo: 'M1 for \\((6 \\times 3) + (3 \\times 4)\\), A1 for 30 m².',
       tutorTip: 'Split compound shapes into simple rectangles and add their areas.'
     },
     {
@@ -1068,10 +1068,10 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       q: 'Calculate the area of a trapezium with parallel sides 8 cm and 14 cm and perpendicular height 6 cm.',
       options: ['66 cm²', '132 cm²', '48 cm²', '84 cm²'],
       answer: '66 cm²',
-      hint: 'Area = 1/2 × (a + b) × h.',
+      hint: 'Area = \\(\\frac{1}{2}(a + b)h\\).',
       stepByStep: ['a + b = 8 + 14 = 22.', 'Half of 22 = 11.', '11 × 6 = 66 cm².'],
       explanation: '\\(\\frac{1}{2}(8 + 14) \\times 6 = 66\\text{ cm}^2\\).',
-      memo: 'M1 for (8+14), M1 for *6/2, A1 for 66 cm².',
+      memo: 'M1 for \\((8 + 14)\\), M1 for \\(\\times 6 \\div 2\\), A1 for 66 cm².',
       tutorTip: 'Add the parallel sides, halve it, then multiply by the height.'
     },
     {
@@ -1085,7 +1085,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Circumference = π × d.',
       stepByStep: ['Use the circumference formula: C = π × d.', 'Substitute values: 3.142 × 14 = 43.988 m, which rounds to 44.0 m.'],
       explanation: '\\(3.142 \\times 14 \\approx 44.0\\text{ m}\\).',
-      memo: 'M1 for 3.142 * 14, A1 for 44.0 m.',
+      memo: 'M1 for \\(3.142 \\times 14\\), A1 for 44.0 m.',
       tutorTip: 'Circumference is the perimeter of a circle: pi times diameter!'
     },
     {
@@ -1099,7 +1099,7 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       hint: 'Area of a parallelogram = base × perpendicular height.',
       stepByStep: ['Use the parallelogram area formula: Area = base × perpendicular height.', 'Multiply base and height: 9 cm × 4 cm = 36 cm².'],
       explanation: '\\(9 \\times 4 = 36\\text{ cm}^2\\).',
-      memo: 'M1 for 9*4, A1 for 36 cm².',
+      memo: 'M1 for \\(9 \\times 4\\), A1 for 36 cm².',
       tutorTip: 'Parallelogram area is just base times height (do not divide by 2!).'
     }
   ],
@@ -1113,10 +1113,10 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       q: 'On a pie chart of 60 learners, rugby occupies an angle of 120°. How many learners play rugby?',
       options: ['20 learners', '15 learners', '25 learners', '30 learners'],
       answer: '20 learners',
-      hint: 'Fraction of circle = 120° / 360° = 1/3.',
-      stepByStep: ['120 / 360 = 1/3.', '1/3 of 60 = 20 learners.'],
+      hint: 'Fraction of circle = \\(\\frac{120^\\circ}{360^\\circ} = \\frac{1}{3}\\).',
+      stepByStep: ['\\(\\frac{120}{360} = \\frac{1}{3}\\).', '\\(\\frac{1}{3} \\times 60 = 20\\text{ learners}\\).'],
       explanation: '\\(\\frac{120}{360} \\times 60 = 20\\text{ learners}\\).',
-      memo: 'M1 for (120/360)*60, A1 for 20 learners.',
+      memo: 'M1 for \\(\\frac{120}{360} \\times 60\\), A1 for 20 learners.',
       tutorTip: 'Find what fraction of 360° the slice is, then multiply by total students.'
     },
     {
@@ -1141,8 +1141,8 @@ export const TOPIC_PAST_EXAM_QUESTIONS = {
       q: 'A stem-and-leaf plot has 15 values. In which ordered position does the median lie?',
       options: ['8th position', '7th position', '7.5th position', '9th position'],
       answer: '8th position',
-      hint: '(15 + 1) / 2 = 16 / 2 = 8th position.',
-      stepByStep: ['For n ordered values where n is odd, the middle position is (n + 1) / 2.', 'Substitute n = 15: (15 + 1) / 2 = 16 / 2 = 8th position.'],
+      hint: '\\(\\frac{15 + 1}{2} = \\frac{16}{2} = 8^{\\text{th}}\\) position.',
+      stepByStep: ['For n ordered values where n is odd, the middle position is (n + 1) / 2.', 'Substitute n = 15: \\(\\frac{15 + 1}{2} = \\frac{16}{2} = 8^{\\text{th}}\\) position.'],
       explanation: 'Median is the \\(8^{\\text{th}}\\) position.',
       memo: 'B1 for 8th position.',
       tutorTip: 'When n is odd, the middle is (n + 1) / 2.'

@@ -406,6 +406,15 @@ export class JustinMathsApp {
   // ==============================================================
   openPracticeArena(unitId, tier = 'mastery', quizMode = 'mastery10') {
     this.currentUnitId = unitId;
+    if (quizMode === 'mastery10') {
+      if (tier !== 'all') {
+        tier = 'mastery';
+      }
+    } else if (tier === 'exam') {
+      quizMode = 'allBank';
+    } else if (['easy', 'medium', 'hard'].includes(tier) && quizMode === 'mastery10') {
+      quizMode = 'allBank';
+    }
     this.currentTier = tier;
     this.quizMode = quizMode;
     this.currentQuestionIdx = 0;
@@ -557,7 +566,8 @@ export class JustinMathsApp {
     container.querySelectorAll('.mode-pill').forEach(pill => {
       pill.onclick = (e) => {
         const selectedMode = e.currentTarget.dataset.mode;
-        this.openPracticeArena(this.currentUnitId, this.currentTier, selectedMode);
+        const targetTier = selectedMode === 'mastery10' ? 'mastery' : this.currentTier;
+        this.openPracticeArena(this.currentUnitId, targetTier, selectedMode);
       };
     });
 
@@ -565,7 +575,15 @@ export class JustinMathsApp {
     container.querySelectorAll('.tier-pill').forEach(pill => {
       pill.onclick = (e) => {
         const selectedTier = e.currentTarget.dataset.tier;
-        this.openPracticeArena(this.currentUnitId, selectedTier, this.quizMode);
+        let targetMode = this.quizMode;
+        if (selectedTier === 'mastery') {
+          targetMode = 'mastery10';
+        } else if (selectedTier === 'exam') {
+          targetMode = 'allBank';
+        } else if (['easy', 'medium', 'hard'].includes(selectedTier) && targetMode === 'mastery10') {
+          targetMode = 'allBank';
+        }
+        this.openPracticeArena(this.currentUnitId, selectedTier, targetMode);
       };
     });
 

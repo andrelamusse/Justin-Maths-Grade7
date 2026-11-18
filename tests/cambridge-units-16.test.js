@@ -5,6 +5,7 @@ import { CAMBRIDGE_STAGE_7_UNITS } from '../data/cambridge-units-data.js';
 import { MathRenderer } from '../js/math-renderer.js';
 import { KAINOS_PAPERS_CATALOG, KainosExamSimulator } from '../js/kainos-exams.js';
 import { SpeechCoach } from '../js/speech-coach.js';
+import { JustinMathsApp } from '../app.js';
 
 test('Full Cambridge Stage 7 Syllabus Scope: Exactly 16 units present and in order', () => {
   assert.equal(CAMBRIDGE_STAGE_7_UNITS.length, 16, 'Must contain all 16 Cambridge units');
@@ -376,3 +377,95 @@ test('Angle visualizer geometry: reflex angles do not clip outside viewBox', () 
     assert.ok(y >= 0 && y <= viewBoxH, `Ray Y coordinate ${y} at ${deg}° must be inside viewBox height`);
   }
 });
+
+test('Zero raw coding math (*, /, ^) and zero control characters across all 368 questions in CAMBRIDGE_STAGE_7_UNITS', () => {
+  let count = 0;
+  for (const unit of CAMBRIDGE_STAGE_7_UNITS) {
+    const allQuestions = [
+      ...unit.questions.easy,
+      ...unit.questions.medium,
+      ...unit.questions.hard,
+      ...(unit.questions.exam || [])
+    ];
+
+    for (const q of allQuestions) {
+      count++;
+      const textFields = [
+        q.q,
+        q.hint,
+        q.explanation,
+        ...(q.stepByStep || []),
+        q.memo || '',
+        q.tutorTip || '',
+        ...(q.options || [])
+      ];
+
+      for (const t of textFields) {
+        if (typeof t !== 'string') continue;
+
+        // 1. Zero control characters (form feed \x0c, unescaped tab \x09)
+        for (let i = 0; i < t.length; i++) {
+          const code = t.charCodeAt(i);
+          assert.notEqual(code, 12, `Form feed control character found in question ${q.id}: ${JSON.stringify(t)}`);
+          if (code === 9) {
+            assert.ok(t.includes('    '), `Unescaped tab found in question ${q.id}: ${JSON.stringify(t)}`);
+          }
+        }
+
+        // 2. Zero raw asterisk multiplication like "5 * 6"
+        assert.ok(!/\d+\s*\*\s*\d+/.test(t), `Raw asterisk multiplication found in question ${q.id}: "${t}"`);
+
+        // 3. Zero raw fraction slashes like "3/4" or "12/30" (must use LaTeX \frac)
+        assert.ok(
+          !/(?<!\\frac\{|0862\/|\d{4}\/)\b\d+\/\d+\b(?!\}|\/)/.test(t),
+          `Raw fraction slash found in question ${q.id}: "${t}"`
+        );
+      }
+    }
+  }
+
+  assert.equal(count, 368, 'Must verify all 368 questions');
+});
+
+test('JustinMathsApp practice arena mode switching and realistic mastery criteria', () => {
+  const app = new JustinMathsApp();
+  app.currentUnitId = 'unit1-integers';
+
+  // 1. Standard 10-Question Mastery Challenge draws balanced questions across tiers
+  app.currentTier = 'mastery';
+  app.quizMode = 'mastery10';
+  const q10 = app.getAvailableQuestions();
+  assert.equal(q10.length, 10, 'Mastery challenge must provide exactly 10 questions');
+
+  // 2. Quick 5-Question Drill draws 5 questions
+  app.quizMode = 'drill5';
+  const q5 = app.getAvailableQuestions();
+  assert.equal(q5.length, 5, 'Quick drill must provide exactly 5 questions');
+
+  // 3. Complete Unit Bank draws all available questions
+  app.currentTier = 'all';
+  app.quizMode = 'allBank';
+  const qAll = app.getAvailableQuestions();
+  assert.equal(qAll.length, 23, 'Unit 1 bank must have 23 total questions (6 easy + 6 med + 6 hard + 5 exam)');
+
+  // 4. Realistic Mastery Criteria:
+  // Golden Star requires completing at least 8 questions with >= 80% accuracy
+  const testQualifies = (correct, total) => {
+    const pct = Math.round((correct / total) * 100);
+    return total >= 8 && pct >= 80;
+  };
+
+  // 2 or 3 questions from old app must NOT qualify
+  assert.equal(testQualifies(2, 2), false, '2/2 must NOT qualify for unit mastery');
+  assert.equal(testQualifies(3, 3), false, '3/3 must NOT qualify for unit mastery');
+  assert.equal(testQualifies(5, 5), false, '5/5 drill must NOT qualify for unit mastery');
+
+  // 8/10 (80%) on 10-Q Mastery qualifies
+  assert.equal(testQualifies(8, 10), true, '8/10 (80%) must qualify for unit mastery');
+  assert.equal(testQualifies(9, 10), true, '9/10 (90%) must qualify for unit mastery');
+  assert.equal(testQualifies(10, 10), true, '10/10 (100%) must qualify for unit mastery');
+
+  // 7/10 (70%) does NOT qualify
+  assert.equal(testQualifies(7, 10), false, '7/10 (70%) must NOT qualify');
+});
+

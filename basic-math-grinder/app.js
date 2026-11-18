@@ -126,156 +126,156 @@ export const SUB_CATEGORIES = [
   }
 ];
 
-// 6 Official Past Exam Papers for Basic Maths Practice (15 Questions each)
+// 6 Official Past Exam Papers for Cambridge Stage 7 Mental Arithmetic (15 Questions each)
 export const PAST_EXAM_PAPERS = [
   {
     id: 'paper_1',
-    title: 'Paper 1: Term 1 Past Paper — Addition & Subtraction Basics',
+    title: 'Paper 1: Term 1 Non-Calculator Past Paper — Mental Arithmetic & Regrouping',
     term: 'Term 1 Past Paper',
     ops: ['+', '-'],
     totalMarks: 22,
-    desc: 'Number bonds to 10 & 20, teen bridges (8+5, 15-7), 2-digit no-carry/no-borrow, and pocket money word problems.',
+    desc: 'Multi-digit mental addition with regrouping, 2-digit borrowing, 3-digit column addition, subtraction across zeros, and Grade 7 word problems.',
     questions: [
-      { section: 'Section A: Mental Warm-Up', op: '+', a: 4, b: 5, result: 9, marks: 1, level: 1 },
-      { section: 'Section A: Mental Warm-Up', op: '+', a: 7, b: 3, result: 10, marks: 1, level: 2 },
-      { section: 'Section A: Mental Warm-Up', op: '-', a: 9, b: 4, result: 5, marks: 1, level: 2 },
-      { section: 'Section A: Mental Warm-Up', op: '-', a: 10, b: 6, result: 4, marks: 1, level: 2 },
-      { section: 'Section A: Mental Warm-Up', op: '+', a: 8, b: 5, result: 13, marks: 1, level: 3 },
-      { section: 'Section B: Core Calculations', op: '+', a: 9, b: 7, result: 16, marks: 1, level: 3 },
-      { section: 'Section B: Core Calculations', op: '-', a: 14, b: 6, result: 8, marks: 1, level: 3 },
-      { section: 'Section B: Core Calculations', op: '-', a: 16, b: 9, result: 7, marks: 1, level: 3 },
-      { section: 'Section B: Core Calculations', op: '+', a: 34, b: 23, result: 57, marks: 2, level: 4 },
-      { section: 'Section B: Core Calculations', op: '-', a: 68, b: 35, result: 33, marks: 2, level: 4 },
-      { section: 'Section C: Exam Word Problems', op: '+', a: 25, b: 14, result: 39, marks: 2, level: 4, wordPrompt: 'Justin has 25 marbles and wins 14 more in a game. How many marbles does he have altogether?' },
-      { section: 'Section C: Exam Word Problems', op: '-', a: 49, b: 24, result: 25, marks: 2, level: 4, wordPrompt: 'A bus has 49 passengers. At the first stop, 24 passengers get off. How many passengers are left on the bus?' },
-      { section: 'Section C: Exam Word Problems', op: '+', a: 32, b: 46, result: 78, marks: 2, level: 4, wordPrompt: 'A tuckshop sells 32 pies on Monday and 46 pies on Tuesday. How many pies were sold in total?' },
-      { section: 'Section C: Exam Word Problems', op: '-', a: 76, b: 42, result: 34, marks: 2, level: 4, wordPrompt: 'Liam saved R76 and spent R42 on a book. How many Rand does he have left?' },
-      { section: 'Section C: Exam Word Problems', op: '+', a: 41, b: 37, result: 78, marks: 2, level: 4, wordPrompt: 'In a cricket match, Justin scores 41 runs in the first innings and 37 runs in the second innings. What is his total score?' }
+      { section: 'Section A: Mental Regrouping & Borrowing', op: '+', a: 48, b: 37, result: 85, marks: 1, level: 1 },
+      { section: 'Section A: Mental Regrouping & Borrowing', op: '+', a: 65, b: 28, result: 93, marks: 1, level: 1 },
+      { section: 'Section A: Mental Regrouping & Borrowing', op: '-', a: 52, b: 28, result: 24, marks: 1, level: 1 },
+      { section: 'Section A: Mental Regrouping & Borrowing', op: '-', a: 71, b: 34, result: 37, marks: 1, level: 1 },
+      { section: 'Section A: Mental Regrouping & Borrowing', op: '+', a: 76, b: 59, result: 135, marks: 1, level: 1 },
+      { section: 'Section B: 3-Digit Column & Subtraction Across Zeros', op: '+', a: 347, b: 285, result: 632, marks: 1, level: 2 },
+      { section: 'Section B: 3-Digit Column & Subtraction Across Zeros', op: '-', a: 500, b: 268, result: 232, marks: 1, level: 2 },
+      { section: 'Section B: 3-Digit Column & Subtraction Across Zeros', op: '+', a: 458, b: 376, result: 834, marks: 1, level: 2 },
+      { section: 'Section B: 3-Digit Column & Subtraction Across Zeros', op: '-', a: 704, b: 389, result: 315, marks: 2, level: 2 },
+      { section: 'Section B: 3-Digit Column & Subtraction Across Zeros', op: '-', a: 602, b: 245, result: 357, marks: 2, level: 2 },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 148, b: 175, result: 323, marks: 2, level: 2, wordPrompt: 'A school tuckshop in Vanderbijlpark sells 148 meat pies on Monday and 175 pies on Tuesday. How many pies were sold in total?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 600, b: 274, result: 326, marks: 2, level: 2, wordPrompt: 'A water reservoir holds 600 litres. After supplying classrooms, 274 litres were used. How many litres remain?' },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 284, b: 356, result: 640, marks: 2, level: 2, wordPrompt: 'Justin scores 284 points in the first round of the mathematics challenge and 356 points in the second round. What is his combined score?' },
+      { section: 'Section C: Exam Word Problems', op: '-', a: 850, b: 468, result: 382, marks: 2, level: 2, wordPrompt: 'Liam saved R850 from his holiday job. He purchases a scientific textbook for R468. How many Rand does he have left?' },
+      { section: 'Section C: Exam Word Problems', op: '+', a: 379, b: 445, result: 824, marks: 2, level: 2, wordPrompt: 'There are 379 learners in the Junior Phase and 445 learners in the Senior Phase at Kainos School. What is the total school enrolment?' }
     ]
   },
   {
     id: 'paper_2',
-    title: 'Paper 2: Term 1 Past Paper — Regrouping & Borrowing Mastery',
+    title: 'Paper 2: Term 1 Advanced Paper — Decimals & Directed Numbers',
     term: 'Term 1 Advanced Paper',
     ops: ['+', '-'],
     totalMarks: 25,
-    desc: 'Teen bridges, 2-digit addition with carrying (48+27), 2-digit subtraction with borrowing (52-28), and word problems.',
+    desc: 'Decimal column addition and subtraction, directed numbers (negative integers across zero), and realistic South African context problems.',
     questions: [
-      { section: 'Section A: Mental Warm-Up', op: '+', a: 8, b: 7, result: 15, marks: 1, level: 3 },
-      { section: 'Section A: Mental Warm-Up', op: '+', a: 9, b: 8, result: 17, marks: 1, level: 3 },
-      { section: 'Section A: Mental Warm-Up', op: '-', a: 15, b: 8, result: 7, marks: 1, level: 3 },
-      { section: 'Section A: Mental Warm-Up', op: '-', a: 17, b: 9, result: 8, marks: 1, level: 3 },
-      { section: 'Section A: Mental Warm-Up', op: '+', a: 26, b: 13, result: 39, marks: 1, level: 4 },
-      { section: 'Section B: Column Regrouping & Borrowing', op: '+', a: 38, b: 25, result: 63, marks: 2, level: 5 },
-      { section: 'Section B: Column Regrouping & Borrowing', op: '+', a: 47, b: 36, result: 83, marks: 2, level: 5 },
-      { section: 'Section B: Column Regrouping & Borrowing', op: '-', a: 52, b: 28, result: 24, marks: 2, level: 5 },
-      { section: 'Section B: Column Regrouping & Borrowing', op: '-', a: 63, b: 37, result: 26, marks: 2, level: 5 },
-      { section: 'Section B: Column Regrouping & Borrowing', op: '+', a: 49, b: 28, result: 77, marks: 2, level: 5 },
-      { section: 'Section C: Exam Word Problems', op: '+', a: 36, b: 27, result: 63, marks: 2, level: 5, wordPrompt: 'There are 36 learners in Grade 7A and 27 learners in Grade 7B. How many learners are there altogether?' },
-      { section: 'Section C: Exam Word Problems', op: '-', a: 61, b: 25, result: 36, marks: 2, level: 5, wordPrompt: 'A rope is 61 metres long. A builder cuts off 25 metres. How many metres of rope remain?' },
-      { section: 'Section C: Exam Word Problems', op: '+', a: 45, b: 38, result: 83, marks: 2, level: 5, wordPrompt: 'Sam collects 45 bottle tops in week 1 and 38 bottle tops in week 2. What is his total collection?' },
-      { section: 'Section C: Exam Word Problems', op: '-', a: 74, b: 39, result: 35, marks: 2, level: 5, wordPrompt: 'A baker bakes 74 cupcakes and sells 39 of them before lunch. How many cupcakes are left?' },
-      { section: 'Section C: Exam Word Problems', op: '-', a: 82, b: 46, result: 36, marks: 2, level: 5, wordPrompt: 'A book has 82 pages. Justin has already read 46 pages. How many pages does he still need to read?' }
+      { section: 'Section A: Decimal Arithmetic', op: '+', a: 4.6, b: 7.82, result: 12.42, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Arithmetic', op: '+', a: 12.4, b: 3.75, result: 16.15, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Arithmetic', op: '-', a: 15.4, b: 8.65, result: 6.75, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Arithmetic', op: '-', a: 20.0, b: 6.35, result: 13.65, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Arithmetic', op: '+', a: 8.45, b: 6.9, result: 15.35, marks: 1, level: 3 },
+      { section: 'Section B: Directed Numbers across Zero', op: '+', a: -18, b: 25, result: 7, marks: 2, level: 4 },
+      { section: 'Section B: Directed Numbers across Zero', op: '+', a: -34, b: -17, result: -51, marks: 2, level: 4 },
+      { section: 'Section B: Directed Numbers across Zero', op: '-', a: -14, b: -8, result: -6, marks: 2, level: 4 },
+      { section: 'Section B: Directed Numbers across Zero', op: '-', a: 8, b: 23, result: -15, marks: 2, level: 4 },
+      { section: 'Section B: Directed Numbers across Zero', op: '-', a: -25, b: 13, result: -38, marks: 2, level: 4 },
+      { section: 'Section C: Grade 7 Exam Context Problems', op: '-', a: 4.5, b: 8.2, result: -3.7, marks: 2, level: 4, wordPrompt: 'At dawn in Vanderbijlpark the temperature was 4.5°C. By midnight it dropped by 8.2°C. What was the midnight temperature in °C?' },
+      { section: 'Section C: Grade 7 Exam Context Problems', op: '+', a: -45, b: 60, result: 15, marks: 2, level: 4, wordPrompt: 'Justin\'s student bank account was overdrawn at -R45. He deposits R60 into his account. What is his new bank balance in Rand?' },
+      { section: 'Section C: Grade 7 Exam Context Problems', op: '-', a: 25.5, b: 16.75, result: 8.75, marks: 2, level: 3, wordPrompt: 'A timber board measures 25.5 metres. A carpenter saws off 16.75 metres. How many metres of timber are left?' },
+      { section: 'Section C: Grade 7 Exam Context Problems', op: '+', a: 14.8, b: 27.45, result: 42.25, marks: 2, level: 3, wordPrompt: 'Two parcels weigh 14.8 kg and 27.45 kg respectively. What is their combined total mass in kg?' },
+      { section: 'Section C: Grade 7 Exam Context Problems', op: '-', a: -12, b: -28, result: 16, marks: 2, level: 4, wordPrompt: 'A freezer temperature rises from -28°C up to -12°C. What is the difference (increase) in temperature in °C?' }
     ]
   },
   {
     id: 'paper_3',
-    title: 'Paper 3: Term 2 Past Paper — Multiplication & Division Core',
+    title: 'Paper 3: Term 2 Past Paper — Speed Tables & Mental Division',
     term: 'Term 2 Past Paper',
     ops: ['×', '÷'],
     totalMarks: 22,
-    desc: 'Core times tables (2x, 3x, 4x, 5x, 10x), halving, equal sharing division, and array/grouping word problems.',
+    desc: 'Complete 12×12 speed tables, upper times tables (7x, 8x, 9x, 11x, 12x), mental division up to 144 ÷ 12, and rate word problems.',
     questions: [
-      { section: 'Section A: Mental Tables', op: '×', a: 2, b: 6, result: 12, marks: 1, level: 1 },
-      { section: 'Section A: Mental Tables', op: '×', a: 5, b: 7, result: 35, marks: 1, level: 1 },
-      { section: 'Section A: Mental Tables', op: '×', a: 10, b: 8, result: 80, marks: 1, level: 1 },
-      { section: 'Section A: Mental Tables', op: '÷', a: 16, b: 2, result: 8, marks: 1, level: 1 },
-      { section: 'Section A: Mental Tables', op: '÷', a: 45, b: 5, result: 9, marks: 1, level: 2 },
-      { section: 'Section B: 3x and 4x Tables & Division', op: '×', a: 3, b: 8, result: 24, marks: 1, level: 2 },
-      { section: 'Section B: 3x and 4x Tables & Division', op: '×', a: 4, b: 7, result: 28, marks: 1, level: 2 },
-      { section: 'Section B: 3x and 4x Tables & Division', op: '÷', a: 27, b: 3, result: 9, marks: 1, level: 3 },
-      { section: 'Section B: 3x and 4x Tables & Division', op: '÷', a: 36, b: 4, result: 9, marks: 2, level: 3 },
-      { section: 'Section B: 3x and 4x Tables & Division', op: '×', a: 4, b: 9, result: 36, marks: 2, level: 2 },
-      { section: 'Section C: Exam Word Problems', op: '×', a: 5, b: 8, result: 40, marks: 2, level: 1, wordPrompt: 'There are 5 boxes of crayons with 8 crayons in each box. How many crayons are there altogether?' },
-      { section: 'Section C: Exam Word Problems', op: '÷', a: 30, b: 5, result: 6, marks: 2, level: 2, wordPrompt: 'Share 30 sweets equally among 5 friends. How many sweets does each friend get?' },
-      { section: 'Section C: Exam Word Problems', op: '×', a: 3, b: 9, result: 27, marks: 2, level: 2, wordPrompt: 'A triangle has 3 sides. How many sides do 9 separate triangles have altogether?' },
-      { section: 'Section C: Exam Word Problems', op: '÷', a: 32, b: 4, result: 8, marks: 2, level: 3, wordPrompt: 'A classroom has 32 desks arranged in 4 equal rows. How many desks are in each row?' },
-      { section: 'Section C: Exam Word Problems', op: '×', a: 10, b: 9, result: 90, marks: 2, level: 1, wordPrompt: 'One cinema ticket costs R10. How much will 9 cinema tickets cost in Rand?' }
+      { section: 'Section A: Speed Tables & Facts', op: '×', a: 7, b: 8, result: 56, marks: 1, level: 1 },
+      { section: 'Section A: Speed Tables & Facts', op: '×', a: 9, b: 6, result: 54, marks: 1, level: 1 },
+      { section: 'Section A: Speed Tables & Facts', op: '×', a: 12, b: 7, result: 84, marks: 1, level: 1 },
+      { section: 'Section A: Speed Tables & Facts', op: '÷', a: 72, b: 8, result: 9, marks: 1, level: 1 },
+      { section: 'Section A: Speed Tables & Facts', op: '÷', a: 108, b: 9, result: 12, marks: 1, level: 1 },
+      { section: 'Section B: Upper Tables & Multi-Digit Mental Facts', op: '×', a: 8, b: 12, result: 96, marks: 1, level: 1 },
+      { section: 'Section B: Upper Tables & Multi-Digit Mental Facts', op: '÷', a: 132, b: 11, result: 12, marks: 1, level: 1 },
+      { section: 'Section B: Upper Tables & Multi-Digit Mental Facts', op: '÷', a: 144, b: 12, result: 12, marks: 1, level: 1 },
+      { section: 'Section B: Upper Tables & Multi-Digit Mental Facts', op: '×', a: 14, b: 6, result: 84, marks: 2, level: 2 },
+      { section: 'Section B: Upper Tables & Multi-Digit Mental Facts', op: '÷', a: 180, b: 15, result: 12, marks: 2, level: 2 },
+      { section: 'Section C: Grade 7 Multiplication & Division Applications', op: '×', a: 15, b: 8, result: 120, marks: 2, level: 2, wordPrompt: 'A sports coach buys 15 boxes of tennis balls, with 8 balls in each box. How many tennis balls are there in total?' },
+      { section: 'Section C: Grade 7 Multiplication & Division Applications', op: '÷', a: 360, b: 12, result: 30, marks: 2, level: 2, wordPrompt: '360 learners at Kainos School are divided equally into 12 house teams for sports day. How many learners are in each house team?' },
+      { section: 'Section C: Grade 7 Multiplication & Division Applications', op: '×', a: 25, b: 16, result: 400, marks: 2, level: 2, wordPrompt: 'A school auditorium has 25 rows with 16 seats in each row. What is the total seating capacity?' },
+      { section: 'Section C: Grade 7 Multiplication & Division Applications', op: '÷', a: 150, b: 25, result: 6, marks: 2, level: 2, wordPrompt: 'A baker packs 150 gourmet biscuits into boxes containing 25 biscuits each. How many boxes can the baker fill completely?' },
+      { section: 'Section C: Grade 7 Multiplication & Division Applications', op: '×', a: 40, b: 70, result: 2800, marks: 2, level: 2, wordPrompt: 'A rectangular turf field measures 40 metres wide by 70 metres long. What is the total area of the field in square metres?' }
     ]
   },
   {
     id: 'paper_4',
-    title: 'Paper 4: Term 2 Past Paper — Upper Tables & Division Mastery',
+    title: 'Paper 4: Term 2 Advanced Paper — Decimals, Powers & Mental Division',
     term: 'Term 2 Advanced Paper',
     ops: ['×', '÷'],
     totalMarks: 25,
-    desc: 'Upper times tables (6x, 7x, 8x, 9x, 11x, 12x), division facts up to 144 ÷ 12, and multi-pack word problems.',
+    desc: 'Decimal mental multiplication and division, square numbers and roots (7²=49, 12²=144), and multi-step division word problems.',
     questions: [
-      { section: 'Section A: Speed Tables', op: '×', a: 6, b: 6, result: 36, marks: 1, level: 3 },
-      { section: 'Section A: Speed Tables', op: '×', a: 7, b: 8, result: 56, marks: 1, level: 3 },
-      { section: 'Section A: Speed Tables', op: '×', a: 9, b: 6, result: 54, marks: 1, level: 3 },
-      { section: 'Section A: Speed Tables', op: '÷', a: 42, b: 6, result: 7, marks: 1, level: 4 },
-      { section: 'Section A: Speed Tables', op: '÷', a: 63, b: 9, result: 7, marks: 1, level: 4 },
-      { section: 'Section B: Upper Tables up to 12x12', op: '×', a: 8, b: 9, result: 72, marks: 2, level: 3 },
-      { section: 'Section B: Upper Tables up to 12x12', op: '×', a: 11, b: 8, result: 88, marks: 2, level: 4 },
-      { section: 'Section B: Upper Tables up to 12x12', op: '×', a: 12, b: 7, result: 84, marks: 2, level: 4 },
-      { section: 'Section B: Upper Tables up to 12x12', op: '÷', a: 96, b: 8, result: 12, marks: 2, level: 4 },
-      { section: 'Section B: Upper Tables up to 12x12', op: '÷', a: 108, b: 9, result: 12, marks: 2, level: 4 },
-      { section: 'Section C: Exam Word Problems', op: '×', a: 7, b: 7, result: 49, marks: 2, level: 3, wordPrompt: 'There are 7 days in 1 week. How many days are there in 7 weeks?' },
-      { section: 'Section C: Exam Word Problems', op: '÷', a: 72, b: 8, result: 9, marks: 2, level: 4, wordPrompt: '72 apples are packed equally into 8 crates. How many apples are in each crate?' },
-      { section: 'Section C: Exam Word Problems', op: '×', a: 12, b: 6, result: 72, marks: 2, level: 4, wordPrompt: 'Eggs are sold in cartons of 12. How many eggs are there in 6 full cartons?' },
-      { section: 'Section C: Exam Word Problems', op: '÷', a: 132, b: 11, result: 12, marks: 2, level: 4, wordPrompt: 'A rugby club spends R132 on 11 identical water bottles. How much does 1 bottle cost in Rand?' },
-      { section: 'Section C: Exam Word Problems', op: '×', a: 12, b: 12, result: 144, marks: 2, level: 5, wordPrompt: 'A square patio has 12 rows of tiles with 12 tiles in each row. How many tiles are used altogether?' }
+      { section: 'Section A: Decimal Mental Calculations', op: '×', a: 0.4, b: 0.08, result: 0.032, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Mental Calculations', op: '×', a: 1.2, b: 1.2, result: 1.44, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Mental Calculations', op: '×', a: 0.03, b: 0.5, result: 0.015, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Mental Calculations', op: '÷', a: 4.8, b: 0.12, result: 40, marks: 1, level: 3 },
+      { section: 'Section A: Decimal Mental Calculations', op: '÷', a: 7.2, b: 9, result: 0.8, marks: 1, level: 3 },
+      { section: 'Section B: Squares, Roots & Multi-Digit Division', op: '×', a: 7, b: 7, result: 49, marks: 2, level: 4 },
+      { section: 'Section B: Squares, Roots & Multi-Digit Division', op: '×', a: 12, b: 12, result: 144, marks: 2, level: 4 },
+      { section: 'Section B: Squares, Roots & Multi-Digit Division', op: '÷', a: 36, b: 0.6, result: 60, marks: 2, level: 3 },
+      { section: 'Section B: Squares, Roots & Multi-Digit Division', op: '÷', a: 240, b: 20, result: 12, marks: 2, level: 2 },
+      { section: 'Section B: Squares, Roots & Multi-Digit Division', op: '÷', a: 300, b: 25, result: 12, marks: 2, level: 2 },
+      { section: 'Section C: Grade 7 Problem Solving', op: '×', a: 16, b: 5, result: 80, marks: 2, level: 2, wordPrompt: 'A tuckshop sells bottles of juice for R16 each. How much will 5 bottles of juice cost in Rand?' },
+      { section: 'Section C: Grade 7 Problem Solving', op: '÷', a: 450, b: 15, result: 30, marks: 2, level: 2, wordPrompt: 'A factory machine produces 450 components in 15 hours. How many components does it produce per hour?' },
+      { section: 'Section C: Grade 7 Problem Solving', op: '×', a: 0.6, b: 8, result: 4.8, marks: 2, level: 3, wordPrompt: 'Each wooden shelf requires 0.6 metres of timber. How many metres of timber are needed to make 8 shelves?' },
+      { section: 'Section C: Grade 7 Problem Solving', op: '÷', a: 4.5, b: 0.5, result: 9, marks: 2, level: 3, wordPrompt: 'A 4.5-litre bottle of cleaning detergent is dispensed into 0.5-litre spray bottles. How many spray bottles can be filled?' },
+      { section: 'Section C: Grade 7 Problem Solving', op: '×', a: 15, b: 15, result: 225, marks: 2, level: 4, wordPrompt: 'A square playground has a side length of 15 metres. Calculate the area of the playground in square metres (15²).' }
     ]
   },
   {
     id: 'paper_5',
-    title: 'Paper 5: Mid-Year Past Exam — All 4 Operations (Paper A)',
+    title: 'Paper 5: Mid-Year Mental Exam — Directed Numbers & All 4 Operations',
     term: 'Mid-Year Exam Paper',
     ops: ['+', '-', '×', '÷'],
     totalMarks: 26,
-    desc: 'Full mid-year exam combining addition, subtraction, multiplication, and division across mental and word problems.',
+    desc: 'Mid-year non-calculator arithmetic testing directed integers (same sign and opposite signs across all 4 operations), decimals, and column calculations.',
     questions: [
-      { section: 'Section A: Mental Operations', op: '+', a: 9, b: 6, result: 15, marks: 1, level: 3 },
-      { section: 'Section A: Mental Operations', op: '-', a: 14, b: 8, result: 6, marks: 1, level: 3 },
-      { section: 'Section A: Mental Operations', op: '×', a: 4, b: 8, result: 32, marks: 1, level: 2 },
-      { section: 'Section A: Mental Operations', op: '÷', a: 40, b: 5, result: 8, marks: 1, level: 2 },
-      { section: 'Section A: Mental Operations', op: '+', a: 35, b: 24, result: 59, marks: 1, level: 4 },
-      { section: 'Section B: Mixed Written Calculations', op: '-', a: 78, b: 43, result: 35, marks: 2, level: 4 },
-      { section: 'Section B: Mixed Written Calculations', op: '+', a: 46, b: 28, result: 74, marks: 2, level: 5 },
-      { section: 'Section B: Mixed Written Calculations', op: '-', a: 62, b: 27, result: 35, marks: 2, level: 5 },
-      { section: 'Section B: Mixed Written Calculations', op: '×', a: 6, b: 8, result: 48, marks: 2, level: 3 },
-      { section: 'Section B: Mixed Written Calculations', op: '÷', a: 54, b: 6, result: 9, marks: 2, level: 4 },
-      { section: 'Section C: Mixed Exam Word Problems', op: '+', a: 48, b: 35, result: 83, marks: 2, level: 5, wordPrompt: 'A farmer has 48 sheep in the top field and 35 sheep in the bottom field. How many sheep does he have in total?' },
-      { section: 'Section C: Mixed Exam Word Problems', op: '-', a: 70, b: 26, result: 44, marks: 2, level: 5, wordPrompt: 'Justin has R70. He buys a cap for R26. How much change should he receive in Rand?' },
-      { section: 'Section C: Mixed Exam Word Problems', op: '×', a: 8, b: 7, result: 56, marks: 2, level: 3, wordPrompt: 'A spider has 8 legs. How many legs do 7 spiders have altogether?' },
-      { section: 'Section C: Mixed Exam Word Problems', op: '÷', a: 64, b: 8, result: 8, marks: 2, level: 4, wordPrompt: '64 learners are put into 8 equal relay teams. How many learners are in each team?' },
-      { section: 'Section C: Mixed Exam Word Problems', op: '×', a: 9, b: 9, result: 81, marks: 3, level: 3, wordPrompt: 'A chessboard-style grid has 9 rows with 9 squares in each row. How many squares are on the board?' }
+      { section: 'Section A: Directed Integer Arithmetic', op: '+', a: -14, b: 22, result: 8, marks: 1, level: 4 },
+      { section: 'Section A: Directed Integer Arithmetic', op: '-', a: -16, b: -9, result: -7, marks: 1, level: 4 },
+      { section: 'Section A: Directed Integer Arithmetic', op: '×', a: -7, b: -4, result: 28, marks: 1, level: 4 },
+      { section: 'Section A: Directed Integer Arithmetic', op: '×', a: 6, b: -9, result: -54, marks: 1, level: 4 },
+      { section: 'Section A: Directed Integer Arithmetic', op: '÷', a: -72, b: -8, result: 9, marks: 1, level: 4 },
+      { section: 'Section B: Mixed Operations with Decimals & Signs', op: '÷', a: -56, b: 7, result: -8, marks: 2, level: 4 },
+      { section: 'Section B: Mixed Operations with Decimals & Signs', op: '+', a: 34.6, b: 18.75, result: 53.35, marks: 2, level: 3 },
+      { section: 'Section B: Mixed Operations with Decimals & Signs', op: '-', a: 50.0, b: 23.45, result: 26.55, marks: 2, level: 3 },
+      { section: 'Section B: Mixed Operations with Decimals & Signs', op: '×', a: 0.8, b: 12, result: 9.6, marks: 2, level: 3 },
+      { section: 'Section B: Mixed Operations with Decimals & Signs', op: '÷', a: 81, b: -9, result: -9, marks: 2, level: 4 },
+      { section: 'Section B: Mixed Operations with Decimals & Signs', op: '+', a: 458, b: 267, result: 725, marks: 2, level: 2 },
+      { section: 'Section C: Exam Real-World Word Problems', op: '-', a: 700, b: 345, result: 355, marks: 2, level: 2, wordPrompt: 'Liam has R700 in his savings account. After paying R345 for school supplies, how much remains in his account?' },
+      { section: 'Section C: Exam Real-World Word Problems', op: '×', a: 25, b: 14, result: 350, marks: 2, level: 2, wordPrompt: 'A bus carries 25 passengers per trip. If the bus completes 14 trips during a school excursion, how many passengers were transported in total?' },
+      { section: 'Section C: Exam Real-World Word Problems', op: '÷', a: 420, b: 14, result: 30, marks: 2, level: 2, wordPrompt: 'A cyclist travels 420 kilometres over 14 stages. What is the cyclist\'s average distance in km per stage?' },
+      { section: 'Section C: Exam Real-World Word Problems', op: '-', a: 12, b: 27, result: -15, marks: 3, level: 4, wordPrompt: 'At noon in the mountains the temperature was 12°C. A severe cold front caused the temperature to drop by 27°C overnight. What was the overnight temperature in °C?' }
     ]
   },
   {
     id: 'paper_6',
-    title: 'Paper 6: Year-End Final Past Exam — All 4 Operations Mastery',
+    title: 'Paper 6: Year-End Final Past Exam — Stage 7 Comprehensive Non-Calculator Exam',
     term: 'Final Year-End Exam',
     ops: ['+', '-', '×', '÷'],
     totalMarks: 30,
-    desc: 'Comprehensive final exam testing carrying, borrowing, upper tables up to 12x12, division up to 144, and word problems.',
+    desc: 'Comprehensive final non-calculator examination covering multi-digit column arithmetic, decimals, directed numbers, upper tables, squares, and contextual word problems.',
     questions: [
-      { section: 'Section A: Rapid Recall', op: '+', a: 8, b: 9, result: 17, marks: 1, level: 3 },
-      { section: 'Section A: Rapid Recall', op: '-', a: 17, b: 8, result: 9, marks: 1, level: 3 },
-      { section: 'Section A: Rapid Recall', op: '×', a: 7, b: 9, result: 63, marks: 1, level: 3 },
-      { section: 'Section A: Rapid Recall', op: '÷', a: 56, b: 7, result: 8, marks: 1, level: 4 },
-      { section: 'Section A: Rapid Recall', op: '×', a: 11, b: 9, result: 99, marks: 2, level: 4 },
-      { section: 'Section B: Advanced Operations', op: '+', a: 49, b: 38, result: 87, marks: 2, level: 5 },
-      { section: 'Section B: Advanced Operations', op: '-', a: 81, b: 46, result: 35, marks: 2, level: 5 },
-      { section: 'Section B: Advanced Operations', op: '+', a: 57, b: 26, result: 83, marks: 2, level: 5 },
-      { section: 'Section B: Advanced Operations', op: '-', a: 73, b: 38, result: 35, marks: 2, level: 5 },
-      { section: 'Section B: Advanced Operations', op: '÷', a: 120, b: 10, result: 12, marks: 2, level: 4 },
-      { section: 'Section C: Final Exam Word Problems', op: '+', a: 47, b: 39, result: 86, marks: 2, level: 5, wordPrompt: 'In a basketball game, Team Blue scores 47 points in the first half and 39 points in the second half. What is their final score?' },
-      { section: 'Section C: Final Exam Word Problems', op: '-', a: 84, b: 47, result: 37, marks: 3, level: 5, wordPrompt: 'A shop has 84 loaves of bread in the morning and sells 47 loaves during the day. How many loaves are left?' },
-      { section: 'Section C: Final Exam Word Problems', op: '×', a: 12, b: 8, result: 96, marks: 3, level: 4, wordPrompt: 'There are 12 pencils in a pack. How many pencils are there in 8 packs?' },
-      { section: 'Section C: Final Exam Word Problems', op: '÷', a: 108, b: 12, result: 9, marks: 3, level: 4, wordPrompt: 'A 108 cm piece of ribbon is cut into 12 equal pieces. How many cm long is each piece?' },
-      { section: 'Section C: Final Exam Word Problems', op: '÷', a: 144, b: 12, result: 12, marks: 3, level: 4, wordPrompt: '144 chairs are arranged in 12 equal rows in the school hall. How many chairs are in each row?' }
+      { section: 'Section A: Speed Recall & Directed Signs', op: '+', a: -28, b: 45, result: 17, marks: 1, level: 4 },
+      { section: 'Section A: Speed Recall & Directed Signs', op: '-', a: 14, b: 32, result: -18, marks: 1, level: 4 },
+      { section: 'Section A: Speed Recall & Directed Signs', op: '×', a: -8, b: -7, result: 56, marks: 1, level: 4 },
+      { section: 'Section A: Speed Recall & Directed Signs', op: '÷', a: -96, b: 8, result: -12, marks: 1, level: 4 },
+      { section: 'Section A: Speed Recall & Directed Signs', op: '×', a: 11, b: 12, result: 132, marks: 2, level: 1 },
+      { section: 'Section B: Multi-Digit, Decimals & Indices', op: '+', a: 549, b: 387, result: 936, marks: 2, level: 2 },
+      { section: 'Section B: Multi-Digit, Decimals & Indices', op: '-', a: 800, b: 436, result: 364, marks: 2, level: 2 },
+      { section: 'Section B: Multi-Digit, Decimals & Indices', op: '×', a: 1.5, b: 0.6, result: 0.9, marks: 2, level: 3 },
+      { section: 'Section B: Multi-Digit, Decimals & Indices', op: '÷', a: 3.6, b: 0.09, result: 40, marks: 2, level: 3 },
+      { section: 'Section B: Multi-Digit, Decimals & Indices', op: '×', a: 13, b: 13, result: 169, marks: 2, level: 4 },
+      { section: 'Section C: Final Exam Multi-Step Word Problems', op: '+', a: 475, b: 389, result: 864, marks: 2, level: 2, wordPrompt: 'In a two-day charity swimathon, the Blue Team raises R475 on Saturday and R389 on Sunday. What is their combined total funds raised in Rand?' },
+      { section: 'Section C: Final Exam Multi-Step Word Problems', op: '-', a: 950, b: 468, result: 482, marks: 3, level: 2, wordPrompt: 'A school bookstore ordered 950 math textbooks at the beginning of the term. By mid-term, 468 had been issued. How many textbooks remain in storage?' },
+      { section: 'Section C: Final Exam Multi-Step Word Problems', op: '×', a: 35, b: 20, result: 700, marks: 3, level: 2, wordPrompt: 'A school sports hall has 35 rows with 20 seats per row. How many seats are there in total?' },
+      { section: 'Section C: Final Exam Multi-Step Word Problems', op: '÷', a: 640, b: 16, result: 40, marks: 3, level: 2, wordPrompt: 'A printing company produces 640 revision booklets and packages them into 16 equal distribution boxes. How many booklets are in each box?' },
+      { section: 'Section C: Final Exam Multi-Step Word Problems', op: '÷', a: 144, b: 12, result: 12, marks: 3, level: 1, wordPrompt: 'A square field with an area of 144 square metres is tiled with 12 equal length rows. How many metres long is each row (√144)?' }
     ]
   }
 ];
@@ -1302,12 +1302,63 @@ export class MathGrinderApp {
 
     this.dom.breakdownContainer.classList.remove('hidden');
     if (this.dom.breakdownBtn) this.dom.breakdownBtn.textContent = 'Hide Breakdown 🧩';
-    const { op, a, b, result } = this.currentQuestion;
+    const { op, a, b, result, expression, explanation } = this.currentQuestion;
 
     let html = '<div class="breakdown-card"><h4>🧩 Step-by-Step Breakdown</h4>';
 
+    // 0. BIDMAS / Explicit Expression Breakdown
+    if (expression || explanation) {
+      const exprText = expression || `${a} ${op} ${b}`;
+      const explText = explanation || `${exprText} = ${result}`;
+      html += `
+        <div class="bd-step"><strong>Problem / Expression:</strong> <span class="highlight-total">${exprText}</span></div>
+        <div class="bd-step"><strong>Step-by-Step Strategy:</strong> ${explText}</div>
+        <div class="bd-step"><strong>Final Value:</strong> <span class="highlight-total">${result}</span></div>
+      `;
+      html += '</div>';
+      this.dom.breakdownContainer.innerHTML = html;
+      return;
+    }
+
+    const isNegA = typeof a === 'number' && a < 0;
+    const isNegB = typeof b === 'number' && b < 0;
+    const hasDec = typeof a === 'number' && typeof b === 'number' && (!Number.isInteger(a) || !Number.isInteger(b));
+
     if (op === '+') {
-      if (a >= 10 && b >= 10) {
+      if (isNegA || isNegB) {
+        if (isNegA && isNegB) {
+          html += `
+            <div class="bd-step"><strong>Negative + Negative:</strong> Start at ${a} and move ${Math.abs(b)} steps further left into the negatives.</div>
+            <div class="bd-step"><strong>Combine:</strong> -(${Math.abs(a)} + ${Math.abs(b)}) = <span class="highlight-total">${result}</span></div>
+          `;
+        } else if (isNegA && !isNegB) {
+          html += `
+            <div class="bd-step"><strong>Crossing Zero:</strong> Start at negative ${a}. Adding positive ${b} moves ${b} steps right towards and past zero.</div>
+            <div class="bd-step"><strong>Calculation:</strong> ${b} - ${Math.abs(a)} = <span class="highlight-total">${result}</span></div>
+          `;
+        } else {
+          html += `
+            <div class="bd-step"><strong>Adding a Negative:</strong> Adding a negative is equivalent to subtracting: ${a} + (${b}) = ${a} - ${Math.abs(b)}.</div>
+            <div class="bd-step"><strong>Calculation:</strong> ${a} - ${Math.abs(b)} = <span class="highlight-total">${result}</span></div>
+          `;
+        }
+      } else if (hasDec) {
+        html += `
+          <div class="bd-step"><strong>Step 1 (Place Value Alignment):</strong> Line up decimal points vertically in columns.</div>
+          <div class="bd-step"><strong>Step 2 (Column Addition):</strong> Add hundredths to hundredths, tenths to tenths, and whole numbers.</div>
+          <div class="bd-step"><strong>Total:</strong> ${a} + ${b} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a >= 100 || b >= 100) {
+        const aH = Math.floor(a / 100) * 100;
+        const bH = Math.floor(b / 100) * 100;
+        const aRem = a % 100;
+        const bRem = b % 100;
+        html += `
+          <div class="bd-step"><strong>Step 1 (Hundreds):</strong> ${aH} + ${bH} = <span class="highlight-tens">${aH + bH}</span></div>
+          <div class="bd-step"><strong>Step 2 (Tens & Ones):</strong> ${aRem} + ${bRem} = <span class="highlight-ones">${aRem + bRem}</span></div>
+          <div class="bd-step"><strong>Step 3 (Combine):</strong> ${aH + bH} + ${aRem + bRem} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a >= 10 && b >= 10) {
         const aT = Math.floor(a / 10) * 10;
         const aO = a % 10;
         const bT = Math.floor(b / 10) * 10;
@@ -1340,8 +1391,38 @@ export class MathGrinderApp {
       } else {
         html += `<div class="bd-step">Start at <strong>${Math.max(a, b)}</strong> and count on <strong>${Math.min(a, b)}</strong> more to reach <span class="highlight-total">${result}</span>.</div>`;
       }
-    } else if (op === '-') {
-      if (a >= 10 && b >= 10 && (a % 10) >= (b % 10)) {
+    } else if (op === '-' || op === '−') {
+      if (isNegA || isNegB || (typeof a === 'number' && typeof b === 'number' && a < b)) {
+        if (isNegB) {
+          html += `
+            <div class="bd-step"><strong>Subtracting a Negative:</strong> Two minus signs cancel into addition: ${a} - (${b}) = ${a} + ${Math.abs(b)}.</div>
+            <div class="bd-step"><strong>Calculation:</strong> ${a} + ${Math.abs(b)} = <span class="highlight-total">${result}</span></div>
+          `;
+        } else if (isNegA) {
+          html += `
+            <div class="bd-step"><strong>Start in Negatives:</strong> From ${a}, subtracting ${b} moves ${b} steps further left into the negatives.</div>
+            <div class="bd-step"><strong>Result:</strong> -(${Math.abs(a)} + ${b}) = <span class="highlight-total">${result}</span></div>
+          `;
+        } else {
+          html += `
+            <div class="bd-step"><strong>Crossing Zero:</strong> Subtracting ${b} from smaller ${a} crosses 0 into negative numbers.</div>
+            <div class="bd-step"><strong>Calculation:</strong> ${a} - ${b} = -(${b} - ${a}) = <span class="highlight-total">${result}</span></div>
+          `;
+        }
+      } else if (hasDec) {
+        html += `
+          <div class="bd-step"><strong>Step 1 (Place Value Alignment):</strong> Line up decimal points vertically in columns.</div>
+          <div class="bd-step"><strong>Step 2 (Column Subtraction):</strong> Subtract hundredths from hundredths, tenths from tenths, borrowing from units as needed.</div>
+          <div class="bd-step"><strong>Difference:</strong> ${a} - ${b} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a >= 100) {
+        const bH = Math.floor(b / 100) * 100;
+        const bRem = b % 100;
+        html += `
+          <div class="bd-step"><strong>Step 1 (Subtract Hundreds):</strong> ${a} - ${bH} = <span class="highlight-tens">${a - bH}</span></div>
+          <div class="bd-step"><strong>Step 2 (Subtract Remainder):</strong> ${a - bH} - ${bRem} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a >= 10 && b >= 10 && (a % 10) >= (b % 10)) {
         const aT = Math.floor(a / 10) * 10;
         const aO = a % 10;
         const bT = Math.floor(b / 10) * 10;
@@ -1386,16 +1467,71 @@ export class MathGrinderApp {
         html += `<div class="bd-step">Start at <strong>${a}</strong>, count back <strong>${b}</strong> steps &rarr; lands on <span class="highlight-total">${result}</span>.</div>`;
       }
     } else if (op === '×') {
-      html += `
-        <div class="bd-step">Think of ${a} bags, with ${b} items in each bag.</div>
-        <div class="bd-step">Repeated addition: ${Array(a).fill(b).join(' + ')} = <span class="highlight-total">${result}</span></div>
-      `;
+      if (isNegA || isNegB) {
+        const signNote = (isNegA && isNegB)
+          ? 'Two negatives multiplied make a positive: (-) × (-) = (+).'
+          : 'A negative and a positive make a negative: (-) × (+) = (-).';
+        html += `
+          <div class="bd-step"><strong>Step 1 (Sign Rule):</strong> ${signNote}</div>
+          <div class="bd-step"><strong>Step 2 (Magnitudes):</strong> ${Math.abs(a)} × ${Math.abs(b)} = <span class="highlight-ones">${Math.abs(result)}</span></div>
+          <div class="bd-step"><strong>Step 3 (Result):</strong> <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (hasDec) {
+        html += `
+          <div class="bd-step"><strong>Step 1 (Place Value):</strong> Count the total decimal places in both factors.</div>
+          <div class="bd-step"><strong>Step 2 (Multiply Integers):</strong> Multiply the numbers as whole integers, then shift the decimal point.</div>
+          <div class="bd-step"><strong>Result:</strong> ${a} × ${b} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a === b) {
+        html += `
+          <div class="bd-step"><strong>Square Number:</strong> Squaring a number means multiplying it by itself.</div>
+          <div class="bd-step"><strong>Calculation:</strong> ${a}² = ${a} × ${a} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a >= 10 && Number.isInteger(a) && b >= 2 && Number.isInteger(b)) {
+        const aT = Math.floor(a / 10) * 10;
+        const aO = a % 10;
+        html += `
+          <div class="bd-step"><strong>Step 1 (Partition):</strong> Break ${a} into ${aT} + ${aO}.</div>
+          <div class="bd-step"><strong>Step 2:</strong> (${aT} × ${b}) = <span class="highlight-tens">${aT * b}</span> and (${aO} × ${b}) = <span class="highlight-ones">${aO * b}</span></div>
+          <div class="bd-step"><strong>Step 3 (Combine):</strong> ${aT * b} + ${aO * b} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (Number.isInteger(a) && a > 0 && a <= 12) {
+        html += `
+          <div class="bd-step">Think of ${a} groups, with ${b} items in each group.</div>
+          <div class="bd-step">Repeated addition: ${Array(a).fill(b).join(' + ')} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else {
+        html += `<div class="bd-step">Multiply <strong>${a}</strong> by <strong>${b}</strong> &rarr; <span class="highlight-total">${result}</span>.</div>`;
+      }
     } else if (op === '÷') {
-      html += `
-        <div class="bd-step">Share ${a} cookies equally with ${b} friends.</div>
-        <div class="bd-step">Everyone gets <span class="highlight-total">${result}</span> cookies each!</div>
-        <div class="bd-step">Check with multiplication: ${b} &times; ${result} = <span class="highlight-total">${a}</span></div>
-      `;
+      if (isNegA || isNegB) {
+        const signNote = (isNegA && isNegB)
+          ? 'Dividing two negatives yields a positive: (-) ÷ (-) = (+).'
+          : 'Dividing opposite signs yields a negative: (-) ÷ (+) = (-).';
+        html += `
+          <div class="bd-step"><strong>Step 1 (Sign Rule):</strong> ${signNote}</div>
+          <div class="bd-step"><strong>Step 2 (Magnitudes):</strong> ${Math.abs(a)} ÷ ${Math.abs(b)} = <span class="highlight-ones">${Math.abs(result)}</span></div>
+          <div class="bd-step"><strong>Step 3 (Result):</strong> <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (hasDec) {
+        html += `
+          <div class="bd-step"><strong>Step 1 (Shift Decimals):</strong> Multiply dividend and divisor by powers of 10 to make divisor a whole integer.</div>
+          <div class="bd-step"><strong>Step 2 (Mental Division):</strong> Compute the equivalent integer division.</div>
+          <div class="bd-step"><strong>Result:</strong> ${a} ÷ ${b} = <span class="highlight-total">${result}</span></div>
+        `;
+      } else if (a >= 100 && Number.isInteger(a) && Number.isInteger(b)) {
+        html += `
+          <div class="bd-step"><strong>Mental Partition:</strong> Check how many times ${b} fits into ${a}.</div>
+          <div class="bd-step"><strong>Check with multiplication:</strong> ${b} × ${result} = <span class="highlight-total">${a}</span></div>
+          <div class="bd-step"><strong>Quotient:</strong> <span class="highlight-total">${result}</span></div>
+        `;
+      } else {
+        html += `
+          <div class="bd-step">Find how many times <strong>${b}</strong> fits into <strong>${a}</strong>.</div>
+          <div class="bd-step">Multiplication fact: <strong>${b} × ${result} = ${a}</strong></div>
+          <div class="bd-step">Answer: <span class="highlight-total">${result}</span></div>
+        `;
+      }
     }
 
     html += '</div>';
@@ -1415,8 +1551,8 @@ export class MathGrinderApp {
       return;
     }
 
-    const { op, a, b, result, wordPrompt } = this.currentQuestion;
-    const baseExplanation = generateVerbalExplanation(op, a, b, result);
+    const { op, a, b, result, wordPrompt, explanation } = this.currentQuestion;
+    const baseExplanation = explanation ? explanation : generateVerbalExplanation(op, a, b, result);
     const text = wordPrompt ? `${wordPrompt} ${baseExplanation}` : baseExplanation;
 
     if (this.dom.captionBar) {

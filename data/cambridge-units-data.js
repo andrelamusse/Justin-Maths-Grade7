@@ -139,7 +139,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
         {
           id: 'u2-e1',
           q: 'Simplify by collecting like terms: \\(5x + 3x - 2x\\)',
-          options: ['6x', '10x', '6x^3', '8x'],
+          options: ['6x', '10x', '\\(6x^3\\)', '8x'],
           answer: '6x',
           hint: 'All terms are x-terms. Add and subtract the coefficients: 5 + 3 - 2.',
           stepByStep: ['\\(5 + 3 = 8\\).', '\\(8 - 2 = 6\\).', 'Attach the variable: \\(6x\\).'],
@@ -365,7 +365,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
           q: 'Convert \\(\\frac{7}{8}\\) to a decimal.',
           options: ['0.875', '0.78', '0.87', '0.75'],
           answer: '0.875',
-          hint: 'Since 1/8 = 0.125, multiply 0.125 by 7.',
+          hint: 'Since \\(\\frac{1}{8} = 0.125\\), multiply 0.125 by 7.',
           stepByStep: ['\\(1 \\div 8 = 0.125\\).', '\\(7 \\times 0.125 = 0.875\\).'],
           explanation: '\\(\\frac{7}{8} = 0.875\\).'
         }
@@ -376,7 +376,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
           q: 'In a maths test of 80 marks, Justin scores 68 marks. What percentage did he achieve?',
           options: ['85%', '80%', '68%', '78%'],
           answer: '85%',
-          hint: 'Write as fraction 68/80, simplify by dividing by 4, then convert to over 100.',
+          hint: 'Write as a fraction \\(\\frac{68}{80}\\), simplify by dividing by 4 to get \\(\\frac{17}{20}\\), then multiply by 5 to get \\(\\frac{85}{100} = 85\\%\\).',
           stepByStep: ['Fraction = \\(\\frac{68}{80}\\).', 'Divide top and bottom by 4: \\(\\frac{17}{20}\\).', 'Multiply top and bottom by 5: \\(\\frac{85}{100} = 85\\%\\).'],
           explanation: 'Justin achieved 85%.'
         },
@@ -390,7 +390,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
             '70%, \\frac{2}{3}, 0.65, \\frac{3}{5}'
           ],
           answer: '\\frac{3}{5}, 0.65, \\frac{2}{3}, 70%',
-          hint: 'Convert all 4 to decimals: 3/5 = 0.60; 0.65; 2/3 = 0.666...; 70% = 0.70.',
+          hint: 'Convert all 4 to decimals: \\(\\frac{3}{5} = 0.60\\); 0.65; \\(\\frac{2}{3} \\approx 0.667\\); \\(70\\% = 0.70\\).',
           stepByStep: ['\\(\\frac{3}{5} = 0.60\\)', '0.65', '\\(\\frac{2}{3} \\approx 0.667\\)', '\\(70\\% = 0.70\\)'],
           explanation: 'Smallest to largest: \\(\\frac{3}{5} < 0.65 < \\frac{2}{3} < 70\\%\\).'
         }
@@ -637,7 +637,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
           options: ['3\\frac{1}{4}', '2\\frac{3}{4}', '4\\frac{1}{4}', '3\\frac{3}{4}'],
           answer: '3\\frac{1}{4}',
           hint: 'Divide 13 by 4. How many whole 4s fit in 13, and what is the remainder?',
-          stepByStep: ['13 ÷ 4 = 3 with a remainder of 1.', 'Whole part = 3, fraction part = 1/4.'],
+          stepByStep: ['\\(13 \\div 4 = 3\\) with a remainder of 1.', 'Whole part = 3, fraction part = \\(\\frac{1}{4}\\).', 'Combined: \\(3\\frac{1}{4}\\).'],
           explanation: '\\(\\frac{13}{4} = 3\\frac{1}{4}\\).'
         }
       ],
@@ -667,7 +667,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
           q: 'Work out: \\(\\frac{2}{3} \\div \\frac{4}{5}\\)',
           options: ['\\frac{5}{6}', '\\frac{8}{15}', '\\frac{6}{5}', '\\frac{10}{15}'],
           answer: '\\frac{5}{6}',
-          hint: 'Keep the 2/3, Change ÷ to ×, Flip 4/5 to 5/4.',
+          hint: 'Keep the \\(\\frac{2}{3}\\), Change \\(\\div\\) to \\(\\times\\), Flip \\(\\frac{4}{5}\\) to \\(\\frac{5}{4}\\).',
           stepByStep: ['Keep-Change-Flip: \\(\\frac{2}{3} \\times \\frac{5}{4}\\).', 'Multiply: \\(\\frac{2 \\times 5}{3 \\times 4} = \\frac{10}{12}\\).', 'Simplify by dividing by 2: \\(\\frac{5}{6}\\).'],
           explanation: '\\(\\frac{2}{3} \\div \\frac{4}{5} = \\frac{5}{6}\\).'
         },
@@ -676,7 +676,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
           q: 'Calculate: \\(2\\frac{1}{2} - 1\\frac{2}{3}\\)',
           options: ['\\frac{5}{6}', '1\\frac{1}{6}', '\\frac{1}{6}', '1\\frac{5}{6}'],
           answer: '\\frac{5}{6}',
-          hint: 'Convert both to improper fractions: 5/2 and 5/3, then use LCD 6.',
+          hint: 'Convert both to improper fractions: \\(\\frac{5}{2}\\) and \\(\\frac{5}{3}\\), then use LCD 6.',
           stepByStep: ['\\(2\\frac{1}{2} = \\frac{5}{2} = \\frac{15}{6}\\).', '\\(1\\frac{2}{3} = \\frac{5}{3} = \\frac{10}{6}\\).', '\\(\\frac{15 - 10}{6} = \\frac{5}{6}\\).'],
           explanation: '\\(2\\frac{1}{2} - 1\\frac{2}{3} = \\frac{5}{6}\\).'
         }
@@ -1427,7 +1427,7 @@ export const CAMBRIDGE_STAGE_7_UNITS = [
           q: 'Find the area of a triangle with base \\(14\\text{ cm}\\) and perpendicular height \\(6\\text{ cm}\\).',
           options: ['42 cm²', '84 cm²', '20 cm²', '48 cm²'],
           answer: '42 cm²',
-          hint: 'Area of triangle = 1/2 × base × height.',
+          hint: 'Area of triangle = \\(\\frac{1}{2} \\times \\text{base} \\times \\text{height}\\).',
           stepByStep: ['\\(\\frac{1}{2} \\times 14 = 7\\).', '\\(7 \\times 6 = 42\\text{ cm}^2\\).'],
           explanation: 'The area is 42 cm².'
         },

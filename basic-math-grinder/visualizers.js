@@ -19,32 +19,35 @@ export class MathVisualizer {
     const wrapper = document.createElement('div');
     wrapper.className = 'visualizer-wrapper';
 
+    // Normalize operation (Unicode minus, asterisk, slash)
+    const op = (operation === '−') ? '-' : (operation === '*' ? '×' : (operation === '/' ? '÷' : operation));
+
     // Choose the best visual model for the problem
-    if (operation === '+' || operation === '-') {
+    if (op === '+' || op === '-') {
       const isCleanSmallInt = Number.isInteger(a) && Number.isInteger(b) && a >= 0 && b >= 0;
-      const useTenFrame = isCleanSmallInt && ((operation === '+' && (a + b) <= 20) || (operation === '-' && a <= 20 && a >= b));
+      const useTenFrame = isCleanSmallInt && ((op === '+' && (a + b) <= 20) || (op === '-' && a <= 20 && a >= b));
 
       if (useTenFrame) {
-        wrapper.appendChild(this.createTenFrameElement(operation, a, b, result));
-        wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
+        wrapper.appendChild(this.createTenFrameElement(op, a, b, result));
+        wrapper.appendChild(this.createNumberLineElement(op, a, b, result));
       } else {
-        if (isCleanSmallInt && a <= 999 && b <= 999 && (operation === '+' || a >= b)) {
-          wrapper.appendChild(this.createBaseTenElement(operation, a, b, result));
+        if (isCleanSmallInt && Math.max(a, b) <= 99 && (op === '+' || a >= b)) {
+          wrapper.appendChild(this.createBaseTenElement(op, a, b, result));
         }
-        wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
+        wrapper.appendChild(this.createNumberLineElement(op, a, b, result));
       }
-    } else if (operation === '×' || operation === '*') {
+    } else if (op === '×') {
       if (Number.isInteger(a) && Number.isInteger(b) && a > 0 && b > 0 && a <= 15 && b <= 15) {
         wrapper.appendChild(this.createArrayElement(a, b, result));
         wrapper.appendChild(this.createRepeatedAdditionElement(a, b, result));
       } else {
-        wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
+        wrapper.appendChild(this.createNumberLineElement(op, a, b, result));
       }
-    } else if (operation === '÷' || operation === '/') {
+    } else if (op === '÷') {
       if (Number.isInteger(a) && Number.isInteger(b) && a > 0 && b > 0 && a <= 144) {
         wrapper.appendChild(this.createSharingElement(a, b, result));
       } else {
-        wrapper.appendChild(this.createNumberLineElement(operation, a, b, result));
+        wrapper.appendChild(this.createNumberLineElement(op, a, b, result));
       }
     }
 
@@ -335,7 +338,8 @@ export class MathVisualizer {
       svgHtml += `<line x1="${x}" y1="${lineY - tickH}" x2="${x}" y2="${lineY + tickH}" stroke="${strokeCol}" stroke-width="${strokeW}"/>`;
       if (isMajor || isKey) {
         const textCol = isKey ? (v === result ? (op === '+' ? '#10b981' : '#f59e0b') : '#2563eb') : '#475569';
-        svgHtml += `<text x="${x}" y="${lineY + 26}" font-size="12" font-weight="${isKey ? 'bold' : 'normal'}" fill="${textCol}" text-anchor="middle">${v}</text>`;
+        const displayVal = Number(Math.round(v * 10000) / 10000);
+        svgHtml += `<text x="${x}" y="${lineY + 26}" font-size="12" font-weight="${isKey ? 'bold' : 'normal'}" fill="${textCol}" text-anchor="middle">${displayVal}</text>`;
       }
     }
 
@@ -352,9 +356,22 @@ export class MathVisualizer {
     const arcPath = `M ${startX} ${lineY} Q ${midX} ${arcControlY} ${endX} ${lineY}`;
     svgHtml += `<path d="${arcPath}" fill="none" stroke="${strokeColor}" stroke-width="3" stroke-dasharray="4,2"/>`;
 
-    // Arc jump label
-    const jumpLabel = op === '+' ? `+${b}` : `-${b}`;
-    svgHtml += `<rect x="${midX - 22}" y="${arcControlY - 18}" width="44" height="20" rx="10" fill="${strokeColor}"/>`;
+    // Arc jump label formatted for operation and signs
+    let jumpLabel = '';
+    if (op === '+') {
+      jumpLabel = b >= 0 ? `+${b}` : `${b}`;
+    } else if (op === '-' || op === '−') {
+      jumpLabel = b >= 0 ? `-${b}` : `+${Math.abs(b)}`;
+    } else if (op === '×') {
+      jumpLabel = `× ${b}`;
+    } else if (op === '÷') {
+      jumpLabel = `÷ ${b}`;
+    } else {
+      jumpLabel = `${op} ${b}`;
+    }
+
+    const labelWidth = Math.max(44, String(jumpLabel).length * 8 + 14);
+    svgHtml += `<rect x="${midX - labelWidth / 2}" y="${arcControlY - 18}" width="${labelWidth}" height="20" rx="10" fill="${strokeColor}"/>`;
     svgHtml += `<text x="${midX}" y="${arcControlY - 4}" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">${jumpLabel}</text>`;
 
     // Start point dot
