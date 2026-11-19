@@ -803,6 +803,37 @@ export class JustinMathsApp {
     if (!grid) return;
     grid.innerHTML = '';
 
+    // Premier Dual Test-Day Simulator Card
+    const dualCard = document.createElement('article');
+    dualCard.className = 'paper-catalog-card';
+    dualCard.style.cssText = 'grid-column: 1 / -1; background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 2px solid #2563eb; box-shadow: 0 4px 14px rgba(37,99,235,0.12);';
+    dualCard.innerHTML = `
+      <div class="paper-card-badge-row">
+        <span class="paper-code-badge" style="background:#1e40af; font-size:0.8rem;">FULL TEST DAY SIMULATOR</span>
+        <span class="paper-mode-badge calc" style="font-size:0.8rem;">2 Back-to-Back Sessions &bull; 90 Marks</span>
+      </div>
+      <h3 style="font-size:1.35rem; color:#1e3a8a; margin:8px 0 6px 0;">🎯 Official Kainos Test Day: Paper 1 &rarr; Paper 2 Transition</h3>
+      <p class="paper-description-text" style="font-size:0.95rem; line-height:1.5; color:#334155;">
+        Simulates Justin's exact exam day routine at Kainos Cambridge School:
+        First write <strong>Session 1 (Paper 1 Non-Calculator)</strong>. When time is called, Paper 1 is collected and taken away. Justin gets a <strong>5-minute intermission</strong>, brings out his scientific calculator, and tackles <strong>Session 2 (Paper 2 Calculator Permitted)</strong>. Receive a combined 90-mark Cambridge report card!
+      </p>
+      <div style="display:flex; gap:12px; margin-top:14px; flex-wrap:wrap;">
+        <button class="btn-start-sim" id="btn-start-dual-prog" style="background:#1e40af; padding:10px 18px; font-weight:800; cursor:pointer;">
+          🚀 Start Progression Test Day (Paper 1 &rarr; Paper 2)
+        </button>
+        <button class="btn-start-sim" id="btn-start-dual-mock" style="background:#059669; padding:10px 18px; font-weight:800; cursor:pointer;">
+          📝 Start Mock Exam Day (Mock 1 &rarr; Mock 2)
+        </button>
+      </div>
+    `;
+    dualCard.querySelector('#btn-start-dual-prog').onclick = () => {
+      this.startKainosDualSimulator('progression');
+    };
+    dualCard.querySelector('#btn-start-dual-mock').onclick = () => {
+      this.startKainosDualSimulator('mock');
+    };
+    grid.appendChild(dualCard);
+
     KAINOS_PAPERS_CATALOG.forEach(paper => {
       const card = document.createElement('article');
       card.className = 'paper-catalog-card';
@@ -848,7 +879,28 @@ export class JustinMathsApp {
   }
 
   startKainosExamSimulator(paperId) {
+    this.examSim.isDualMode = false;
     this.examSim.setPaper(paperId);
+    this.switchTab('exams');
+
+    const container = document.getElementById('exam-sim-workspace');
+    if (!container) return;
+
+    this.examSim.startTimer(
+      (timeStr) => {
+        const timerBox = document.getElementById('sim-timer-box');
+        if (timerBox) timerBox.textContent = `⏱️ ${timeStr}`;
+      },
+      () => {
+        this.renderExamSimResults();
+      }
+    );
+
+    this.renderExamSimStep();
+  }
+
+  startKainosDualSimulator(seriesId = 'progression') {
+    this.examSim.setDualMode(seriesId);
     this.switchTab('exams');
 
     const container = document.getElementById('exam-sim-workspace');
@@ -886,8 +938,15 @@ export class JustinMathsApp {
       </button>
     `).join('');
 
+    const dualNotice = this.examSim.isDualMode ? (
+      this.examSim.dualPhase === 'paper1'
+        ? `<div style="background:#fee2e2; color:#991b1b; padding:6px 12px; border-radius:6px; font-size:0.82rem; font-weight:800; margin-bottom:10px; display:inline-block;">🚫 SESSION 1 OF 2: PAPER 1 (NON-CALCULATOR) &bull; NO CALCULATOR ALLOWED ON DESK</div>`
+        : `<div style="background:#dbeafe; color:#1e40af; padding:6px 12px; border-radius:6px; font-size:0.82rem; font-weight:800; margin-bottom:10px; display:inline-block;">📱 SESSION 2 OF 2: PAPER 2 (CALCULATOR PERMITTED) &bull; CALCULATOR ALLOWED</div>`
+    ) : '';
+
     container.innerHTML = `
       <div class="exam-sim-container">
+        ${dualNotice}
         <div class="exam-sim-header">
           <div class="exam-sim-title">
             <h3>${paper.title}</h3>
@@ -921,6 +980,84 @@ export class JustinMathsApp {
     this.examSim.stopTimer();
     const container = document.getElementById('exam-sim-workspace');
     if (!container) return;
+
+    if (this.examSim.isDualMode) {
+      if (this.examSim.dualPhase === 'intermission') {
+        container.innerHTML = `
+          <div class="exam-sim-container report-card" style="border: 2px solid #f59e0b; background:#fffbeb;">
+            <div style="font-size:3rem; margin-bottom:8px;">📋</div>
+            <div style="background:#fef3c7; color:#92400e; padding:4px 12px; border-radius:999px; display:inline-block; font-weight:800; font-size:0.85rem; margin-bottom:12px;">INTERMISSION: PAPER 1 COLLECTED &amp; SEALED</div>
+            <h2 style="color:#b45309; font-size:1.6rem; margin-bottom:8px;">Session 1 (Non-Calculator) Handed In!</h2>
+            <p style="font-size:0.95rem; color:#92400e; max-width:540px; margin:0 auto 16px; line-height:1.5;">
+              Awesome work, Justin! Your Non-Calculator paper has been collected by the invigilator. Now take a 5-minute breather, clear your mind, and place your scientific calculator on your desk.
+            </p>
+            <div style="background:#ffffff; border:1px solid #fde68a; border-radius:10px; padding:14px; max-width:480px; margin:0 auto 20px; text-align:left;">
+              <h4 style="margin:0 0 6px 0; color:#b45309;">👨‍🏫 Justin's Test Day Intermission Checklist:</h4>
+              <ul style="margin:0; padding-left:20px; font-size:0.88rem; color:#475569; line-height:1.5;">
+                <li>Drink a few sips of water and shake out any hand cramps.</li>
+                <li>Take out your approved scientific calculator and place it on your desk.</li>
+                <li>Remember: for Paper 2, use brackets <code>(a + b) ÷ (c × d)</code> and write down the full display before rounding.</li>
+              </ul>
+            </div>
+            <button class="primary-action-btn" id="btn-start-session2" style="background:#1e40af; font-size:1.05rem; padding:12px 24px;">
+              📱 Start Session 2: Paper 2 (Calculator Permitted) &rarr;
+            </button>
+          </div>
+        `;
+        container.querySelector('#btn-start-session2').onclick = () => {
+          this.examSim.advanceToPaper2();
+          this.examSim.startTimer(
+            (timeStr) => {
+              const timerBox = document.getElementById('sim-timer-box');
+              if (timerBox) timerBox.textContent = `⏱️ ${timeStr}`;
+            },
+            () => {
+              this.renderExamSimResults();
+            }
+          );
+          this.renderExamSimStep();
+        };
+        return;
+      } else if (this.examSim.dualPhase === 'complete') {
+        const dualRes = this.examSim.getDualResults();
+        container.innerHTML = `
+          <div class="exam-sim-container report-card">
+            <div class="report-score-ring">
+              <div class="report-pct-text">${dualRes.percentage}%</div>
+              <div class="report-grade-badge">${dualRes.grade}</div>
+            </div>
+
+            <h2>${dualRes.title} Complete!</h2>
+            <p style="color:var(--text-secondary); margin-bottom:20px;">
+              Overall Score: <strong>${dualRes.marksScored} / ${dualRes.totalPossibleMarks} Marks</strong> (${dualRes.percentage}%) &bull; Cambridge Stage 7
+            </p>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-bottom:22px; text-align:left;">
+              <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:14px;">
+                <h4 style="margin:0 0 6px 0; color:#1e293b;">Session 1: Non-Calculator</h4>
+                <div style="font-size:1.3rem; font-weight:800; color:#1e40af;">${dualRes.paper1.marksScored} / ${dualRes.paper1.totalPossibleMarks} Marks</div>
+                <div style="font-size:0.85rem; color:#64748b;">${dualRes.paper1.percentage}% &bull; ${dualRes.paper1.grade}</div>
+              </div>
+              <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:14px;">
+                <h4 style="margin:0 0 6px 0; color:#1e293b;">Session 2: Calculator Permitted</h4>
+                <div style="font-size:1.3rem; font-weight:800; color:#059669;">${dualRes.paper2.marksScored} / ${dualRes.paper2.totalPossibleMarks} Marks</div>
+                <div style="font-size:0.85rem; color:#64748b;">${dualRes.paper2.percentage}% &bull; ${dualRes.paper2.grade}</div>
+              </div>
+            </div>
+
+            <button class="primary-action-btn" id="btn-return-exam-catalog" style="margin-top:16px;">
+              &larr; Return to Past Papers Hub
+            </button>
+          </div>
+        `;
+        container.querySelector('#btn-return-exam-catalog').onclick = () => {
+          this.examSim.isDualMode = false;
+          container.innerHTML = '';
+          this.switchTab('exams');
+        };
+        return;
+      }
+    }
 
     const res = this.examSim.getResults();
 

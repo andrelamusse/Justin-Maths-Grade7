@@ -315,6 +315,43 @@ test('Kainos Cambridge Exams Catalog and Simulator logic', () => {
   assert.equal(sim.userAnswers[0].marksAwarded, q1.marks);
 });
 
+test('KainosExamSimulator dual-mode: Simulates Paper 1 (Non-Calc) -> Intermission -> Paper 2 (Calc) -> 90 Marks', () => {
+  const sim = new KainosExamSimulator();
+  sim.setDualMode('progression');
+  assert.equal(sim.isDualMode, true);
+  assert.equal(sim.dualPhase, 'paper1');
+  assert.equal(sim.paper.id, 'stage7-p1');
+
+  // Complete Paper 1
+  while (!sim.isFinished) {
+    const q = sim.getCurrentQuestion();
+    sim.recordAnswer(q.answer);
+  }
+  assert.equal(sim.dualPhase, 'intermission');
+  assert.ok(sim.paper1Results);
+  assert.equal(sim.paper1Results.marksScored, sim.paper1Results.totalPossibleMarks);
+
+  // Transition to Paper 2
+  sim.advanceToPaper2();
+  assert.equal(sim.dualPhase, 'paper2');
+  assert.equal(sim.paper.id, 'stage7-p2');
+  assert.equal(sim.isFinished, false);
+
+  // Complete Paper 2
+  while (!sim.isFinished) {
+    const q = sim.getCurrentQuestion();
+    sim.recordAnswer(q.answer);
+  }
+  assert.equal(sim.dualPhase, 'complete');
+  assert.ok(sim.paper2Results);
+
+  const dualRes = sim.getDualResults();
+  assert.ok(dualRes);
+  assert.equal(dualRes.marksScored, dualRes.totalPossibleMarks);
+  assert.equal(dualRes.percentage, 100);
+  assert.ok(dualRes.grade.startsWith('A*'));
+});
+
 test('Topic-by-topic past exam bank: Every one of the 16 units has at least 5 past exam questions from across 6 papers', () => {
   let totalTopicExamQuestions = 0;
   for (const unit of CAMBRIDGE_STAGE_7_UNITS) {

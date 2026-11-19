@@ -521,7 +521,39 @@ export const KAINOS_PAPERS_CATALOG = [
 
 export class KainosExamSimulator {
   constructor(paperId = 'stage7-p1') {
+    this.isDualMode = false;
+    this.dualPhase = 'idle'; // 'paper1' | 'intermission' | 'paper2' | 'complete'
+    this.paper1Results = null;
+    this.paper2Results = null;
+    this.p1Id = 'stage7-p1';
+    this.p2Id = 'stage7-p2';
     this.setPaper(paperId);
+  }
+
+  setDualMode(seriesId = 'progression') {
+    this.isDualMode = true;
+    this.dualSeriesId = seriesId;
+    this.dualPhase = 'paper1';
+    this.paper1Results = null;
+    this.paper2Results = null;
+
+    if (seriesId === 'mock') {
+      this.p1Id = 'stage7-m1';
+      this.p2Id = 'stage7-m2';
+    } else if (seriesId === 'kainos') {
+      this.p1Id = 'stage7-midyear';
+      this.p2Id = 'stage7-yearend';
+    } else {
+      this.p1Id = 'stage7-p1';
+      this.p2Id = 'stage7-p2';
+    }
+    this.setPaper(this.p1Id);
+  }
+
+  advanceToPaper2() {
+    if (!this.isDualMode) return;
+    this.dualPhase = 'paper2';
+    this.setPaper(this.p2Id);
   }
 
   setPaper(paperId) {
@@ -592,6 +624,15 @@ export class KainosExamSimulator {
     if (this.currentIndex >= this.questions.length) {
       this.isFinished = true;
       this.stopTimer();
+      if (this.isDualMode) {
+        if (this.dualPhase === 'paper1') {
+          this.paper1Results = this.getResults();
+          this.dualPhase = 'intermission';
+        } else if (this.dualPhase === 'paper2') {
+          this.paper2Results = this.getResults();
+          this.dualPhase = 'complete';
+        }
+      }
     }
   }
 
@@ -614,6 +655,32 @@ export class KainosExamSimulator {
       percentage,
       grade,
       breakdown: this.userAnswers
+    };
+  }
+
+  getDualResults() {
+    if (!this.paper1Results || !this.paper2Results) {
+      return null;
+    }
+    const marksScored = this.paper1Results.marksScored + this.paper2Results.marksScored;
+    const totalPossibleMarks = this.paper1Results.totalPossibleMarks + this.paper2Results.totalPossibleMarks;
+    const percentage = totalPossibleMarks > 0 ? Math.round((marksScored / totalPossibleMarks) * 100) : 0;
+
+    let grade = 'A*';
+    if (percentage < 40) grade = 'U (Needs Practice)';
+    else if (percentage < 55) grade = 'C (Satisfactory)';
+    else if (percentage < 70) grade = 'B (Good Merit)';
+    else if (percentage < 85) grade = 'A (Distinction)';
+    else grade = 'A* (Outstanding Master)';
+
+    return {
+      title: 'Kainos Full Test Day Dual-Paper Simulation',
+      paper1: this.paper1Results,
+      paper2: this.paper2Results,
+      marksScored,
+      totalPossibleMarks,
+      percentage,
+      grade
     };
   }
 }
