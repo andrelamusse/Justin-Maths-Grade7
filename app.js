@@ -817,6 +817,11 @@ export class JustinMathsApp {
         Simulates Justin's exact exam day routine at Kainos Cambridge School:
         First write <strong>Session 1 (Paper 1 Non-Calculator)</strong>. When time is called, Paper 1 is collected and taken away. Justin gets a <strong>5-minute intermission</strong>, brings out his scientific calculator, and tackles <strong>Session 2 (Paper 2 Calculator Permitted)</strong>. Receive a combined 90-mark Cambridge report card!
       </p>
+      <div style="display:flex; align-items:center; gap:8px; margin: 12px 0 6px 0; font-size:0.88rem; font-weight:700; flex-wrap:wrap;">
+        <span style="color:#1e3a8a;">⏱️ Exam Duration Allowance:</span>
+        <button id="toggle-dur-60" class="dur-pill active" style="padding:4px 10px; border-radius:6px; border:1.5px solid #1e40af; background:#1e40af; color:#fff; cursor:pointer; font-weight:700; font-size:0.82rem;">1 Hour (60 min - Standard)</button>
+        <button id="toggle-dur-90" class="dur-pill" style="padding:4px 10px; border-radius:6px; border:1.5px solid #94a3b8; background:#fff; color:#334155; cursor:pointer; font-weight:700; font-size:0.82rem;">1.5 Hours (90 min - Extended)</button>
+      </div>
       <div style="display:flex; gap:12px; margin-top:14px; flex-wrap:wrap;">
         <button class="btn-start-sim" id="btn-start-dual-prog" style="background:#1e40af; padding:10px 18px; font-weight:800; cursor:pointer;">
           🚀 Start Progression Test Day (Paper 1 &rarr; Paper 2)
@@ -826,10 +831,39 @@ export class JustinMathsApp {
         </button>
       </div>
     `;
+
+    let selectedMins = 60;
+    const btn60 = dualCard.querySelector('#toggle-dur-60');
+    const btn90 = dualCard.querySelector('#toggle-dur-90');
+
+    btn60.onclick = () => {
+      selectedMins = 60;
+      this.examSim.setDurationMinutes(60);
+      btn60.style.background = '#1e40af';
+      btn60.style.color = '#fff';
+      btn60.style.borderColor = '#1e40af';
+      btn90.style.background = '#fff';
+      btn90.style.color = '#334155';
+      btn90.style.borderColor = '#94a3b8';
+    };
+
+    btn90.onclick = () => {
+      selectedMins = 90;
+      this.examSim.setDurationMinutes(90);
+      btn90.style.background = '#1e40af';
+      btn90.style.color = '#fff';
+      btn90.style.borderColor = '#1e40af';
+      btn60.style.background = '#fff';
+      btn60.style.color = '#334155';
+      btn60.style.borderColor = '#94a3b8';
+    };
+
     dualCard.querySelector('#btn-start-dual-prog').onclick = () => {
+      this.examSim.setDurationMinutes(selectedMins);
       this.startKainosDualSimulator('progression');
     };
     dualCard.querySelector('#btn-start-dual-mock').onclick = () => {
+      this.examSim.setDurationMinutes(selectedMins);
       this.startKainosDualSimulator('mock');
     };
     grid.appendChild(dualCard);

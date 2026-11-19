@@ -527,7 +527,13 @@ export class KainosExamSimulator {
     this.paper2Results = null;
     this.p1Id = 'stage7-p1';
     this.p2Id = 'stage7-p2';
+    this.durationMinutes = 60;
     this.setPaper(paperId);
+  }
+
+  setDurationMinutes(mins) {
+    this.durationMinutes = mins;
+    this.timerSeconds = mins * 60;
   }
 
   setDualMode(seriesId = 'progression') {
@@ -561,7 +567,8 @@ export class KainosExamSimulator {
     this.questions = [...this.paper.sampleQuestions];
     this.currentIndex = 0;
     this.userAnswers = [];
-    this.timerSeconds = this.paper.durationMinutes * 60;
+    const mins = this.durationMinutes || this.paper.durationMinutes || 60;
+    this.timerSeconds = mins * 60;
     this.isFinished = false;
     this.timerInterval = null;
   }
